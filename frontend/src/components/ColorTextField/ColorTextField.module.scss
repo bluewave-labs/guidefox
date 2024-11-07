@@ -28,4 +28,10 @@
         box-shadow: none;
         border: 1.23px solid var(--grey-border);
     }
+    &.error {
+        border-color: red;
+    }
+    &.error input {
+        border-color: red;
+    }
 }

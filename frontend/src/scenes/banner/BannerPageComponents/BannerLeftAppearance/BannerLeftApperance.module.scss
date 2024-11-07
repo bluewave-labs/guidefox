@@ -11,7 +11,15 @@
     }
     .color{
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 1rem;
     }
+    .error {
+        color: red;
+        font-size: 0.8rem;
+        margin-left: 4px;
+        display: block;
+      }
 
 }
