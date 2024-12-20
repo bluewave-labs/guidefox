@@ -1,6 +1,6 @@
 const bannerService = require("../service/banner.service.js");
-const db = require("../models/index.js"); 
-const {ErrorHandler} = require('../utils/banner.helper.js')
+const db = require("../models/index.js");
+const { ErrorHandler } = require("../utils/banner.helper.js");
 const Banner = db.Banner;
 
 class BannerController {
@@ -10,12 +10,12 @@ class BannerController {
       async () => {
         const newBannerData = {
           ...req.body,
-          createdBy: req.user.id
+          createdBy: req.user.id,
         };
         const newBanner = await bannerService.createBanner(newBannerData);
         return res.status(201).json({
           success: true,
-          data: newBanner
+          data: newBanner,
         });
       },
       "CREATE_BANNER_ERROR"
@@ -23,7 +23,7 @@ class BannerController {
   }
 
   async deleteBanner(req, res) {
-     return await ErrorHandler.handleAsync(
+    return await ErrorHandler.handleAsync(
       res,
       async () => {
         const { id } = req.params;
@@ -32,13 +32,13 @@ class BannerController {
         if (!deletionResult) {
           return res.status(404).json({
             success: false,
-            error: "Banner not found"
+            error: "Banner not found",
           });
         }
 
         return res.status(200).json({
           success: true,
-          message: `Banner with ID ${id} deleted successfully`
+          message: `Banner with ID ${id} deleted successfully`,
         });
       },
       "DELETE_BANNER_ERROR"
@@ -55,13 +55,13 @@ class BannerController {
         if (!updatedBanner) {
           return res.status(404).json({
             success: false,
-            error: "Banner not found"
+            error: "Banner not found",
           });
         }
 
         return res.status(200).json({
           success: true,
-          data: updatedBanner
+          data: updatedBanner,
         });
       },
       "EDIT_BANNER_ERROR"
@@ -75,7 +75,7 @@ class BannerController {
         const banners = await bannerService.getAllBanners();
         return res.status(200).json({
           success: true,
-          data: banners
+          data: banners,
         });
       },
       "GET_ALL_BANNERS_ERROR"
@@ -90,7 +90,7 @@ class BannerController {
         const banners = await bannerService.getBanners(userId);
         return res.status(200).json({
           success: true,
-          data: banners
+          data: banners,
         });
       },
       "GET_BANNERS_ERROR"
@@ -107,17 +107,37 @@ class BannerController {
         if (!banner) {
           return res.status(404).json({
             success: false,
-            error: "Banner not found"
+            error: "Banner not found",
           });
         }
 
         return res.status(200).json({
           success: true,
-          data: banner
+          data: banner,
         });
       },
       "GET_BANNER_BY_ID_ERROR"
     );
+  }
+  async getBannerByUrl(req, res) {
+    try {
+      const { url } = req.body;
+
+      if (!url || typeof url !== "string") {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "URL is missing or invalid" }] });
+      }
+
+      const banner = await bannerService.getBannerByUrl(url);
+      res.status(200).json({ banner });
+    } catch (error) {
+      const { payload, statusCode } = internalServerError(
+        "GET_BANNER_BY_URL_ERROR",
+        error.message
+      );
+      res.status(statusCode).json(payload);
+    }
   }
 }
 
