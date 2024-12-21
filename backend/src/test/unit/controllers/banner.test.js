@@ -399,4 +399,38 @@ describe("Test Banner controller", () => {
       });
     });
   });
+  describe("getBannerByUrl", () => {
+    it("should return status 400 if the URL is missing or invalid", async () => {
+      req.body = { url: "" };
+      await controller.getBannerByUrl(req, res);
+      const status = res.status.args[0][0];
+      const body = res.json.args[0][0];
+      expect(status).to.be.equal(400);
+      expect(body).to.be.deep.equal({ errors: [{ msg: "URL is missing or invalid" }] });
+    });
+
+    it("should return status 200 and the banners if everything goes right", async () => {
+      req.body = { url: "http://localhost:3000" };
+      serviceMock.getBannerByUrl = sinon.stub(service, "getBannerByUrl").returns(validList);
+      await controller.getBannerByUrl(req, res);
+      const status = res.status.args[0][0];
+      const body = res.json.args[0][0];
+      expect(status).to.be.equal(200);
+      expect(body).to.be.deep.equal({ banner: validList });
+    });
+
+    it("should return status 500 if something goes wrong", async () => {
+      req.body = { url: "http://localhost:3000" };
+      serviceMock.getBannerByUrl = sinon.stub(service, "getBannerByUrl").rejects();
+      await controller.getBannerByUrl(req, res);
+      const status = res.status.args[0][0];
+      const body = res.json.args[0][0];
+      expect(status).to.be.equal(500);
+      expect(body).to.be.deep.equal({
+        error: "Internal Server Error",
+        errorCode: "GET_BANNER_BY_URL_ERROR",
+        message: "Error",
+      });
+    });
+  });
 });

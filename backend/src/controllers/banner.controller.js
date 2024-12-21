@@ -120,24 +120,22 @@ class BannerController {
     );
   }
   async getBannerByUrl(req, res) {
-    try {
-      const { url } = req.body;
+    return await ErrorHandler.handleAsync(
+      res,
+      async () => {
+        const { url } = req.body;
 
-      if (!url || typeof url !== "string") {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: "URL is missing or invalid" }] });
-      }
+        if (!url || typeof url !== "string") {
+          return res
+            .status(400)
+            .json({ errors: [{ msg: "URL is missing or invalid" }] });
+        }
 
-      const banner = await bannerService.getBannerByUrl(url);
-      res.status(200).json({ banner });
-    } catch (error) {
-      const { payload, statusCode } = internalServerError(
-        "GET_BANNER_BY_URL_ERROR",
-        error.message
-      );
-      res.status(statusCode).json(payload);
-    }
+        const banner = await bannerService.getBannerByUrl(url);
+        return res.status(200).json({ banner });
+      },
+      "GET_BANNER_BY_URL_ERROR"
+    );
   }
 }
 
