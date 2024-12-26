@@ -39,10 +39,6 @@ h6 {
     font-weight: 600;
 }
 
-.MuiTabPanel-root {
-    padding: 0
-}
-
 .pencil {
     cursor: pointer;
 }

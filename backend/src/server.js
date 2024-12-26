@@ -23,6 +23,7 @@ const tourRoutes = require("./routes/tour.routes");
 const linkRoutes = require("./routes/link.routes");
 const helperLinkRoutes = require("./routes/helperLink.routes");
 const guideRoutes = require("./routes/guide.routes");
+const statisticsRoutes = require("./routes/statistics.routes");
 
 const app = express();
 
@@ -30,7 +31,9 @@ app.use(cors());
 app.use(helmet());
 app.use(bodyParser.json({ limit: MAX_FILE_SIZE }));
 app.use(jsonErrorMiddleware);
-app.use(ipFilter);
+if (process.env.ENABLE_IP_CHECK === 'true') {
+  app.use(ipFilter);
+}
 // app.use(fileSizeValidator);
 
 const { sequelize } = require("./models");
@@ -57,6 +60,7 @@ app.use("/api/hint", hint);
 app.use("/api/tour", tourRoutes);
 app.use("/api/link", linkRoutes);
 app.use("/api/helper-link", helperLinkRoutes);
+app.use("/api/statistics", statisticsRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

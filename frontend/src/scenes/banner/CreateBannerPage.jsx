@@ -12,7 +12,7 @@ import BannerLeftContent from "./BannerPageComponents/BannerLeftContent/BannerLe
 import BannerPreview from "./BannerPageComponents/BannerPreview/BannerPreview";
 import { useDialog } from "../../templates/GuideTemplate/GuideTemplateContext";
 
-const BannerPage = ({isEdit,  itemId,  setItemsUpdated}) => {
+const BannerPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated }) => {
   const [backgroundColor, setBackgroundColor] = useState("#F9F5FF");
   const [fontColor, setFontColor] = useState("#344054");
   const [activeButton, setActiveButton] = useState(0);
@@ -21,11 +21,16 @@ const BannerPage = ({isEdit,  itemId,  setItemsUpdated}) => {
   const [url, setUrl] = useState("");
   const [actionUrl, setActionUrl] = useState("");
   const [buttonAction, setButtonAction] = useState("No action");
-  const { closeDialog } = useDialog();
+  const { openDialog, closeDialog } = useDialog();
 
   const handleButtonClick = (index) => {
     setActiveButton(index);
   };
+
+
+  useEffect(() => {
+    if (autoOpen) openDialog();
+  }, [autoOpen, openDialog]);
 
   useEffect(() => {
     if (isEdit) {

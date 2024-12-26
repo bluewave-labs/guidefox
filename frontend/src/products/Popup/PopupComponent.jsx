@@ -23,6 +23,9 @@ const PopupComponent = ({
   const sizeClass = validSizes.includes(popupSize.toLowerCase())
     ? styles[popupSize.toLowerCase()]
     : "";
+  const sizeClassContent = validSizes.includes(popupSize.toLowerCase())
+    ? styles[popupSize.toLowerCase() + 'Content']
+    : "";
   const centeredClass = isReal ? styles.centered : "";
 
   const handleClose = () => {
@@ -63,7 +66,7 @@ const PopupComponent = ({
             />
           </div>
         )}
-        <div className={`${styles.popupContentContainer}`}>
+        <div className={`${styles.popupContentContainer} ${sizeClassContent}`}>
           <div className={styles.popupContent} style={{ color: textColor }}>
             <ReactMarkdown>{content}</ReactMarkdown>
           </div>
@@ -73,7 +76,7 @@ const PopupComponent = ({
                 style={{
                   backgroundColor: buttonBackgroundColor,
                   color: buttonTextColor,
-                  marginRight: "1rem",
+                  borderRadius: '8px'
                 }}
                 text={previewBtnText}
                 onClick={handleButtonClick} // Add onClick handler

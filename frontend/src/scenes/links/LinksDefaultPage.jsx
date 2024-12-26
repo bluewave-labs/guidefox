@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { ACTIVITY_TYPES_INFO } from "../../data/guideMainPageData";
-import { deleteHelper, getHelpers} from "../../services/helperLinkService";
+import { deleteHelper, getHelpers } from "../../services/helperLinkService";
 import HelperLinkProvider from "../../services/linksProvider";
 import DefaultPageTemplate from "../../templates/DefaultPageTemplate/DefaultPageTemplate";
-import NewLinksPopup from "./NewLinksPopup";
 import styles from "./LinkPage.module.scss";
+import NewLinksPopup from "./NewLinksPopup";
 
 const LinksDefaultPage = () => {
   const [itemsUpdated, setItemsUpdated] = useState(false);
@@ -16,30 +16,28 @@ const LinksDefaultPage = () => {
     headerBackgroundColor: helper.headerBackgroundColor,
     linkFontColor: helper.linkFontColor,
     iconColor: helper.iconColor,
-  })
+  });
 
   return (
-    <>
-      <HelperLinkProvider>
-        <div className={styles.container}>
-          <NewLinksPopup
-            isEdit={isEdit}
-            itemId={itemId}
-            setItemsUpdated={setItemsUpdated}
-          />
-          <DefaultPageTemplate
-            getItems={getHelpers}
-            deleteItem={deleteHelper}
-            itemsUpdated={itemsUpdated}
-            setIsEdit={setIsEdit}
-            setItemId={setItemId}
-            itemType={ACTIVITY_TYPES_INFO.HELPERLINKS}
-            itemTypeInfo={ACTIVITY_TYPES_INFO.HELPERLINKS}
-            getItemDetails={getItemDetails}
-          />
-        </div>
-      </HelperLinkProvider>
-    </>
+    <HelperLinkProvider>
+      <div className={styles.container}>
+        <NewLinksPopup
+          isEdit={isEdit}
+          itemId={itemId}
+          setItemsUpdated={setItemsUpdated}
+        />
+        <DefaultPageTemplate
+          getItems={getHelpers}
+          deleteItem={deleteHelper}
+          itemsUpdated={itemsUpdated}
+          setIsEdit={setIsEdit}
+          setItemId={setItemId}
+          itemType={ACTIVITY_TYPES_INFO.HELPERLINKS}
+          itemTypeInfo={ACTIVITY_TYPES_INFO.HELPERLINKS}
+          getItemDetails={getItemDetails}
+        />
+      </div>
+    </HelperLinkProvider>
   );
 };
 

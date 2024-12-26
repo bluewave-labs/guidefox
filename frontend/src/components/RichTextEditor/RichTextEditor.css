@@ -3,9 +3,11 @@
   color: var(--main-text-color);
   font-size: var(--font-regular);
   border-radius: 8px;
-  padding-top: 1rem;
+  padding-top: 0.5rem;
   margin-top: 1rem;
   width: 400px;
+  padding-left: 0.5rem;
+  box-sizing: border-box;
 }
 
 .ProseMirror {

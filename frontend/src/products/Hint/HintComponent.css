@@ -1,6 +1,6 @@
 .preview-container {
   width: 100%;
-  height: 250px;
+  min-height: 250px;
   border: 1px solid var(--light-border-color);
   margin-top: 1rem;
   overflow: auto;
@@ -17,23 +17,31 @@
   font-weight: 600;
   line-height: 30px;
   text-align: left;
-  padding: 0 2rem 0 0;
+  padding: 0 2rem;
+  color: var(--preview-header-color);
+  margin-bottom: 8px;
+  margin-top: 24px;
 }
 
 .preview-content-container {
-  color: var(--second-text-color);
+  color: var(--main-text-color);
   justify-content: space-between;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  height: calc(100% - 20px);
+  min-height: 170px;
   padding: 0 2rem;
   font-size: 13px;
 }
 
 .preview-content p {
-  margin: 0.1rem 0;
+  margin: 0;
   line-height: 24px;
+}
+
+.preview-content  {
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
 }
 
 .preview-button-container {

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {useLocation} from "react-router-dom"
 import DefaultPageTemplate from "../../templates/DefaultPageTemplate/DefaultPageTemplate";
 import CreateHintPage from "./CreateHintPage";
 import { ACTIVITY_TYPES_INFO } from "../../data/guideMainPageData";
@@ -8,6 +9,7 @@ const HintDefaultPage = () => {
   const [itemsUpdated, setItemsUpdated] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [itemId, setItemId] = useState(null);
+  const locationData = useLocation()
 
   const getHintDetails = (hint) => ({
     title: `Hint ${hint.id}`,
@@ -27,6 +29,7 @@ const HintDefaultPage = () => {
         itemsUpdated={itemsUpdated}
       />
       <CreateHintPage
+        autoOpen={locationData.state?.autoOpen}
         isEdit={isEdit}
         itemId={itemId}
         setItemsUpdated={setItemsUpdated}

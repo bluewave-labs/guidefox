@@ -10,9 +10,8 @@ import toastEmitter, { TOAST_EMITTER_KEY } from "../../utils/toastEmitter";
 import { emitToastError } from "../../utils/guideHelper";
 import { useDialog } from "../../templates/GuideTemplate/GuideTemplateContext";
 
-const HintPage = ({ isEdit, itemId, setItemsUpdated }) => {
-  const { closeDialog } = useDialog();
-
+const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated }) => {
+  const { openDialog, closeDialog } = useDialog();
 
   const [activeButton, setActiveButton] = useState(0);
 
@@ -59,6 +58,10 @@ const HintPage = ({ isEdit, itemId, setItemsUpdated }) => {
       setState: setButtonTextColor,
     },
   ];
+
+  useEffect(() => {
+    if (autoOpen) openDialog();
+  }, [autoOpen, openDialog]);
 
   useEffect(() => {
     if (isEdit) {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useLocation} from "react-router-dom"
 import DefaultPageTemplate from '../../templates/DefaultPageTemplate/DefaultPageTemplate';
 import CreatePopupPage from './CreatePopupPage';
 import { getPopups, deletePopup } from '../../services/popupServices';
@@ -8,6 +9,7 @@ const PopupDefaultPage = () => {
     const [itemsUpdated, setItemsUpdated] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [itemId, setItemId] = useState(null);
+    const locationData = useLocation()
 
     const getPopupDetails = (popup) => ({
         title: `Popup ${popup.id}`,
@@ -28,6 +30,7 @@ const PopupDefaultPage = () => {
           itemsUpdated={itemsUpdated}
         />
         <CreatePopupPage
+          autoOpen= {locationData.state?.autoOpen}
           isEdit={isEdit}
           itemId={itemId}
           setItemsUpdated={setItemsUpdated}

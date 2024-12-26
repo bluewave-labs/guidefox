@@ -14,7 +14,7 @@ import {
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import './LeftMenu.css';
 import Logo from '../Logo/Logo';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import UserProfileSidebar from '../UserProfileSidebar/UserProfileSidebar';
 
 
@@ -37,6 +37,7 @@ const menuItems = [
 
 function LeftMenu() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleNavigation = (route) => {
     if (route && route.startsWith('/')) {
@@ -58,6 +59,9 @@ function LeftMenu() {
               <ListItemButton
                 key={index}
                 className="menu-item"
+                sx={{
+                  backgroundColor: location.pathname === item.route ? "var(--gray-200)" : "transparent"
+                }}
                 onClick={() => handleNavigation(item.route)}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>

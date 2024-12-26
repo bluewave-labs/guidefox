@@ -25,13 +25,3 @@
   border-radius: 8px !important;
 
 }
-
-.textField .MuiButton-root {
-  font-size: var(--font-regular);
-  color: var(--second-text-color);
-}
-
-.MuiBox-root .MuiInputLabel-root {
-  font-size: var(--font-regular);
-  color: var(--second-text-color);
-}

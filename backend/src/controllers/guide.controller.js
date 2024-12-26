@@ -2,7 +2,7 @@ const bannerService = require("../service/banner.service");
 const guidelogService = require("../service/guidelog.service");
 const helperLinkService = require("../service/helperLink.service");
 const popupService = require("../service/popup.service");
-
+const { internalServerError } = require("../utils/errors.helper");
 class GuideController {
     async getGuidesByUrl(req, res) {
         try {

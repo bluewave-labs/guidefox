@@ -2,22 +2,6 @@
 
 .colorTextField {
 
-    :global {
-        .MuiOutlinedInput-root {
-            &:hover fieldset {
-                border-color: var(--main-purple);
-            }
-
-            &.Mui-focused fieldset {
-                border-color: var(--main-purple);
-            }
-
-        }
-        .MuiOutlinedInput-root {
-            border-radius: 8px;
-        }
-    }
-
     input {
         font-size: var(--font-regular);
         height: 34px;

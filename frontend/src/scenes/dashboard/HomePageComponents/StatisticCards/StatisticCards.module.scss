@@ -2,7 +2,7 @@
 
 .statisticCard {
     border: 1px solid var(--light-gray);
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 24px;
     gap:10px;
     display: flex;
@@ -13,12 +13,14 @@
 
     .metricName {
         font-size: var(--font-header);
-        font-weight: 600;
+        color: var(--gray-350);
+        font-weight: 400;
         line-height: 24px;
         margin-bottom: 13px;
     }
   
     .metricValue {
+        color: var(--gray-500);
         font-size: 36px;
         font-weight: 600;
         line-height: 44px;
