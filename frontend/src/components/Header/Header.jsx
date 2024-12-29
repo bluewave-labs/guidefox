@@ -16,7 +16,7 @@ const Header = () => {
 
     return (
         <div className="top-banner">
-            <div className="logo">BlueWave Onboard</div>
+            <div className="logo">GuideFox</div>
             <div className="user-info">
                 <Avatar src="/vendetta.png" alt="User" size="medium" />
                 <div className="user-details">

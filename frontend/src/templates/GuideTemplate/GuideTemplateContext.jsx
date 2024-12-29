@@ -1,6 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
 
-const GuideTemplateContext = createContext();
+const GuideTemplateContext = createContext({
+  isOpen: false,
+  openDialog: () => {},
+  closeDialog: () => {},
+});
 
 export const useDialog = () => {
   const context = useContext(GuideTemplateContext);

@@ -5,6 +5,7 @@
     border-bottom: 1px solid var(--grey-border);
     padding-bottom: 15px;
     height: 2rem;
+    margin-top: 8px;
 }
 
 .orgNameContainer {

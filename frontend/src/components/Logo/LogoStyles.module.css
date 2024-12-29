@@ -15,7 +15,7 @@
 
 .sidebar {
   display: flex;
-  justify-content: center;
+  margin-left: 3px;
   align-items: center;
   max-width: 200px;
   margin-top: 1rem;

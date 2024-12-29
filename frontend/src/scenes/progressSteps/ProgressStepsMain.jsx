@@ -85,10 +85,10 @@ const ProgressStepsMain = () => {
     const content = [
         {
             title: "Customize your onboarding",
-            explanation: "Welcome to BlueWave Onboard. Please customize your dashboard experience here."
+            explanation: "Welcome to GuideFox. Please customize your dashboard experience here."
         },
         {
-            title: "Install BlueWave Onboard now?",
+            title: "Install GuideFox now?",
             explanation: "You’ll need a small extension to use create, edit and preview your onboarding items. Your end users don’t need to install this."
         },
         {

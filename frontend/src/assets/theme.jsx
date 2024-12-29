@@ -32,7 +32,7 @@ export const lightTheme = createTheme({
     MuiTabPanel: {
       styleOverrides: {
         root: {
-          padding: 0,
+          padding: '24px 0 0 24px',
         },
       },
     },
@@ -112,7 +112,7 @@ export const darkTheme = createTheme({
     MuiTabPanel: {
       styleOverrides: {
         root: {
-          padding: 0,
+          padding: '24px 0 0 24px',
         },
       },
     },

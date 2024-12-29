@@ -9,6 +9,7 @@ class HintBuilder {
       tooltipPlacement: "top",
       hintContent: "content",
       header: "header",
+      url: "",
       headerBackgroundColor: "#FFFFFF",
       headerColor: "#000000",
       textColor: "#000000",

@@ -3,12 +3,15 @@ import DropdownList from "../../DropdownList/DropdownList";
 import CustomTextField from "../../TextFieldComponents/CustomTextField/CustomTextField";
 import "./HintLeftContent.css";
 
-const HintLeftContent = ({ actionButtonText, setActionButtonText, actionButtonUrl, setActionButtonUrl, action, setAction, targetElement, setTargetElement, tooltipPlacement, setTooltipPlacement }) => {
+const HintLeftContent = ({ actionButtonText, setActionButtonText, actionButtonUrl, setActionButtonUrl, action, setAction, targetElement, setTargetElement, tooltipPlacement, setTooltipPlacement, setUrl, url }) => {
   const handleActionButtonText = (event) => {
     setActionButtonText(event.target.value);
   };
   const handleActionButtonUrl = (event) => {
     setActionButtonUrl(event.target.value);
+  };
+  const handleUrl = (event) => {
+    setUrl(event.target.value);
   };
   const handleActionChange = (newAction) => {
     setAction(newAction);
@@ -24,11 +27,19 @@ const HintLeftContent = ({ actionButtonText, setActionButtonText, actionButtonUr
 
   return (
     <div className="left-content-container">
+      <h2 className="hint-label" style={{ marginBottom: 0, marginTop: "16px" }}>
+        Url (can be relative)
+      </h2>
+      <CustomTextField
+        TextFieldWidth="241px"
+        value={url}
+        onChange={handleUrl}
+      />
       <h2 className="hint-label" style={{ marginTop: "16px" }}>
         Action
       </h2>
       <DropdownList
-        actions={["No action", "Open a URL", "Open a URL in a new tab"]}
+        actions={["No action", "Open URL", "Open URL in a new tab"]}
         onActionChange={handleActionChange}
         selectedActionString={action.toLowerCase()}
       />

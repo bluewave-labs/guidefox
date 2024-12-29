@@ -29,6 +29,7 @@ const NewLinksPopup = ({
   isEdit,
   itemId,
   setItemsUpdated,
+  setIsEdit,
 }) => {
   const [activeBtn, setActiveBtn] = useState(0);
   const {
@@ -160,6 +161,7 @@ const NewLinksPopup = ({
         leftContent={leftContent}
         leftAppearance={leftAppearance}
         onSave={handleSaveHelper}
+        setIsEdit={setIsEdit}
       />
     </div>
   );

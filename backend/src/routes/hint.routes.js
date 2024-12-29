@@ -13,6 +13,6 @@ router.put("/edit_hint/:hintId", authenticateJWT, accessGuard(teamPermissions.hi
 router.get("/all_hints", authenticateJWT, hintController.getAllHints);
 router.get("/hints", authenticateJWT, hintController.getHints);
 router.get("/get_hint/:hintId", authenticateJWT, hintController.getHintById);
-// router.get("/get_hint_by_url", hintController.getHintByUrl);
+router.get("/get_hint_by_url", hintController.getHintByUrl);
 
 module.exports = router;

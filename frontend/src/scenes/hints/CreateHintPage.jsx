@@ -10,7 +10,7 @@ import toastEmitter, { TOAST_EMITTER_KEY } from "../../utils/toastEmitter";
 import { emitToastError } from "../../utils/guideHelper";
 import { useDialog } from "../../templates/GuideTemplate/GuideTemplateContext";
 
-const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated }) => {
+const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEdit }) => {
   const { openDialog, closeDialog } = useDialog();
 
   const [activeButton, setActiveButton] = useState(0);
@@ -28,7 +28,8 @@ const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated }) => {
   const [header, setHeader] = useState("");
   const [content, setContent] = useState("");
   const markdownContent = new Turndown().turndown(content);
-  
+
+  const [url, setUrl] = useState("https://");
   const [actionButtonUrl, setActionButtonUrl] = useState("https://");
   const [actionButtonText, setActionButtonText] = useState("Take me to subscription page");
   const [action, setAction] = useState("No action");
@@ -76,6 +77,7 @@ const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated }) => {
           setHeader(hintData.header || "");
           setContent(hintData.hintContent || "");
           setActionButtonUrl(hintData.actionButtonUrl || "https://");
+          setUrl(hintData.url || "https://");
           setActionButtonText(hintData.actionButtonText || "");
           setAction(hintData.action || "No action");
         } catch (error) {
@@ -89,6 +91,7 @@ const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated }) => {
   const onSave = async () => {
     const hintData = {
       tooltipPlacement: tooltipPlacement.toLowerCase(),
+      url,
       actionButtonUrl,
       actionButtonText,
       action: action.toLowerCase(),
@@ -125,6 +128,7 @@ const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated }) => {
       activeButton={activeButton}
       handleButtonClick={handleButtonClick}
       onSave={onSave}
+      setIsEdit={setIsEdit}
       rightContent={() => (
         <RichTextEditor
           sx={{
@@ -157,6 +161,8 @@ const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated }) => {
           setActionButtonText={setActionButtonText}
           actionButtonUrl={actionButtonUrl}
           setActionButtonUrl={setActionButtonUrl}
+          setUrl={setUrl}
+          url={url}
           action={action}
           setAction={setAction}
           targetElement={targetElement}

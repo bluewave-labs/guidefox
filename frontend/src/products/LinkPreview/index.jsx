@@ -67,7 +67,7 @@ const Preview = () => {
             ))}
         </ul>
         <p className={s["preview__card--footer"]}>
-          Powered by BlueWave Onboarding
+          Powered by GuideFox
         </p>
       </div>
     </div>

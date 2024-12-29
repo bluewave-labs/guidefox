@@ -98,6 +98,7 @@ RichTextEditor.propTypes = {
   setHeader: PropTypes.func,
   setContent: PropTypes.func,
   content: PropTypes.string,
+  resetState: PropTypes.func,
 };
 
 export default RichTextEditor;

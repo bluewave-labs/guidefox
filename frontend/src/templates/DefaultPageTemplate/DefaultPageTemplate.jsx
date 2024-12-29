@@ -54,6 +54,8 @@ const DefaultPageTemplate = ({ getItems, deleteItem, setIsEdit, setItemId, itemT
 
     const handleClosePopup = () => {
         setPopupOpen(false);
+        setIsEdit(false);
+        setItemId(null);
     };
 
     useEffect(() => {

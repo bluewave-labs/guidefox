@@ -16,6 +16,7 @@ const GuideTemplate = ({
   rightContent = () => null,
   leftAppearance = () => null,
   onSave = () => null,
+  setIsEdit = () => null,
 }) => {
   const { isOpen, closeDialog } = useDialog();
   const location = useLocation();
@@ -26,6 +27,7 @@ const GuideTemplate = ({
     if (location.state?.autoOpen) navigate("/", { state: {} });
 
     closeDialog();
+    setIsEdit(false);
   };
 
   return (
@@ -91,6 +93,7 @@ GuideTemplate.propTypes = {
   rightContent: PropTypes.func,
   leftAppearance: PropTypes.func,
   onSave: PropTypes.func,
+  setIsEdit: PropTypes.func,
 };
 
 export default GuideTemplate;

@@ -12,7 +12,7 @@ import BannerLeftContent from "./BannerPageComponents/BannerLeftContent/BannerLe
 import BannerPreview from "./BannerPageComponents/BannerPreview/BannerPreview";
 import { useDialog } from "../../templates/GuideTemplate/GuideTemplateContext";
 
-const BannerPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated }) => {
+const BannerPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEdit }) => {
   const [backgroundColor, setBackgroundColor] = useState("#F9F5FF");
   const [fontColor, setFontColor] = useState("#344054");
   const [activeButton, setActiveButton] = useState(0);
@@ -46,8 +46,6 @@ const BannerPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated }) => {
           setActionUrl(bannerData.actionUrl || "");
           setButtonAction(bannerData.closeButtonAction || "No action");
           setIsTopPosition(bannerData.position === "top");
-
-          console.log("Get banner successful:", bannerData);
         } catch (error) {
           emitToastError(error);
         }
@@ -88,6 +86,7 @@ const BannerPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated }) => {
       activeButton={activeButton}
       handleButtonClick={handleButtonClick}
       onSave={onSave}
+      setIsEdit={setIsEdit}
       rightContent={() => (
         <BannerPreview
           backgroundColor={backgroundColor}
