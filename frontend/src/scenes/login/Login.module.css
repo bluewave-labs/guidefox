@@ -22,12 +22,18 @@
 .login-container {
   display: flex;
   flex-direction: column;
-  max-width: 360px;
+  min-width: 360px;
   margin: 0 auto;
   padding: 20px;
   background-repeat: no-repeat;
   background-image: url('../../assets/auth-screen-background.svg');
   background-position: center -350px;
+}
+
+@media (max-width: 400px) {
+  .login-container {
+    min-width: auto;
+  }
 }
 
 .form-group {
