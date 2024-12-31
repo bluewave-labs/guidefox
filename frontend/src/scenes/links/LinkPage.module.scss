@@ -13,23 +13,31 @@ $box-shadow-color: rgba(16, 24, 40, 0.05);
   }
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
 .body {
   &__title {
-    font-family: Inter;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.43;
     color: #344054;
+    margin-top: 20px;
   }
 
   &__links {
-    width: 50%;
+    width: 15rem;
     margin-right: 2rem;
+    margin-left: 8px;
 
     &--new {
       margin-left: 1rem;
-
-      font-family: Inter;
       font-size: 0.875rem;
       font-weight: 400;
       line-height: 1.43;
@@ -47,8 +55,6 @@ $box-shadow-color: rgba(16, 24, 40, 0.05);
     flex-direction: column;
     margin-bottom: 1rem;
     width: fit-content;
-
-    font-family: Inter;
     font-size: 0.813rem;
     font-weight: 400;
     line-height: 1.54;
@@ -62,6 +68,9 @@ $box-shadow-color: rgba(16, 24, 40, 0.05);
     height: $input-height;
     border-radius: 0.5rem;
     display: inline-block;
+    font-size: var(--font-regular);
+    color: var(--main-text-color);
+    font-family: Inter;
 
     &:first-of-type {
       margin-top: 5px;

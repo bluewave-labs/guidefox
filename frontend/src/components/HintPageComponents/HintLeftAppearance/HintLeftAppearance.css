@@ -16,4 +16,8 @@
 .hint-appearance-color {
   display: flex;
   align-items: center;
+  width: 241px;
+  > div {
+    width: 100%;
+  }
 }

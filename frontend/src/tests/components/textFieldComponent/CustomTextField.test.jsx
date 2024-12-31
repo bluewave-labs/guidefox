@@ -67,7 +67,7 @@ describe('CustomTextField', () => {
   it('renders with custom input height', () => {
     render(<CustomTextField labelText="Test Label" inputHeight="50px" />);
 
-    expect(screen.getByRole('textbox').style.height).toBe('50px');
+    expect(screen.getByRole('textbox').closest('.MuiOutlinedInput-root').style.height).toBe('50px');
   });
 
   it('renders with custom label font weight', () => {

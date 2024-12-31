@@ -2,6 +2,16 @@
   border: 1px solid var(--light-border-color);
   border-radius: 5px;
   width: fit-content;
+  min-height: 34px!important;
+  margin-top: 15px;
+}
+
+.editor-tabs button {
+  min-height: 34px!important;
+}
+
+.editor-tabs.css-11keaam-MuiTabs-root {
+  position: static!important;
 }
 
 .tab[aria-selected="true"] {

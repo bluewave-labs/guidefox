@@ -29,12 +29,43 @@ export const lightTheme = createTheme({
         },
       },
     },
+    MuiTabPanel: {
+      styleOverrides: {
+        root: {
+          padding: '24px 0 0 24px',
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          margin: "0px 5px !important",
+          "&.Mui-selected": {
+            backgroundColor: "#F9FAFB !important",
+            borderRadius: "8px !important",
+          },
+        },
+      },
+    },
     MuiDrawer: {
       styleOverrides: {
         paper: {
           width: "250px",
           flexShrink: 0,
           zIndex: 1200,
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: "8px",
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: "var(--main-purple)",
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "var(--main-purple)",
+          },
         },
       },
     },
@@ -69,6 +100,33 @@ export const darkTheme = createTheme({
         },
       },
     },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+          fontSize: "14px",
+          padding: "3px 9px",
+        },
+      },
+    },
+    MuiTabPanel: {
+      styleOverrides: {
+        root: {
+          padding: '24px 0 0 24px',
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          margin: "0px 5px !important",
+          "&.Mui-selected": {
+            backgroundColor: "#F9FAFB !important",
+            borderRadius: "8px !important",
+          },
+        },
+      },
+    },
     MuiDrawer: {
       styleOverrides: {
         paper: {
@@ -78,12 +136,16 @@ export const darkTheme = createTheme({
         },
       },
     },
-    MuiTab: {
+    MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          textTransform: "none",
-          fontSize: "14px",
-          padding: "3px 9px",
+          borderRadius: "8px",
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: "var(--main-purple)",
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "var(--main-purple)",
+          },
         },
       },
     },

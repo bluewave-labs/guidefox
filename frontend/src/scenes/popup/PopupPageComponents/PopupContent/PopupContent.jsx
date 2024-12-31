@@ -1,8 +1,8 @@
 import DropdownList from "@components/DropdownList/DropdownList";
 import CustomTextField from "@components/TextFieldComponents/CustomTextField/CustomTextField";
+import PropTypes from "prop-types";
 import { React } from "react";
 import styles from "./PopupContent.module.scss";
-import PropTypes from "prop-types";
 
 const PopupContent = ({
   actionButtonText,
@@ -26,6 +26,7 @@ const PopupContent = ({
   const handleUrlChange = (event) => {
     setUrl(event.target.value);
   };
+
   return (
     <div className={styles.container}>
       <h2>Action</h2>
@@ -66,4 +67,4 @@ PopupContent.propTypes = {
   setButtonAction: PropTypes.func,
   url: PropTypes.string,
   setUrl: PropTypes.func,
-}
+};

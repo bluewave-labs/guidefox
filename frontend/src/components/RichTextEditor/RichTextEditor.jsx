@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import "./RichTextEditor.css";
 import { useEditor, EditorContent } from "@tiptap/react";
 import { StarterKit } from "@tiptap/starter-kit";
@@ -7,50 +8,23 @@ import Link from "@tiptap/extension-link";
 import BulletList from "@tiptap/extension-bullet-list";
 import OrderedList from "@tiptap/extension-ordered-list";
 import Toolbar from "./Toolbar/EditorToolbar";
-import PopupComponent from "../../products/Popup/PopupComponent";
 import EditorTabs from "./Tabs/EditorTabs";
 import CustomTextField from "../TextFieldComponents/CustomTextField/CustomTextField";
 
 const RichTextEditor = ({
-  previewBtnText,
-  content: initialContent,
-  setContent: initialSetContent,
-  header: initialHeader,
-  setHeader: initialSetHeader,
-  headerBackgroundColor,
-  headerColor,
-  textColor,
-  buttonBackgroundColor,
-  buttonTextColor,
-  popupSize,
-  sx,
+  sx = {},
+  previewComponent,
+  header,
+  setHeader,
+  setContent,
+  content,
 }) => {
-  const [htmlContent, setHtmlContent] = useState("");
   const [mode, setMode] = useState("editor");
-  const [content, setContent] = useState(initialContent ?? "");
-  const [header, setHeader] = useState(initialHeader ?? "");
 
-  useEffect(() => {
-    if (initialSetContent) {
-      initialSetContent(content);
-      setContent(content);
-    }
-
-    if(initialHeader){
-      initialSetHeader(header);
-      setHeader(header);
-    }
-
-
-  }, [content]);
+  const Preview = previewComponent;
 
   const handleHeaderChange = (e) => {
-    const newHeader = e.target.value;
-    setHeader(newHeader);
-    if (initialSetHeader) {
-      initialSetHeader(newHeader);
-    }
-    console.log(header);
+    setHeader(e.target.value);
   };
 
   const editor = useEditor({
@@ -65,23 +39,32 @@ const RichTextEditor = ({
       BulletList,
       OrderedList,
     ],
+    content,
     onUpdate: ({ editor }) => {
-      let html = editor.getHTML();
-      setHtmlContent(html);
-      setContent(html);
-      console.log(html);
+      setContent(editor.getHTML());
+    },
+    onDestroy: () => {
+      setContent("");
+      setHeader("");
     },
   });
-
+  
+  // Set initial content of the editor to the content prop during editing
+  useEffect(() => {
+    if (editor?.isEmpty && content !== "<p></p>") {
+      editor.commands.setContent(content);
+    }
+  }, [content]);
+  
   return (
-    <div style={{ position: 'relative', ...sx }}>
+    <div style={{ ...sx }}>
       {mode === "editor" ? (
         <>
           <CustomTextField
             labelText="Header"
             labelFontWeight={600}
             inputHeight="40px"
-            TextFieldWidth={"100%"}
+            TextFieldWidth="100%"
             value={header}
             onChange={handleHeaderChange}
             style={{ marginBottom: "2rem" }}
@@ -89,30 +72,33 @@ const RichTextEditor = ({
           <label className="editor-label">Content</label>
           <div className="editor-container">
             <Toolbar editor={editor} />
-            <EditorContent editor={editor} />
+            <EditorContent editor={editor}/>
           </div>
         </>
       ) : (
-        <PopupComponent
-          header={header}
-          content={htmlContent}
-          previewBtnText={previewBtnText}
-          headerBackgroundColor={headerBackgroundColor}
-          headerColor={headerColor}
-          buttonBackgroundColor={buttonBackgroundColor}
-          buttonTextColor={buttonTextColor}
-          textColor={textColor}
-          popupSize={popupSize}
-        />
+        <Preview />
       )}
-      <EditorTabs mode={mode} setMode={setMode}
+      <EditorTabs
+        mode={mode}
+        setMode={setMode}
         sx={{
-          position: 'absolute',
-          top: '400px',
+          position: "absolute",
+          top: "400px",
           left: 0,
-        }} />
+        }}
+      />
     </div>
   );
+};
+
+RichTextEditor.propTypes = {
+  sx: PropTypes.object,
+  previewComponent: PropTypes.elementType.isRequired,
+  header: PropTypes.string,
+  setHeader: PropTypes.func,
+  setContent: PropTypes.func,
+  content: PropTypes.string,
+  resetState: PropTypes.func,
 };
 
 export default RichTextEditor;

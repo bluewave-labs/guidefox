@@ -3,9 +3,10 @@ import { describe, it, expect, vi } from 'vitest';
 import CreatePopupPage from '../../../scenes/popup/CreatePopupPage';
 import * as popupServices from '../../../services/popupServices';
 import * as loginServices from '../../../services/loginServices';
-import { BrowserRouter as Router, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { act } from 'react';
 import toastEmitter from '../../../utils/toastEmitter';
+import { GuideTemplateProvider } from '../../../templates/GuideTemplate/GuideTemplateContext';
 
 vi.mock('react-router-dom', async (importOriginal) => {
   const actual = await importOriginal();
@@ -17,6 +18,12 @@ vi.mock('react-router-dom', async (importOriginal) => {
 
 vi.mock('../../../services/popupServices');
 vi.mock('../../../services/loginServices');
+
+const Wrapper = ({ children }) => (
+  <GuideTemplateProvider>
+    <Router>{children}</Router>
+  </GuideTemplateProvider>
+);
 
 describe('CreatePopupPage component', () => {
   it('handles onSave and successful popup creation', async () => {
@@ -36,11 +43,7 @@ describe('CreatePopupPage component', () => {
     });
 
     await act(async () => {
-      render(
-        <Router>
-          <CreatePopupPage />
-        </Router>
-      );
+      render(<CreatePopupPage autoOpen />, { wrapper: Wrapper });
     });
 
     const saveButton = await waitFor(() => screen.getByRole('button', { name: /Save/i }));
@@ -67,11 +70,7 @@ describe('CreatePopupPage component', () => {
     const emitSpy = vi.spyOn(toastEmitter, 'emit');
 
     await act(async () => {
-      render(
-        <Router>
-          <CreatePopupPage />
-        </Router>
-      );
+      render(<CreatePopupPage autoOpen />, { wrapper: Wrapper });
     });
 
     // Wait for the "Save" button to appear in the DOM
@@ -97,11 +96,7 @@ describe('CreatePopupPage component', () => {
 
 
   it('initializes form fields correctly', async () => {
-    render(
-      <Router>
-        <CreatePopupPage />
-      </Router>
-    );
+    render(<CreatePopupPage autoOpen />, { wrapper: Wrapper });
 
     // Check initial state of form fields
     const headerBackgroundColor = screen.getByDisplayValue('No action');

@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import styles from "./Login.module.css";
@@ -22,8 +22,8 @@ const validationSchema = Yup.object({
   password: Yup.string().required("Password is required").trim(),
 });
 
-function LoginPage({isAdmin=false}) {
-  const [rememberMe, setRememberMe]=useState(false)
+function LoginPage({ isAdmin = false }) {
+  const [rememberMe, setRememberMe] = useState(false)
   const [serverErrors, setServerErrors] = useState([]);
   const { loginAuth } = useAuth();
 
@@ -79,6 +79,7 @@ function LoginPage({isAdmin=false}) {
             <CustomTextField
               id="email"
               name="email"
+              type="email"
               placeholder="Enter email"
               labelText="Email:"
               textFieldMargin="none"
@@ -124,7 +125,7 @@ function LoginPage({isAdmin=false}) {
                 <input
                   type="checkbox"
                   checked={rememberMe}
-                  onChange={(e)=>setRememberMe(e.target.checked)}
+                  onChange={(e) => setRememberMe(e.target.checked)}
                 />
                 Remember for 30 days
               </label>

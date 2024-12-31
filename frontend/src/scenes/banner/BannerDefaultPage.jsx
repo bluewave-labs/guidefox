@@ -1,31 +1,47 @@
-import React from 'react';
-import DefaultPageTemplate from '../../templates/DefaultPageTemplate/DefaultPageTemplate';
-import { getBanners, deleteBanner } from '../../services/bannerServices';
-import { useNavigate } from 'react-router-dom';
-import { ACTIVITY_TYPES_INFO } from '../../data/guideMainPageData';
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { ACTIVITY_TYPES_INFO } from "../../data/guideMainPageData";
+import { deleteBanner, getBanners } from "../../services/bannerServices";
+import DefaultPageTemplate from "../../templates/DefaultPageTemplate/DefaultPageTemplate";
+import { useDialog } from "../../templates/GuideTemplate/GuideTemplateContext";
+import BannerPage from "./CreateBannerPage";
 
 const BannerDefaultPage = () => {
-    const navigate = useNavigate();
+  const [itemsUpdated, setItemsUpdated] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [itemId, setItemId] = useState(null);
+  const locationData = useLocation();
 
-    const getBannerDetails = (banner) => ({
-        title: `Banner ${banner.id}`,
-        text: banner.bannerText,
-    });
+  const { isOpen } = useDialog();
 
-    const navigateToCreate = (state) => {
-        navigate('/banner/create', state);
-    };
+  const getBannerDetails = (banner) => ({
+    title: `Banner ${banner.id}`,
+    text: banner.bannerText,
+  });
 
-    return (
-        <DefaultPageTemplate
-            getItems={getBanners}
-            deleteItem={deleteBanner}
-            navigateToCreate={navigateToCreate}
-            itemType={ACTIVITY_TYPES_INFO.BANNERS}
-            itemTypeInfo={ACTIVITY_TYPES_INFO.BANNERS}
-            getItemDetails={getBannerDetails}
+  return (
+    <>
+      <DefaultPageTemplate
+        getItems={getBanners}
+        deleteItem={deleteBanner}
+        setIsEdit={setIsEdit}
+        setItemId={setItemId}
+        itemType={ACTIVITY_TYPES_INFO.BANNERS}
+        itemTypeInfo={ACTIVITY_TYPES_INFO.BANNERS}
+        getItemDetails={getBannerDetails}
+        itemsUpdated={itemsUpdated}
+      />
+      {isOpen && (
+        <BannerPage
+          autoOpen={locationData.state?.autoOpen}
+          isEdit={isEdit}
+          itemId={itemId}
+          setItemsUpdated={setItemsUpdated}
+          setIsEdit={setIsEdit}
         />
-    );
+      )}
+    </>
+  );
 };
 
 export default BannerDefaultPage;

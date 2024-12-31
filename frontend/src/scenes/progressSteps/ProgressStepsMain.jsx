@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import ProgressSteps from './ProgressSteps/ProgressSteps';
 import styles from './ProgressStepsMain.module.scss';
 import Button from '@components/Button/Button';
-import CheckboxHRM from '@components/Checkbox/CheckboxHRM';
 import TeamMembersList from './ProgressSteps/TeamMemberList/TeamMembersList';
 import { useNavigate } from "react-router-dom";
 import { setOrganisation } from '../../services/teamServices';
@@ -12,7 +11,6 @@ import { CircularProgress } from '@mui/material';
 
 const ProgressStepsMain = () => {
     const navigate = useNavigate();
-    const NUMBER_OF_STEPS = 4;
     const [step, setStep] = useState(1);
     const [teamMembersEmails, setTeamMembersEmails] = useState([]);
     const [organizationName, setOrganizationName] = useState('');
@@ -87,10 +85,10 @@ const ProgressStepsMain = () => {
     const content = [
         {
             title: "Customize your onboarding",
-            explanation: "Welcome to BlueWave Onboard. Please customize your dashboard experience here."
+            explanation: "Welcome to GuideFox. Please customize your dashboard experience here."
         },
         {
-            title: "Install BlueWave Onboard now?",
+            title: "Install GuideFox now?",
             explanation: "You’ll need a small extension to use create, edit and preview your onboarding items. Your end users don’t need to install this."
         },
         {
@@ -102,18 +100,6 @@ const ProgressStepsMain = () => {
             explanation: "You have successfully set up your account. <br> What next? Start adding a guide, hint or a tour in your app"
         }
     ];
-
-    const increaseStep = () => {
-        if (step < NUMBER_OF_STEPS) {
-            setStep(step => step + 1);
-        }
-    }
-
-    const decreaseStep = () => {
-        if (step > 1) {
-            setStep(step => step - 1);
-        }
-    }
 
     const handleOrgNameEmpty = () => {
         if (!organizationName.trim()) {
@@ -209,13 +195,24 @@ const ProgressStepsMain = () => {
         )
     }
 
-    const pages = [firstPage, secondPage, thirdPage, fourthPage];
+    const pages = [firstPage, thirdPage, fourthPage]; //second page is removed
 
+    const increaseStep = () => {
+        if (step < pages.length) {
+            setStep(step => step + 1);
+        }
+    }
+
+    const decreaseStep = () => {
+        if (step > 1) {
+            setStep(step => step - 1);
+        }
+    }
     return (
         <div className={styles.container}>
             <div className={styles.skeleton}>
                 <h2>{content[step - 1].title}</h2>
-                <ProgressSteps stepData={NUMBER_OF_STEPS} completed={step} />
+                <ProgressSteps stepData={pages.length} completed={step} />
             </div>
             <div className={styles.content}>
                 <h3 dangerouslySetInnerHTML={{ __html: content[step - 1].explanation }} />

@@ -51,6 +51,19 @@ class GuideLogService {
       throw new Error(`Failed to retrieve popup log for user ${userId}: ${err.message}`);
     }
   }
+  async getCompleteHintLogs(userId) {
+    try {
+      return await GuideLog.findAll({
+        where: {
+          userId: userId,
+          completed: true,
+          guideType: GuideType.HINT
+        },
+      });
+    } catch (err) {
+      throw new Error(`Failed to retrieve hint log for user ${userId}: ${err.message}`);
+    }
+  }
 
   async getCompleteHelperLogs(userId) {
     try {

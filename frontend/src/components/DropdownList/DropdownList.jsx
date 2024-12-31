@@ -48,6 +48,7 @@ const DropdownList = ({
       value={selectedAction}
       onChange={handleChange}
       className={`select ${className}`}
+      sx={{marginTop: 1 }}
     >
       {actions.length > 0 ? (
         actions.map((action, index) => (

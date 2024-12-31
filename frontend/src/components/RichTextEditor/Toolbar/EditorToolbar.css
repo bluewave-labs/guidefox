@@ -1,9 +1,10 @@
 .toolbar-container {
   display: flex;
-  gap: 16px;
-  /* justify-content: space-between; */
+  gap: 1px;
   align-items: center;
   width: 70%;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .toolbar-container button {
@@ -12,4 +13,8 @@
 
 .toolbar-container button[disabled] {
   color: var(--light-border-color);
+}
+
+.toolbar-container .MuiButtonBase-root {
+  min-width: 0!important;
 }

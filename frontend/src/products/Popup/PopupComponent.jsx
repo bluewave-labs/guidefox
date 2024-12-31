@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import DOMPurify from "dompurify";
+import ReactMarkdown from "react-markdown";
 import styles from "./PopupComponent.module.css"; // Use your module CSS file
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import Button from "@components/Button/Button";
 
 const PopupComponent = ({
@@ -16,12 +16,17 @@ const PopupComponent = ({
   buttonAction,
   popupSize,
   actionButtonUrl,
-  isReal
+  isReal,
 }) => {
   const [isVisible, setIsVisible] = useState(true);
   const validSizes = ["small", "medium", "large"];
-  const sizeClass = validSizes.includes(popupSize.toLowerCase()) ? styles[popupSize.toLowerCase()] : '';
-  const centeredClass = isReal ? styles.centered : '';
+  const sizeClass = validSizes.includes(popupSize.toLowerCase())
+    ? styles[popupSize.toLowerCase()]
+    : "";
+  const sizeClassContent = validSizes.includes(popupSize.toLowerCase())
+    ? styles[popupSize.toLowerCase() + 'Content']
+    : "";
+  const centeredClass = isReal ? styles.centered : "";
 
   const handleClose = () => {
     if (isReal) {
@@ -30,12 +35,12 @@ const PopupComponent = ({
   };
 
   const handleButtonClick = () => {
-    if (buttonAction === 'close the popup') {
+    if (buttonAction === "close the popup") {
       handleClose();
-    } else if (buttonAction === 'open url') {
-      window.open(actionButtonUrl, '_self'); 
-    } else if (buttonAction === 'open url in new page') {
-      window.open(actionButtonUrl, '_blank'); 
+    } else if (buttonAction === "open url") {
+      window.open(actionButtonUrl, "_self");
+    } else if (buttonAction === "open url in new page") {
+      window.open(actionButtonUrl, "_blank");
     }
   };
 
@@ -49,28 +54,29 @@ const PopupComponent = ({
         {header && (
           <div
             className={styles.header}
-            style={{ backgroundColor: headerBackgroundColor, color: headerColor }}
+            style={{
+              backgroundColor: headerBackgroundColor,
+              color: headerColor,
+            }}
           >
-            <h3 style={{ marginLeft: '5px' }}>{header}</h3>
-            <CloseOutlinedIcon 
-              style={{ color: '#98A2B3', fontSize: '20px', cursor: 'pointer' }} 
-              onClick={handleClose} 
+            <h3 style={{ marginLeft: "5px" }}>{header}</h3>
+            <CloseOutlinedIcon
+              style={{ color: "#98A2B3", fontSize: "20px", cursor: "pointer" }}
+              onClick={handleClose}
             />
           </div>
         )}
-        <div className={styles.popupContentContainer}>
-          <div
-            className={styles.popupContent}
-            style={{ color: textColor }}
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
-          />
+        <div className={`${styles.popupContentContainer} ${sizeClassContent}`}>
+          <div className={styles.popupContent} style={{ color: textColor }}>
+            <ReactMarkdown>{content}</ReactMarkdown>
+          </div>
           <div className={styles.popupButtonContainer}>
             {previewBtnText && (
               <Button
                 style={{
                   backgroundColor: buttonBackgroundColor,
                   color: buttonTextColor,
-                  margin: '1rem'
+                  borderRadius: '8px'
                 }}
                 text={previewBtnText}
                 onClick={handleButtonClick} // Add onClick handler

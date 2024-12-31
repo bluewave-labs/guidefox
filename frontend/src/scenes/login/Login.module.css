@@ -22,12 +22,18 @@
 .login-container {
   display: flex;
   flex-direction: column;
-  max-width: 360px;
+  min-width: 360px;
   margin: 0 auto;
   padding: 20px;
   background-repeat: no-repeat;
   background-image: url('../../assets/auth-screen-background.svg');
   background-position: center -350px;
+}
+
+@media (max-width: 400px) {
+  .login-container {
+    min-width: auto;
+  }
 }
 
 .form-group {
@@ -43,11 +49,9 @@
 }
 
 .form-group input[type="email"],
-.form-group input[type="name"],
-.form-group input[type="password"],
-.form-group input[type="surname"] {
+.form-group input[type="text"],
+.form-group input[type="password"] {
   width: 100%;
-  padding: 8px 12px;
   border: 1px solid var(--light-border-color);
   border-radius: 8px;
   font-size: var(--font-regular);

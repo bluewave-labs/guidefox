@@ -349,7 +349,6 @@ describe("Test popup controller", () => {
       await popupController.editPopup(req, res);
       const status = res.status.getCall(0).args[0];
       const body = res.json.getCall(0).args[0];
-      console.log(body)
       expect(status).to.be.equal(500);
       expect(body).to.be.deep.equal({
         error: "Internal Server Error",

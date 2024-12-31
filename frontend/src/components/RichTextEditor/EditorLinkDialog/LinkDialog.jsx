@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import Button from "../../Button/Button";
 import CustomTextField from "../../TextFieldComponents/CustomTextField/CustomTextField";
+import { dialogStyles } from "./DialogStyles";
 
 const LinkDialog = ({
   open,
@@ -18,9 +19,17 @@ const LinkDialog = ({
   handleOpenLink = () => {},
 }) => {
   return (
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>{isLinkActive ? "Edit Link" : "Add Link"}</DialogTitle>
-      <DialogContent>
+    <Dialog
+      PaperProps={{
+        sx: dialogStyles.paper,
+      }}
+      open={open}
+      onClose={handleClose}
+    >
+      <DialogTitle sx={dialogStyles.title}>
+        {isLinkActive ? "Edit link" : "Add link"}
+      </DialogTitle>
+      <DialogContent sx={dialogStyles.content}>
         <CustomTextField
           type="url"
           placeholder="https://"
@@ -28,7 +37,7 @@ const LinkDialog = ({
           onChange={(e) => setUrl(e.target.value)}
         />
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={dialogStyles.actions}>
         {isLinkActive && (
           <Button
             text="Open Link"
@@ -37,15 +46,16 @@ const LinkDialog = ({
             onClick={handleOpenLink}
           />
         )}
-        <Button
-          text={url ? "Insert/Update" : "Remove Link"}
-          onClick={handleInsertLink}
-        />
+
         <Button
           text="Cancel"
           buttonType="secondary"
           variant="text"
           onClick={handleClose}
+        />
+        <Button
+          text={url ? "Insert/Update" : "Remove link"}
+          onClick={handleInsertLink}
         />
       </DialogActions>
     </Dialog>

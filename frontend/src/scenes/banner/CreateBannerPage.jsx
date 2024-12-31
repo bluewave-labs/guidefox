@@ -1,5 +1,4 @@
 import { React, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import {
   addBanner,
   editBanner,
@@ -11,11 +10,9 @@ import toastEmitter, { TOAST_EMITTER_KEY } from "../../utils/toastEmitter";
 import BannerLeftAppearance from "./BannerPageComponents/BannerLeftAppearance/BannerLeftApperance";
 import BannerLeftContent from "./BannerPageComponents/BannerLeftContent/BannerLeftContent";
 import BannerPreview from "./BannerPageComponents/BannerPreview/BannerPreview";
+import { useDialog } from "../../templates/GuideTemplate/GuideTemplateContext";
 
-const BannerPage = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
+const BannerPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEdit }) => {
   const [backgroundColor, setBackgroundColor] = useState("#F9F5FF");
   const [fontColor, setFontColor] = useState("#344054");
   const [activeButton, setActiveButton] = useState(0);
@@ -24,13 +21,19 @@ const BannerPage = () => {
   const [url, setUrl] = useState("");
   const [actionUrl, setActionUrl] = useState("");
   const [buttonAction, setButtonAction] = useState("No action");
+  const { openDialog, closeDialog } = useDialog();
 
   const handleButtonClick = (index) => {
     setActiveButton(index);
   };
 
+
   useEffect(() => {
-    if (location.state?.isEdit) {
+    if (autoOpen) openDialog();
+  }, [autoOpen, openDialog]);
+
+  useEffect(() => {
+    if (isEdit) {
       const fetchBannerData = async () => {
         try {
           const response = await getBannerById(location.state.id);
@@ -51,16 +54,7 @@ const BannerPage = () => {
 
       fetchBannerData();
     }
-  }, [location.state]);
-
-  const validateUrl = (url) => {
-    try {
-      new URL(url);
-      return null;
-    } catch (err) {
-      return "Invalid URL format";
-    }
-  };
+  }, [isEdit, itemId]);
 
   const onSave = async () => {
     const bannerData = {
@@ -73,14 +67,15 @@ const BannerPage = () => {
       bannerText,
     };
     try {
-      const response = location.state?.isEdit
-        ? await editBanner(location.state?.id, bannerData)
+      const response = isEdit
+        ? await editBanner(itemId, bannerData)
         : await addBanner(bannerData);
-      const toastMessage = location.state?.isEdit
+      const toastMessage = isEdit
         ? "You edited this banner"
         : "New banner saved";
       toastEmitter.emit(TOAST_EMITTER_KEY, toastMessage);
-      navigate("/banner");
+      setItemsUpdated(prevState => !prevState);
+      closeDialog();
     } catch (error) {
       emitToastError(error);
     }
@@ -88,10 +83,11 @@ const BannerPage = () => {
 
   return (
     <GuideTemplate
-      title={location.state?.isEdit ? "Edit Banner" : "New Banner"}
+      title={isEdit ? "Edit Banner" : "New Banner"}
       activeButton={activeButton}
       handleButtonClick={handleButtonClick}
       onSave={onSave}
+      setIsEdit={setIsEdit}
       rightContent={() => (
         <BannerPreview
           backgroundColor={backgroundColor}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAuth } from '../../services/authProvider';
 import Avatar from '../Avatar/Avatar';
 import DropdownMenu from '../DropdownMenu/DropdownMenu'; // Adjusted import
@@ -24,13 +24,8 @@ function UserProfileSidebar() {
             handleGenericError("Error logging out");
         }
     }
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const fullName = getFullName(userInfo);
-
-    const handleDropdownClick = () => {
-        setIsDropdownOpen(!isDropdownOpen);
-    };
 
     const menuItems = [
         { text: 'Settings', icon: <SettingsOutlinedIcon />, onClick: () => navigate('/settings') },

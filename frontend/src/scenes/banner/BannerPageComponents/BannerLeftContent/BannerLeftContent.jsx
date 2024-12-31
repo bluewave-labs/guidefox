@@ -39,7 +39,7 @@ const BannerLeftContent = ({
         onActionChange={handleActionChange}
         selectedActionString={buttonAction}
       />
-      <h2>Position</h2>
+      <h2 style={{ marginBottom: '10px'}}>Position</h2>
       <div className={styles.radioContent}>
         <RadioButton
           label='Top (centered)'
@@ -55,14 +55,14 @@ const BannerLeftContent = ({
         />
       </div>
 
-      <h2 style={{ marginBottom: 0, marginTop: "1.2rem" }}>URL</h2>
+      <h2>URL</h2>
       <CustomTextField
         TextFieldWidth='241px'
         value={url}
         onChange={handleSetUrl}
       />
 
-      <h2 style={{ marginBottom: 0, marginTop: "1.2rem" }}>Action URL</h2>
+      <h2>Action URL</h2>
       <CustomTextField
         TextFieldWidth='241px'
         value={actionUrl}

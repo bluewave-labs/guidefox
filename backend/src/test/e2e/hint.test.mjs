@@ -502,6 +502,7 @@ describe("E2e tests hint", () => {
           "createdBy",
           "creator",
           "header",
+          "url",
           "targetElement",
           "tooltipPlacement",
         ]);

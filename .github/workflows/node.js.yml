@@ -88,12 +88,12 @@ jobs:
         working-directory: ./frontend
         run: npm run build --if-present
 
-      - name: Run tests for backend
-        working-directory: ./backend
-        run: npm test
-
       - name: Run tests for frontend
         working-directory: ./frontend
+        run: npm test
+
+      - name: Run tests for backend
+        working-directory: ./backend
         run: npm test
 
       - name: Run Docker container

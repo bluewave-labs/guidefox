@@ -56,12 +56,18 @@ const Toolbar = ({ editor }) => {
       <Button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
+        style = {{
+          backgroundColor : editor.isActive("bold") ? "#e0e0e0": "transparent",
+        }}
       >
         <FormatBold />
       </Button>
       <Button
         onClick={() => editor.chain().focus().toggleItalic().run()}
         disabled={!editor.can().chain().focus().toggleItalic().run()}
+        style = {{
+          backgroundColor : editor.isActive("italic")? "#e0e0e0" : "transparent",
+        }}
       >
         <FormatItalic />
       </Button>
@@ -70,6 +76,10 @@ const Toolbar = ({ editor }) => {
         disabled={
           !editor.can().chain().focus().toggleHeading({ level: 2 }).run()
         }
+        style = {{
+          backgroundColor: editor.isActive("heading", {level:3})
+          ? "#e0e0e0" : "transparent",
+        }}
       >
         <Title />
       </Button>
@@ -79,12 +89,20 @@ const Toolbar = ({ editor }) => {
       <Button
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         disabled={!editor.can().chain().focus().toggleBulletList().run()}
+        style = {{
+          backgroundColor : editor.isActive("bulletList") ? "#e0e0e0" : "transparent",
+
+        }}
       >
         <FormatListBulleted />
       </Button>
       <Button
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         disabled={!editor.can().chain().focus().toggleOrderedList().run()}
+
+        style = {{
+          backgroundColor : editor.isActive("orderedList") ? "#e0e0e0" : "transparent",
+        }}
       >
         <FormatListNumbered />
       </Button>

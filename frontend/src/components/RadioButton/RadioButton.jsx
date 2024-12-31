@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Radio } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import './RadioButtonStyles.css';
+import styles from './RadioButtonStyles.module.css'; 
 
 const CustomRadioIcon = styled('span')({
-    borderRadius: '50%',
-    width: 16,
-    height: 16,
-    boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
-  });
+  borderRadius: '50%',
+  width: 16,
+  height: 16,
+  boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
+});
 
 const CustomRadioCheckedIcon = styled('span')({
-    borderRadius: '50%',
-    backgroundColor: 'var(--main-purple)',
+  borderRadius: '50%',
+  backgroundColor: 'var(--main-purple)',
   '&::before': {
     display: 'block',
     width: 16,
@@ -24,15 +24,15 @@ const CustomRadioCheckedIcon = styled('span')({
 });
 
 function RadioButton({ 
-    id, 
-    name, 
-    value, 
-    label, 
-    onChange, 
-    onClick, 
-    size = 'small', 
-    checked = false, 
-    enabled = true 
+  id, 
+  name, 
+  value, 
+  label, 
+  onChange, 
+  onClick, 
+  size = 'small', 
+  checked = false, 
+  enabled = true 
 }) {
 
   const handleChange = (event) => {
@@ -44,7 +44,7 @@ function RadioButton({
   };
 
   return (
-    <div className={`radio-button`}>
+    <div className={styles.radioButton}>
       <Radio
         id={id}
         name={name}
@@ -56,9 +56,9 @@ function RadioButton({
         icon={<CustomRadioIcon />}
         checked={checked}
         onClick={onClick}
-        sx={{padding:'0'}}
+        sx={{ padding: '0' }}
       />
-      {label && <label htmlFor={id}>{label}</label>}
+      {label && <label className={styles.label} htmlFor={id}>{label}</label>}
     </div>
   );
 }

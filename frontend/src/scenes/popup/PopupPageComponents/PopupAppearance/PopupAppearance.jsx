@@ -20,7 +20,7 @@ const PopupAppearance = ({ data = [], setPopupSize, popupSize }) => {
                     </div>
                 </div>
             ))}
-            <h2 style={{ marginBottom: '1rem' }}>Popup Size</h2>
+            <h2 style={{ marginBottom: 0 }}>Popup Size</h2>
             <DropdownList
                 actions={['Small', 'Medium', 'Large']}
                 onActionChange={handleActionChange} 

@@ -1,10 +1,10 @@
 import { Link } from "@mui/material";
 import { useContext, useState } from "react";
-import CardContainer from "../../components/Links/Card";
-import Card from "../../components/Links/Card/Card";
-import Popup from "../../components/Links/Popup/Popup";
-import { HelperLinkContext } from "../../services/linksProvider";
-import s from "./LinkPage.module.scss";
+import CardContainer from "@components/Links/Card";
+import Card from "@components/Links/Card/Card";
+import Popup from "@components/Links/Popup/Popup";
+import { HelperLinkContext } from "../../../services/linksProvider";
+import styles from "../LinkPage.module.scss";
 
 const LinkContent = () => {
   const [draggingItem, setDraggingItem] = useState(null);
@@ -39,8 +39,8 @@ const LinkContent = () => {
 
   return (
     <>
-      <div className={s.body__links}>
-        <h3 className={s.body__title}>Link items</h3>
+      <div className={styles.body__links}>
+        <h3 className={styles.body__title}>Link items</h3>
         <CardContainer>
           {links.map((item) => (
             <Card

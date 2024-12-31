@@ -4,9 +4,9 @@ RUN apk update && apk add bash && rm -rf /var/cache/apk/*
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package.json ./
 
-RUN rm -rf package-lock.json && npm install
+RUN npm install
 
 COPY . .
 

@@ -3,14 +3,16 @@
   color: var(--main-text-color);
   font-size: var(--font-regular);
   border-radius: 8px;
-  padding-top: 1rem;
+  padding-top: 0.5rem;
   margin-top: 1rem;
-  height: 200px;
+  width: 400px;
+  padding-left: 0.5rem;
+  box-sizing: border-box;
 }
 
 .ProseMirror {
-    height: 160px;
-    padding: 0 25px;
+    height: 7.5rem;
+    padding: 0 14px;
     overflow-y: auto;
 }
 

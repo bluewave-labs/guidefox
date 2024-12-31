@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { TextField, InputLabel } from "@mui/material";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ChipAdornment from "../Chips/ChipAdornment";
 import "./CustomTextFieldStyles.css";
 
@@ -29,15 +29,15 @@ const CustomTextField = ({
   type = "text",
   required = false,
   style,
-  labelSubText,
-  fullWidth=false, 
+  labelSubText = "",
+  fullWidth = false,
   disabled = false,
-  autofocus = false
+  autoFocus = false,
 }) => {
-  const computedFullWidth = fullWidth || 
+  const computedFullWidth = fullWidth ||
     ["full", "100%", "stretch"].some(value => TextFieldWidth.toLowerCase().includes(value));
   return (
-    <div style={{...style,  ...(computedFullWidth && { width: '100%' })}} >
+    <div style={{ ...style, ...(computedFullWidth && { width: '100%' })}}>
       {!checkCircleIconVisible &&
         <div>
           <InputLabel sx={{ fontWeight: labelFontWeight, margin: 0 }}>{labelText}</InputLabel>
@@ -51,15 +51,16 @@ const CustomTextField = ({
           {labelSubText && <InputLabel sx={{ fontWeight: labelFontWeight, margin: 0 }}>{labelSubText}</InputLabel>}
         </div>
       }
+
       <TextField
         id={id}
         type={type}
         name={name}
-        autoFocus={autofocus}
+        autoFocus={autoFocus}
         onBlur={onBlur}
         required={Boolean(required)}
         className="textField"
-        sx={{ width: computedFullWidth ? "100%" : TextFieldWidth }}
+        sx={{ width: computedFullWidth ? "100%" : TextFieldWidth, marginTop: 1 }}
         fullWidth={computedFullWidth}
         margin={textFieldMargin}
         value={value}
@@ -70,23 +71,28 @@ const CustomTextField = ({
         rows={rows}
         helperText={helperText}
         disabled={disabled}
-        InputProps={{
-          startAdornment: startAdornment,
-          endAdornment: endAdornment,
-          ...(chips &&
-            chips.length > 0 && {
-            startAdornment: <ChipAdornment chips={chips} />,
-          }),
-        }}
-        inputProps={{
-          style: {
-            height: inputHeight,
-            paddingTop: 0,
-            paddingBottom: 0,
+        slotProps={{
+          formHelperText: {
+            style: { marginLeft: 0, paddingTop: 1 },
           },
-        }}
-        FormHelperTextProps={{
-          sx: { margin: 0, paddingTop: 1 },
+          textField: {
+            InputProps: {
+              height: inputHeight,
+            },
+          },
+          input: {
+            style: {
+              height: inputHeight,
+              paddingTop: 0,
+              paddingBottom: 0,
+            },
+            startAdornment: startAdornment,
+            endAdornment: endAdornment,
+            ...(chips &&
+              chips.length > 0 && {
+              startAdornment: <ChipAdornment chips={chips} />,
+            }),
+          },
         }}
       />
     </div>
@@ -121,7 +127,7 @@ CustomTextField.propTypes = {
   displayCheckCircleIcon: PropTypes.bool,
   textFieldMargin: PropTypes.string,
   type: PropTypes.string,
-  fullWidth: PropTypes.bool, 
+  fullWidth: PropTypes.bool,
   required: PropTypes.bool,
 };
 
