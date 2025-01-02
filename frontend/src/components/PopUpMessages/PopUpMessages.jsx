@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import styles from "./PopUpMessages.module.scss";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
@@ -10,6 +11,8 @@ const PopUpMessages = ({
   leftBtnText = "Dismiss",
   rightBtnText = "View Changes",
   type = 1,
+  isOpen = false,
+  hidePopUp,
 }) => {
   const getIcon = () => {
     switch (type) {
@@ -41,8 +44,28 @@ const PopUpMessages = ({
     margin: type === 5 ? "0" : "0.5rem 0px",
   };
 
+  //Close PopUp when we click outside of the component
+  const ref = useRef();
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const callback = (e) => {
+      if (ref.current.contains(e.target)) return;
+      hidePopUp();
+    };
+    document.addEventListener("click", callback, true);
+
+    //CLEAN UP to prevent memory leaks
+    return () => {
+      document.removeEventListener("click", callback, true);
+      console.log("clean");
+    };
+  }, [isOpen, hidePopUp]);
+
+  if (!isOpen) return null;
+
   return (
-    <div className={styles.container} style={containerStyle}>
+    <div className={styles.container} style={containerStyle} ref={ref}>
       <div className={styles.iconAndText}>
         {getIcon()}
         <div className={styles.textContainer}>
@@ -57,7 +80,7 @@ const PopUpMessages = ({
         </div>
       </div>
 
-      <button className={styles.closeBtn}>
+      <button className={styles.closeBtn} onClick={hidePopUp}>
         <CloseOutlinedIcon style={{ color: "#98A2B3" }} />
       </button>
     </div>
