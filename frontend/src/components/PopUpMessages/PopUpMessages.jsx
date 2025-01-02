@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import styles from "./PopUpMessages.module.scss";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
@@ -6,8 +7,8 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
 const PopUpMessages = ({
   // Defined default values for props
-  header = "We’ve just released a new feature",
-  content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum dolor.",
+  header = "",
+  content = "",
   leftBtnText = "Dismiss",
   rightBtnText = "View Changes",
   type = 1,
@@ -49,8 +50,9 @@ const PopUpMessages = ({
   useEffect(() => {
     if (!isOpen) return;
 
+    //Add callback separately so we can cleanup later
     const callback = (e) => {
-      if (ref.current.contains(e.target)) return;
+      if (ref.current?.contains?.(e.target)) return;
       hidePopUp();
     };
     document.addEventListener("click", callback, true);
@@ -58,7 +60,6 @@ const PopUpMessages = ({
     //CLEAN UP to prevent memory leaks
     return () => {
       document.removeEventListener("click", callback, true);
-      console.log("clean");
     };
   }, [isOpen, hidePopUp]);
 
@@ -89,6 +90,16 @@ const PopUpMessages = ({
       </button>
     </div>
   );
+};
+
+PopUpMessages.propTypes = {
+  header: PropTypes.string,
+  content: PropTypes.string.isRequired,
+  leftBtnText: PropTypes.string,
+  rightBtnText: PropTypes.string,
+  type: PropTypes.oneOf([1, 2, 3, 4, 5]),
+  isOpen: PropTypes.bool,
+  hidePopUp: PropTypes.func.isRequired,
 };
 
 export default PopUpMessages;
