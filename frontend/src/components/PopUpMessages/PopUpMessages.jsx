@@ -80,7 +80,11 @@ const PopUpMessages = ({
         </div>
       </div>
 
-      <button className={styles.closeBtn} onClick={hidePopUp}>
+      <button
+        className={styles.closeBtn}
+        onClick={hidePopUp}
+        aria-label="Close"
+      >
         <CloseOutlinedIcon style={{ color: "#98A2B3" }} />
       </button>
     </div>
