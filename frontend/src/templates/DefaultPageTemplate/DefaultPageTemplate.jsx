@@ -47,10 +47,10 @@ const DefaultPageTemplate = ({ getItems, deleteItem, setIsEdit, setItemId, itemT
         }
     };
 
-    const handleOpenPopup = (id) => {
-        setItemToDelete(id);
-        setPopupOpen(true);
-    };
+  const handleOpenPopup = (id) => {
+    setItemToDelete(id);
+    setPopupOpen(true);
+  };
 
     const handleClosePopup = () => {
         setPopupOpen(false);
@@ -76,7 +76,9 @@ const DefaultPageTemplate = ({ getItems, deleteItem, setIsEdit, setItemId, itemT
         fetchData();
     }, [itemDeleted, itemsUpdated]);
 
-    const mappedItems = useMemo(() => items.map(item => ({
+  const mappedItems = useMemo(
+    () =>
+      items.map((item) => ({
         idItem: item.id,
         ...getItemDetails(item),
         onDelete: () => handleOpenPopup(item.id),

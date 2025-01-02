@@ -6,6 +6,7 @@ class BannerService {
   async getAllBanners() {
     return await Banner.findAll({
       include: [{ model: db.User, as: "creator" }],
+      
     });
   }
 

@@ -102,4 +102,24 @@ describe("Test Banner service", () => {
       expect(error.message).to.be.equal("Error retrieving banner by ID");
     }
   });
+  it("getBannerByUrl - should return the banners with the specified URL", async () => {
+    BannerMock.findAll = sinon.stub(Banner, "findAll").resolves(validList);
+    const result = await service.getBannerByUrl("http://localhost:3000");
+    expect(result).to.be.deep.equal(validList);
+    const params = BannerMock.findAll.args[0][0];
+    expect(params).to.be.deep.equal({ where: { url: "http://localhost:3000" } });
+  });
+
+  it("getIncompleteBannersByUrl - should return the banners with the specified URL excluding specified IDs", async () => {
+    BannerMock.findAll = sinon.stub(Banner, "findAll").resolves(validList);
+    const result = await service.getIncompleteBannersByUrl("http://localhost:3000", [1, 2]);
+    expect(result).to.be.deep.equal(validList);
+    const params = BannerMock.findAll.args[0][0];
+    expect(params).to.be.deep.equal({
+      where: {
+        url: "http://localhost:3000",
+        id: { [Op.notIn]: [1, 2] }
+      }
+    });
+  });
 });
