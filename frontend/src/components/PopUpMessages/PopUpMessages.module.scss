@@ -1,65 +1,89 @@
-@use '../../styles/globals.scss' as *;
+@use "../styles/globals.scss" as *;
 
-.container{
-    border: 1px solid var(--light-border-color) ;
-    padding: 1rem;
-    border-radius: 0.25rem;
-    box-shadow: 0px 1px 2px 0px #1018280D;
+.container {
+  border: 1px solid var(--light-border-color);
+  padding: 1rem;
+  border-radius: 0.25rem;
+  box-shadow: 0px 1px 2px 0px #1018280d;
+  display: flex;
+  flex-direction: row;
+  // justify-content: space-between;
+  width: fit-content;
+  gap: 1rem;
+  background-color: white;
+  position: absolute;
+  inset: 40% 0 0 50%;
+  height: fit-content;
+  transform: translate(-50%, -50%);
+
+  .iconAndText {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 
-  .iconAndText{
-    display: flex;
-    flex-direction: row;
-
-    .icon{
-        font-size: 24px;
-        border: 1px solid var(--light-border-color) ;
-        border-radius: 8px;
-        padding: 10px;
-        margin-right: 1rem;
+    .icon {
+      font-size: 24px;
+      border: 1px solid var(--light-border-color);
+      border-radius: 8px;
+      padding: 10px;
+      margin-right: 1rem;
     }
   }
 
-  .textContainer{
+  .textContainer {
     display: flex;
     flex-direction: column;
+    flex-basis: 1fr;
 
-    h2{
-      @include text-style(regular, semibold);
+    h2 {
+      @include text-style(header-text, semibold);
       margin: 0;
       margin-top: 3px;
     }
-    h3{
+    h3 {
       @include text-style(regular);
-      color : var(--third-text-color);
+      color: var(--third-text-color);
       line-height: 20px;
     }
 
-    .buttons{
-        display: flex;
-        flex-direction: row;
-        margin-top: 0.5rem;
-      }
-    
-      .acceptButton,
-      .dismiss{
-        border-radius: 8px;
-        border: none;
-        background-color: transparent;
-        @include text-style(regular, semibold);
-        margin: 0;
-        padding: 0;
-      }
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      margin-top: 0.5rem;
+      align-self: self-end;
+    }
 
-      .acceptButton{
-        color: var(--main-purple);
-      }
+    .acceptButton,
+    .dismiss {
+      border-radius: 8px;
+      border: none;
+      @include text-style(regular, semibold);
+      margin: 0;
+      padding: 0;
+      cursor: pointer;
+    }
 
-      .dismiss{
-        margin-right: 15px;
-        color: var(--third-text-color);
+    .acceptButton {
+      color: #fff;
+      background-color: var(--main-purple);
+      padding: 1rem 1.5rem;
+    }
+
+    .dismiss {
+      margin-right: 15px;
+      color: var(--third-text-color);
+      background-color: transparent;
+
+      &:hover {
+        color: var(--error-color);
       }
+    }
+  }
+
+  .closeBtn {
+    align-self: self-start;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
   }
 }
