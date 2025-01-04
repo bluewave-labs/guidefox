@@ -1,7 +1,7 @@
-@use "../../../styles/globals.scss" as *;
+@use '../../../styles/globals.scss' as *;
 
 :root {
-  --font-family-inter: "Inter", sans-serif;
+  --font-family-inter: 'Inter', sans-serif;
   --font-size-sm: 0.688rem;
   --font-size-md: 0.813rem;
   --font-size-lg: 1.25rem;
@@ -100,7 +100,20 @@
       box-shadow: 0px 1px 2px 0px #1018280d;
       height: 1.4rem;
       border-radius: 0.5rem;
+
+      &.error {
+        border: 1px solid var(--error-color);
+      }
     }
+
+    &--error {
+      font-family: var(--font-family-inter);
+      font-size: var(--font-size-sm);
+      font-weight: 400;
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+
     &--obs {
       display: block;
       margin-bottom: 1.75rem;

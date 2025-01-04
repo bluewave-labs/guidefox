@@ -3,48 +3,6 @@ $circle-size: 24px;
 $input-height: 1.4rem;
 $box-shadow-color: rgba(16, 24, 40, 0.05);
 
-.new {
-  &__container {
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.body {
-  &__title {
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.43;
-    color: #344054;
-    margin-top: 20px;
-  }
-
-  &__links {
-    width: 15rem;
-    margin-right: 2rem;
-    margin-left: 8px;
-
-    &--new {
-      margin-left: 1rem;
-      font-size: 0.875rem;
-      font-weight: 400;
-      line-height: 1.43;
-    }
-  }
-}
-
 .appearance {
   width: 50%;
   padding: 20px 0;
@@ -74,6 +32,43 @@ $box-shadow-color: rgba(16, 24, 40, 0.05);
 
     &:first-of-type {
       margin-top: 5px;
+    }
+  }
+
+  &__color {
+    margin: 5px 0 0;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+  }
+
+  &__circle {
+    width: $circle-size;
+    height: $circle-size;
+    border-radius: 50%;
+    padding: 0;
+    background-color: transparent;
+    position: relative;
+    margin-left: 9px;
+
+    & input {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    &--mask {
+      display: block;
+      position: relative;
+      z-index: 2;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1.5px solid #000;
     }
   }
 }

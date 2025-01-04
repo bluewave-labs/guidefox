@@ -157,7 +157,7 @@ const NewLinksPopup = ({
       <LinkContent />
     </>
   );
-  const leftAppearance = () => <LinkAppearance />;
+  const leftAppearance = () => <LinkAppearance handleSaveHelper={handleSaveHelper} />;
 
   return (
     <div className={styles.new__container}>
