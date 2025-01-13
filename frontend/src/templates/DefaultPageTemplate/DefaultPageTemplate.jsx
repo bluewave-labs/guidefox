@@ -10,11 +10,12 @@ import { renderIfAuthorized } from '../../utils/generalHelper';
 import { useDialog } from "../GuideTemplate/GuideTemplateContext";
 
 
-const DefaultPageTemplate = ({ getItems, deleteItem, setIsEdit, setItemId, itemType, itemTypeInfo, getItemDetails, itemsUpdated }) => {
+const DefaultPageTemplate = ({ getItems, deleteItem, setIsEdit, setItemId, itemType, itemTypeInfo, getItemDetails, itemsUpdated, getItemById, duplicateItem }) => {
     const [items, setItems] = useState([]);
     const [isPopupOpen, setPopupOpen] = useState(false);
     const [itemToDelete, setItemToDelete] = useState();
     const [itemDeleted, setItemDeleted] = useState(false);
+    const [itemsDuplicated, setItemsDuplicated] = useState(false);
     const [loading, setLoading] = useState(true);
     const [load, setLoad] = useState(true)
     const { userInfo } = useAuth();
@@ -33,6 +34,7 @@ const DefaultPageTemplate = ({ getItems, deleteItem, setIsEdit, setItemId, itemT
         setItemId(null);
         openDialog();
     };
+
     const handleDelete = async () => {
         try {
             await deleteItem(itemToDelete);
@@ -46,6 +48,30 @@ const DefaultPageTemplate = ({ getItems, deleteItem, setIsEdit, setItemId, itemT
             toastEmitter.emit(TOAST_EMITTER_KEY, `Failed to remove this ${itemType.slice(0, -1)}`);
         }
     };
+
+    const duplicateHandler = async (id) => {
+        try {
+          if (itemType === 'helper links') {
+            const { createdBy, id: fetchedId, links, ...helper } = await getItemById(id);
+            const updatedLinks = links.map(({ id, ...data }) => data);
+
+            await duplicateItem(helper, updatedLinks);
+
+        } else {
+            const { createdBy, id: fetchedId, ...data } = await getItemById(id);
+            await duplicateItem(data);
+          }
+          
+          toastEmitter.emit(TOAST_EMITTER_KEY, `${itemType.charAt(0).toUpperCase() + itemType.slice(1, -1)} duplicated successfully`);
+
+          setItemsDuplicated((prev) => !prev);
+        } catch (error) {
+          const errorMessage = error.response?.data?.message
+            ? `Error: ${error.response.data.message}`
+            : 'An unexpected error occurred. Please try again.';
+          toastEmitter.emit(TOAST_EMITTER_KEY, errorMessage);
+        }
+      };
 
     const handleOpenPopup = (id) => {
         setItemToDelete(id);
@@ -74,14 +100,15 @@ const DefaultPageTemplate = ({ getItems, deleteItem, setIsEdit, setItemId, itemT
             }
         };
         fetchData();
-    }, [itemDeleted, itemsUpdated]);
+    }, [itemDeleted, itemsUpdated, itemsDuplicated]);
 
     const mappedItems = useMemo(() => items.map(item => ({
         idItem: item.id,
         ...getItemDetails(item),
         onDelete: () => handleOpenPopup(item.id),
         onEdit: () => openEditPopupDialog(item.id),
-    })), [items, getItemDetails, handleOpenPopup, openNewPopupDialog]);
+        onDuplicate: () => duplicateHandler(item.id)
+    })), [items, getItemDetails, handleOpenPopup, openNewPopupDialog, duplicateHandler]);
 
     return (
         <>
@@ -118,6 +145,7 @@ DefaultPageTemplate.propTypes = {
     itemType: PropTypes.string.isRequired, 
     itemTypeInfo: PropTypes.string.isRequired, 
     getItemDetails: PropTypes.func.isRequired, 
+    duplicateItem: PropTypes.func.isRequired,
 };
 
 export default DefaultPageTemplate;

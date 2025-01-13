@@ -9,7 +9,7 @@ class GuideLogController {
 
           const guideLog = await guidelogService.addGuideLog({ guideType, guideId, userId, completed: isCompleted });
     
-          res.status(201).json(guideLog);
+          res.status(200).json(guideLog);
         } catch (err) {
           const { statusCode, payload } = internalServerError(
             "Error adding Guide Logs:",

@@ -360,7 +360,9 @@ describe("E2e tests auth", () => {
         .send({ token, newPassword: user().invalidPasswordChar().build() });
       expect(result).to.have.status(400);
       expect(result.body).to.be.deep.equal({
-        errors: ["Must contain one special character"],
+        errors: [
+          "Must contain one special character"
+        ],
       });
     });
     it("should return status 400 if the new password is empty", async () => {

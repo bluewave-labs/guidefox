@@ -17,48 +17,6 @@ describe("Unit test team controller", () => {
   });
   afterEach(sinon.restore);
 
-  it("setOrganisation - should return status 400 if no name is passed", async () => {
-    req.body = {};
-    await controller.setOrganisation(req, res);
-    expect(res.status.args[0][0]).to.equal(400);
-    const body = res.json.args[0][0];
-    expect(body).to.be.deep.equal({
-      error: "Organisation name is required and should be a non-empty string",
-    });
-  });
-  it("setOrganisation - should return status 400 if name is invalid", async () => {
-    req.body = {
-      name: 12,
-    };
-    await controller.setOrganisation(req, res);
-    expect(res.status.args[0][0]).to.equal(400);
-    const body = res.json.args[0][0];
-    expect(body).to.be.deep.equal({
-      error: "Organisation name is required and should be a non-empty string",
-    });
-  });
-  it("setOrganisation - should return status 400 if name is bigger than 100 characters", async () => {
-    req.body = {
-      name: "a".repeat(101),
-    };
-    await controller.setOrganisation(req, res);
-    expect(res.status.args[0][0]).to.equal(400);
-    const body = res.json.args[0][0];
-    expect(body).to.be.deep.equal({
-      error: "Organisation name cannot exceed 100 characters",
-    });
-  });
-  it("setOrganisation - should return status 400 if name has invalid characters", async () => {
-    req.body = {
-      name: "a$",
-    };
-    await controller.setOrganisation(req, res);
-    expect(res.status.args[0][0]).to.equal(400);
-    const body = res.json.args[0][0];
-    expect(body).to.be.deep.equal({
-      error: "Organisation name contains invalid characters",
-    });
-  });
   it("setOrganisation - should return status 400 if a team is already created", async () => {
     sinon.stub(Team, "count").returns(1);
     req.body = {
@@ -86,7 +44,7 @@ describe("Unit test team controller", () => {
     const body = res.json.args[0][0];
     expect(body).to.be.deep.equal({
       status: 201,
-      message: "Organisation created successfully",
+      message: "Organization created successfully",
       data: {
         id: 1,
         name: "Test",

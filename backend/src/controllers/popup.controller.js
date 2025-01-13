@@ -1,6 +1,6 @@
 const popupService = require("../service/popup.service");
 const { internalServerError } = require("../utils/errors.helper");
-const { validateCloseButtonAction } = require("../utils/guide.helper");
+const { validateCloseButtonAction, validateRepetitionOption } = require("../utils/guide.helper");
 const {
   validatePopupSize,
   validateUrl,
@@ -14,6 +14,7 @@ class PopupController {
     const {
       popupSize,
       closeButtonAction,
+      repetitionType,
       headerBackgroundColor,
       headerColor,
       textColor,
@@ -31,10 +32,11 @@ class PopupController {
 
     if (
       !validatePopupSize(popupSize) ||
-      !validateCloseButtonAction(closeButtonAction)
+      !validateCloseButtonAction(closeButtonAction) ||
+      !validateRepetitionOption(repetitionType)
     ) {
       return res.status(400).json({
-        errors: [{ msg: "Invalid value for popupSize or closeButtonAction" }],
+        errors: [{ msg: "Invalid value for popupSize or closeButtonAction or repetitionType" }],
       });
     }
 
@@ -115,6 +117,7 @@ class PopupController {
       const {
         popupSize,
         closeButtonAction,
+        repetitionType,
         headerBackgroundColor,
         headerColor,
         textColor,
@@ -140,6 +143,12 @@ class PopupController {
         return res
           .status(400)
           .json({ errors: [{ msg: "Invalid value for closeButtonAction" }] });
+      }
+
+      if (!validateRepetitionOption(repetitionType)) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "Invalid value for repetition" }] });
       }
 
       if (actionUrl) {

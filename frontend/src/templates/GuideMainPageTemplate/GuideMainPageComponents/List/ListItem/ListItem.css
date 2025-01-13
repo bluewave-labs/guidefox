@@ -59,14 +59,13 @@
 
 .list-item-info p {
   margin: 2px 0 0 33px;
-  font-size: 14px;
-  color: var(--second-text-color);
+  color: var(--main-text-color);
 }
 
 .item-id {
   margin: 2px 0 0 0;
-  font-size: 12px;
-  color: var(--second-text-color);
+  font-size: var(--font-informative);
+  color: var(--third-text-color);
 }
 
 .list-item-actions {

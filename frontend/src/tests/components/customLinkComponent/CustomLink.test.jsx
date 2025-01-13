@@ -14,7 +14,7 @@ describe('CustomLink', () => {
     render(<CustomLink />);
     const linkElement = screen.getByText(/Default Text/i);
     expect(linkElement).not.toBeNull();
-    expect(linkElement.getAttribute('href')).toBe('#');
+    expect(linkElement.getAttribute('href')).toBe('');
   });
 
   it('applies custom class names correctly', () => {

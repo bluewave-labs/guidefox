@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { IconButton, useTheme } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import { DuplicateIcon, EditIcon, TrashIcon } from '../../../../../../public/svg/utilityIcons';
 import CircleIcon from '@mui/icons-material/Circle';
 import './ListItem.css';
 import { useAuth } from '../../../../../services/authProvider';
 import { renderIfAuthorized } from '../../../../../utils/generalHelper';
 
-const ListItem = ({ title, text, id, onClick, onDelete, onEdit }) => {
+const ListItem = ({ title, text, id, onClick, onDelete, onEdit, onDuplicate }) => {
   const theme = useTheme();
   const { userInfo } = useAuth();
   const role =  userInfo.role;
@@ -26,16 +25,20 @@ const ListItem = ({ title, text, id, onClick, onDelete, onEdit }) => {
         {text && <p>{text}</p>}
         {id && <p className="item-id">ID: {id}</p>}
       </div>
+      
       <div className="list-item-actions">
         {renderIfAuthorized(role, 'admin',
+        <>
+          <IconButton onClick={onDuplicate}>
+            <DuplicateIcon />
+          </IconButton>
           <IconButton onClick={onEdit}>
-            <EditIcon />
+            <EditIcon/>
           </IconButton>
-        )}
-        {renderIfAuthorized(role, 'admin',
           <IconButton onClick={onDelete}>
-            <DeleteIcon />
+            <TrashIcon />
           </IconButton>
+        </>
         )}
       </div>
     </div>
@@ -49,6 +52,7 @@ ListItem.propTypes = {
   onClick: PropTypes.func,
   onDelete: PropTypes.func,
   onEdit: PropTypes.func,
+  onDuplicate: PropTypes.func,
 };
 
 export default ListItem;

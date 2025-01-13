@@ -1,4 +1,5 @@
 const settings = require("../../config/settings");
+const { sendInviteEmail } = require("./email.service");
 const db = require("../models");
 const Invite = db.Invite;
 const User = db.User;
@@ -22,6 +23,7 @@ class InviteService {
                     invitedBy: userId,
                     role: settings.user.role[role],
                 })
+                sendInviteEmail(invitedEmail);
             }
             else {
                 await Invite.create({
@@ -29,6 +31,7 @@ class InviteService {
                     invitedEmail: invitedEmail,
                     role: settings.user.role[role],
                 });
+                sendInviteEmail(invitedEmail);
             }
         }
         catch (err) {

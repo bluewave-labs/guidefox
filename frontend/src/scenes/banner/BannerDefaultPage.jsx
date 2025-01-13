@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ACTIVITY_TYPES_INFO } from "../../data/guideMainPageData";
-import { deleteBanner, getBanners } from "../../services/bannerServices";
+import { addBanner, getBannerById, deleteBanner, getBanners } from "../../services/bannerServices";
 import DefaultPageTemplate from "../../templates/DefaultPageTemplate/DefaultPageTemplate";
 import { useDialog } from "../../templates/GuideTemplate/GuideTemplateContext";
 import BannerPage from "./CreateBannerPage";
@@ -30,6 +30,8 @@ const BannerDefaultPage = () => {
         itemTypeInfo={ACTIVITY_TYPES_INFO.BANNERS}
         getItemDetails={getBannerDetails}
         itemsUpdated={itemsUpdated}
+        getItemById={getBannerById}
+        duplicateItem={addBanner}
       />
       {isOpen && (
         <BannerPage

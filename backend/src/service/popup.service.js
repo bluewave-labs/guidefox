@@ -4,9 +4,7 @@ const Popup = db.Popup;
 
 class PopupService {
   async getAllPopups() {
-    return await Popup.findAll({
-      include: [{ model: db.User, as: "creator" }],
-    });
+    return await Popup.findAll();
   }
 
   async getPopups(userId) {
@@ -14,7 +12,6 @@ class PopupService {
       where: {
         createdBy: userId
       },
-      include: [{ model: db.User, as: "creator" }],
     });
   }
 
@@ -49,7 +46,6 @@ class PopupService {
     try {
       return await Popup.findOne({
         where: { id: popupId },
-        include: [{ model: db.User, as: "creator" }],
       });
     } catch (error) {
       throw new Error("Error retrieving popup by ID");

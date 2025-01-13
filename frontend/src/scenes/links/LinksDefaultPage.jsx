@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ACTIVITY_TYPES_INFO } from "../../data/guideMainPageData";
-import { deleteHelper, getHelpers } from "../../services/helperLinkService";
+import { createHelper, getHelperById, deleteHelper, getHelpers } from "../../services/helperLinkService";
 import HelperLinkProvider from "../../services/linksProvider";
 import DefaultPageTemplate from "../../templates/DefaultPageTemplate/DefaultPageTemplate";
 import { useDialog } from "../../templates/GuideTemplate/GuideTemplateContext";
@@ -41,6 +41,8 @@ const LinksDefaultPage = () => {
           itemType={ACTIVITY_TYPES_INFO.HELPERLINKS}
           itemTypeInfo={ACTIVITY_TYPES_INFO.HELPERLINKS}
           getItemDetails={getItemDetails}
+          getItemById={getHelperById}
+          duplicateItem={createHelper}
         />
       </div>
     </HelperLinkProvider>

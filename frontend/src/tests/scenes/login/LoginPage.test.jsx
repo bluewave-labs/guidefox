@@ -20,7 +20,6 @@ describe('LoginPage', () => {
     expect(screen.getByText('Log in to your account')).toBeTruthy();
     expect(screen.getByPlaceholderText('Enter email')).toBeTruthy();
     expect(screen.getByPlaceholderText('Enter password')).toBeTruthy();
-    expect(screen.getByText("Don't have an account?")).toBeTruthy();
   });
 
   it('handles login success', async () => {

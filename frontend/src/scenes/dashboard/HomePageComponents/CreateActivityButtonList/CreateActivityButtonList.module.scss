@@ -1,6 +1,12 @@
-.activityButtons{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 2rem;
+.activityButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .activityButtons {
+    gap: 1rem;
+  }
 }

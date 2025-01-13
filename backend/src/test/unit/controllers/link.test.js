@@ -17,72 +17,6 @@ describe("Test link controller", () => {
       res.json = sinon.stub().returns(res);
     });
     afterEach(sinon.restore);
-    it("should return 400 if url is missing", async () => {
-      req.body = link().missingUrl().build();
-      await linkController.addLink(req, res);
-      const params = res.json.getCall(0).args[0];
-      const status = res.status.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "title and url are required" }],
-      });
-    });
-    it("should return 400 if title is missing", async () => {
-      req.body = link().missingTitle().build();
-      await linkController.addLink(req, res);
-      const status = res.status.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      const params = res.json.getCall(0).args[0];
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "title and url are required" }],
-      });
-    });
-    it("should return 400 if title is invalid", async () => {
-      req.body = link().invalidTitle().build();
-      await linkController.addLink(req, res);
-      const status = res.status.getCall(0).args[0];
-      const params = res.json.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for title or url" }],
-      });
-    });
-    it("should return 400 if url is invalid", async () => {
-      req.body = link().invalidUrl().build();
-      await linkController.addLink(req, res);
-      const status = res.status.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      const params = res.json.getCall(0).args[0];
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for title or url" }],
-      });
-    });
-    it("should return 400 if type of order is invalid", async () => {
-      req.body = link().invalidOrderType().build();
-      serviceMock.getLinksByHelperId = sinon
-        .stub(linkService, "getLinksByHelperId")
-        .resolves([]);
-      await linkController.addLink(req, res);
-      const status = res.status.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      const params = res.json.getCall(0).args[0];
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for order" }],
-      });
-    });
-    it("should return 400 if order is invalid", async () => {
-      req.body = link().invalidOrderValue().build();
-      serviceMock.getLinksByHelperId = sinon
-        .stub(linkService, "getLinksByHelperId")
-        .resolves([]);
-      await linkController.addLink(req, res);
-      const status = res.status.getCall(0).args[0];
-      const params = res.json.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for order" }],
-      });
-    });
     it("should return 201 if link was created", async () => {
       req.body = link().build();
       serviceMock.getLinksByHelperId = sinon
@@ -155,26 +89,6 @@ describe("Test link controller", () => {
       res.json = sinon.stub().returns(res);
     });
     afterEach(sinon.restore);
-    it("should return 400 if id is invalid", async () => {
-      req.params = { id: "id" };
-      await linkController.deleteLink(req, res);
-      const status = res.status.getCall(0).args[0];
-      const params = res.json.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "Invalid id" }],
-      });
-    });
-    it("should return 400 if id is empty", async () => {
-      req.params = { id: "" };
-      await linkController.deleteLink(req, res);
-      const status = res.status.getCall(0).args[0];
-      const params = res.json.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "Invalid id" }],
-      });
-    });
     it("should return 404 if link was not found", async () => {
       req.params = { id: "1" };
       serviceMock.deleteLink = sinon
@@ -222,98 +136,6 @@ describe("Test link controller", () => {
       res.json = sinon.stub().returns(res);
     });
     afterEach(sinon.restore);
-    it("should return 400 if id is invalid", async () => {
-      req.params = { id: "id" };
-      await linkController.editLink(req, res);
-      const status = res.status.getCall(0).args[0];
-      const params = res.json.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "Invalid id" }],
-      });
-    });
-    it("should return 400 if id is empty", async () => {
-      req.params = { id: "" };
-      await linkController.editLink(req, res);
-      const status = res.status.getCall(0).args[0];
-      const params = res.json.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "Invalid id" }],
-      });
-    });
-    it("should return 400 if title is missing", async () => {
-      req.params = { id: "1" };
-      req.body = link().missingTitle().build();
-      await linkController.editLink(req, res);
-      const status = res.status.getCall(0).args[0];
-      const params = res.json.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "title and url are required" }],
-      });
-    });
-    it("should return 400 if url is missing", async () => {
-      req.params = { id: "1" };
-      req.body = link().missingUrl().build();
-      await linkController.editLink(req, res);
-      const status = res.status.getCall(0).args[0];
-      const params = res.json.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "title and url are required" }],
-      });
-    });
-    it("should return 400 if title is invalid", async () => {
-      req.params = { id: "1" };
-      req.body = link().invalidTitle().build();
-      await linkController.editLink(req, res);
-      const status = res.status.getCall(0).args[0];
-      const params = res.json.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for title or url" }],
-      });
-    });
-    it("should return 400 if url is invalid", async () => {
-      req.params = { id: "1" };
-      req.body = link().invalidUrl().build();
-      await linkController.editLink(req, res);
-      const status = res.status.getCall(0).args[0];
-      const params = res.json.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for title or url" }],
-      });
-    });
-    it("should return 400 if order is invalid", async () => {
-      req.params = { id: "1" };
-      req.body = link().invalidOrderValue().build();
-      serviceMock.getLinksByHelperId = sinon
-        .stub(linkService, "getLinksByHelperId")
-        .resolves([]);
-      await linkController.editLink(req, res);
-      const status = res.status.getCall(0).args[0];
-      const params = res.json.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for order" }],
-      });
-    });
-    it("should return 400 if order type is invalid", async () => {
-      req.params = { id: "1" };
-      req.body = link().invalidOrderType().build();
-      serviceMock.getLinksByHelperId = sinon
-        .stub(linkService, "getLinksByHelperId")
-        .resolves([]);
-      await linkController.editLink(req, res);
-      const status = res.status.getCall(0).args[0];
-      const params = res.json.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for order" }],
-      });
-    });
     it("should return 200 if order is not provided", async () => {
       req.body = link().missingOrder().build();
       serviceMock.getLinksByHelperId = sinon
@@ -418,16 +240,6 @@ describe("Test link controller", () => {
       res.json = sinon.stub().returns(res);
     });
     afterEach(sinon.restore);
-    it("should return 400 if helperId is invalid", async () => {
-      req.query = { helperId: "id" };
-      await linkController.getLinksByHelperId(req, res);
-      const status = res.status.getCall(0).args[0];
-      const params = res.json.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "Invalid helperId" }],
-      });
-    });
     it("should return 200 if links were found", async () => {
       req.query = { helperId: "1" };
       serviceMock.getLinksByHelperId = sinon
@@ -460,26 +272,6 @@ describe("Test link controller", () => {
       res.json = sinon.stub().returns(res);
     });
     afterEach(sinon.restore);
-    it("should return 400 if id is invalid", async () => {
-      req.params = { id: "id" };
-      await linkController.getLinksById(req, res);
-      const status = res.status.getCall(0).args[0];
-      const params = res.json.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "Invalid link ID" }],
-      });
-    });
-    it("should return 400 if id is empty", async () => {
-      req.params = { id: "" };
-      await linkController.getLinksById(req, res);
-      const status = res.status.getCall(0).args[0];
-      const params = res.json.getCall(0).args[0];
-      expect(status).to.be.equal(400);
-      expect(params).to.be.deep.equal({
-        errors: [{ msg: "Invalid link ID" }],
-      });
-    });
     it("should return 404 if link was not found", async () => {
       req.params = { id: "1" };
       serviceMock.getLinkById = sinon

@@ -1,11 +1,14 @@
 //CONSTANTS
-const BW_SERVER_ENDPOINT_BASE =
-    "http://localhost:3000/api/guide/get_guides_by_url";
-const BW_JS_BASE_URL = "http://localhost:8082/";
+const BW_SERVER_ENDPOINT_BASE = window.bwApiBaseUrl;
+const BW_GET_GUIDE_LOG_URL= `${BW_SERVER_ENDPOINT_BASE}guide/get_incomplete_guides_by_url`;
+const BW_ADD_GUIDE_LOG_URL= `${BW_SERVER_ENDPOINT_BASE}guide_log/add_guide_log`;
+const BW_JS_BASE_URL = window.bwAgentBaseUrl;
 const BW_POPUP_JS_URL = `${BW_JS_BASE_URL}popup.js`;
 const BW_LINKS_JS_URL = `${BW_JS_BASE_URL}links.js`;
 const BW_BANNER_JS_URL = `${BW_JS_BASE_URL}banner.js`;
 const BW_TOUR_JS_URL = `${BW_JS_BASE_URL}tour.js`;
+const BW_HINT_JS_URL = `${BW_JS_BASE_URL}hint.js`;
+
 
 const BW_USER_KEY = "BW_USER_KEY";
 
@@ -35,10 +38,7 @@ bw.util = {
                 script.async = false;
                 if (script.readyState) {
                     script.onreadystatechange = function () {
-                        if (
-                            script.readyState == "loaded" ||
-                            script.readyState == "complete"
-                        ) {
+                        if (script.readyState == "loaded" || script.readyState == "complete") {
                             script.onreadystatechange = null;
                             cb && cb();
                         }
@@ -52,10 +52,7 @@ bw.util = {
                     errcb && errcb();
                 };
                 script.src = url;
-                (
-                    document.getElementsByTagName("head")[0] ||
-                    document.getElementsByTagName("body")[0]
-                ).appendChild(script);
+                (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(script);
             }
         } catch (e) {
             console.log(e);
@@ -90,6 +87,16 @@ bw.util = {
     },
 };
 
+
+bw.GuideType = Object.freeze({
+    POPUP: 0,
+    HINT: 1,
+    BANNER: 2,
+    LINK: 3,
+    TOUR: 4,
+    CHECKLIST: 5
+});
+
 bw.data = {
     getData: async function (userId) {
         const myHeaders = new Headers();
@@ -105,9 +112,29 @@ bw.data = {
             redirect: "follow",
         };
 
-        const response = await fetch(BW_SERVER_ENDPOINT_BASE, requestOptions);
+        const response = await fetch(BW_GET_GUIDE_LOG_URL, requestOptions);
         const data = await response.json();
         return data;
+    },
+    sendData: async function (guideType, userId, completed = true, guideId) {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+    
+        const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: JSON.stringify({
+                guideType,
+                userId,
+                completed: true,
+                guideId 
+            })
+        };
+
+        const response = await fetch(BW_ADD_GUIDE_LOG_URL, requestOptions)
+        const responseJson = await response.json();
+        return responseJson;
     },
 };
 
@@ -170,6 +197,9 @@ bw.init = (cb) => {
             } 
             if (onBoardConfig.helperLink?.length > 0) {
                 bw.util.loadScriptAsync(BW_LINKS_JS_URL);
+            }
+            if (onBoardConfig.hint?.length > 0) {
+                bw.util.loadScriptAsync(BW_HINT_JS_URL);
             }
         } catch (error) {
             console.log("error :", error);

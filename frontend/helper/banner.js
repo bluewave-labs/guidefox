@@ -1,1 +1,0 @@
-console.log('banner.js is here!');

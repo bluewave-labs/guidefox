@@ -6,7 +6,7 @@ const BannerLeftAppearance = ({ backgroundColor, setBackgroundColor, fontColor, 
 
     return (
         <div className={styles.container}>
-            <h2>Background Color</h2>
+            <h2 style={{marginTop: '1.5rem', marginBottom: '11.2px'}}>Background Color</h2>
             <div className={styles.color}>
                 <ColorTextField
                     value={backgroundColor}

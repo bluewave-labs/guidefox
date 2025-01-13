@@ -144,9 +144,6 @@ function LoginPage({ isAdmin = false }) {
               "Sign In"
             )}
           </button>
-          <div className={styles["sign-up-link"]}>
-            Don't have an account? <CustomLink text="Sign up" url="/signup" />
-          </div>
         </Form>
       )}
     </Formik>

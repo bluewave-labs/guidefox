@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {useLocation} from "react-router-dom"
 import DefaultPageTemplate from '../../templates/DefaultPageTemplate/DefaultPageTemplate';
 import CreatePopupPage from './CreatePopupPage';
-import { getPopups, deletePopup } from '../../services/popupServices';
+import { addPopup, getPopupById, getPopups, deletePopup } from '../../services/popupServices';
 import { ACTIVITY_TYPES_INFO } from '../../data/guideMainPageData';
 import { useDialog } from '../../templates/GuideTemplate/GuideTemplateContext';
 
@@ -30,6 +30,8 @@ const PopupDefaultPage = () => {
         itemTypeInfo={ACTIVITY_TYPES_INFO.POPUPS}
         getItemDetails={getPopupDetails}
         itemsUpdated={itemsUpdated}
+        getItemById={getPopupById}
+        duplicateItem={addPopup}
       />
       {isOpen && (
         <CreatePopupPage

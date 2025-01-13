@@ -1,53 +1,77 @@
-import {React} from 'react';
-import styles from './PopUpMessages.module.scss';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import PropTypes from "prop-types";
+import { popupStyles } from "./PopUpStyles";
+import Button from "../Button/Button";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 
-const PopUpMessages = () => {
-    // these info will come from backend
+const PopUpMessages = ({
+  open,
+  header,
+  leftButtonText,
+  rightButtonText,
+  leftButtonClickHandler,
+  rightButtonClickHandler,
+  leftButtonType,
+  rightButtonType,
+  handleOpenLink,
+  additionanLinkButton,
+  children,
+}) => {
+  return (
+    <Dialog
+      PaperProps={{ sx: popupStyles.paper }}
+      open={open}
+      onClose={leftButtonClickHandler}
+      closeAfterTransition={open}
+    >
+      <DialogTitle sx={popupStyles.title}>{header}</DialogTitle>
 
-    const message = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum dolor."
-    const title = "We’ve just released a new feature";
-    const type = 1; // total 5 types
+      <DialogContent sx={popupStyles.content}>{children}</DialogContent>
 
-    const getIcon = () => {
-        switch(type) {
-            case 1:
-                return <InfoOutlinedIcon className={styles.icon} />;
-            case 2:
-                return <ErrorOutlineOutlinedIcon className={styles.icon} style={{ color: '#D92D20' }} />;
-            case 3:
-                return <ErrorOutlineOutlinedIcon className={styles.icon} style={{ color: '#079455' }} />;
-            default:
-                return null;
-        }
-    };
-    const containerStyle = {
-        maxWidth: (type === 4 || type === 5) ? '20rem' : 'none',
-    };
+      <DialogActions sx={popupStyles.actions}>
+        {additionanLinkButton && (
+          <Button
+            text="Open link"
+            buttonType="secondary"
+            variant="text"
+            onClick={handleOpenLink}
+          />
+        )}
+        <Button
+          text={leftButtonText}
+          buttonType={leftButtonType || "secondary"}
+          variant="text"
+          onClick={leftButtonClickHandler}
+          sx={popupStyles.contentText}
+        />
+        <Button
+          text={rightButtonText}
+          onClick={rightButtonClickHandler}
+          variant="contained"
+          buttonType={rightButtonType || "secondary"}
+          sx={popupStyles.contentText}
+        />
+      </DialogActions>
+    </Dialog>
+  );
+};
 
-    const messageStyle = {
-        margin: type === 5 ? '0' : '0.5rem 0px',
-    };
+PopUpMessages.propTypes = {
+  open: PropTypes.bool.isRequired,
+  header: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  leftButtonText: PropTypes.string.isRequired,
+  rightButtonText: PropTypes.string.isRequired,
+  leftButtonClickHandler: PropTypes.func.isRequired,
+  rightButtonClickHandler: PropTypes.func.isRequired,
+  leftButtonType: PropTypes.string,
+  rightButtonType: PropTypes.string,
+  handleOpenLink: PropTypes.func,
+  additionanLinkButton: PropTypes.bool,
+};
 
-    return (
-        <div className={styles.container} style={containerStyle}>
-            <div className={styles.iconAndText}>
-                {getIcon()}
-                <div className={styles.textContainer}>
-                {type !== 5 && (<h2>{title}</h2>)}
-                <h3 style={messageStyle}>{message}</h3>   
-                {type !== 5 && (<div className={styles.buttons}>
-                        <button className={styles.dismiss}>Dismiss</button>
-                        <button className={styles.acceptButton}>View Changes</button>
-                    </div>)}
-                </div>
-            </div>
-
-            <CloseOutlinedIcon style={{color: '#98A2B3'}}/>
-        </div>
-        )
-    }
-
-export default PopUpMessages
+export default PopUpMessages;

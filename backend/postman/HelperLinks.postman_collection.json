@@ -14,7 +14,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqaG9uLmRvZUBlbWFpbC5jb20iLCJpYXQiOjE3MzAyNTY2ODgsImV4cCI6MTczMDI2MDI4OH0.pzV9pcXrfIbzA38Uwp8fO_UEms25SJniAlrhM83lIsE",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTU4MDY2NiwiZXhwIjoxNzM1NTg0MjY2fQ.NIzkEJEP7-Ns46WRR9PH2YzxS-9gA3cpyWYyuzzOQRE",
 							"type": "string"
 						}
 					]
@@ -92,6 +92,91 @@
 			"response": []
 		},
 		{
+			"name": "Get helpers with link",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTU4MDY2NiwiZXhwIjoxNzM1NTg0MjY2fQ.NIzkEJEP7-Ns46WRR9PH2YzxS-9gA3cpyWYyuzzOQRE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJuZXdfdXNlcjFAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mjc0NjI3NTUsImV4cCI6MTcyNzQ2NjM1NX0.yD0DL-LDFC7O-jgLI_eSHtJw2L1AttsnPv8lOzGzNRw",
+						"name": "authorization",
+						"type": "text"
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache",
+						"name": "cache-control",
+						"type": "text"
+					},
+					{
+						"key": "Postman-Token",
+						"value": "<calculated when request is sent>",
+						"name": "postman-token",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "<calculated when request is sent>",
+						"name": "host",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "PostmanRuntime/7.39.1",
+						"name": "user-agent",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"name": "accept",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br",
+						"name": "accept-encoding",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive",
+						"name": "connection",
+						"type": "text"
+					},
+					{
+						"key": "content-length",
+						"value": "1024",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/helper-link/get_helpers_with_links",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"helper-link",
+						"get_helpers_with_links"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get by user Id",
 			"request": {
 				"auth": {
@@ -99,7 +184,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqaG9uLmRvZUBlbWFpbC5jb20iLCJpYXQiOjE3MzAyNTc1NjAsImV4cCI6MTczMDI2MTE2MH0.hdD0gV84Ol-LIgeX5jaJI6rCZJ_dDHzD2hFGgFhxhkc",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTU4MDY2NiwiZXhwIjoxNzM1NTg0MjY2fQ.NIzkEJEP7-Ns46WRR9PH2YzxS-9gA3cpyWYyuzzOQRE",
 							"type": "string"
 						}
 					]
@@ -161,7 +246,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/helper-link",
+					"raw": "http://localhost:3000/api/helper-link/get_helpers",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -169,7 +254,8 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"helper-link"
+						"helper-link",
+						"get_helpers"
 					]
 				}
 			},
@@ -183,7 +269,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqaG9uLmRvZUBlbWFpbC5jb20iLCJpYXQiOjE3MzAyNTc1NjAsImV4cCI6MTczMDI2MTE2MH0.hdD0gV84Ol-LIgeX5jaJI6rCZJ_dDHzD2hFGgFhxhkc",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTU4MDY2NiwiZXhwIjoxNzM1NTg0MjY2fQ.NIzkEJEP7-Ns46WRR9PH2YzxS-9gA3cpyWYyuzzOQRE",
 							"type": "string"
 						}
 					]
@@ -252,7 +338,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Help Center\",\r\n    \"headerBackgroundColor\": \"#ffffff\", \r\n    \"linkFontColor\": \"#000000\",\r\n    \"iconColor\": \"#000000\"\r\n}",
+					"raw": "{\r\n    \"title\": \"Help Center\",\r\n    \"headerBackgroundColor\": \"#ffffff\",\r\n    \"linkFontColor\": \"#000000\",\r\n    \"iconColor\": \"#000000\",\r\n    \"links\": [\r\n        {\r\n            \"title\": \"link1\",\r\n            \"url\": \"https://bluewavelabs.ca\"\r\n        },\r\n        {\r\n            \"title\": \"link2\",\r\n            \"url\": \"https://bluewavelabs.ca\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -260,7 +346,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/helper-link",
+					"raw": "http://localhost:3000/api/helper-link/add_helper",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -268,7 +354,8 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"helper-link"
+						"helper-link",
+						"add_helper"
 					]
 				}
 			},
@@ -282,7 +369,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqaG9uLmRvZUBlbWFpbC5jb20iLCJpYXQiOjE3MzAyNTc1NjAsImV4cCI6MTczMDI2MTE2MH0.hdD0gV84Ol-LIgeX5jaJI6rCZJ_dDHzD2hFGgFhxhkc",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTU4MDY2NiwiZXhwIjoxNzM1NTg0MjY2fQ.NIzkEJEP7-Ns46WRR9PH2YzxS-9gA3cpyWYyuzzOQRE",
 							"type": "string"
 						}
 					]
@@ -344,7 +431,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/helper-link/1",
+					"raw": "http://localhost:3000/api/helper-link/get_helper/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -353,6 +440,7 @@
 					"path": [
 						"api",
 						"helper-link",
+						"get_helper",
 						"1"
 					]
 				}
@@ -367,7 +455,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqaG9uLmRvZUBlbWFpbC5jb20iLCJpYXQiOjE3MzAyNTc1NjAsImV4cCI6MTczMDI2MTE2MH0.hdD0gV84Ol-LIgeX5jaJI6rCZJ_dDHzD2hFGgFhxhkc",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTU4MDY2NiwiZXhwIjoxNzM1NTg0MjY2fQ.NIzkEJEP7-Ns46WRR9PH2YzxS-9gA3cpyWYyuzzOQRE",
 							"type": "string"
 						}
 					]
@@ -376,7 +464,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Help center\",\r\n    \"headerBackgroundColor\": \"#ffffff\", \r\n    \"linkFontColor\": \"#000000\",\r\n    \"iconColor\": \"#000000\",\r\n    \"userId\": 1\r\n}",
+					"raw": "{\r\n    \"title\": \"Help center\",\r\n    \"headerBackgroundColor\": \"#ffffff\",\r\n    \"linkFontColor\": \"#000000\",\r\n    \"iconColor\": \"#000000\",\r\n    \"userId\": 1,\r\n    \"links\": []\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -384,7 +472,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/helper-link/1",
+					"raw": "http://localhost:3000/api/helper-link/edit_helper/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -393,6 +481,7 @@
 					"path": [
 						"api",
 						"helper-link",
+						"edit_helper",
 						"1"
 					]
 				}
@@ -407,7 +496,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqaG9uLmRvZUBlbWFpbC5jb20iLCJpYXQiOjE3MzAyNTc1NjAsImV4cCI6MTczMDI2MTE2MH0.hdD0gV84Ol-LIgeX5jaJI6rCZJ_dDHzD2hFGgFhxhkc",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTU4MDY2NiwiZXhwIjoxNzM1NTg0MjY2fQ.NIzkEJEP7-Ns46WRR9PH2YzxS-9gA3cpyWYyuzzOQRE",
 							"type": "string"
 						}
 					]
@@ -463,7 +552,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/helper-link/1",
+					"raw": "http://localhost:3000/api/helper-link/delete_helper/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -472,6 +561,7 @@
 					"path": [
 						"api",
 						"helper-link",
+						"delete_helper",
 						"1"
 					]
 				}

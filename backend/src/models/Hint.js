@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       hintContent: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(1024),
         allowNull: false,
         defaultValue: "",
       },

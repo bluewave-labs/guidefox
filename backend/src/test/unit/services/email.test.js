@@ -92,7 +92,7 @@ describe("Test email service", () => {
     expect(params).to.deep.equal({
       from: process.env.EMAIL,
       to: user().build().email,
-      subject: "Password Reset",
+      subject: "Reset your password for Guidefox",
       html: "html",
     });
   });

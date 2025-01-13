@@ -12,6 +12,8 @@ const BannerLeftContent = ({
   setButtonAction,
   isTopPosition,
   buttonAction,
+  buttonRepetition,
+  setButtonRepetition,
   actionUrl,
   setActionUrl,
 }) => {
@@ -31,8 +33,18 @@ const BannerLeftContent = ({
     setIsTopPosition(newPosition);
   };
 
+  const handleRepetitionChange = (newRepetitionType) => {
+    setButtonRepetition(newRepetitionType);
+  };
+
   return (
     <div className={styles.container}>
+      <h2 style={{marginTop: '1.5rem', marginBottom: '5.3px'}}>Repetition</h2>
+      <DropdownList
+        actions={['Show only once', 'Show every visit']}
+        onActionChange={handleRepetitionChange}
+        selectedActionString={buttonRepetition}
+      />
       <h2>Action</h2>
       <DropdownList
         actions={["No action", "Open URL", "Open URL in a new tab"]}
@@ -82,4 +94,6 @@ BannerLeftContent.propTypes = {
   buttonAction: PropTypes.string,
   actionUrl: PropTypes.string,
   setActionUrl: PropTypes.func,
+  setButtonRepetition: PropTypes.func,
+  buttonRepetition: PropTypes.string
 };

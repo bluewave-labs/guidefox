@@ -4,6 +4,6 @@ const guideController = require("../controllers/guide.controller.js");
 const router = express.Router();
 
 router.post("/get_guides_by_url", guideController.getGuidesByUrl);
-router.get("/get_incomplete_guides_by_url", guideController.getIncompleteGuidesByUrl);
+router.post("/get_incomplete_guides_by_url", guideController.getIncompleteGuidesByUrl);
 
 module.exports = router;

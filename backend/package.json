@@ -19,12 +19,12 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "compression": "^1.7.5",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-validator": "^7.1.0",
     "handlebars": "^4.7.8",
-    "he": "^1.2.0",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.9.15",
@@ -32,8 +32,11 @@
     "sequelize": "^6.37.3"
   },
   "devDependencies": {
+    "@eslint/js": "^9.17.0",
     "chai": "^4.5.0",
     "chai-http": "^5.1.1",
+    "eslint": "^9.17.0",
+    "globals": "^15.14.0",
     "mocha": "^10.8.2",
     "nodemon": "^3.1.0",
     "nyc": "^17.1.0",

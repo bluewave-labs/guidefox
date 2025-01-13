@@ -53,7 +53,7 @@ export const removeTeamMember = async (memberId) => {
 
 export const inviteMember = async (inputs) => {
     try {
-        const response = await apiClient.post('/team/invite', { invitedEmail: inputs.email, role: inputs.role });
+        const response = await apiClient.post('team/invite', { invitedEmail: inputs.email, role: inputs.role });
         return response;
     } catch (error) {
         console.error('Error inviting member: ', error.message);

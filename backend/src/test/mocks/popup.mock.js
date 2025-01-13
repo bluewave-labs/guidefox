@@ -3,6 +3,7 @@ class PopupBuilder {
     this.popup = {
       id,
       closeButtonAction: "open url",
+      repetitionType: 'show only once',
       popupSize: "small",
       url: "/url",
       actionButtonText: "action",
@@ -64,6 +65,16 @@ class PopupBuilder {
 
   invalidButtonTextColor() {
     this.popup.buttonTextColor = "invalid";
+    return this;
+  }
+
+  missingRepetitionType() {
+    this.popup.repetitionType = undefined; 
+    return this;
+  }
+
+  invalidRepetitionType() {
+    this.popup.repetitionType = "invalid"; 
     return this;
   }
 

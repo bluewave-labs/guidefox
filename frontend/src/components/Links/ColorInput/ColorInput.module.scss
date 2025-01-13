@@ -1,0 +1,74 @@
+$appearance-width: 194px;
+$circle-size: 24px;
+$input-height: 1.4rem;
+$box-shadow-color: rgba(16, 24, 40, 0.05);
+
+.appearance {
+  width: 50%;
+  padding: 20px 0;
+  margin-right: 2rem;
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    width: fit-content;
+    font-size: 0.813rem;
+    font-weight: 400;
+    line-height: 1.54;
+  }
+
+  &__input {
+    width: $appearance-width;
+    padding: 0.313rem;
+    border: 1px solid var(--light-border-color);
+    box-shadow: 0px 1px 2px 0px $box-shadow-color;
+    height: $input-height;
+    border-radius: 0.5rem;
+    display: inline-block;
+    font-size: var(--font-regular);
+    color: var(--main-text-color);
+    font-family: Inter;
+
+    &:first-of-type {
+      margin-top: 5px;
+    }
+  }
+
+  &__color {
+    margin: 5px 0 0;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+  }
+
+  &__circle {
+    width: $circle-size;
+    height: $circle-size;
+    border-radius: 50%;
+    padding: 0;
+    background-color: transparent;
+    position: relative;
+    margin-left: 9px;
+
+    & input {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    &--mask {
+      display: block;
+      position: relative;
+      z-index: 2;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1.5px solid #000;
+    }
+  }
+}

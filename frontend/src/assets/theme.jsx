@@ -58,6 +58,9 @@ export const lightTheme = createTheme({
     },
     MuiOutlinedInput: {
       styleOverrides: {
+        input: {
+          boxSizing: 'border-box'
+        },
         root: {
           borderRadius: "8px",
           "&:hover .MuiOutlinedInput-notchedOutline": {
@@ -138,6 +141,9 @@ export const darkTheme = createTheme({
     },
     MuiOutlinedInput: {
       styleOverrides: {
+        input: {
+          boxSizing: 'border-box'
+        },
         root: {
           borderRadius: "8px",
           "&:hover .MuiOutlinedInput-notchedOutline": {

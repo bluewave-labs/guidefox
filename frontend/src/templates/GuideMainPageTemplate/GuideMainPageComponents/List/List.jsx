@@ -14,6 +14,7 @@ const List = ({ items }) => {
           onClick={() => {}}
           onDelete={item.onDelete}
           onEdit={item.onEdit}
+          onDuplicate={item.onDuplicate}
         />
       ))}
     </>

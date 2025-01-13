@@ -19,7 +19,7 @@ class LinkBuilder {
   }
 
   invalidTitle() {
-    this.link.title = "http://url.com";
+    this.link.title = 123;
     return this;
   }
 

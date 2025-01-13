@@ -46,7 +46,8 @@
 
     .bannerOne,
     .bannerTwo,
-    .bannerThree {
+    .bannerThree,
+    .bannerFour {
         background-color: #F3F3F3;
         border-radius: 5px;
         margin-bottom: 1rem;
@@ -61,11 +62,16 @@
 
     .bannerTwo {
         width: 80%;
-        height: 5rem;
+        height: 5.4rem;
     }
 
     .bannerThree {
-        width: 80%;
+        width: 95%;
+        height: 4rem;
+    }
+
+    .bannerFour {
+        width: 95%;
         height: 3rem;
     }
 }

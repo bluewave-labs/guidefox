@@ -17,8 +17,8 @@ const HintLeftContent = ({ actionButtonText, setActionButtonText, actionButtonUr
     setAction(newAction);
   };
 
-  const handleTargetElement = (newAction) => {
-    setTargetElement(newAction);
+  const handleTargetElement = (event) => {
+    setTargetElement(event.target.value);
   };
 
   const handleTooltipPlacement = (newAction) => {

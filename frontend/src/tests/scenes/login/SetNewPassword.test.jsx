@@ -1,15 +1,9 @@
-import {
-  render,
-  screen,
-  fireEvent,
-  act,
-  waitFor,
-} from "@testing-library/react";
+import { render, screen, fireEvent, act, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
-import { BrowserRouter as Router } from "react-router-dom";
-import { AuthProvider } from "../../../services/authProvider"; // Import your AuthProvider
-import SetNewPassword from "../../../scenes/login/SetNewPassword";
-import { resetPassword } from "../../../services/loginServices";
+import { MemoryRouter, Route, Routes } from "react-router-dom";  
+import { AuthProvider } from "../../../services/authProvider"; 
+import SetNewPasswordPage from "../../../scenes/login/SetNewPassword";  
+import { resetPassword } from "../../../services/loginServices";  
 
 vi.mock("../../../services/loginServices", () => ({
   resetPassword: vi.fn(),
@@ -18,41 +12,32 @@ vi.mock("../../../services/loginServices", () => ({
 describe("SetNewPasswordPage", () => {
   it("renders the set new password reset page", () => {
     render(
-      <Router>
+      <MemoryRouter initialEntries={['/reset-password?token=mock-token']}>  {/* Mock the route */}
         <AuthProvider>
-          <SetNewPassword />
+          <SetNewPasswordPage />
         </AuthProvider>
-      </Router>
+      </MemoryRouter>
     );
 
     expect(screen.getByText("Set new Password")).toBeTruthy();
-    expect(
-      screen.getByText(
-        "Your new password must be different to previously used passwords."
-      )
-    ).toBeTruthy();
   });
 
   it("handles reset password success", async () => {
     resetPassword.mockResolvedValueOnce({ data: { success: true } });
 
     render(
-      <Router>
+      <MemoryRouter initialEntries={['/reset-password?token=mock-token']}>
         <AuthProvider>
-          <SetNewPassword email="asdf@asdf.com" />
+          <SetNewPasswordPage />
         </AuthProvider>
-      </Router>
+      </MemoryRouter>
     );
 
     await act(async () => {
       const validPassword = "Test123!@";
 
-      fireEvent.change(screen.getByPlaceholderText("Create your password"), {
-        target: { value: validPassword },
-      });
-      fireEvent.change(screen.getByPlaceholderText("Confirm your password"), {
-        target: { value: validPassword },
-      });
+      fireEvent.change(screen.getByPlaceholderText("Create your password"), { target: { value: validPassword } });
+      fireEvent.change(screen.getByPlaceholderText("Confirm your password"), { target: { value: validPassword } });
 
       fireEvent.blur(screen.getByPlaceholderText("Create your password"));
       fireEvent.blur(screen.getByPlaceholderText("Confirm your password"));
@@ -62,8 +47,8 @@ describe("SetNewPasswordPage", () => {
     });
 
     expect(resetPassword).toHaveBeenCalledWith({
-      email: "asdf@asdf.com",
-      password: "Test123!@",
+      token: "mock-token",  // Ensure token is passed
+      newPassword: "Test123!@",  // Ensure the new password is passed
     });
   });
 
@@ -75,22 +60,18 @@ describe("SetNewPasswordPage", () => {
     });
 
     render(
-      <Router>
+      <MemoryRouter initialEntries={['/reset-password?token=mock-token']}>
         <AuthProvider>
-          <SetNewPassword email="asdf@asdf.com" />
+          <SetNewPasswordPage />
         </AuthProvider>
-      </Router>
+      </MemoryRouter>
     );
 
     await act(async () => {
       const validPassword = "Test123!@";
 
-      fireEvent.change(screen.getByPlaceholderText("Create your password"), {
-        target: { value: validPassword },
-      });
-      fireEvent.change(screen.getByPlaceholderText("Confirm your password"), {
-        target: { value: validPassword },
-      });
+      fireEvent.change(screen.getByPlaceholderText("Create your password"), { target: { value: validPassword } });
+      fireEvent.change(screen.getByPlaceholderText("Confirm your password"), { target: { value: validPassword } });
 
       fireEvent.blur(screen.getByPlaceholderText("Create your password"));
       fireEvent.blur(screen.getByPlaceholderText("Confirm your password"));
@@ -103,8 +84,8 @@ describe("SetNewPasswordPage", () => {
     });
 
     expect(resetPassword).toHaveBeenCalledWith({
-      email: "asdf@asdf.com",
-      password: "Test123!@",
+      token: "mock-token",  
+      newPassword: "Test123!@",  
     });
   });
 });

@@ -4,9 +4,7 @@ const Banner = db.Banner;
 
 class BannerService {
   async getAllBanners() {
-    return await Banner.findAll({
-      include: [{ model: db.User, as: "creator" }],
-    });
+    return await Banner.findAll();
   }
 
   async getBanners(userId) {
@@ -14,7 +12,6 @@ class BannerService {
       where: {
         createdBy: userId
       },
-      include: [{ model: db.User, as: "creator" }],
     });
   }
 

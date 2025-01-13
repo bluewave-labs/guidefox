@@ -15,24 +15,19 @@ const DropdownList = ({
 
   const [selectedAction, setSelectedAction] = useState('');
 
-  useEffect(() => {
-    const getInitialSelectedAction = () => {
-      if (selectedActionString) {
-        const index = actions.findIndex(action =>
-          action.toLowerCase() === selectedActionString.toLowerCase()
-        );
-        return index !== -1 ? actions[index] : actions[0] || "";
-      }
-      return actions[selectedActionIndex] || "";
-    };
-    setSelectedAction(getInitialSelectedAction());
-  }, []);
+  const getInitialSelectedAction = () => {
+    if (selectedActionString) {
+      const index = actions.findIndex(action =>
+        action.toLowerCase() === selectedActionString.toLowerCase()
+      );
+      return index !== -1 ? actions[index] : actions[0] || "";
+    }
+    return actions[selectedActionIndex] || "";
+  };
 
   useEffect(() => {
-    if (onActionChange) {
-      onActionChange(selectedAction);
-    }
-  }, [selectedAction, onActionChange]);
+    setSelectedAction(getInitialSelectedAction());
+  }, [selectedActionString]);
 
   const handleChange = (event) => {
     const newValue = event.target.value;

@@ -94,6 +94,16 @@
 		{
 			"name": "Get by helperId",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqaG9uLmRvZUBlbWFpbC5jb20iLCJpYXQiOjE3MzEwOTkzMDYsImV4cCI6MTczMTEwMjkwNn0.nWklArIN-ZMfEn4ndluNfZ09ncfpOY1dKef0x12olJI",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [
 					{
@@ -151,7 +161,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/link?helperId=1",
+					"raw": "http://localhost:3000/api/link/get_links?helperId=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -159,7 +169,8 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"link"
+						"link",
+						"get_links"
 					],
 					"query": [
 						{
@@ -174,6 +185,16 @@
 		{
 			"name": "Add link",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTU4MDY2NiwiZXhwIjoxNzM1NTg0MjY2fQ.NIzkEJEP7-Ns46WRR9PH2YzxS-9gA3cpyWYyuzzOQRE",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -246,7 +267,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/link",
+					"raw": "http://localhost:3000/api/link/add_link",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -254,7 +275,8 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"link"
+						"link",
+						"add_link"
 					]
 				}
 			},
@@ -263,6 +285,16 @@
 		{
 			"name": "Get by id",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTU4MDY2NiwiZXhwIjoxNzM1NTg0MjY2fQ.NIzkEJEP7-Ns46WRR9PH2YzxS-9gA3cpyWYyuzzOQRE",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [
 					{
@@ -320,7 +352,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/link/1",
+					"raw": "http://localhost:3000/api/link/get_link/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -329,6 +361,7 @@
 					"path": [
 						"api",
 						"link",
+						"get_link",
 						"1"
 					]
 				}
@@ -343,7 +376,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqaG9uLmRvZUBlbWFpbC5jb20iLCJpYXQiOjE3Mjk4ODYyNDUsImV4cCI6MTcyOTg4OTg0NX0.IjHuyczgMP-LuuPXz_PsgnLSPlJLAWQkZxnGzFQtk_w",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTU4MDY2NiwiZXhwIjoxNzM1NTg0MjY2fQ.NIzkEJEP7-Ns46WRR9PH2YzxS-9gA3cpyWYyuzzOQRE",
 							"type": "string"
 						}
 					]
@@ -352,7 +385,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"link1\",\r\n    \"url\": \"https://www.bluewavelabs.ca\",\r\n    \"order\": 1\r\n}",
+					"raw": "{\r\n    \"title\": \"link1\",\r\n    \"url\": \"https://www.bluewavelabs.ca\",\r\n    \"order\": 1,\r\n    \"helperId\":1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -360,7 +393,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/link/1",
+					"raw": "http://localhost:3000/api/link/edit_link/a",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -369,7 +402,8 @@
 					"path": [
 						"api",
 						"link",
-						"1"
+						"edit_link",
+						"a"
 					]
 				}
 			},
@@ -378,6 +412,16 @@
 		{
 			"name": "Delete link",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTU4MDY2NiwiZXhwIjoxNzM1NTg0MjY2fQ.NIzkEJEP7-Ns46WRR9PH2YzxS-9gA3cpyWYyuzzOQRE",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [
 					{
@@ -429,7 +473,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/link/1",
+					"raw": "http://localhost:3000/api/link/delete_link/a",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -438,7 +482,51 @@
 					"path": [
 						"api",
 						"link",
-						"1"
+						"delete_link",
+						"a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_link_by_url",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTU4MDY2NiwiZXhwIjoxNzM1NTg0MjY2fQ.NIzkEJEP7-Ns46WRR9PH2YzxS-9gA3cpyWYyuzzOQRE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\": \"/url\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/link/get_link_by_url",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"link",
+						"get_link_by_url"
 					]
 				}
 			},

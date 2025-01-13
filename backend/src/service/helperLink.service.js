@@ -5,17 +5,7 @@ const Link = db.Link;
 
 class HelperLinkService {
   async getAllHelpers() {
-    return await HelperLink.findAll({
-      include: [
-        {
-          model: db.User,
-          as: "creator",
-          attributes: {
-            exclude: ["password"],
-          },
-        },
-      ],
-    });
+    return await HelperLink.findAll();
   }
 
   async getAllHelpersWithLinks() {
@@ -48,15 +38,6 @@ class HelperLinkService {
       where: {
         createdBy: userId,
       },
-      include: [
-        {
-          model: db.User,
-          as: "creator",
-          attributes: {
-            exclude: ["password"],
-          },
-        },
-      ],
     });
   }
 
@@ -130,13 +111,6 @@ class HelperLinkService {
       return await HelperLink.findOne({
         where: { id: helperId },
         include: [
-          {
-            model: db.User,
-            as: "creator",
-            attributes: {
-              exclude: ["password"],
-            },
-          },
           {
             model: db.Link,
             as: "links",

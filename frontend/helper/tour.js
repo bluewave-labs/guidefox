@@ -1,1 +1,0 @@
-console.log('tour.js is here');

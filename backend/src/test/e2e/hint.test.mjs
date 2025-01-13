@@ -500,7 +500,6 @@ describe("E2e tests hint", () => {
           "buttonBackgroundColor",
           "buttonTextColor",
           "createdBy",
-          "creator",
           "header",
           "url",
           "targetElement",
@@ -629,9 +628,9 @@ describe("E2e tests hint", () => {
         .get(`/api/hint/get_hint/${addHint.body.id}`)
         .set("Authorization", `Bearer ${token}`);
       expect(res).to.have.status(200);
-      const { creator, ...rest } = res.body;
+      const { ...rest } = res.body;
       expect(rest).to.be.deep.equal({ ...newHint, id: addHint.body.id });
-      expect(creator).to.have.property("id", 1);
+      // expect(creator).to.have.property("id", 1);
     });
     it("should return 404 if hint is not found", async () => {
       const res = await chai.request

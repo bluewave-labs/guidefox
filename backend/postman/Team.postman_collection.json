@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "caecba77-5a5e-4d5c-9ff1-95eda2e4d334",
+		"name": "Team",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21904853"
+	},
+	"item": [
+		{
+			"name": "set-organisation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTQxMDA2NywiZXhwIjoxNzM1NDEzNjY3fQ.xAIfgcPrJ0fvxT58FVPrCWwb7miM51AVema3PfFqxBo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"organization\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/team/set-organisation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"team",
+						"set-organisation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "count",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/team/count",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"team",
+						"count"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invite",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTQxMDA2NywiZXhwIjoxNzM1NDEzNjY3fQ.xAIfgcPrJ0fvxT58FVPrCWwb7miM51AVema3PfFqxBo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"invitedEmail\": \"jhon.snow@email.com\",\n    \"role\": \"member\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/team/invite",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"team",
+						"invite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change-role",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTQxMDA2NywiZXhwIjoxNzM1NDEzNjY3fQ.xAIfgcPrJ0fvxT58FVPrCWwb7miM51AVema3PfFqxBo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"memberId\": \"1\",\n    \"role\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/team/change-role",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"team",
+						"change-role"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTQxMDA2NywiZXhwIjoxNzM1NDEzNjY3fQ.xAIfgcPrJ0fvxT58FVPrCWwb7miM51AVema3PfFqxBo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/team/remove/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"team",
+						"remove",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-invites",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTQxMDA2NywiZXhwIjoxNzM1NDEzNjY3fQ.xAIfgcPrJ0fvxT58FVPrCWwb7miM51AVema3PfFqxBo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/team/get-all-invites",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"team",
+						"get-all-invites"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZW11bWVrdUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTczNTQxMDA2NywiZXhwIjoxNzM1NDEzNjY3fQ.xAIfgcPrJ0fvxT58FVPrCWwb7miM51AVema3PfFqxBo",
+				"type": "string"
+			}
+		]
+	}
+}

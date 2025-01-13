@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import PropTypes from "prop-types";
 import React, { useContext, useEffect, useState } from "react";
 import Settings from "../../components/Links/Settings/Settings";
@@ -83,12 +84,13 @@ const NewLinksPopup = ({
     }
   }, [isOpen]);
 
-  const buildToastError = (msg) =>
-    msg.response
+  const buildToastError = (msg) => {
+    return msg.response
       ? msg
       : {
           response: { data: { errors: [{ msg }] } },
         };
+  };
 
   const handleLinks = async (item) => {
     const { id, ...link } = item;
@@ -118,7 +120,13 @@ const NewLinksPopup = ({
       setHelper(newHelper);
       setItemsUpdated((prevState) => !prevState);
     } catch (err) {
-      emitToastError(buildToastError(err));
+      let msg;
+      if (err instanceof AxiosError) {
+        msg = err.response.data.errors[0];
+      } else {
+        msg = err;
+      }
+      emitToastError(buildToastError(msg));
       return null;
     }
     if (isEdit && deletedLinks.length) {
@@ -149,7 +157,7 @@ const NewLinksPopup = ({
       <LinkContent />
     </>
   );
-  const leftAppearance = () => <LinkAppearance />;
+  const leftAppearance = () => <LinkAppearance handleSaveHelper={handleSaveHelper} />;
 
   return (
     <div className={styles.new__container}>

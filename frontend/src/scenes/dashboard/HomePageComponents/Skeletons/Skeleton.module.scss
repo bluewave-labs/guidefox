@@ -1,20 +1,20 @@
 .skeletonContainer {
   position: relative;
-  width: 256;
-  height: 152;
+  width: 100%;
+  height: 85%;
   background-color: white;
-  border-radius: 7.8px;
+  border-radius: var(--radius-card);
   border: 1.23px solid var(--grey-border);
-  padding: 1.3rem 1rem;
+  padding: 5%;
   display: flex;
-  justify-self: center;
+  justify-content: space-between;
   flex-direction: column;
   gap: 8px;
-  width: auto;
-  margin-bottom: 24px;
+  margin-bottom: 5%;
 }
 
 .bannerSkeletonContainer {
   @extend .skeletonContainer;
-  padding-top: 40px;
+  padding-top: 18%;
+  justify-content: center;
 }

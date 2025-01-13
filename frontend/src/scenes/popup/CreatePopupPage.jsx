@@ -40,6 +40,7 @@ const CreatePopupPage = ({
     "Take me to subscription page"
   );
   const [buttonAction, setButtonAction] = useState("No action");
+  const [buttonRepetition, setButtonRepetition] = useState('Show only once')
   const [popupSize, setPopupSize] = useState("Small");
   const [stablePopupSize, setStablePopupSize] = useState("");
 
@@ -76,6 +77,7 @@ const CreatePopupPage = ({
         popupData.actionButtonText || "Take me to subscription page"
       );
       setButtonAction(popupData.closeButtonAction || "No action");
+      setButtonRepetition(popupData.repetitionType)
       setPopupSize(popupData.popupSize || "Small");
     } catch (error) {
       console.log({ error });
@@ -121,6 +123,7 @@ const CreatePopupPage = ({
       buttonBackgroundColor,
       buttonTextColor,
       closeButtonAction: buttonAction.toLowerCase(),
+      repetitionType: buttonRepetition.toLowerCase(),
       header,
       content,
     };
@@ -180,6 +183,8 @@ const CreatePopupPage = ({
       actionButtonText={actionButtonText}
       setButtonAction={setButtonAction}
       buttonAction={buttonAction}
+      setButtonRepetition={setButtonRepetition}
+      buttonRepetition={buttonRepetition}
       url={url}
       setUrl={setUrl}
     />

@@ -1,102 +1,116 @@
-import { useContext, useEffect } from "react";
-import { HelperLinkContext } from "../../../services/linksProvider";
-import styles from "../LinkPage.module.scss";
+import { Form, Formik } from 'formik';
+import PropTypes from 'prop-types';
+import { useContext, useEffect } from 'react';
+import ColorInput from '../../../components/Links/ColorInput';
+import { HelperLinkContext } from '../../../services/linksProvider';
+import { appearanceSchema } from '../../../utils/linkHelper';
+import styles from '../LinkPage.module.scss';
 
-const LinkAppearance = () => {
+const LinkAppearance = ({ handleSaveHelper }) => {
   const context = useContext(HelperLinkContext);
   if (!context) {
-    throw new Error("LinkAppearance must be used within a HelperLinkProvider");
+    throw new Error('LinkAppearance must be used within a HelperLinkProvider');
   }
 
   const { helper, setHelper } = context;
 
   useEffect(() => {
-    document.querySelector('#header').focus()
-  }, [])
+    document.querySelector('#header').focus();
+  }, []);
 
-  const handleChange = (e) => {
+  const handleHelperChange = (e) => {
     const { name, value } = e.target;
     setHelper((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
-    <form className={styles.appearance} role='form'>
-      <label htmlFor='header' className={styles.appearance__label}>
-        Header text{" "}
-        <input
-          type='text'
-          id='header'
-          className={styles.appearance__input}
-          name='title'
-          value={helper.title || ""}
-          onChange={handleChange}
-        />
-      </label>
-      <label htmlFor='header-bg' className={styles.appearance__label}>
-        Header background color{" "}
-        <div className={styles.appearance__color}>
-          <span className={`${styles.appearance__input} ${styles.header}`}>
-            {helper.headerBackgroundColor}
-          </span>
-          <div className={styles.appearance__circle}>
+    <Formik
+      initialValues={helper}
+      validationSchema={appearanceSchema}
+      validateOnMount={false}
+      validateOnBlur={true}
+    >
+      {({ errors, handleChange, handleBlur, values, validateField }) => (
+        <Form className={styles.appearance} data-testid="appearance-form">
+          <label htmlFor="header" className={styles.appearance__label}>
+            Header text{' '}
             <input
-              type='color'
-              id='header-bg'
-              name='headerBackgroundColor'
-              value={helper.headerBackgroundColor || "#F8F9F8"}
-              onChange={handleChange}
+              type="text"
+              id="header"
+              className={`${styles.appearance__input} ${
+                errors.title && styles.error
+              }`}
+              name="title"
+              value={values.title || ''}
+              onChange={(e) => {
+                handleChange(e);
+                handleHelperChange(e);
+              }}
+              onBlur={(e) => {
+                handleBlur(e);
+                handleHelperChange(e);
+              }}
             />
-            <span
-              className={styles["appearance__circle--mask"]}
-              style={{ backgroundColor: helper.headerBackgroundColor }}
-            />
-          </div>
-        </div>
-      </label>
-      <label htmlFor='link-color' className={styles.appearance__label}>
-        Link font color{" "}
-        <div className={styles.appearance__color}>
-          <span className={`${styles.appearance__input} ${styles.link}`}>
-            {helper.linkFontColor || "#344054"}
-          </span>
-          <div className={styles.appearance__circle}>
-            <input
-              type='color'
-              id='link-color'
-              name='linkFontColor'
-              value={helper.linkFontColor || "#344054"}
-              onChange={handleChange}
-            />
-            <span
-              className={styles["appearance__circle--mask"]}
-              style={{ backgroundColor: helper.linkFontColor }}
-            />
-          </div>
-        </div>
-      </label>
-      <label htmlFor='icon' className={styles.appearance__label}>
-        Helper icon color{" "}
-        <div className={styles.appearance__color}>
-          <span className={`${styles.appearance__input} ${styles.icon}`}>
-            {helper.iconColor}
-          </span>
-          <div className={styles.appearance__circle}>
-            <input
-              type='color'
-              id='icon'
-              name='iconColor'
-              value={helper.iconColor || "#7F56D9"}
-              onChange={handleChange}
-            />
-            <span
-              className={styles["appearance__circle--mask"]}
-              style={{ backgroundColor: helper.iconColor }}
-            />
-          </div>
-        </div>
-      </label>
-    </form>
+            {errors.title && (
+              <span className={styles.appearance__error}>{errors.title}</span>
+            )}
+          </label>
+          <ColorInput
+            id="header-bg"
+            name="headerBackgroundColor"
+            value={values.headerBackgroundColor}
+            onChange={(e) => {
+              handleChange(e);
+              handleHelperChange(e);
+            }}
+            onBlur={(e) => {
+              handleBlur(e);
+              handleHelperChange(e);
+            }}
+            error={errors.headerBackgroundColor}
+            title={'Header background color'}
+            className={'header'}
+          />
+          <ColorInput
+            id="link-color"
+            name="linkFontColor"
+            value={values.linkFontColor}
+            onChange={(e) => {
+              handleChange(e);
+              handleHelperChange(e);
+            }}
+            onBlur={(e) => {
+              handleBlur(e);
+              handleHelperChange(e);
+            }}
+            error={errors.linkFontColor}
+            title={'Link font color'}
+            className={'link'}
+          />
+          <ColorInput
+            id="icon"
+            name="iconColor"
+            value={values.iconColor}
+            onChange={(e) => {
+              handleChange(e);
+              handleHelperChange(e);
+            }}
+            onBlur={(e) => {
+              handleBlur(e);
+              handleHelperChange(e);
+            }}
+            error={errors.iconColor}
+            title={'Helper icon color'}
+            className={'icon'}
+          />
+        </Form>
+      )}
+    </Formik>
   );
 };
 
 export default LinkAppearance;
+
+LinkAppearance.propTypes = {
+  handleSaveHelper: PropTypes.func.isRequired,
+};

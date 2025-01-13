@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Login.module.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { forgotPassword } from "../../services/loginServices"; // Make sure this function is properly implemented
+import { forgotPassword } from "../../services/loginServices"; 
 import { useNavigate } from "react-router-dom";
 import CustomTextField from "../../components/TextFieldComponents/CustomTextField/CustomTextField";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -33,7 +33,7 @@ const ForgotPasswordPage = () => {
       onSubmit={async (values, { setSubmitting }) => {
         setServerErrors([]);
         try {
-          const response = await forgotPassword(values);
+          await forgotPassword(values);
           navigate("/check-email", { state: { values } });
         } catch (error) {
           setServerErrors(error.response?.data?.error);

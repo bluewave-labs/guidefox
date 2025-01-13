@@ -1,69 +1,10 @@
-const helperService = require("../service/helperLink.service");
-const { internalServerError } = require("../utils/errors.helper");
-const { validateHexColor } = require("../utils/guide.helper");
-const { validateUrl } = require("../utils/link.helper");
-
-function validateColors(colors) {
-  for (const [name, color] of Object.entries(colors)) {
-    if (color) {
-      validateHexColor(color, name);
-    }
-  }
-}
-
-function validateLinks(links) {
-  const result = [];
-  for (const link of links) {
-    const { title, url, order } = link;
-    if (!title || !url) {
-      result.push({ msg: "title and url are required" });
-      continue;
-    }
-    if (!validateUrl(url)) {
-      result.push({ msg: "Invalid value for url" });
-      continue;
-    }
-    if ((order && isNaN(order)) || order < 1) {
-      result.push({ msg: "Invalid value for order" });
-      continue;
-    }
-    result.push({ msg: null });
-  }
-  return result;
-}
+const helperService = require('../service/helperLink.service');
+const { internalServerError } = require('../utils/errors.helper');
 
 class LinkController {
   async addHelper(req, res) {
     const userId = req.user.id;
-    const { title, headerBackgroundColor, linkFontColor, iconColor, links } =
-      req.body;
-
-    if (!title) {
-      return res.status(400).json({
-        errors: [{ msg: "header is required" }],
-      });
-    }
-
-    try {
-      validateColors({ headerBackgroundColor, linkFontColor, iconColor });
-    } catch (e) {
-      return res.status(400).json({
-        errors: [
-          {
-            msg: e.message,
-          },
-        ],
-      });
-    }
-
-    if (links) {
-      const result = validateLinks(links);
-
-      if (result.some((it) => it?.msg !== null)) {
-        const response = result.find((it) => it.msg);
-        return res.status(400).json({ errors: [response] });
-      }
-    }
+    const { links } = req.body;
 
     try {
       const newHelperData = {
@@ -74,10 +15,7 @@ class LinkController {
       res.status(201).json(newHelper);
     } catch (err) {
       console.log(err);
-      const { statusCode, payload } = internalServerError(
-        "CREATE_HELPER_ERROR",
-        err.message
-      );
+      const { statusCode, payload } = internalServerError('CREATE_HELPER_ERROR', err.message);
       res.status(statusCode).json(payload);
     }
   }
@@ -86,26 +24,17 @@ class LinkController {
     try {
       const { id } = req.params;
 
-      if (isNaN(id) || id.trim() === "") {
-        return res.status(400).json({ errors: [{ msg: "Invalid id" }] });
-      }
-
       const deletionResult = await helperService.deleteHelper(id);
 
       if (!deletionResult) {
         return res.status(404).json({
-          errors: [{ msg: "Helper with the specified id does not exist" }],
+          errors: [{ msg: 'Helper with the specified id does not exist' }],
         });
       }
 
-      res
-        .status(200)
-        .json({ message: `Helper with ID ${id} deleted successfully` });
+      res.status(200).json({ message: `Helper with ID ${id} deleted successfully` });
     } catch (err) {
-      const { statusCode, payload } = internalServerError(
-        "DELETE_HELPER_ERROR",
-        err.message
-      );
+      const { statusCode, payload } = internalServerError('DELETE_HELPER_ERROR', err.message);
       res.status(statusCode).json(payload);
     }
   }
@@ -113,61 +42,19 @@ class LinkController {
   async editHelper(req, res) {
     try {
       const { id } = req.params;
-      const { title, headerBackgroundColor, linkFontColor, iconColor, links } =
-        req.body;
+      const { links } = req.body;
 
-      if (isNaN(id) || id.trim() === "") {
-        return res.status(400).json({ errors: [{ msg: "Invalid id" }] });
-      }
-
-      if (!title) {
-        return res.status(400).json({
-          errors: [{ msg: "header is required" }],
-        });
-      }
-
-      try {
-        validateColors({
-          headerBackgroundColor,
-          linkFontColor,
-          iconColor,
-        });
-      } catch (e) {
-        return res.status(400).json({
-          errors: [
-            {
-              msg: e.message,
-            },
-          ],
-        });
-      }
-
-      if (links) {
-        const result = validateLinks(links);
-        if (result.some((it) => it?.msg !== null)) {
-          const response = result.find((it) => it.msg);
-          return res.status(400).json({ errors: [response] });
-        }
-      }
-
-      const updatedHelper = await helperService.updateHelper(
-        id,
-        req.body,
-        links
-      );
+      const updatedHelper = await helperService.updateHelper(id, req.body, links);
 
       if (!updatedHelper) {
         return res.status(404).json({
-          errors: [{ msg: "Helper with the specified id does not exist" }],
+          errors: [{ msg: 'Helper with the specified id does not exist' }],
         });
       }
 
       res.status(200).json(updatedHelper);
     } catch (err) {
-      const { statusCode, payload } = internalServerError(
-        "EDIT_HELPER_ERROR",
-        err.message
-      );
+      const { statusCode, payload } = internalServerError('EDIT_HELPER_ERROR', err.message);
       res.status(statusCode).json(payload);
     }
   }
@@ -177,10 +64,7 @@ class LinkController {
       const links = await helperService.getAllHelpers();
       res.status(200).json(links);
     } catch (err) {
-      const { statusCode, payload } = internalServerError(
-        "GET_ALL_HELPERS_ERROR",
-        err.message
-      );
+      const { statusCode, payload } = internalServerError('GET_ALL_HELPERS_ERROR', err.message);
       res.status(statusCode).json(payload);
     }
   }
@@ -190,10 +74,7 @@ class LinkController {
       const links = await helperService.getAllHelpersWithLinks();
       res.status(200).json(links);
     } catch (err) {
-      const { statusCode, payload } = internalServerError(
-        "GET_ALL_HELPERS_WITH_LINKSERROR",
-        err.message
-      );
+      const { statusCode, payload } = internalServerError('GET_ALL_HELPERS_WITH_LINKS_ERROR', err.message);
       res.status(statusCode).json(payload);
     }
   }
@@ -204,10 +85,7 @@ class LinkController {
       const helpers = await helperService.getHelpersByUserId(userId);
       res.status(200).json(helpers);
     } catch (err) {
-      const { statusCode, payload } = internalServerError(
-        "GET_HELPERS_ERROR",
-        err.message
-      );
+      const { statusCode, payload } = internalServerError('GET_HELPERS_ERROR', err.message);
       res.status(statusCode).json(payload);
     }
   }
@@ -216,29 +94,20 @@ class LinkController {
     try {
       const { id } = req.params;
 
-      if (isNaN(id) || id.trim() === "") {
-        return res.status(400).json({ errors: [{ msg: "Invalid helper ID" }] });
-      }
-
       const helper = await helperService.getHelperById(id);
 
       if (!helper) {
-        return res.status(404).json({ errors: [{ msg: "Helper not found" }] });
+        return res.status(404).json({ errors: [{ msg: 'Helper not found' }] });
       }
 
       res.status(200).json(helper);
     } catch (err) {
-      const { statusCode, payload } = internalServerError(
-        "GET_HELPER_BY_ID_ERROR",
-        err.message
-      );
+      const { statusCode, payload } = internalServerError('GET_HELPER_BY_ID_ERROR', err.message);
       res.status(statusCode).json(payload);
     }
   }
 }
 
 module.exports = {
-  controller: new LinkController(),
-  validateColors,
-  validateLinks,
+  controller: new LinkController()
 };

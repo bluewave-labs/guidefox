@@ -3,6 +3,7 @@ class BannerBuilder {
     this.banner = {
       id: 1,
       closeButtonAction: "no action",
+      repetitionType: 'show only once',
       position: "top",
       url: "http://localhost:3000",
       fontColor: "#FFFFFF",
@@ -44,6 +45,16 @@ class BannerBuilder {
     return this;
   }
 
+  missingRepetitionType() {
+    this.banner.repetitionType = undefined; 
+    return this;
+  }
+
+  invalidRepetitionType() {
+    this.banner.repetitionType = "invalid"; 
+    return this;
+  }
+
   build() {
     return this.banner;
   }
@@ -53,6 +64,7 @@ const validList = [
   {
     id: 1,
     closeButtonAction: "no action",
+    repetitionType: 'show only once',
     position: "top",
     url: "http://localhost:3000",
     fontColor: "#FFFFFF",
@@ -63,6 +75,7 @@ const validList = [
   {
     id: 2,
     closeButtonAction: "open url",
+    repetitionType: 'show only once',
     position: "top",
     url: "http://localhost:3000",
     fontColor: "#FFFFFF",
@@ -73,6 +86,7 @@ const validList = [
   {
     id: 3,
     closeButtonAction: "open url in a new tab",
+    repetitionType: 'show only once',
     position: "top",
     url: "http://localhost:3000",
     fontColor: "#FFFFFF",
@@ -83,6 +97,7 @@ const validList = [
   {
     id: 4,
     closeButtonAction: "no action",
+    repetitionType: 'show every visit',
     position: "bottom",
     url: "http://localhost:3000",
     fontColor: "#FFFFFF",
@@ -93,6 +108,7 @@ const validList = [
   {
     id: 5,
     closeButtonAction: "open url",
+    repetitionType: 'show only once',
     position: "bottom",
     url: "http://localhost:3000",
     fontColor: "#FFFFFF",
@@ -103,6 +119,7 @@ const validList = [
   {
     id: 6,
     closeButtonAction: "open url in a new tab",
+    repetitionType: 'show every visit',
     position: "bottom",
     url: "http://localhost:3000",
     fontColor: "#FFFFFF",
@@ -113,6 +130,7 @@ const validList = [
   {
     id: 7,
     closeButtonAction: "no action",
+    repetitionType: 'show every visit',
     position: "top",
     url: "http://localhost:3000",
     fontColor: "#FFFFFF",
@@ -123,6 +141,7 @@ const validList = [
   {
     id: 8,
     closeButtonAction: "no action",
+    repetitionType: 'show only once',
     position: "top",
     url: "http://localhost:3000",
     fontColor: "#FFFFFF",
@@ -133,6 +152,7 @@ const validList = [
   {
     id: 9,
     closeButtonAction: "no action",
+    repetitionType: 'show every visit',
     position: "top",
     url: "http://localhost:3000",
     fontColor: "#FFFFFF",
@@ -143,6 +163,7 @@ const validList = [
   {
     id: 10,
     closeButtonAction: "no action",
+    repetitionType: 'show only once',
     position: "top",
     url: "http://localhost:3000",
     fontColor: "#FFFFFF",

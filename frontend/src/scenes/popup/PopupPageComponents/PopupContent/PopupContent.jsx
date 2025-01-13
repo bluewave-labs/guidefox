@@ -11,24 +11,39 @@ const PopupContent = ({
   buttonAction,
   actionButtonUrl,
   setButtonAction,
+  buttonRepetition,
+  setButtonRepetition,
   url,
   setUrl,
 }) => {
   const handleActionButtonText = (event) => {
     setActionButtonText(event.target.value);
   };
+
   const handleActionButtonUrl = (event) => {
     setActionButtonUrl(event.target.value);
   };
+
   const handleActionChange = (newAction) => {
     setButtonAction(newAction);
   };
+
   const handleUrlChange = (event) => {
     setUrl(event.target.value);
   };
 
+  const handleRepetitionChange = (newRepetitionType) => {
+    setButtonRepetition(newRepetitionType);
+  };
+
   return (
     <div className={styles.container}>
+      <h2 style={{marginTop: '1.5rem'}}>Repetition</h2>
+      <DropdownList
+        actions={['Show only once', 'Show every visit']}
+        onActionChange={handleRepetitionChange}
+        selectedActionString={buttonRepetition}
+      />
       <h2>Action</h2>
       <DropdownList
         actions={["No action", "Open URL", "Open URL in a new tab"]}
@@ -67,4 +82,6 @@ PopupContent.propTypes = {
   setButtonAction: PropTypes.func,
   url: PropTypes.string,
   setUrl: PropTypes.func,
+  buttonRepetition: PropTypes.string,
+  setButtonRepetition: PropTypes.func,
 };

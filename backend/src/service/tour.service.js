@@ -3,9 +3,7 @@ const Tour = db.Tour;
 
 class TourService {
   async getAllTours() {
-    return await Tour.findAll({
-      include: [{ model: db.User, as: "creator" }],
-    });
+    return await Tour.findAll();
   }
 
   async getTours(userId) {
@@ -13,7 +11,6 @@ class TourService {
       where: {
         createdBy: userId
       },
-      include: [{ model: db.User, as: "creator" }],
     });
   }
 
@@ -48,7 +45,6 @@ class TourService {
     try {
       return await Tour.findOne({
         where: { id: tourId },
-        include: [{ model: db.User, as: "creator" }],
       });
     } catch (error) {
       throw new Error("Error retrieving tour by ID");

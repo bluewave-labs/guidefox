@@ -1,65 +1,47 @@
 import React from "react";
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from "@mui/material";
-import Button from "../../Button/Button";
+import PropTypes from "prop-types";
 import CustomTextField from "../../TextFieldComponents/CustomTextField/CustomTextField";
-import { dialogStyles } from "./DialogStyles";
+import PopUpMessages from "../../PopUpMessages/PopUpMessages";
 
 const LinkDialog = ({
   open,
-  handleClose = () => {},
   url = "",
-  setUrl = () => {},
   isLinkActive = false,
+  setUrl = () => {},
+  handleClose = () => {},
   handleInsertLink = () => {},
   handleOpenLink = () => {},
 }) => {
+  const title = isLinkActive ? "Edit link" : "Add link";
   return (
-    <Dialog
-      PaperProps={{
-        sx: dialogStyles.paper,
-      }}
+    <PopUpMessages
       open={open}
-      onClose={handleClose}
+      header={title}
+      leftButtonClickHandler={handleClose}
+      rightButtonClickHandler={handleInsertLink}
+      leftButtonText={"Cancel"}
+      additionanLinkButton={isLinkActive}
+      handleOpenLink={handleOpenLink}
+      rightButtonText={`${url ? "Insert/Update" : "Remove link"}`}
     >
-      <DialogTitle sx={dialogStyles.title}>
-        {isLinkActive ? "Edit link" : "Add link"}
-      </DialogTitle>
-      <DialogContent sx={dialogStyles.content}>
-        <CustomTextField
-          type="url"
-          placeholder="https://"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
-      </DialogContent>
-      <DialogActions sx={dialogStyles.actions}>
-        {isLinkActive && (
-          <Button
-            text="Open Link"
-            buttonType="secondary"
-            variant="text"
-            onClick={handleOpenLink}
-          />
-        )}
-
-        <Button
-          text="Cancel"
-          buttonType="secondary"
-          variant="text"
-          onClick={handleClose}
-        />
-        <Button
-          text={url ? "Insert/Update" : "Remove link"}
-          onClick={handleInsertLink}
-        />
-      </DialogActions>
-    </Dialog>
+      <CustomTextField
+        type="url"
+        placeholder="https://"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+      />
+    </PopUpMessages>
   );
+};
+
+LinkDialog.propTypes = {
+  url: PropTypes.string,
+  isLinkActive: PropTypes.bool,
+  open: PropTypes.bool.isRequired,
+  setUrl: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  handleInsertLink: PropTypes.func.isRequired,
+  handleOpenLink: PropTypes.func.isRequired,
 };
 
 export default LinkDialog;

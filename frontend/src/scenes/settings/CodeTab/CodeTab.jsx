@@ -9,8 +9,8 @@ import toastEmitter, { TOAST_EMITTER_KEY } from "../../../utils/toastEmitter";
 import { URL_REGEX } from "../../../utils/constants";
 
 const CodeTab = () => {
-    const [serverUrl, setServerUrl] = useState('')
-    const [isLoading, setIsLoading] = useState(false);
+    const [serverUrl, setServerUrl] = useState('');
+    const [agentUrl, setAgentUrl] = useState('');
 
     const validateServerUrl = url => {
         const errors = [];
@@ -43,8 +43,9 @@ const CodeTab = () => {
     useEffect(() => {
         const fetchServerUrl = async () => {
             try {
-                const { serverUrl } = await getServerUrl();
+                const { serverUrl, agentUrl } = await getServerUrl();
                 setServerUrl(serverUrl);
+                setAgentUrl(agentUrl)
             } catch (err) {
                 console.error('Error fetching server url: ', err);
             }
@@ -54,6 +55,10 @@ const CodeTab = () => {
 
     const handleUrlChange = (e) => {
         setServerUrl(e.target.value);
+    };
+
+    const handleAgentUrlChange = (e) => {
+        setAgentUrl(e.target.value);
     };
 
     const onSave = async () => {
@@ -67,13 +72,10 @@ const CodeTab = () => {
         }
 
         try {
-            setIsLoading(true);
-            const response = await addServerUrl(serverUrl);
+            const response = await addServerUrl(serverUrl, agentUrl);
             toastEmitter.emit(TOAST_EMITTER_KEY, response.message);
         } catch (err) {
             emitToastError(err);
-        } finally {
-            setIsLoading(false);
         }
     };
 
@@ -81,13 +83,14 @@ const CodeTab = () => {
         <!-- Client-side HTML/JS Snippet to be integrated into their website -->
         <script>
             (function() {
-                const apiUrl = '${serverUrl}';
+                window.bwApiBaseUrl = '${serverUrl}';
+                window.bwAgentBaseUrl = '${agentUrl}';
 
                 var s=document.createElement("script");
                 s.type="text/javascript";
                 s.async=false;
                 s.onerror=()=>{console.log("onboard not loaded");};
-                s.src = 'http://localhost:8082/main.js';
+                s.src = window.bwAgentBaseUrl + '/main.js';
                 (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(s);
             })();
         </script>
@@ -110,7 +113,7 @@ const CodeTab = () => {
 
             {/* server url */}
             <div className={styles.block}>
-                <p className={styles.label}>Server URL:</p>
+                <p className={styles.label}>Server Base URL:</p>
                 <CustomTextField
                     value={serverUrl}
                     onChange={handleUrlChange}
@@ -119,11 +122,23 @@ const CodeTab = () => {
                 />
                 <span />
                 <Button text='Save' sx={{ width: '120px' }} onClick={onSave} />
+
+
+            </div>
+            <div className={styles.block}>
+                <p className={styles.label}>Agent Base URL:&nbsp;</p>
+                <CustomTextField
+                    value={agentUrl}
+                    onChange={handleAgentUrlChange}
+                    style={{ textAlign: 'right' }}
+                    TextFieldWidth="550px"
+                />
+                <span />
             </div>
             <h2 style={{ marginTop: '25px' }}>Code in your webpage</h2>
             <div className={styles.informativeBlock}>
                 <p className={styles.content}>
-                    Code snippet to copy in your web page between {"<head>"} and {"</head>"}. Make sure you edit the API URL.
+                    Code snippet to copy in your web page between {"<head>"} and {"</head>"}. Make sure you edit the Base API URL.
                 </p>
                 <ContentCopyOutlinedIcon
                     onClick={handleCopy}
@@ -132,7 +147,7 @@ const CodeTab = () => {
                         fontSize: '20px',
                         color: 'var(--main-text-color)',
                     }}
-                    />
+                />
             </div>
 
             <pre><code>{codeToCopy}</code></pre>

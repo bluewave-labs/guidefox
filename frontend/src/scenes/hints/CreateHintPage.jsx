@@ -80,6 +80,8 @@ const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEdit
           setUrl(hintData.url || "https://");
           setActionButtonText(hintData.actionButtonText || "");
           setAction(hintData.action || "No action");
+          setTargetElement(hintData.targetElement || '.element')
+          setTooltipPlacement(hintData.tooltipPlacement || 'Top')
         } catch (error) {
           emitToastError(error);
         }

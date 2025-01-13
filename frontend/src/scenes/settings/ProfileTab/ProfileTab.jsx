@@ -133,7 +133,7 @@ const ProfileTab = () => {
             value={formData.name}
             onChange={handleInputChange}
             placeholder="Enter your first name"
-            style={{ flexGrow: 1, textAlign: 'right' }}
+            className={styles.textField}
             TextFieldWidth="350px"
           />
         </div>
@@ -148,7 +148,7 @@ const ProfileTab = () => {
             placeholder="Enter your last name"
             value={formData.surname}
             onChange={handleInputChange}
-            style={{ flexGrow: 1, textAlign: 'right' }}
+            className={styles.textField}
             TextFieldWidth="350px"
           />
         </div>
@@ -168,12 +168,11 @@ const ProfileTab = () => {
             placeholder="Enter your email"
             value={userInfo.email}
             disabled={true} // Disabled since it cannot be changed
-            style={{ flexGrow: 1, textAlign: 'right' }}
+            className={styles.textField}
             TextFieldWidth="350px"
           />
         </div>
         <div className={styles.photoElements}>
-          <div>
             <label htmlFor="photo" className={styles.label}>
               Your Photo
             </label>
@@ -196,7 +195,6 @@ const ProfileTab = () => {
                 </div>
               </div>
             </div>
-          </div>
         </div>
         <div className={styles.saveButton}>
           <Button

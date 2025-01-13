@@ -1,6 +1,6 @@
 const bannerService = require("../service/banner.service.js");
 const { internalServerError } = require("../utils/errors.helper");
-const { validateCloseButtonAction } = require("../utils/guide.helper");
+const { validateCloseButtonAction, validateRepetitionOption } = require("../utils/guide.helper");
 const {
   validatePosition,
   validateUrl,
@@ -14,6 +14,7 @@ class BannerController {
     const {
       position,
       closeButtonAction,
+      repetitionType,
       fontColor,
       backgroundColor,
       actionUrl,
@@ -28,7 +29,8 @@ class BannerController {
 
     if (
       !validatePosition(position) ||
-      !validateCloseButtonAction(closeButtonAction)
+      !validateCloseButtonAction(closeButtonAction) ||
+      !validateRepetitionOption(repetitionType)
     ) {
       return res.status(400).json({
         errors: [{ msg: "Invalid value entered" }],
@@ -108,6 +110,7 @@ class BannerController {
         url,
         position,
         closeButtonAction,
+        repetitionType,
         actionUrl,
       } = req.body;
 
@@ -127,6 +130,12 @@ class BannerController {
         return res
           .status(400)
           .json({ errors: [{ msg: "Invalid value for closeButtonAction" }] });
+      }
+
+      if (!validateRepetitionOption(repetitionType)) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "Invalid value for repetition" }] });
       }
 
       if (actionUrl) {

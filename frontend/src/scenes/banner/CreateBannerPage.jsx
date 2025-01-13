@@ -21,6 +21,7 @@ const BannerPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEd
   const [url, setUrl] = useState("");
   const [actionUrl, setActionUrl] = useState("");
   const [buttonAction, setButtonAction] = useState("No action");
+  const [buttonRepetition, setButtonRepetition] = useState('Show only once')
   const { openDialog, closeDialog } = useDialog();
 
   const handleButtonClick = (index) => {
@@ -45,6 +46,7 @@ const BannerPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEd
           setUrl(bannerData.url || "");
           setActionUrl(bannerData.actionUrl || "");
           setButtonAction(bannerData.closeButtonAction || "No action");
+          setButtonRepetition(bannerData.repetitionType || 'Show only once')
           setIsTopPosition(bannerData.position === "top");
         } catch (error) {
           emitToastError(error);
@@ -63,6 +65,7 @@ const BannerPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEd
       actionUrl,
       position: isTopPosition ? "top" : "bottom",
       closeButtonAction: buttonAction.toLowerCase(),
+      repetitionType: buttonRepetition.toLowerCase(),
       bannerText,
     };
     try {
@@ -104,6 +107,8 @@ const BannerPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEd
           setUrl={setUrl}
           setButtonAction={setButtonAction}
           buttonAction={buttonAction}
+          setButtonRepetition={setButtonRepetition}
+          buttonRepetition={buttonRepetition}
           actionUrl={actionUrl}
           setActionUrl={setActionUrl}
         />

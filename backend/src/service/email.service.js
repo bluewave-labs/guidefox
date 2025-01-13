@@ -2,17 +2,20 @@ const nodemailer = require("nodemailer");
 const handlebars = require("handlebars");
 const fs = require("fs");
 const path = require("path");
-const { API_BASE_URL } = require("../utils/constants.helper");
+const { API_BASE_URL, FRONTEND_URL } = require('../utils/constants.helper');
 const db = require("../models");
 const User = db.User;
 
 const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST || "localhost",
+  host: process.env.EMAIL_HOST || 'localhost',
   port: process.env.EMAIL_PORT || 465,
   secure: true,
   auth: {
     user: process.env.EMAIL,
     pass: process.env.APP_PASSWORD,
+  },
+  tls: {
+    rejectUnauthorized: process.env.NODE_ENV === 'production',
   },
 });
 
@@ -59,16 +62,25 @@ const sendSignupEmail = async (email, name) => {
 };
 
 const sendPasswordResetEmail = async (email, name, resetToken) => {
-  const resetLink = `${API_BASE_URL}reset-password?token=${resetToken}`;
-  await sendEmail(email, "Password Reset", "resetPassword", {
+  const resetLink = `${FRONTEND_URL}set-new-password?token=${resetToken}`;
+  await sendEmail(email, 'Reset your password for Guidefox', 'resetPassword', {
     name,
     resetLink,
   });
 };
 
+const sendInviteEmail = async (email) => {
+  const inviteLink = FRONTEND_URL;
+  await sendEmail(email, 'You’re invited to join Guidefox!', 'invite', {
+    inviteLink,
+  });
+};
+
+
 module.exports = {
   sendSignupEmail,
   sendPasswordResetEmail,
+  sendInviteEmail,
   findUserByEmail,
   transporter,
 };

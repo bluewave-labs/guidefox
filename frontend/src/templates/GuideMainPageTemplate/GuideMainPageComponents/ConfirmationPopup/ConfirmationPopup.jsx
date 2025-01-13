@@ -1,30 +1,21 @@
-import React from "react";
 import PropTypes from "prop-types";
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Button,
-} from "@mui/material";
+import { DialogContentText } from "@mui/material";
+import PopUpMessages from "../../../../components/PopUpMessages/PopUpMessages.jsx";
 
 const ConfirmationPopup = ({ open, onConfirm, onCancel }) => {
   return (
-    <Dialog open={open} onClose={onCancel} closeAfterTransition={open}>
-      <DialogTitle>Confirm Action</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          Are you sure you want to perform this action?
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onCancel}>Cancel</Button>
-        <Button onClick={onConfirm} color="primary">
-          Confirm
-        </Button>
-      </DialogActions>
-    </Dialog>
+    <PopUpMessages
+      open={open}
+      header="Confirm Action"
+      leftButtonClickHandler={onCancel}
+      rightButtonClickHandler={onConfirm}
+      leftButtonText="Cancel"
+      rightButtonText="Confirm"
+    >
+      <DialogContentText sx={{ fontSize: "13px" }}>
+        Are you sure you want to perform this action?
+      </DialogContentText>
+    </PopUpMessages>
   );
 };
 

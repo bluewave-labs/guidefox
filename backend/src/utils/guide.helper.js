@@ -31,10 +31,23 @@ const validateActionButton = (value) => {
   }
 };
 
+const validateRepetitionOption  = (value) => {
+  const validActions = ['show only once', 'show every visit'];
+  return validActions.includes(value);
+};
+
+const ensureValidRepetitionOption  = (value) => {
+  if (!validateRepetitionOption (value)) {
+    throw new Error('Invalid repetition option selected');
+  }
+};
+
 module.exports = {
     isValidHexColor,
     validateHexColor,
     checkColorFieldsFail,
     validateCloseButtonAction,
-    validateActionButton
+    validateActionButton,
+    validateRepetitionOption,
+    ensureValidRepetitionOption 
 };

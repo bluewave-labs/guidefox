@@ -46,7 +46,7 @@ describe("Test popup controller", () => {
       const body = res.json.getCall(0).args[0];
       expect(status).to.be.equal(400);
       expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for popupSize or closeButtonAction" }],
+        errors: [{ msg: "Invalid value for popupSize or closeButtonAction or repetitionType" }],
       });
     });
     it("should return 400 if closeButtonAction is invalid", async () => {
@@ -56,7 +56,7 @@ describe("Test popup controller", () => {
       const body = res.json.getCall(0).args[0];
       expect(status).to.be.equal(400);
       expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for popupSize or closeButtonAction" }],
+        errors: [{ msg: "Invalid value for popupSize or closeButtonAction or repetitionType" }],
       });
     });
     it("should return 400 if headerBackgroundColor is invalid", async () => {

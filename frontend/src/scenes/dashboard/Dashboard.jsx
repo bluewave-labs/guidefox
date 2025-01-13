@@ -9,6 +9,7 @@ import StatisticCardList from "./HomePageComponents/StatisticCardsList/Statistic
 import UserTitle from "./HomePageComponents/UserTitle/UserTitle";
 import BannerSkeleton from "./HomePageComponents/Skeletons/BannerSkeleton";
 import BaseSkeleton from "./HomePageComponents/Skeletons/BaseSkeleton";
+import HintSkeleton from "./HomePageComponents/Skeletons/HintSkeleton";
 
 const mapMetricName = (guideType) => {
   switch (guideType) {
@@ -19,7 +20,7 @@ const mapMetricName = (guideType) => {
     case "banner":
       return "Banner views";
     case "link":
-      return "Link views";
+      return "Helper link views";
     case "tour":
       return "Tour views";
     case "checklist":
@@ -34,18 +35,22 @@ const Dashboard = ({ name }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [metrics, setMetrics] = useState([]);
 
-  const metricNames = ['popup', 'banner', 'link']
+  const metricNames = ['popup', 'banner', 'link', 'hint']
 
   useEffect(() => {
     getStatistics().then((data) => {
+      const metricsData = data
+        ?.filter((metric) => metricNames.includes(metric.guideType))
+        .sort(
+          (x, y) =>
+            metricNames.indexOf(x.guideType) - metricNames.indexOf(y.guideType)
+        );
       setMetrics(
-        data
-          ?.filter((metric) => metricNames.includes(metric.guideType)) 
-          ?.map((metric) => ({
-            metricName: mapMetricName(metric.guideType),
-            metricValue: metric.views,
-            changeRate: metric.change,
-          }))
+        metricsData?.map((metric) => ({
+          metricName: mapMetricName(metric.guideType),
+          metricValue: metric.views,
+          changeRate: metric.change,
+        }))
       );
       setIsLoading(false);
     });
@@ -65,6 +70,11 @@ const Dashboard = ({ name }) => {
     {
       skeletonType: <BaseSkeleton guideType="helperLink" />,
       placeholder: "Create a new helper link",
+      onClick: () => navigate("/link", { state: { autoOpen: true } }),
+    },
+    {
+      skeletonType: <HintSkeleton/>,
+      placeholder: "Create a new hint",
       onClick: () => navigate("/hint", { state: { autoOpen: true } }),
     },
   ];

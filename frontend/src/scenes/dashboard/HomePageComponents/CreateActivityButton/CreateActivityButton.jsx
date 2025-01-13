@@ -11,7 +11,11 @@ const CreateActivityButton = ({
   return (
     <Button variant="text" onClick={onClick} sx={activityButtonStyles}>
       {skeletonType}
-      {placeholder}
+      <span
+        style={{ display: 'block', whiteSpace: 'nowrap', textAlign: 'center' }}
+      >
+        {placeholder}
+      </span>
     </Button>
   );
 };

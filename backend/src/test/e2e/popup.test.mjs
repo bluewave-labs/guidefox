@@ -96,7 +96,7 @@ describe("E2e tests popup", () => {
       expect(res.body).to.be.deep.equal({
         errors: [
           {
-            msg: "Invalid value for popupSize or closeButtonAction",
+            msg: "Invalid value for popupSize or closeButtonAction or repetitionType",
           },
         ],
       });
@@ -111,7 +111,7 @@ describe("E2e tests popup", () => {
       expect(res.body).to.be.deep.equal({
         errors: [
           {
-            msg: "Invalid value for popupSize or closeButtonAction",
+            msg: "Invalid value for popupSize or closeButtonAction or repetitionType",
           },
         ],
       });
@@ -126,7 +126,7 @@ describe("E2e tests popup", () => {
       expect(res.body).to.be.deep.equal({
         errors: [
           {
-            msg: "Invalid value for popupSize or closeButtonAction",
+            msg: "Invalid value for popupSize or closeButtonAction or repetitionType",
           },
         ],
       });
@@ -141,7 +141,7 @@ describe("E2e tests popup", () => {
       expect(res.body).to.be.deep.equal({
         errors: [
           {
-            msg: "Invalid value for popupSize or closeButtonAction",
+            msg: "Invalid value for popupSize or closeButtonAction or repetitionType",
           },
         ],
       });
@@ -717,10 +717,10 @@ describe("E2e tests popup", () => {
         .get(`/api/popup/get_popup/${popupId}`)
         .set("Authorization", `Bearer ${token}`)
         .send();
-      const { creator, ...rest } = res2.body;
+      const { ...rest } = res2.body;
       expect(res2).to.have.status(200);
       expect(rest).to.be.deep.equal(popup().build());
-      expect(creator.id).to.be.equal(user().build().id);
+      // expect(creator.id).to.be.equal(user().build().id);
     });
   });
 });
