@@ -185,8 +185,8 @@ const resetPassword = async (req, res) => {
   try {
     const { token, newPassword } = req.body;
     const dbToken = await Token.findOne({ where: { type: 'reset' } });
-
-    if (!dbToken || new Date(dbToken.expiresAt) < new Date() || !(await bcrypt.compare(token, dbToken.token))) {
+    const compareHash= token === dbToken.token;
+    if (!dbToken || new Date(dbToken.expiresAt) < new Date() || !compareHash) {
       return res.status(400).json({ error: 'Invalid or expired token' });
     }
 
