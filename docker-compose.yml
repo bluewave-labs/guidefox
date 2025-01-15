@@ -25,14 +25,7 @@ services:
             - coverage/
             - dist/
     command: >
-      bash -c "if [ "$NODE_ENV" = "production" ]; then
-        if ! npx sequelize-cli db:migrate; then
-          if ! npx sequelize-cli db:create; then
-            echo 'Database already exists';
-          fi
-          npx sequelize-cli db:migrate;
-        fi
-      fi;
+      bash -c "
       if [ \"$$NODE_ENV\" = \"production\" ]; then
         npm run prod;
       elif [ \"$$NODE_ENV\" = \"staging\" ]; then

@@ -48,13 +48,13 @@ const App = () => {
         </Route>
 
         <Route path="/login" element={<LoginPage isAdmin={isAdminLogin}/>} />
-        <Route path="/signup" element={<CreateAccountPage isAdmin={isAdminLogin} setIsAdmin={setIsAdminLogin}/>} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        {/* <Route path="/signup" element={<CreateAccountPage isAdmin={isAdminLogin} setIsAdmin={setIsAdminLogin}/>} /> */}
+        {/* <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<PasswordResetPage />} />
         <Route path="/check-email" element={<CheckYourEmailPage />} />
-        <Route path="/set-new-password" element={<SetNewPasswordPage />} />
+        <Route path="/set-new-password" element={<SetNewPasswordPage />} /> */}
 
-        <Route path="/progress-steps" element={<ProgressStepsMain />} />
+        {/* <Route path="/progress-steps" element={<ProgressStepsMain />} /> */}
         <Route path="/403" element={<Error403 />} />
         <Route path="*" element={<Error404 />} />
       </Routes>

@@ -5,10 +5,10 @@ const { loginValidation, registerValidation, forgetPasswordValidation, resetPass
 const { handleValidationErrors } = require('../middleware/validation.middleware')
 const router = express.Router();
 
-router.post("/register", registerValidation, handleValidationErrors, register);
+// router.post("/register", registerValidation, handleValidationErrors, register);
 router.post("/login", loginValidation, handleValidationErrors, login);
 router.post("/logout", authenticateJWT, logout);
-router.post("/forget-password", forgetPasswordValidation, handleValidationErrors, forgetPassword);
-router.post("/reset-password", resetPasswordValidation, handleValidationErrors, resetPassword);
+// router.post("/forget-password", forgetPasswordValidation, handleValidationErrors, forgetPassword);
+// router.post("/reset-password", resetPasswordValidation, handleValidationErrors, resetPassword);
 
 module.exports = router;
