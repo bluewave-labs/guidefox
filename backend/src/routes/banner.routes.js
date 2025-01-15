@@ -8,8 +8,8 @@ const router = express.Router();
 const teamPermissions = settings.team.permissions;
 
 router.post("/add_banner", authenticateJWT, accessGuard(teamPermissions.banners), bannerController.addBanner);
-router.delete("/delete_banner/:id", authenticateJWT, accessGuard(teamPermissions.banners), bannerController.deleteBanner);
-router.put("/edit_banner/:id", authenticateJWT, accessGuard(teamPermissions.banners), bannerController.editBanner);
+// router.delete("/delete_banner/:id", authenticateJWT, accessGuard(teamPermissions.banners), bannerController.deleteBanner);
+// router.put("/edit_banner/:id", authenticateJWT, accessGuard(teamPermissions.banners), bannerController.editBanner);
 router.get("/all_banners", authenticateJWT, bannerController.getAllBanners);
 router.get("/banners", authenticateJWT, bannerController.getBanners);
 router.get("/get_banner/:id", authenticateJWT, bannerController.getBannerById);

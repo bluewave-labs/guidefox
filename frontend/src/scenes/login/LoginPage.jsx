@@ -13,6 +13,7 @@ import Logo from "../../components/Logo/Logo";
 
 function LoginPage({ isAdmin = false }) {
   const { loginAuth } = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -22,8 +23,10 @@ function LoginPage({ isAdmin = false }) {
   }
 
   const handleLogin = async () => {
+    setIsSubmitting(true);
     const response = await login(values);
     handleAuthSuccess(response, loginAuth, navigate);
+    setIsSubmitting(false);
   }
 
   return (

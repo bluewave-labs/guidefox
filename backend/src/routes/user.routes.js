@@ -15,8 +15,8 @@ const router = express.Router();
 
 router.get("/users-list", getUsersList);
 router.get("/current-user", authenticateJWT, getCurrentUser);
-router.put("/update", authenticateJWT, checkAtLeastOneField, validateProfileUpdate, handleValidationErrors, updateUserDetails);
-router.delete("/delete", authenticateJWT, deleteUser);
+// router.put("/update", authenticateJWT, checkAtLeastOneField, validateProfileUpdate, handleValidationErrors, updateUserDetails);
+// router.delete("/delete", authenticateJWT, deleteUser);
 router.get("/has-users", hasUsers);
 
 module.exports = router;

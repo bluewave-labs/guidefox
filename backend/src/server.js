@@ -8,6 +8,7 @@ const jsonErrorMiddleware = require("./middleware/jsonError.middleware");
 const fileSizeValidator = require("./middleware/fileSizeValidator.middleware");
 const { MAX_FILE_SIZE } = require("./utils/constants.helper");
 const ipFilter = require("./middleware/ipFilter.middleware");
+const { runSeeders } = require('../seeders/seeders');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -41,19 +42,25 @@ if (process.env.ENABLE_IP_CHECK === 'true') {
 
 
 const { sequelize } = require("./models");
+const { queryInterface } = sequelize; // Get queryInterface from sequelize
 
 sequelize
   .authenticate()
   .then(() => console.log("Database connected..."))
   .catch((err) => console.log("Error: " + err));
 
-
 sequelize
   .sync({ force: true })
-  .then(() => console.log("Models synced with the database..."))
-  .catch((err) => console.log("Error syncing models: " + err));
-
-
+  .then(() => {
+    console.log("Models synced with the database...");
+    return runSeeders(queryInterface); // Pass queryInterface to runSeeders
+  })
+  .then(() => {
+    console.log("Seeders executed successfully.");
+  })
+  .catch((err) => {
+    console.error("Error syncing models or running seeders:", err);
+  });
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/mock/", mocks);

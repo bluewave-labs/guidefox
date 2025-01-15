@@ -32,12 +32,6 @@ const ListItem = ({ title, text, id, onClick, onDelete, onEdit, onDuplicate }) =
           <IconButton onClick={onDuplicate}>
             <DuplicateIcon />
           </IconButton>
-          <IconButton onClick={onEdit}>
-            <EditIcon/>
-          </IconButton>
-          <IconButton onClick={onDelete}>
-            <TrashIcon />
-          </IconButton>
         </>
         )}
       </div>

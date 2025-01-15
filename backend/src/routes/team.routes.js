@@ -30,42 +30,42 @@ router.use(authenticateJWT);
 router.get('/details', getTeamDetails);
 router.get('/urls', accessGuard(teamPermissions.serverUrl), getServerUrl);
 
-router.post(
-  '/set-organisation',
-  accessGuard(teamPermissions.setOrg),
-  validateOrganizationName,
-  handleValidationErrors,
-  setOrganisation
-);
+// router.post(
+//   '/set-organisation',
+//   accessGuard(teamPermissions.setOrg),
+//   validateOrganizationName,
+//   handleValidationErrors,
+//   setOrganisation
+// );
 router.post('/invite', accessGuard(teamPermissions.invite), validationInvite, handleValidationErrors, sendTeamInvite);
-router.put(
-  '/update',
-  accessGuard(teamPermissions.update),
-  validateOrganizationName,
-  handleValidationErrors,
-  updateTeamDetails
-);
-router.put(
-  '/change-role',
-  accessGuard(teamPermissions.changeRole),
-  validationChangeRole,
-  handleValidationErrors,
-  changeRole
-);
-router.put(
-  '/urls',
-  accessGuard(teamPermissions.serverUrl),
-  validateSetServerUrl,
-  handleValidationErrors,
-  setServerUrl
-);
+// router.put(
+//   '/update',
+//   accessGuard(teamPermissions.update),
+//   validateOrganizationName,
+//   handleValidationErrors,
+//   updateTeamDetails
+// );
+// router.put(
+//   '/change-role',
+//   accessGuard(teamPermissions.changeRole),
+//   validationChangeRole,
+//   handleValidationErrors,
+//   changeRole
+// );
+// router.put(
+//   '/urls',
+//   accessGuard(teamPermissions.serverUrl),
+//   validateSetServerUrl,
+//   handleValidationErrors,
+//   setServerUrl
+// );
 
-router.delete(
-  '/remove/:memberId',
-  accessGuard(teamPermissions.removeUser),
-  validateIdParam,
-  handleValidationErrors,
-  removeMember
-);
+// router.delete(
+//   '/remove/:memberId',
+//   accessGuard(teamPermissions.removeUser),
+//   validateIdParam,
+//   handleValidationErrors,
+//   removeMember
+// );
 router.get('/get-all-invites', accessGuard(teamPermissions.removeUser), getAllInvites);
 module.exports = router;

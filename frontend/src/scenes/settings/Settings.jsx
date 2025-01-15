@@ -17,7 +17,7 @@ import { renderIfAuthorized } from "../../utils/generalHelper";
 export default function Settings() {
   const { userInfo } = useAuth();
   const role = userInfo?.role;
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState("4");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

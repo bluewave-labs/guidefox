@@ -138,7 +138,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "popup",
+      tableName: "popups",
       timestamps: false,
     }
   );

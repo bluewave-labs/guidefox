@@ -61,23 +61,23 @@ const CodeTab = () => {
         setAgentUrl(e.target.value);
     };
 
-    const onSave = async () => {
-        const { valid, errors } = validateServerUrl(serverUrl);
+    // const onSave = async () => {
+    //     const { valid, errors } = validateServerUrl(serverUrl);
 
-        if (!valid) {
-            errors.forEach(err => {
-                toastEmitter.emit(TOAST_EMITTER_KEY, err);
-            });
-            return;
-        }
+    //     if (!valid) {
+    //         errors.forEach(err => {
+    //             toastEmitter.emit(TOAST_EMITTER_KEY, err);
+    //         });
+    //         return;
+    //     }
 
-        try {
-            const response = await addServerUrl(serverUrl, agentUrl);
-            toastEmitter.emit(TOAST_EMITTER_KEY, response.message);
-        } catch (err) {
-            emitToastError(err);
-        }
-    };
+    //     try {
+    //         const response = await addServerUrl(serverUrl, agentUrl);
+    //         toastEmitter.emit(TOAST_EMITTER_KEY, response.message);
+    //     } catch (err) {
+    //         emitToastError(err);
+    //     }
+    // };
 
     const codeToCopy = `
         <!-- Client-side HTML/JS Snippet to be integrated into their website -->
@@ -121,7 +121,6 @@ const CodeTab = () => {
                     TextFieldWidth="550px"
                 />
                 <span />
-                <Button text='Save' sx={{ width: '120px' }} onClick={onSave} />
 
 
             </div>

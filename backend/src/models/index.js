@@ -30,7 +30,6 @@ db.Banner = require("./Banner.js")(sequelize, Sequelize.DataTypes);
 db.Team = require("./Team.js")(sequelize, Sequelize.DataTypes);
 db.Invite = require("./Invite.js")(sequelize, Sequelize.DataTypes);
 db.Hint = require("./Hint.js")(sequelize, Sequelize.DataTypes);
-db.Tour = require("./Tour.js")(sequelize, Sequelize.DataTypes);
 db.Link = require("./Link.js")(sequelize, Sequelize.DataTypes);
 db.HelperLink = require("./HelperLink.js")(sequelize, Sequelize.DataTypes);
 
@@ -51,7 +50,5 @@ db.Invite.belongsTo(db.User, { foreignKey: "invitedBy" });
 db.User.hasMany(db.Invite, { foreignKey: "invitedBy" });
 db.User.hasMany(db.Hint, { foreignKey: "createdBy", as: "hints" });
 db.Hint.belongsTo(db.User, { foreignKey: "createdBy", as: "creator" });
-db.User.hasMany(db.Tour, { foreignKey: "createdBy", as: "tours" });
-db.Tour.belongsTo(db.User, { foreignKey: "createdBy", as: "creator" });
 
 module.exports = db;
