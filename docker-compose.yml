@@ -68,11 +68,11 @@ services:
           elif [ \"$NODE_ENV\" != \"development\" ]; then
             npm run build && npm run preview;
           fi"
-  mailhog:
-    image: mailhog/mailhog
-    ports:
-      - "1025:1025"
-      - "8025:8025"
+  # mailhog:
+  #   image: mailhog/mailhog
+  #   ports:
+  #     - "1025:1025"
+  #     - "8025:8025"
 
 volumes:
   pgdata:
