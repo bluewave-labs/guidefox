@@ -20,6 +20,30 @@ async function runSeeders(queryInterface) {
   );
 
   await queryInterface.bulkInsert(
+    'hints',
+    [
+      {
+        action: 'open url',
+        url: 'https://guidefox-demo.bluewavelabs.ca',
+        actionButtonUrl: 'https://guidefox.io/',
+        actionButtonText: 'Take me to GuideFox page',
+        targetElement: '.element',
+        tooltipPlacement: 'right',
+        hintContent:
+          'Guidefox helps app owners build knowledge and user-experience oriented apps. It includes the following features: welcome tours, popups, banners, helper links, hints',
+        header: 'GuideFox Intro',
+        headerBackgroundColor: '#FFFFFF',
+        headerColor: '#101828',
+        textColor: '#101828',
+        buttonBackgroundColor: '#7F56D9',
+        buttonTextColor: '#FFFFFF',
+        createdBy: 1,
+      },
+    ],
+    {}
+  );
+
+  await queryInterface.bulkInsert(
     "popups",
     [
       {
@@ -58,6 +82,27 @@ async function runSeeders(queryInterface) {
     ],
     {}
   );
+
+  const [helperLink] = await queryInterface.bulkInsert(
+    'helper_link',
+    [
+      {
+        title: 'GuideFox Links',
+        headerBackgroundColor: '#adb2f5',
+        linkFontColor: '#344054',
+        iconColor: '#7F56D9',
+        createdBy: 1,
+      },
+    ],
+    { returning: true } // Return the created row to use its ID
+  );
+
+  const links = [
+    { title: 'GuideFox Website', url: 'http://localhost:4173https://guidefox-demo.bluewavelabs.ca', target: true, helperId: helperLink.id },
+    { title: 'GuideFox Repo', url: 'https://github.com/bluewave-labs/guidefox', target: false, helperId: helperLink.id },
+  ];
+
+  await queryInterface.bulkInsert('link', links, {});
 
   await queryInterface.bulkInsert(
     "teams",
