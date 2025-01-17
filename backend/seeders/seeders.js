@@ -27,7 +27,7 @@ async function runSeeders(queryInterface) {
         url: 'https://guidefox-demo.bluewavelabs.ca',
         actionButtonUrl: 'https://guidefox.io/',
         actionButtonText: 'Take me to GuideFox page',
-        targetElement: '.element',
+        targetElement: '._sidebar_z57ma_16', //Pointing to GuideFox logo on top left side.
         tooltipPlacement: 'right',
         hintContent:
           'Guidefox helps app owners build knowledge and user-experience oriented apps. It includes the following features: welcome tours, popups, banners, helper links, hints',
