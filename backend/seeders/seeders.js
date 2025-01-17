@@ -98,7 +98,7 @@ async function runSeeders(queryInterface) {
   );
 
   const links = [
-    { title: 'GuideFox Website', url: 'http://localhost:4173https://guidefox-demo.bluewavelabs.ca', target: true, helperId: helperLink.id },
+    { title: 'GuideFox Website', url: 'https://guidefox-demo.bluewavelabs.ca', target: true, helperId: helperLink.id },
     { title: 'GuideFox Repo', url: 'https://github.com/bluewave-labs/guidefox', target: false, helperId: helperLink.id },
   ];
 
