@@ -69,6 +69,19 @@ async function runSeeders(queryInterface) {
     ],
     {}
   );
+
+  await queryInterface.bulkInsert(
+    "teams",
+    [
+      {
+        name: 'Bluewave',
+        createdAt: new Date(),
+        serverUrl: 'https://guidefox-demo.bluewavelabs.ca/api/',
+        agentUrl: 'https://cdn.jsdelivr.net/gh/bluewave-labs/bluewave-onboarding@agent-1.0.0/jsAgent/'
+      }
+    ],
+    {}
+  );
 }
 
 module.exports = { runSeeders };
