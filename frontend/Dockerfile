@@ -15,5 +15,3 @@ COPY . .
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 
 EXPOSE 4173
-
-CMD ["sh", "-c", "npm run build && npm run preview"]

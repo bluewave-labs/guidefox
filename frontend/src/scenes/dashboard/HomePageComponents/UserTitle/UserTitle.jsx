@@ -5,7 +5,7 @@ import styles from './UserTitle.module.scss'
 const UserTitle = ({ name }) => {
   return (
     <div className={styles.title}>
-      Hello, {name}
+      Copy the code in Settings here to see your guides!
     </div>
   );
 };

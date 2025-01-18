@@ -134,6 +134,7 @@ const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEdit
       rightContent={() => (
         <RichTextEditor
           sx={{
+            position: 'relative',
             width: "400px",
             maxWidth: "700px",
             marginLeft: "2.5rem",

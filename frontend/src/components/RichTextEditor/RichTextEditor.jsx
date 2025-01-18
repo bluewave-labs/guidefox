@@ -83,7 +83,7 @@ const RichTextEditor = ({
         setMode={setMode}
         sx={{
           position: "absolute",
-          top: "400px",
+          bottom: "35px",
           left: 0,
         }}
       />
