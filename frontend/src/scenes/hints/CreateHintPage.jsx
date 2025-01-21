@@ -64,6 +64,7 @@ const HintPage = ({
       const fetchHintData = async () => {
         try {
           const hintData = await getHintById(itemId);
+
           setAppearance({
             headerBackgroundColor: hintData.headerBackgroundColor || '#F8F9F8',
             headerColor: hintData.headerColor || '#101828',
@@ -71,7 +72,7 @@ const HintPage = ({
             buttonBackgroundColor: hintData.buttonBackgroundColor || '#7F56D9',
             buttonTextColor: hintData.buttonTextColor || '#FFFFFF',
           });
-          setButtonRepetition(bannerData.repetitionType || 'Show only once')
+          setButtonRepetition(hintData.repetitionType || 'Show only once')
           setHeader(hintData.header || '');
           setContent(hintData.hintContent || '');
           setActionButtonUrl(hintData.actionButtonUrl || 'https://');

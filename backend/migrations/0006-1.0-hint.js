@@ -15,6 +15,11 @@ module.exports = {
           primaryKey: true,
           type: Sequelize.INTEGER
         },
+        repetitionType: {
+          type: Sequelize.STRING(255),
+          allowNull: false,
+          defaultValue: 'show only once'
+        },
         action: {
           type: Sequelize.STRING(31),
           allowNull: false,

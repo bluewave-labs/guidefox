@@ -3,6 +3,7 @@ const { isValidHexColor } = require('./guide.helper');
 const { validateUrl } = require('./link.helper');
 
 const validActions = ['no action', 'open url', 'open url in a new tab'];
+const validRepetitionOptions = ['show only once', 'show every visit'];
 
 const createColorValidator = (fieldName) =>
   body(fieldName).optional().isString().custom(isValidHexColor).withMessage(`Invalid value for ${fieldName}`);
@@ -21,6 +22,14 @@ const hintValidator = [
   createColorValidator('textColor'),
   createColorValidator('buttonBackgroundColor'),
   createColorValidator('buttonTextColor'),
+  body('repetitionType')
+    .isString()
+    .notEmpty()
+    .withMessage('Repetition option is required')
+    .custom((value) => {
+      return validRepetitionOptions.includes(value);
+    })
+    .withMessage('Invalid value for repetition'),
   body('url')
     .optional()
     .isString()
