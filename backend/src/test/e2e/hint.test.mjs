@@ -464,6 +464,7 @@ describe('E2e tests hint', () => {
         expect(it).to.have.all.keys([
           'id',
           'action',
+          'repetitionType',
           'hintContent',
           'actionButtonText',
           'actionButtonUrl',

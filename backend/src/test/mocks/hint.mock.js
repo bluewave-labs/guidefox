@@ -3,6 +3,7 @@ class HintBuilder {
     this.hint = {
       id,
       action: "open url in a new tab",
+      repetitionType: "show only once",
       actionButtonUrl: "/url",
       actionButtonText: "text",
       targetElement: ".element",
@@ -30,6 +31,16 @@ class HintBuilder {
 
   invalidAction() {
     this.hint.action = "invalid action";
+    return this;
+  }
+
+  missingRepetitionType() {
+    this.hint.repetitionType = undefined;
+    return this;
+  }
+
+  invalidMissingRepetitionType() {
+    this.hint.repetitionType = "invalid repetition type";
     return this;
   }
 
