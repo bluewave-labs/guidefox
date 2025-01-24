@@ -1,8 +1,10 @@
-const express = require("express");
-const hintController = require("../controllers/hint.controller");
-const authenticateJWT = require("../middleware/auth.middleware");
+const express = require('express');
+const hintController = require('../controllers/hint.controller');
+const authenticateJWT = require('../middleware/auth.middleware');
 const settings = require('../../config/settings');
 const accessGuard = require('../middleware/accessGuard.middleware');
+const { hintValidator, paramIdValidator, bodyUrlValidator } = require('../utils/hint.helper');
+const { handleValidationErrors } = require('../middleware/validation.middleware');
 
 const router = express.Router();
 const teamPermissions = settings.team.permissions;

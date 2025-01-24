@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
       },
       closeButtonAction: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(31),
         allowNull: false,
         validate: {
           isValidAction(value) {
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       repetitionType: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(31),
         allowNull: false,
         defaultValue: 'show only once',
         validate: {
@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       popupSize: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(15),
         allowNull: false,
         validate: {
           isValidPopupSize(value) {
@@ -60,7 +60,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       headerBackgroundColor: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(15),
         allowNull: false,
         defaultValue: "#FFFFFF",
         validate: {
@@ -70,7 +70,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       headerColor: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(15),
         allowNull: false,
         defaultValue: "#FFFFFF",
         validate: {
@@ -80,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       textColor: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(15),
         allowNull: false,
         defaultValue: "#FFFFFF",
         validate: {
@@ -100,7 +100,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       buttonTextColor: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(15),
         allowNull: false,
         defaultValue: "#FFFFFF",
         validate: {
@@ -115,7 +115,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: "",
       },
       content: {
-        type: DataTypes.STRING(1024),
+        type: DataTypes.STRING(2047),
         allowNull: false,
         defaultValue: "",
       },

@@ -3,7 +3,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
-const compression = require("compression");
+// const compression = require("compression");
 const jsonErrorMiddleware = require("./middleware/jsonError.middleware");
 const fileSizeValidator = require("./middleware/fileSizeValidator.middleware");
 const { MAX_FILE_SIZE } = require("./utils/constants.helper");
@@ -33,7 +33,7 @@ app.use(cors());
 app.options('*', cors()); // this is for preflight requests
 app.use(helmet());
 app.use(bodyParser.json({ limit: MAX_FILE_SIZE }));
-app.use(compression());
+// app.use(compression());
 app.use(jsonErrorMiddleware);
 if (process.env.ENABLE_IP_CHECK === 'true') {
   app.use(ipFilter);

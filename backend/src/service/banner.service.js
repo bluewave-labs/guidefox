@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require('../models');
 const { Op } = require('sequelize');
 const Banner = db.Banner;
 
@@ -10,7 +10,7 @@ class BannerService {
   async getBanners(userId) {
     return await Banner.findAll({
       where: {
-        createdBy: userId
+        createdBy: userId,
       },
     });
   }
@@ -47,31 +47,34 @@ class BannerService {
       return await Banner.findOne({
         where: { id: bannerId },
       });
-    } catch (error) {
-      throw new Error("Error retrieving banner by ID");
+    } catch {
+      throw new Error('Error retrieving banner by ID');
     }
   }
 
   async getBannerByUrl(url) {
     try {
       return await Banner.findAll({ where: { url } });
-    } catch (error) {
-      throw new Error("Error retrieving banner by URL");
+    } catch {
+      throw new Error('Error retrieving banner by URL');
     }
-  };
+  }
 
   async getIncompleteBannersByUrl(url, ids) {
     try {
       return await Banner.findAll({
         where: {
           url,
-          id: { [Op.notIn]: ids }
-        }
+          [Op.or]: [
+            { repetitionType: 'show every visit' },
+            { id: { [Op.notIn]: ids } },
+          ],
+        },
       });
-    } catch (error) {
-      throw new Error("Error retrieving banner by URL");
+    } catch {
+      throw new Error('Error retrieving banner by URL');
     }
-  };
+  }
 }
 
 module.exports = new BannerService();

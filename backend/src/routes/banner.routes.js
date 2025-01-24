@@ -1,8 +1,14 @@
-const express = require("express");
-const bannerController = require("../controllers/banner.controller.js");
-const authenticateJWT = require("../middleware/auth.middleware");
+const express = require('express');
+const bannerController = require('../controllers/banner.controller.js');
+const authenticateJWT = require('../middleware/auth.middleware');
 const settings = require('../../config/settings');
 const accessGuard = require('../middleware/accessGuard.middleware');
+const {
+  addOrUpdateBannerValidation,
+  deleteOrGetBannerByIdValidation,
+  getBannerByUrlValidation,
+} = require('../utils/banner.helper.js');
+const { handleValidationErrors } = require('../middleware/validation.middleware.js');
 
 const router = express.Router();
 const teamPermissions = settings.team.permissions;

@@ -11,7 +11,7 @@
     "test:e2e": "npm run pretest && NODE_ENV=test mocha 'src/test/e2e/**/*.test.mjs'",
     "test:unit": "NODE_ENV=test mocha 'src/test/unit/**/*.test.js' --watch",
     "dev": "nodemon index.js",
-    "prod": "NODE_ENV=production node index.js",
+    "prod": "node index.js",
     "build": "echo 'No build script defined'"
   },
   "keywords": [],

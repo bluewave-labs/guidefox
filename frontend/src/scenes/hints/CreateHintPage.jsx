@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from "react";
-import Turndown from "turndown";
-import GuideTemplate from "../../templates/GuideTemplate/GuideTemplate";
-import RichTextEditor from "@components/RichTextEditor/RichTextEditor";
-import HintComponent from "../../products/Hint/HintComponent";
-import HintLeftContent from "@components/HintPageComponents/HintLeftContent/HintLeftContent";
-import HintLeftAppearance from "@components/HintPageComponents/HintLeftAppearance/HintLeftAppearance";
-import { addHint, getHintById, editHint } from '../../services/hintServices';
-import toastEmitter, { TOAST_EMITTER_KEY } from "../../utils/toastEmitter";
-import { emitToastError } from "../../utils/guideHelper";
-import { useDialog } from "../../templates/GuideTemplate/GuideTemplateContext";
+import HintLeftAppearance from '@components/HintPageComponents/HintLeftAppearance/HintLeftAppearance';
+import HintLeftContent from '@components/HintPageComponents/HintLeftContent/HintLeftContent';
+import RichTextEditor from '@components/RichTextEditor/RichTextEditor';
+import React, { useEffect, useState } from 'react';
+import Turndown from 'turndown';
+import HintComponent from '../../products/Hint/HintComponent';
+import { addHint, editHint, getHintById } from '../../services/hintServices';
+import GuideTemplate from '../../templates/GuideTemplate/GuideTemplate';
+import { useDialog } from '../../templates/GuideTemplate/GuideTemplateContext';
+import { emitToastError } from '../../utils/guideHelper';
+import toastEmitter, { TOAST_EMITTER_KEY } from '../../utils/toastEmitter';
 
-const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEdit }) => {
+const HintPage = ({
+  autoOpen = false,
+  isEdit,
+  itemId,
+  setItemsUpdated,
+  setIsEdit,
+}) => {
   const { openDialog, closeDialog } = useDialog();
 
   const [activeButton, setActiveButton] = useState(0);
@@ -19,46 +25,35 @@ const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEdit
     setActiveButton(index);
   };
 
-  const [headerBackgroundColor, setHeaderBackgroundColor] = useState("#FFFFFF");
-  const [headerColor, setHeaderColor] = useState("#101828");
-  const [textColor, setTextColor] = useState("#344054");
-  const [buttonBackgroundColor, setButtonBackgroundColor] = useState("#7F56D9");
-  const [buttonTextColor, setButtonTextColor] = useState("#FFFFFF");
+  const [appearance, setAppearance] = useState({
+    headerBackgroundColor: '#F8F9F8',
+    headerColor: '#101828',
+    textColor: '#344054',
+    buttonBackgroundColor: '#7F56D9',
+    buttonTextColor: '#FFFFFF',
+  });
+  const {
+    headerBackgroundColor,
+    headerColor,
+    textColor,
+    buttonBackgroundColor,
+    buttonTextColor,
+  } = appearance;
 
-  const [header, setHeader] = useState("");
-  const [content, setContent] = useState("");
+  const [header, setHeader] = useState('');
+  const [content, setContent] = useState('');
   const markdownContent = new Turndown().turndown(content);
 
-  const [url, setUrl] = useState("https://");
-  const [actionButtonUrl, setActionButtonUrl] = useState("https://");
-  const [actionButtonText, setActionButtonText] = useState("Take me to subscription page");
-  const [action, setAction] = useState("No action");
-  const [targetElement, setTargetElement] = useState(".element");
-  const [tooltipPlacement, setTooltipPlacement] = useState("Top");
+  const [buttonRepetition, setButtonRepetition] = useState('Show only once');
 
-  const stateList = [
-    {
-      stateName: "Header Background Color",
-      state: headerBackgroundColor,
-      setState: setHeaderBackgroundColor,
-    },
-    {
-      stateName: "Header Color",
-      state: headerColor,
-      setState: setHeaderColor,
-    },
-    { stateName: "Text Color", state: textColor, setState: setTextColor },
-    {
-      stateName: "Button Background Color",
-      state: buttonBackgroundColor,
-      setState: setButtonBackgroundColor,
-    },
-    {
-      stateName: "Button Text Color",
-      state: buttonTextColor,
-      setState: setButtonTextColor,
-    },
-  ];
+  const [url, setUrl] = useState('https://');
+  const [actionButtonUrl, setActionButtonUrl] = useState('https://');
+  const [actionButtonText, setActionButtonText] = useState(
+    'Take me to subscription page'
+  );
+  const [action, setAction] = useState('No action');
+  const [targetElement, setTargetElement] = useState('.element');
+  const [tooltipPlacement, setTooltipPlacement] = useState('Top');
 
   useEffect(() => {
     if (autoOpen) openDialog();
@@ -69,19 +64,23 @@ const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEdit
       const fetchHintData = async () => {
         try {
           const hintData = await getHintById(itemId);
-          setHeaderBackgroundColor(hintData.headerBackgroundColor || "#F8F9F8");
-          setHeaderColor(hintData.headerColor || "#101828");
-          setTextColor(hintData.textColor || "#344054");
-          setButtonBackgroundColor(hintData.buttonBackgroundColor || "#7F56D9");
-          setButtonTextColor(hintData.buttonTextColor || "#FFFFFF");
-          setHeader(hintData.header || "");
-          setContent(hintData.hintContent || "");
-          setActionButtonUrl(hintData.actionButtonUrl || "https://");
-          setUrl(hintData.url || "https://");
-          setActionButtonText(hintData.actionButtonText || "");
-          setAction(hintData.action || "No action");
-          setTargetElement(hintData.targetElement || '.element')
-          setTooltipPlacement(hintData.tooltipPlacement || 'Top')
+
+          setAppearance({
+            headerBackgroundColor: hintData.headerBackgroundColor || '#F8F9F8',
+            headerColor: hintData.headerColor || '#101828',
+            textColor: hintData.textColor || '#344054',
+            buttonBackgroundColor: hintData.buttonBackgroundColor || '#7F56D9',
+            buttonTextColor: hintData.buttonTextColor || '#FFFFFF',
+          });
+          setButtonRepetition(hintData.repetitionType || 'Show only once')
+          setHeader(hintData.header || '');
+          setContent(hintData.hintContent || '');
+          setActionButtonUrl(hintData.actionButtonUrl || 'https://');
+          setUrl(hintData.url || 'https://');
+          setActionButtonText(hintData.actionButtonText || '');
+          setAction(hintData.action || 'No action');
+          setTargetElement(hintData.targetElement || '.element');
+          setTooltipPlacement(hintData.tooltipPlacement || 'Top');
         } catch (error) {
           emitToastError(error);
         }
@@ -92,6 +91,7 @@ const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEdit
 
   const onSave = async () => {
     const hintData = {
+      repetitionType: buttonRepetition.toLowerCase(),
       tooltipPlacement: tooltipPlacement.toLowerCase(),
       url,
       actionButtonUrl,
@@ -106,27 +106,33 @@ const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEdit
       buttonBackgroundColor,
       buttonTextColor,
     };
+
     try {
       const response = isEdit
         ? await editHint(itemId, hintData)
         : await addHint(hintData);
-      const toastMessage = isEdit ? "You edited this hint" : "New hint saved";
+      const toastMessage = isEdit ? 'You edited this hint' : 'New hint saved';
       toastEmitter.emit(TOAST_EMITTER_KEY, toastMessage);
       setItemsUpdated((prev) => !prev);
-      setHeader("");
-      setContent("");
+      setHeader('');
+      setContent('');
       closeDialog();
     } catch (error) {
+      if (error.response.data?.errors) {
+        return error.response.data.errors.forEach((err) => {
+          toastEmitter.emit(TOAST_EMITTER_KEY, `Error: ${err}`);
+        });
+      }
       const errorMessage = error.response?.data?.message
         ? `Error: ${error.response.data.message}`
-        : "An unexpected error occurred. Please try again.";
+        : 'An unexpected error occurred. Please try again.';
       toastEmitter.emit(TOAST_EMITTER_KEY, errorMessage);
     }
   };
 
   return (
     <GuideTemplate
-      title={isEdit ? "Edit Hint" : "Create Hint"}
+      title={isEdit ? 'Edit Hint' : 'Create Hint'}
       activeButton={activeButton}
       handleButtonClick={handleButtonClick}
       onSave={onSave}
@@ -135,10 +141,10 @@ const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEdit
         <RichTextEditor
           sx={{
             position: 'relative',
-            width: "400px",
-            maxWidth: "700px",
-            marginLeft: "2.5rem",
-            marginTop: "1rem",
+            width: '400px',
+            maxWidth: '700px',
+            marginLeft: '2.5rem',
+            marginTop: '1rem',
           }}
           header={header}
           setHeader={setHeader}
@@ -160,6 +166,8 @@ const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEdit
       )}
       leftContent={() => (
         <HintLeftContent
+          buttonRepetition={buttonRepetition}
+          setButtonRepetition={setButtonRepetition}
           actionButtonText={actionButtonText}
           setActionButtonText={setActionButtonText}
           actionButtonUrl={actionButtonUrl}
@@ -172,9 +180,16 @@ const HintPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEdit
           setTargetElement={setTargetElement}
           tooltipPlacement={tooltipPlacement}
           setTooltipPlacement={setTooltipPlacement}
+          onSave={onSave}
         />
       )}
-      leftAppearance={() => <HintLeftAppearance data={stateList} />}
+      leftAppearance={() => (
+        <HintLeftAppearance
+          data={appearance}
+          setState={setAppearance}
+          onSave={onSave}
+        />
+      )}
     />
   );
 };

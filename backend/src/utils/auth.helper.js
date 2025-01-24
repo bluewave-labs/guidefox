@@ -1,4 +1,5 @@
 const { body } = require('express-validator');
+const PASSWORD_SPECIAL_CHARS = /[!@#$%^&*(),.?":{}|<>_\-=]/;
 const registerValidation = [
   body('name')
     .notEmpty()
@@ -14,7 +15,7 @@ const registerValidation = [
   body('password')
     .isLength({ min: 8 })
     .withMessage('Must be at least 8 characters')
-    .matches(/[!@#$%^&*(),.?":{}|<>_\-=]/)
+    .matches(PASSWORD_SPECIAL_CHARS)
     .withMessage('Must contain one special character'),
 ];
 
@@ -30,7 +31,7 @@ const resetPasswordValidation = [
   body('newPassword')
     .isLength({ min: 8 })
     .withMessage('Must be atleast 8 characters')
-    .matches(/[!@#$%^&*(),.?":{}|<>]/)
+    .matches(PASSWORD_SPECIAL_CHARS)
     .withMessage('Must contain one special character'),
 ];
 
