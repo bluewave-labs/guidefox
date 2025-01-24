@@ -17,13 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       repetitionType: {
         type: DataTypes.ENUM(settings.hint.repetition),
         allowNull: false,
-      },
-      repetitionType: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          isIn: [['show only once', 'show every visit']]
-        },
+        defaultValue: 'show only once'
       },
       url: {
         type: DataTypes.STRING,
