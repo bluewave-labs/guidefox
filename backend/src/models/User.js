@@ -10,14 +10,14 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
       },
       name: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(63),
         allowNull: false,
       },
       surname: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(63),
       },
       email: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(255),
         allowNull: false,
         unique: true,
         validate: {
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       password: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(127),
         allowNull: false,
       },
       role: {

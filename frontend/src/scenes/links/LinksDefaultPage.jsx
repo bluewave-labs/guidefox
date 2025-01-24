@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom"
 import { ACTIVITY_TYPES_INFO } from "../../data/guideMainPageData";
 import { createHelper, getHelperById, deleteHelper, getHelpers } from "../../services/helperLinkService";
 import HelperLinkProvider from "../../services/linksProvider";
@@ -11,6 +12,7 @@ const LinksDefaultPage = () => {
   const [itemsUpdated, setItemsUpdated] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [itemId, setItemId] = useState(null);
+  const { state } = useLocation();
 
   const { isOpen } = useDialog();
 
@@ -24,8 +26,9 @@ const LinksDefaultPage = () => {
   return (
     <HelperLinkProvider>
       <div className={styles.container}>
-        {isOpen && (
+        {(isOpen || state?.autoOpen) && (
           <NewLinksPopup
+            autoOpen={state?.autoOpen}
             isEdit={isEdit}
             itemId={itemId}
             setItemsUpdated={setItemsUpdated}

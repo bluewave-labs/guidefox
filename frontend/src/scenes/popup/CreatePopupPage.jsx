@@ -167,6 +167,7 @@ const CreatePopupPage = ({
       setContent={setContent}
       content={content}
       sx={{
+        position: 'relative',
         minWidth: "400px",
         maxWidth: "700px",
         marginLeft: "2.5rem",

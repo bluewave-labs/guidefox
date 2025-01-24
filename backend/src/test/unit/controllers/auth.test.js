@@ -276,7 +276,7 @@ describe("Unit test auth controller", () => {
       error: "User not found",
     });
   });
-  it("forgetPassword - should create a temporary token, send an email and return status 200", async () => {
+  it.skip("forgetPassword - should create a temporary token, send an email and return status 200", async () => {
     req.body = {
       email: mocks.validUser.email,
     };

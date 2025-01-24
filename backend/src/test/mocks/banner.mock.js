@@ -2,15 +2,15 @@ class BannerBuilder {
   constructor() {
     this.banner = {
       id: 1,
-      closeButtonAction: "no action",
+      closeButtonAction: 'no action',
       repetitionType: 'show only once',
-      position: "top",
-      url: "http://localhost:3000",
-      fontColor: "#FFFFFF",
-      backgroundColor: "#FFFFFF",
-      bannerText: "banner 1",
+      position: 'top',
+      url: 'http://localhost:3000',
+      fontColor: '#FFFFFF',
+      backgroundColor: '#FFFFFF',
+      bannerText: 'banner 1',
       createdBy: 1,
-      actionUrl: "https://www.google.com",
+      actionUrl: '/home',
     };
   }
 
@@ -19,39 +19,39 @@ class BannerBuilder {
   }
 
   missingCloseButtonAction() {
-    this.banner.closeButtonAction = "";
+    this.banner.closeButtonAction = '';
     return this;
   }
   missingPosition() {
-    this.banner.position = "";
+    this.banner.position = '';
     return this;
   }
 
   invalidCloseButtonAction() {
-    this.banner.closeButtonAction = "close";
+    this.banner.closeButtonAction = 'close';
     return this;
   }
   invalidPosition() {
-    this.banner.position = "side";
+    this.banner.position = 'side';
     return this;
   }
 
   invalidFontColor() {
-    this.banner.fontColor = "blue";
+    this.banner.fontColor = 'blue';
     return this;
   }
   invalidBackgroundColor() {
-    this.banner.backgroundColor = "black";
+    this.banner.backgroundColor = 'black';
     return this;
   }
 
   missingRepetitionType() {
-    this.banner.repetitionType = undefined; 
+    this.banner.repetitionType = undefined;
     return this;
   }
 
   invalidRepetitionType() {
-    this.banner.repetitionType = "invalid"; 
+    this.banner.repetitionType = 'invalid';
     return this;
   }
 
@@ -63,112 +63,112 @@ class BannerBuilder {
 const validList = [
   {
     id: 1,
-    closeButtonAction: "no action",
+    closeButtonAction: 'no action',
     repetitionType: 'show only once',
-    position: "top",
-    url: "http://localhost:3000",
-    fontColor: "#FFFFFF",
-    backgroundColor: "#FFFFFF",
-    bannerText: "banner 1",
+    position: 'top',
+    url: 'http://localhost:3000',
+    fontColor: '#FFFFFF',
+    backgroundColor: '#FFFFFF',
+    bannerText: 'banner 1',
     createdBy: 1,
   },
   {
     id: 2,
-    closeButtonAction: "open url",
+    closeButtonAction: 'open url',
     repetitionType: 'show only once',
-    position: "top",
-    url: "http://localhost:3000",
-    fontColor: "#FFFFFF",
-    backgroundColor: "#FFFFFF",
-    bannerText: "banner 2",
+    position: 'top',
+    url: 'http://localhost:3000',
+    fontColor: '#FFFFFF',
+    backgroundColor: '#FFFFFF',
+    bannerText: 'banner 2',
     createdBy: 1,
   },
   {
     id: 3,
-    closeButtonAction: "open url in a new tab",
+    closeButtonAction: 'open url in a new tab',
     repetitionType: 'show only once',
-    position: "top",
-    url: "http://localhost:3000",
-    fontColor: "#FFFFFF",
-    backgroundColor: "#FFFFFF",
-    bannerText: "banner 3",
+    position: 'top',
+    url: 'http://localhost:3000',
+    fontColor: '#FFFFFF',
+    backgroundColor: '#FFFFFF',
+    bannerText: 'banner 3',
     createdBy: 1,
   },
   {
     id: 4,
-    closeButtonAction: "no action",
+    closeButtonAction: 'no action',
     repetitionType: 'show every visit',
-    position: "bottom",
-    url: "http://localhost:3000",
-    fontColor: "#FFFFFF",
-    backgroundColor: "#FFFFFF",
-    bannerText: "banner 4",
+    position: 'bottom',
+    url: 'http://localhost:3000',
+    fontColor: '#FFFFFF',
+    backgroundColor: '#FFFFFF',
+    bannerText: 'banner 4',
     createdBy: 1,
   },
   {
     id: 5,
-    closeButtonAction: "open url",
+    closeButtonAction: 'open url',
     repetitionType: 'show only once',
-    position: "bottom",
-    url: "http://localhost:3000",
-    fontColor: "#FFFFFF",
-    backgroundColor: "#FFFFFF",
-    bannerText: "banner 5",
+    position: 'bottom',
+    url: 'http://localhost:3000',
+    fontColor: '#FFFFFF',
+    backgroundColor: '#FFFFFF',
+    bannerText: 'banner 5',
     createdBy: 1,
   },
   {
     id: 6,
-    closeButtonAction: "open url in a new tab",
+    closeButtonAction: 'open url in a new tab',
     repetitionType: 'show every visit',
-    position: "bottom",
-    url: "http://localhost:3000",
-    fontColor: "#FFFFFF",
-    backgroundColor: "#FFFFFF",
-    bannerText: "banner 6",
+    position: 'bottom',
+    url: 'http://localhost:3000',
+    fontColor: '#FFFFFF',
+    backgroundColor: '#FFFFFF',
+    bannerText: 'banner 6',
     createdBy: 2,
   },
   {
     id: 7,
-    closeButtonAction: "no action",
+    closeButtonAction: 'no action',
     repetitionType: 'show every visit',
-    position: "top",
-    url: "http://localhost:3000",
-    fontColor: "#FFFFFF",
-    backgroundColor: "#FFFFFF",
-    bannerText: "banner 7",
+    position: 'top',
+    url: 'http://localhost:3000',
+    fontColor: '#FFFFFF',
+    backgroundColor: '#FFFFFF',
+    bannerText: 'banner 7',
     createdBy: 2,
   },
   {
     id: 8,
-    closeButtonAction: "no action",
+    closeButtonAction: 'no action',
     repetitionType: 'show only once',
-    position: "top",
-    url: "http://localhost:3000",
-    fontColor: "#FFFFFF",
-    backgroundColor: "#FFFFFF",
-    bannerText: "banner 8",
+    position: 'top',
+    url: 'http://localhost:3000',
+    fontColor: '#FFFFFF',
+    backgroundColor: '#FFFFFF',
+    bannerText: 'banner 8',
     createdBy: 2,
   },
   {
     id: 9,
-    closeButtonAction: "no action",
+    closeButtonAction: 'no action',
     repetitionType: 'show every visit',
-    position: "top",
-    url: "http://localhost:3000",
-    fontColor: "#FFFFFF",
-    backgroundColor: "#FFFFFF",
-    bannerText: "banner 9",
+    position: 'top',
+    url: 'http://localhost:3000',
+    fontColor: '#FFFFFF',
+    backgroundColor: '#FFFFFF',
+    bannerText: 'banner 9',
     createdBy: 2,
   },
   {
     id: 10,
-    closeButtonAction: "no action",
+    closeButtonAction: 'no action',
     repetitionType: 'show only once',
-    position: "top",
-    url: "http://localhost:3000",
-    fontColor: "#FFFFFF",
-    backgroundColor: "#FFFFFF",
-    bannerText: "banner 10",
+    position: 'top',
+    url: 'http://localhost:3000',
+    fontColor: '#FFFFFF',
+    backgroundColor: '#FFFFFF',
+    bannerText: 'banner 10',
     createdBy: 2,
   },
 ];

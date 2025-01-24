@@ -83,8 +83,11 @@ class PopupService {
       return await Popup.findAll({
         where: {
           url,
-          id: { [Op.notIn]: ids }
-        }
+          [Op.or]: [
+            { repetitionType: 'show every visit' },
+            { id: { [Op.notIn]: ids } },
+          ],
+        },
       });
     } catch (error) {
       throw new Error("Error retrieving popup by URL");

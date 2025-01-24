@@ -1,5 +1,7 @@
+const settings = require('../../config/settings');
+
 const validatePopupSize = (value) => {
-  const validSizes = ["small", "medium", "large"];
+  const validSizes = settings.popup.size;
   return validSizes.includes(value);
 };
 
@@ -15,11 +17,11 @@ const validateRelativeUrl = (value, fieldName) => {
     new URL(value);
   } catch (error) {
     if (value.startsWith('/')) {
-      return
+      return;
     }
     throw new Error(`Invalid URL for ${fieldName}: ${error.message}`);
   }
-}
+};
 
 const validateUrl = (value, fieldName) => {
   if (!value) return;
@@ -37,5 +39,5 @@ module.exports = {
   validatePopupSize,
   validatePopupSizeWrapper,
   validateUrl,
-  validateRelativeUrl
+  validateRelativeUrl,
 };

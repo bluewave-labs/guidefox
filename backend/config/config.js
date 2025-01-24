@@ -1,31 +1,55 @@
-require("dotenv").config();
+require('dotenv').config();
+const envSuffix = process.env.NODE_ENV && process.env.NODE_ENV == 'test' ? `.${process.env.NODE_ENV}` : '';
+const env = `.env${envSuffix}`;
+
+const dotenv = require('dotenv');
+const result = dotenv.config({ path: `./${env}` });
+
+if (result.error) {
+  console.error(`Failed to load environment file: ${env}`);
+  process.exit(1);
+}
+
+const {
+  DB_HOST,
+  DB_NAME,
+  DB_PASSWORD,
+  DB_PORT,
+  DB_USERNAME,
+  TEST_DB_HOST,
+  TEST_DB_NAME,
+  TEST_DB_PASSWORD,
+  TEST_DB_PORT,
+  TEST_DB_USERNAME,
+} = process.env;
+
 module.exports = {
-  defaultTeamName: "My Organisation",
+  defaultTeamName: 'My Organisation',
   development: {
-    username: process.env.DEV_DB_USERNAME,
-    password: process.env.DEV_DB_PASSWORD,
-    database: process.env.DEV_DB_NAME,
-    host: process.env.DEV_DB_HOST,
-    dialect: "postgres",
-    port: process.env.DEV_DB_PORT,
+    username: DB_USERNAME,
+    password: DB_PASSWORD,
+    database: DB_NAME,
+    host: DB_HOST,
+    dialect: 'postgres',
+    port: DB_PORT,
     logging: false,
   },
   test: {
-    username: process.env.TEST_DB_USERNAME,
-    password: process.env.TEST_DB_PASSWORD,
-    database: process.env.TEST_DB_NAME,
-    host: process.env.TEST_DB_HOST,
-    dialect: "postgres",
-    port: process.env.TEST_DB_PORT,
+    username: TEST_DB_USERNAME,
+    password: TEST_DB_PASSWORD,
+    database: TEST_DB_NAME,
+    host: TEST_DB_HOST,
+    dialect: 'postgres',
+    port: TEST_DB_PORT,
     logging: false,
   },
   production: {
-    username: process.env.PROD_DB_USERNAME,
-    password: process.env.PROD_DB_PASSWORD,
-    database: process.env.PROD_DB_NAME,
-    host: process.env.PROD_DB_HOST,
-    dialect: "postgres",
-    port: process.env.PROD_DB_PORT,
+    username: DB_USERNAME,
+    password: DB_PASSWORD,
+    database: DB_NAME,
+    host: DB_HOST,
+    dialect: 'postgres',
+    port: DB_PORT,
     logging: false,
   },
 };

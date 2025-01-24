@@ -150,7 +150,7 @@ const CodeTab = () => {
                 />
             </div>
 
-            <pre><code>{codeToCopy}</code></pre>
+            <pre><code style={{ whiteSpace: "break-spaces"}}>{codeToCopy}</code></pre>
         </section>
     )
 }

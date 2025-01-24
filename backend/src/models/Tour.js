@@ -1,12 +1,8 @@
-const {
-  validateTriggeringFrequency,
-  validatePageTargeting,
-  validateTheme,
-} = require("../utils/tour.helper");
+const settings = require('../../config/settings');
 
 module.exports = (sequelize, DataTypes) => {
   const Tour = sequelize.define(
-    "Tour",
+    'Tour',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -26,55 +22,34 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: false,
       },
       pageTargeting: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM(settings.tour.pageTargeting),
         allowNull: false,
-        validate: {
-          customValidator(value) {
-            if (!validatePageTargeting(value)) {
-              throw new Error("Invalid page targeting value");
-            }
-          },
-        },
       },
       theme: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM(settings.tour.themes),
         allowNull: false,
-        validate: {
-          customValidator(value) {
-            if (!validateTheme(value)) {
-              throw new Error("Invalid theme value");
-            }
-          },
-        },
       },
       triggeringFrequency: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM(settings.tour.triggeringFrequency),
         allowNull: false,
-        validate: {
-          customValidator(value) {
-            if (!validateTriggeringFrequency(value)) {
-              throw new Error("Invalid triggering frequency");
-            }
-          },
-        },
       },
       createdBy: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "users",
-          key: "id",
+          model: 'users',
+          key: 'id',
         },
       },
     },
     {
-      tableName: "tours",
+      tableName: 'tours',
       timestamps: false,
     }
   );
 
   Tour.associate = (models) => {
-    Tour.belongsTo(models.User, { foreignKey: "createdBy", as: "creator" });
+    Tour.belongsTo(models.User, { foreignKey: 'createdBy', as: 'creator' });
   };
 
   return Tour;

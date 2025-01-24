@@ -38,7 +38,6 @@ const BannerPage = ({ autoOpen = false, isEdit, itemId, setItemsUpdated, setIsEd
       const fetchBannerData = async () => {
         try {
           const bannerData = await getBannerById(itemId);
-
           // Update the state with the fetched data
           setBackgroundColor(bannerData.backgroundColor || "#F9F5FF");
           setFontColor(bannerData.fontColor || "#344054");

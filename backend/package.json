@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "pretest": "NODE_ENV=test docker rm -f test-postgres || true && docker run --name test-postgres --env-file .env.test -p 5432:5432 -d postgres && npx wait-on tcp:5432 && npx sequelize-cli db:create --env test || true && npx sequelize-cli db:migrate --env test",
-    "posttest": "docker stop test-postgres && docker rm test-postgres",
+    "pretest": "NODE_ENV=test bash pretest-script.sh",
+    "posttest": "bash posttest-script.sh",
     "test": "NODE_ENV=test nyc mocha --extension js,mjs 'src/test/**/*.test.*'",
     "test:e2e": "npm run pretest && NODE_ENV=test mocha 'src/test/e2e/**/*.test.mjs'",
     "test:unit": "NODE_ENV=test mocha 'src/test/unit/**/*.test.js' --watch",
     "dev": "nodemon index.js",
-    "prod": "NODE_ENV=production node index.js",
+    "prod": "node index.js",
     "build": "echo 'No build script defined'"
   },
   "keywords": [],

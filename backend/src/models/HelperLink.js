@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       headerBackgroundColor: {
-        type: DataTypes.STRING(7),
+        type: DataTypes.STRING(15),
         allowNull: false,
         defaultValue: "#F8F9F8",
         validate: {
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       linkFontColor: {
-        type: DataTypes.STRING(7),
+        type: DataTypes.STRING(15),
         allowNull: false,
         defaultValue: "#344054",
         validate: {
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       iconColor: {
-        type: DataTypes.STRING(7),
+        type: DataTypes.STRING(15),
         allowNull: false,
         defaultValue: "#7F56D9",
         validate: {

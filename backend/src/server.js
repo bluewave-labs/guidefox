@@ -39,6 +39,7 @@ if (process.env.ENABLE_IP_CHECK === 'true') {
 }
 // app.use(fileSizeValidator);
 
+
 const { sequelize } = require("./models");
 
 sequelize
@@ -46,10 +47,12 @@ sequelize
   .then(() => console.log("Database connected..."))
   .catch((err) => console.log("Error: " + err));
 
-sequelize
-  .sync({ alter: true })
-  .then(() => console.log("Models synced with the database..."))
-  .catch((err) => console.log("Error syncing models: " + err));
+if (process.env.NODE_ENV == 'development') {
+  sequelize
+    .sync({ alter: true })
+    .then(() => console.log("Models synced with the database..."))
+    .catch((err) => console.log("Error syncing models: " + err));
+}
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);

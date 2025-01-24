@@ -120,7 +120,8 @@ bw.hint = {
             display: flex;
             flex-direction: column;
             color: ${item.textColor};
-            z-index: 9999;
+            z-index:9999;
+            visibility: hidden;
         `;
 
         return tooltip;
@@ -273,8 +274,6 @@ bw.hint = {
                 tooltip.positionTimer = setTimeout(function() {
 
                     const position = e.target.getAttribute('data-tooltip-position') || 'top';
-
-
 
                     const rect = e.target.getBoundingClientRect();
                     switch (position) {

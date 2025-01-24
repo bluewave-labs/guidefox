@@ -55,7 +55,7 @@ class GuideController {
                 popupService.getIncompletePopupsByUrl(url, popupIds),
                 bannerService.getIncompleteBannersByUrl(url, bannerIds),
                 hintService.getIncompleteHintsByUrl(url, hintIds),
-                helperLinkService.getIncompleteHelpers(helperLinkIds),
+                helperLinkService.getAllHelpersWithLinks(),
             ]);
             res.status(200).json({popup, banner, hint, helperLink });
 

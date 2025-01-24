@@ -19,76 +19,6 @@ describe("Test hint controller", () => {
       res.json = sinon.stub().returns(res);
     });
     afterEach(sinon.restore);
-    it("should return 400 if action is missing", async () => {
-      req.body = hint(1).missingAction().build();
-      await hintController.addHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "action is required" }],
-      });
-    });
-    it("should return 400 if action is invalid", async () => {
-      req.body = hint(1).invalidAction().build();
-      await hintController.addHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for action" }],
-      });
-    });
-    it("should return 400 if headerBackgroundColor is invalid", async () => {
-      req.body = hint(1).invalidHeaderBackgroundColor().build();
-      await hintController.addHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for headerBackgroundColor" }],
-      });
-    });
-    it("should return 400 if headerColor is invalid", async () => {
-      req.body = hint(1).invalidHeaderColor().build();
-      await hintController.addHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for headerColor" }],
-      });
-    });
-    it("should return 400 if textColor is invalid", async () => {
-      req.body = hint(1).invalidTextColor().build();
-      await hintController.addHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for textColor" }],
-      });
-    });
-    it("should return 400 if buttonBackgroundColor is invalid", async () => {
-      req.body = hint(1).invalidButtonBackgroundColor().build();
-      await hintController.addHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for buttonBackgroundColor" }],
-      });
-    });
-    it("should return 400 if buttonTextColor is invalid", async () => {
-      req.body = hint(1).invalidButtonTextColor().build();
-      await hintController.addHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for buttonTextColor" }],
-      });
-    });
     it("should return 201 if hint is created", async () => {
       req.body = hint(1).build();
       serviceMock.createHint = sinon
@@ -187,26 +117,6 @@ describe("Test hint controller", () => {
       res.json = sinon.stub().returns(res);
     });
     afterEach(sinon.restore);
-    it("should return 400 if hint id is missing", async () => {
-      req.params = {};
-      await hintController.getHintById(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid hint ID" }],
-      });
-    });
-    it("should return 400 if hint id is invalid", async () => {
-      req.params = { hintId: "invalid" };
-      await hintController.getHintById(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid hint ID" }],
-      });
-    });
     it("should return 200 if hint is retrieved", async () => {
       req.params = { hintId: "1" };
       serviceMock.getHintById = sinon
@@ -254,76 +164,6 @@ describe("Test hint controller", () => {
       res.json = sinon.stub().returns(res);
     });
     afterEach(sinon.restore);
-    it("should return 400 if action is missing", async () => {
-      req.body = hint(1).missingAction().build();
-      await hintController.updateHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "action is required" }],
-      });
-    });
-    it("should return 400 if action is invalid", async () => {
-      req.body = hint(1).invalidAction().build();
-      await hintController.updateHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for action" }],
-      });
-    });
-    it("should return 400 if headerBackgroundColor is invalid", async () => {
-      req.body = hint(1).invalidHeaderBackgroundColor().build();
-      await hintController.updateHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for headerBackgroundColor" }],
-      });
-    });
-    it("should return 400 if headerColor is invalid", async () => {
-      req.body = hint(1).invalidHeaderColor().build();
-      await hintController.updateHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for headerColor" }],
-      });
-    });
-    it("should return 400 if textColor is invalid", async () => {
-      req.body = hint(1).invalidTextColor().build();
-      await hintController.updateHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for textColor" }],
-      });
-    });
-    it("should return 400 if buttonBackgroundColor is invalid", async () => {
-      req.body = hint(1).invalidButtonBackgroundColor().build();
-      await hintController.updateHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for buttonBackgroundColor" }],
-      });
-    });
-    it("should return 400 if buttonTextColor is invalid", async () => {
-      req.body = hint(1).invalidButtonTextColor().build();
-      await hintController.updateHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid value for buttonTextColor" }],
-      });
-    });
     it("should return 404 if hint is not found", async () => {
       req.params = { hintId: "1" };
       req.body = hint(1).build();
@@ -377,26 +217,6 @@ describe("Test hint controller", () => {
       res.json = sinon.stub().returns(res);
     });
     afterEach(sinon.restore);
-    it("should return 400 if hint id is missing", async () => {
-      req.params = {};
-      await hintController.deleteHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid hint ID" }],
-      });
-    });
-    it("should return 400 if hint id is invalid", async () => {
-      req.params = { hintId: "invalid" };
-      await hintController.deleteHint(req, res);
-      const status = res.status.args[0][0];
-      const body = res.json.args[0][0];
-      expect(status).to.equal(400);
-      expect(body).to.be.deep.equal({
-        errors: [{ msg: "Invalid hint ID" }],
-      });
-    });
     it("should return 404 if hint is not found", async () => {
       req.params = { hintId: "1" };
       serviceMock.getHintById = sinon

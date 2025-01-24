@@ -3,7 +3,7 @@ const { GuideType } = require("../utils/guidelog.helper");
 const GuideLog = db.GuideLog;
 
 class StatisticsService {
-  async generateStatistics({ userId }) {
+  async generateStatistics() {
     try {
       const now = new Date();
       const thisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -14,7 +14,6 @@ class StatisticsService {
         const logs = await GuideLog.findAll({
           where: {
             guideType: Number(guideType),
-            userId,
             showingTime: {
               [db.Sequelize.Op.gte]: twoMonthsAgo,
             },

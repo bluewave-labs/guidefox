@@ -10,7 +10,7 @@ const BannerDefaultPage = () => {
   const [itemsUpdated, setItemsUpdated] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [itemId, setItemId] = useState(null);
-  const locationData = useLocation();
+  const { state } = useLocation();
 
   const { isOpen } = useDialog();
 
@@ -33,9 +33,9 @@ const BannerDefaultPage = () => {
         getItemById={getBannerById}
         duplicateItem={addBanner}
       />
-      {isOpen && (
+      {(isOpen || state?.autoOpen) && (
         <BannerPage
-          autoOpen={locationData.state?.autoOpen}
+          autoOpen={state?.autoOpen}
           isEdit={isEdit}
           itemId={itemId}
           setItemsUpdated={setItemsUpdated}
