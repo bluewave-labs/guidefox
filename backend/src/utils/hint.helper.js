@@ -23,11 +23,11 @@ const hintValidator = [
   body('repetitionType')
     .isString()
     .notEmpty()
-    .withMessage('Repetition option is required')
+    .withMessage('RepetitionType is required')
     .custom((value) => {
-      return validRepetitionOptions.includes(value);
+      return settings.hint.repetition.includes(value);
     })
-    .withMessage('Invalid value for repetition'),
+    .withMessage('Invalid value for repetitionType'),
   body('url')
     .optional()
     .isString()

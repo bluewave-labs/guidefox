@@ -40,7 +40,7 @@ class HintBuilder {
     return this;
   }
 
-  invalidMissingRepetitionType() {
+  invalidRepetitionType() {
     this.hint.repetitionType = "invalid repetition type";
     return this;
   }

@@ -44,7 +44,7 @@ const HintPage = ({
   const [content, setContent] = useState('');
   const markdownContent = new Turndown().turndown(content);
 
-  const [buttonRepetition, setButtonRepetition] = useState('Show only once');
+  const [buttonRepetition, setButtonRepetition] = useState('show only once');
 
   const [url, setUrl] = useState('https://');
   const [actionButtonUrl, setActionButtonUrl] = useState('https://');

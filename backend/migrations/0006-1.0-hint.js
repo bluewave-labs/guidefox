@@ -15,6 +15,11 @@ module.exports = {
             primaryKey: true,
             type: Sequelize.INTEGER,
           },
+          repetitionType: {
+            type: Sequelize.STRING(255),
+            allowNull: false,
+            defaultValue: 'show only once',
+          },
           action: {
             type: Sequelize.STRING(255),
             allowNull: false,
@@ -111,11 +116,25 @@ module.exports = {
         { transaction }
       );
 
+      await queryInterface.removeColumn(TABLE_NAME, 'repetitionType', { transaction });
+
+      await queryInterface.addColumn(
+        TABLE_NAME,
+        'repetitionType',
+        {
+          type: Sequelize.ENUM('show only once', 'show every visit'),
+          allowNull: false,
+          defaultValue: 'show only once',
+        },
+        { transaction }
+      );
+
       if (allHints.length > 0) {
         const updates = allHints.map((val) => ({
           id: val.id,
           action: val.action,
           tooltipPlacement: val.tooltipPlacement,
+          repetitionType: val.repetitionType,
         }));
 
         await queryInterface.bulkUpdate(TABLE_NAME, updates, null, { transaction });
