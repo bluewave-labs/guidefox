@@ -1,12 +1,14 @@
+const settings = require('../../config/settings');
+
 const isValidHexColor = (value) => {
-    const hexColorRegex = /^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/;
-    return hexColorRegex.test(value);
+  const hexColorRegex = /^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/;
+  return hexColorRegex.test(value);
 };
 
 const validateHexColor = (value, fieldName) => {
-    if (!isValidHexColor(value)) {
-        throw new Error(`${fieldName} must be a valid hex color code`);
-    }
+  if (!isValidHexColor(value)) {
+    throw new Error(`${fieldName} must be a valid hex color code`);
+  }
 };
 
 const checkColorFieldsFail = (colorFields, res) => {
@@ -21,7 +23,7 @@ const checkColorFieldsFail = (colorFields, res) => {
 };
 
 const validateCloseButtonAction = (value) => {
-  const validActions = ["no action", "open url", "open url in a new tab"];
+  const validActions = settings.popup.action;
   return validActions.includes(value);
 };
 
@@ -31,23 +33,23 @@ const validateActionButton = (value) => {
   }
 };
 
-const validateRepetitionOption  = (value) => {
-  const validActions = ['show only once', 'show every visit'];
+const validateRepetitionOption = (value) => {
+  const validActions = settings.popup.repetition;
   return validActions.includes(value);
 };
 
-const ensureValidRepetitionOption  = (value) => {
-  if (!validateRepetitionOption (value)) {
+const ensureValidRepetitionOption = (value) => {
+  if (!validateRepetitionOption(value)) {
     throw new Error('Invalid repetition option selected');
   }
 };
 
 module.exports = {
-    isValidHexColor,
-    validateHexColor,
-    checkColorFieldsFail,
-    validateCloseButtonAction,
-    validateActionButton,
-    validateRepetitionOption,
-    ensureValidRepetitionOption 
+  isValidHexColor,
+  validateHexColor,
+  checkColorFieldsFail,
+  validateCloseButtonAction,
+  validateActionButton,
+  validateRepetitionOption,
+  ensureValidRepetitionOption,
 };

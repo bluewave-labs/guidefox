@@ -1,5 +1,7 @@
 "use strict";
 
+const settings = require("../../config/settings");
+
 module.exports = (sequelize, DataTypes) => {
   const Token = sequelize.define(
     "Token",
@@ -23,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
       },
       type: {
-        type: DataTypes.STRING(15),
+        type: DataTypes.ENUM(settings.token.type),
         allowNull: false,
       },
       expiresAt: {

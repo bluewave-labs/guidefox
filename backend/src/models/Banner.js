@@ -1,18 +1,20 @@
+const settings = require('../../config/settings');
+
 module.exports = (sequelize, DataTypes) => {
   const Banner = sequelize.define(
     'Banner',
     {
       closeButtonAction: {
-        type: DataTypes.STRING(31),
+        type: DataTypes.ENUM(settings.banner.action),
         allowNull: false,
       },
       repetitionType: {
-        type: DataTypes.STRING(31),
+        type: DataTypes.ENUM(settings.banner.repetition),
         allowNull: false,
-        defaultValue: 'show only once',
+        defaultValue: settings.banner.repetition[0] ?? 'show only once',
       },
       position: {
-        type: DataTypes.STRING(31),
+        type: DataTypes.ENUM(settings.banner.position),
         allowNull: false,
       },
       url: {

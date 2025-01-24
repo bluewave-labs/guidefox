@@ -21,3 +21,10 @@
   margin-top: -4px;
   color: var(--error-color);
 }
+
+.switch-style {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

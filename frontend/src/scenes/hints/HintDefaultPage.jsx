@@ -10,7 +10,7 @@ const HintDefaultPage = () => {
   const [itemsUpdated, setItemsUpdated] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [itemId, setItemId] = useState(null);
-  const locationData = useLocation()
+  const { state } = useLocation();
   const { isOpen } = useDialog();
   
   const getHintDetails = (hint) => ({
@@ -32,9 +32,9 @@ const HintDefaultPage = () => {
         getItemById={getHintById}
         duplicateItem={addHint}
       />
-      {isOpen && (
+      {(isOpen || state?.autoOpen) && (
         <CreateHintPage
-          autoOpen={locationData.state?.autoOpen}
+          autoOpen={state?.autoOpen}
           isEdit={isEdit}
           itemId={itemId}
           setItemsUpdated={setItemsUpdated}

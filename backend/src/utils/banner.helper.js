@@ -1,4 +1,5 @@
 const { body, param } = require('express-validator');
+const settings = require('../../config/settings');
 const hexColorPattern = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
 
 const addOrUpdateBannerValidation = [
@@ -6,21 +7,19 @@ const addOrUpdateBannerValidation = [
     .notEmpty()
     .withMessage('Position is required')
     .bail()
-    .isIn(['top', 'bottom'])
+    .isIn(settings.banner.position)
     .withMessage('Position must be top or bottom'),
   body('closeButtonAction')
     .notEmpty()
     .withMessage('Close Button Action is required')
     .bail()
-    .isIn(['no action', 'open url', 'open url in a new tab'])
+    .isIn(settings.banner.action)
     .withMessage('Invalid close button action'),
   body('url')
     .optional()
     .custom((value, { req }) => {
-      if (!value && ['open url', 'open url in a new tab'].includes(req.body.closeButtonAction)) {
-        return false;
-      }
-      return true;
+      const needsUrl = ['open url', 'open url in a new tab'].includes(req.body.closeButtonAction);
+      return !needsUrl || (needsUrl && value);
     })
     .withMessage('URL is required when close button action is set to open URL')
     .bail()
@@ -45,7 +44,7 @@ const addOrUpdateBannerValidation = [
     if (!value) {
       throw new Error('Repetition type is required');
     }
-    if (!['show only once', 'show every visit'].includes(value)) {
+    if (!settings.banner.repetition.includes(value)) {
       throw new Error('Invalid repetition type');
     }
     return true;
@@ -61,7 +60,7 @@ const deleteOrGetBannerByIdValidation = [param('id').notEmpty().trim().isInt().w
 const getBannerByUrlValidation = [body('url').notEmpty().isString().withMessage('URL is missing or invalid')];
 
 const validatePosition = (value) => {
-  const validPositions = ['top', 'bottom'];
+  const validPositions = settings.banner.position;
   return validPositions.includes(value.toLowerCase());
 };
 

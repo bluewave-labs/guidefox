@@ -54,6 +54,7 @@ const HintPage = ({
   const [action, setAction] = useState('No action');
   const [targetElement, setTargetElement] = useState('.element');
   const [tooltipPlacement, setTooltipPlacement] = useState('Top');
+  const [isHintIconVisible, setHintIconVisible] = useState(true);
 
   useEffect(() => {
     if (autoOpen) openDialog();
@@ -81,6 +82,7 @@ const HintPage = ({
           setAction(hintData.action || 'No action');
           setTargetElement(hintData.targetElement || '.element');
           setTooltipPlacement(hintData.tooltipPlacement || 'Top');
+          setHintIconVisible(hintData.isHintIconVisible ?? true);
         } catch (error) {
           emitToastError(error);
         }
@@ -105,6 +107,7 @@ const HintPage = ({
       textColor,
       buttonBackgroundColor,
       buttonTextColor,
+      isHintIconVisible
     };
 
     try {
@@ -180,6 +183,8 @@ const HintPage = ({
           setTargetElement={setTargetElement}
           tooltipPlacement={tooltipPlacement}
           setTooltipPlacement={setTooltipPlacement}
+          isHintIconVisible={isHintIconVisible}
+          enableHintIcon={setHintIconVisible}
           onSave={onSave}
         />
       )}
