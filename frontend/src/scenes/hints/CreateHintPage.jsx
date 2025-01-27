@@ -44,21 +44,47 @@ const HintPage = ({
   const [content, setContent] = useState('');
   const markdownContent = new Turndown().turndown(content);
 
-  const [buttonRepetition, setButtonRepetition] = useState('show only once');
+  // const [buttonRepetition, setButtonRepetition] = useState('show only once');
 
-  const [url, setUrl] = useState('https://');
-  const [actionButtonUrl, setActionButtonUrl] = useState('https://');
-  const [actionButtonText, setActionButtonText] = useState(
-    'Take me to subscription page'
-  );
-  const [action, setAction] = useState('No action');
-  const [targetElement, setTargetElement] = useState('.element');
-  const [tooltipPlacement, setTooltipPlacement] = useState('Top');
-  const [isHintIconVisible, setHintIconVisible] = useState(true);
+  // const [url, setUrl] = useState('https://');
+  // const [actionButtonUrl, setActionButtonUrl] = useState('https://');
+  // const [actionButtonText, setActionButtonText] = useState(
+  //   'Take me to subscription page'
+  // );
+  // const [action, setAction] = useState('No action');
+  // const [targetElement, setTargetElement] = useState('.element');
+  // const [tooltipPlacement, setTooltipPlacement] = useState('Top');
+  // const [isHintIconVisible, setIsHintIconVisible] = useState(true);
+
+  const [leftContent, setLeftContent] = useState({
+    buttonRepetition: 'show only once',
+    url: 'https://',
+    actionButtonUrl: 'https://',
+    actionButtonText: 'Take me to subscription page',
+    action: 'No action',
+    targetElement: '.element',
+    tooltipPlacement: 'Top',
+    isHintIconVisible: true,
+  });
+
+  const {
+    buttonRepetition,
+    url,
+    actionButtonUrl,
+    actionButtonText,
+    action,
+    targetElement,
+    tooltipPlacement,
+    isHintIconVisible,
+  } = leftContent;
 
   useEffect(() => {
     if (autoOpen) openDialog();
   }, [autoOpen, openDialog]);
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  }
 
   useEffect(() => {
     if (isEdit) {
@@ -73,16 +99,19 @@ const HintPage = ({
             buttonBackgroundColor: hintData.buttonBackgroundColor || '#7F56D9',
             buttonTextColor: hintData.buttonTextColor || '#FFFFFF',
           });
-          setButtonRepetition(hintData.repetitionType || 'Show only once')
+          setLeftContent({
+            buttonRepetition: hintData.repetitionType || 'show only once',
+            url: hintData.url || 'https://',
+            actionButtonUrl: hintData.actionButtonUrl || 'https://',
+            actionButtonText:
+              hintData.actionButtonText || 'Take me to subscription page',
+            action: capitalizeFirstLetter(hintData.action) || 'No action',
+            targetElement: hintData.targetElement || '.element',
+            tooltipPlacement: capitalizeFirstLetter(hintData.tooltipPlacement) || 'Top',
+            isHintIconVisible: hintData.isHintIconVisible ?? true,
+          });
           setHeader(hintData.header || '');
           setContent(hintData.hintContent || '');
-          setActionButtonUrl(hintData.actionButtonUrl || 'https://');
-          setUrl(hintData.url || 'https://');
-          setActionButtonText(hintData.actionButtonText || '');
-          setAction(hintData.action || 'No action');
-          setTargetElement(hintData.targetElement || '.element');
-          setTooltipPlacement(hintData.tooltipPlacement || 'Top');
-          setHintIconVisible(hintData.isHintIconVisible ?? true);
         } catch (error) {
           emitToastError(error);
         }
@@ -107,7 +136,7 @@ const HintPage = ({
       textColor,
       buttonBackgroundColor,
       buttonTextColor,
-      isHintIconVisible
+      isHintIconVisible,
     };
 
     try {
@@ -169,22 +198,8 @@ const HintPage = ({
       )}
       leftContent={() => (
         <HintLeftContent
-          buttonRepetition={buttonRepetition}
-          setButtonRepetition={setButtonRepetition}
-          actionButtonText={actionButtonText}
-          setActionButtonText={setActionButtonText}
-          actionButtonUrl={actionButtonUrl}
-          setActionButtonUrl={setActionButtonUrl}
-          setUrl={setUrl}
-          url={url}
-          action={action}
-          setAction={setAction}
-          targetElement={targetElement}
-          setTargetElement={setTargetElement}
-          tooltipPlacement={tooltipPlacement}
-          setTooltipPlacement={setTooltipPlacement}
-          isHintIconVisible={isHintIconVisible}
-          enableHintIcon={setHintIconVisible}
+          data={leftContent}
+          setState={setLeftContent}
           onSave={onSave}
         />
       )}
