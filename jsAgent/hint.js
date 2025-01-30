@@ -221,7 +221,7 @@ bw.hint = {
             vertical-align: middle !important;
         `;
 
-        button.addEventListener('click',async (e) => {
+        button.addEventListener('click', async (e) => {
             e.preventDefault();
             const itemId = e.target.getAttribute('bw-data-id');
             if(btnEvent == 'no action'){
@@ -229,10 +229,22 @@ bw.hint = {
             }
             else if(btnEvent == 'open url'){
                 await bw.data.sendData(bw.GuideType.HINT, bw.user.getUserID(), true, itemId);
+                bw.onAction && bw.onAction({
+                    type : bw.GuideType.HINT,
+                    uid : bw.user.getUserID(),
+                    completed : true,
+                    id : itemId
+                });
                 location.href = item.actionButtonUrl;
             }
             else if(btnEvent == 'open url in a new tab'){
                 await bw.data.sendData(bw.GuideType.HINT, bw.user.getUserID(), true, itemId);
+                bw.onAction && bw.onAction({
+                    type : bw.GuideType.HINT,
+                    uid : bw.user.getUserID(),
+                    completed : true,
+                    id : itemId
+                });
                 window.open(item.actionButtonUrl, '_blank');
             }
         });

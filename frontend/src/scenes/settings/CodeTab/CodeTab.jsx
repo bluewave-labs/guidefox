@@ -92,6 +92,12 @@ const CodeTab = () => {
                 s.onerror=()=>{console.log("onboard not loaded");};
                 s.src = window.bwAgentBaseUrl + '/main.js';
                 (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(s);
+                s.onload = function (e) {
+                    console.log('script is loaded');
+                    bw.onAction = function(e){
+                        console.log('new action : ', e);
+                    };
+                }
             })();
         </script>
         `;

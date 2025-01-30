@@ -61,6 +61,12 @@ bw.popup = {
             </div>`;
         overlay.insertAdjacentHTML('afterbegin', temp_html);
         await bw.data.sendData(bw.GuideType.POPUP, bw.user.getUserID(), true, option.id);
+        bw.onAction && bw.onAction({
+            type : bw.GuideType.POPUP,
+            uid : bw.user.getUserID(),
+            completed : true,
+            id : itemId
+        });
         bw.popup.bindEvents( option.closeButtonAction, option.url);
     },
     addHeader: function(headerTitle, bgColor, textColor, padding){

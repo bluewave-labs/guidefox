@@ -87,6 +87,9 @@ bw.util = {
     },
 };
 
+bw.onAction = function(e){
+    console.log('data : ', e);
+};
 
 bw.GuideType = Object.freeze({
     POPUP: 0,
@@ -184,7 +187,7 @@ bw.init = (cb) => {
     bw.init(async function () {
         try {
             const onBoardConfig = await bw.data.getData(window.BW_USER);
-            console.log("data loaded:", onBoardConfig);
+            //console.log("data loaded:", onBoardConfig);
             window.bwonboarddata = onBoardConfig;
             if (onBoardConfig.popup.length > 0) {
                 bw.util.loadScriptAsync(BW_POPUP_JS_URL);

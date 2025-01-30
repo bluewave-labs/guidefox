@@ -131,6 +131,12 @@ bw.links={
     action : async function(e){
         const itemId = e.target.getAttribute('bw-data-id');
         await bw.data.sendData(bw.GuideType.LINK, bw.user.getUserID(), true, itemId);
+        bw.onAction && bw.onAction({
+            type : bw.GuideType.LINK,
+            uid : bw.user.getUserID(),
+            completed : true,
+            id : itemId
+        });
         const target_url = e.target.getAttribute('href');
         window.open(target_url, "_blank");
     },

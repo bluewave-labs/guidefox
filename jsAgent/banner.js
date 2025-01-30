@@ -38,10 +38,15 @@ bw.banner = {
                 clickedElement.style.display = 'none';
                 const dataId = clickedElement.getAttribute('data-id');
                 await bw.data.sendData(bw.GuideType.BANNER, bw.user.getUserID(), true, dataId);
+                bw.onAction && bw.onAction({
+                    type : bw.GuideType.BANNER,
+                    uid : bw.user.getUserID(),
+                    completed : true,
+                    id:dataId
+                });
             });
         }
     },
-
 };
 
 (async function () {
