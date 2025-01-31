@@ -44,18 +44,6 @@ const HintPage = ({
   const [content, setContent] = useState('');
   const markdownContent = new Turndown().turndown(content);
 
-  // const [buttonRepetition, setButtonRepetition] = useState('show only once');
-
-  // const [url, setUrl] = useState('https://');
-  // const [actionButtonUrl, setActionButtonUrl] = useState('https://');
-  // const [actionButtonText, setActionButtonText] = useState(
-  //   'Take me to subscription page'
-  // );
-  // const [action, setAction] = useState('No action');
-  // const [targetElement, setTargetElement] = useState('.element');
-  // const [tooltipPlacement, setTooltipPlacement] = useState('Top');
-  // const [isHintIconVisible, setIsHintIconVisible] = useState(true);
-
   const [leftContent, setLeftContent] = useState({
     buttonRepetition: 'show only once',
     url: 'https://',

@@ -9,7 +9,7 @@ import {
   updateHelper,
 } from "../../services/helperLinkService";
 import { deleteLink } from "../../services/linkService";
-import { HelperLinkContext } from "../../services/linksProvider";
+import { DEFAULT_VALUES, HelperLinkContext } from "../../services/linksProvider";
 import GuideTemplate from "../../templates/GuideTemplate/GuideTemplate";
 import { useDialog } from "../../templates/GuideTemplate/GuideTemplateContext";
 import { emitToastError } from "../../utils/guideHelper";
@@ -17,13 +17,6 @@ import toastEmitter, { TOAST_EMITTER_KEY } from "../../utils/toastEmitter";
 import styles from "./LinkPage.module.scss";
 import LinkAppearance from "./LinkPageComponents/LinkAppearance";
 import LinkContent from "./LinkPageComponents/LinkContent";
-
-const DEFAULT_VALUES = {
-  title: "",
-  headerBackgroundColor: "#F8F9F8",
-  linkFontColor: "#344054",
-  iconColor: "#7F56D9",
-};
 
 const NewLinksPopup = ({
   autoOpen = false,
@@ -48,7 +41,7 @@ const NewLinksPopup = ({
 
   const resetHelper = (close = true) => {
     close && closeDialog();
-    setHelper({});
+    setHelper(DEFAULT_VALUES);
     setLinks([]);
     setHelperToEdit(null);
     setDeletedLinks([]);

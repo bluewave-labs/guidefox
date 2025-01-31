@@ -31,6 +31,10 @@ const appearanceSchema = Yup.object().shape({
       /^[A-Za-z'\s-]+$/,
       'Header can only contain letters, hyphens and apostrophes'
     ),
+  url: Yup.string()
+    .required('URL is required')
+    .test('url', 'Invalid value for URL', validateUrl)
+    .max(2000, 'URL must be at most 2000 characters'),
   headerBackgroundColor: Yup.string()
     .optional()
     .matches(/^#[0-9A-Fa-f]{6}$/, 'Invalid value for headerBackgroundColor'),
@@ -40,6 +44,8 @@ const appearanceSchema = Yup.object().shape({
   iconColor: Yup.string()
     .optional()
     .matches(/^#[0-9A-Fa-f]{6}$/, 'Invalid value for iconColor'),
+  active: Yup.boolean('Active option must be a boolean'),
+  absolutePath: Yup.boolean('Absolute path option must be a boolean'),
 });
 
 export { appearanceSchema, newLinkSchema, validateUrl };
