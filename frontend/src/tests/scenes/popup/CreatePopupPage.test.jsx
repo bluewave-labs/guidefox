@@ -34,19 +34,28 @@ describe('CreatePopupPage component', () => {
 
     // Simulate user registration and set token in localStorage
     await act(async () => {
-      await loginServices.signUp({ name: 'test', surname: 'user', email: 'test_user@example.com', password: 'password123' });
+      await loginServices.signUp({
+        name: 'test',
+        surname: 'user',
+        email: 'test_user@example.com',
+        password: 'password123',
+      });
       localStorage.setItem('authToken', 'mockAuthToken');
     });
 
-    const mockAddPopup = vi.spyOn(popupServices, 'addPopup').mockResolvedValueOnce({
-      data: { success: true },
-    });
+    const mockAddPopup = vi
+      .spyOn(popupServices, 'addPopup')
+      .mockResolvedValueOnce({
+        data: { success: true },
+      });
 
     await act(async () => {
       render(<CreatePopupPage autoOpen />, { wrapper: Wrapper });
     });
 
-    const saveButton = await waitFor(() => screen.getByRole('button', { name: /Save/i }));
+    const saveButton = await waitFor(() =>
+      screen.getByRole('button', { name: /Save/i })
+    );
     fireEvent.click(saveButton);
     expect(mockAddPopup).toHaveBeenCalledTimes(1);
   });
@@ -59,13 +68,24 @@ describe('CreatePopupPage component', () => {
 
     // Simulate user registration and set token in localStorage
     await act(async () => {
-      await loginServices.signUp({ name: 'test', surname: 'user', email: 'test_user@example.com', password: 'password123' });
+      await loginServices.signUp({
+        name: 'test',
+        surname: 'user',
+        email: 'test_user@example.com',
+        password: 'password123',
+      });
       localStorage.setItem('authToken', 'mockAuthToken');
     });
 
-    const mockAddPopup = vi.spyOn(popupServices, 'addPopup').mockRejectedValueOnce({
-      response: { data: { errors: [{ msg: "headerColor must be a valid hex color code" }] } },
-    });
+    const mockAddPopup = vi
+      .spyOn(popupServices, 'addPopup')
+      .mockRejectedValueOnce({
+        response: {
+          data: {
+            errors: [{ msg: 'headerColor must be a valid hex color code' }],
+          },
+        },
+      });
 
     const emitSpy = vi.spyOn(toastEmitter, 'emit');
 
@@ -74,7 +94,9 @@ describe('CreatePopupPage component', () => {
     });
 
     // Wait for the "Save" button to appear in the DOM
-    const saveButton = await waitFor(() => screen.getByRole('button', { name: /Save/i }));
+    const saveButton = await waitFor(() =>
+      screen.getByRole('button', { name: /Save/i })
+    );
 
     // Trigger the Save button click
     fireEvent.click(saveButton);
@@ -91,10 +113,6 @@ describe('CreatePopupPage component', () => {
     expect(mockAddPopup).toHaveBeenCalledTimes(1);
   });
 
-
-
-
-
   it('initializes form fields correctly', async () => {
     render(<CreatePopupPage autoOpen />, { wrapper: Wrapper });
 
@@ -107,9 +125,7 @@ describe('CreatePopupPage component', () => {
     // Add more checks for other form fields
   });
 
-
-
-// TODO: Write a edit test
+  // TODO: Write a edit test
   // it('initializes with existing popup data in edit mode', async () => {
   //   // Mock the sign-up process
   //   vi.spyOn(loginServices, 'signUp').mockResolvedValueOnce({
@@ -152,5 +168,4 @@ describe('CreatePopupPage component', () => {
   //   }, { timeout: 1000 });
 
   // });
-
 });

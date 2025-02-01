@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import "./EditorToolbar.css";
-import { Button } from "@mui/material";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import './EditorToolbar.css';
+import { Button } from '@mui/material';
 import {
   FormatBold,
   FormatItalic,
@@ -8,12 +9,12 @@ import {
   FormatListBulleted,
   FormatListNumbered,
   Title,
-} from "@mui/icons-material";
-import LinkDialog from "../EditorLinkDialog/LinkDialog";
+} from '@mui/icons-material';
+import LinkDialog from '../EditorLinkDialog/LinkDialog';
 
 const Toolbar = ({ editor }) => {
   const [open, setOpen] = useState(false);
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState('');
   const [isLinkActive, setIsLinkActive] = useState(false);
 
   if (!editor) {
@@ -21,15 +22,15 @@ const Toolbar = ({ editor }) => {
   }
 
   const handleClickOpen = () => {
-    const currentLink = editor.getAttributes("link").href;
-    setUrl(currentLink || "");
+    const currentLink = editor.getAttributes('link').href;
+    setUrl(currentLink || '');
     setOpen(true);
     setIsLinkActive(!!currentLink);
   };
 
   const handleClose = () => {
     setOpen(false);
-    setUrl("");
+    setUrl('');
   };
 
   const handleInsertLink = () => {
@@ -37,7 +38,7 @@ const Toolbar = ({ editor }) => {
       editor
         .chain()
         .focus()
-        .extendMarkRange("link")
+        .extendMarkRange('link')
         .setLink({ href: url })
         .run();
     } else {
@@ -47,7 +48,7 @@ const Toolbar = ({ editor }) => {
   };
 
   const handleOpenLink = () => {
-    window.open(url, "_blank");
+    window.open(url, '_blank');
     handleClose();
   };
 
@@ -56,8 +57,8 @@ const Toolbar = ({ editor }) => {
       <Button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
-        style = {{
-          backgroundColor : editor.isActive("bold") ? "#e0e0e0": "transparent",
+        style={{
+          backgroundColor: editor.isActive('bold') ? '#e0e0e0' : 'transparent',
         }}
       >
         <FormatBold />
@@ -65,8 +66,10 @@ const Toolbar = ({ editor }) => {
       <Button
         onClick={() => editor.chain().focus().toggleItalic().run()}
         disabled={!editor.can().chain().focus().toggleItalic().run()}
-        style = {{
-          backgroundColor : editor.isActive("italic")? "#e0e0e0" : "transparent",
+        style={{
+          backgroundColor: editor.isActive('italic')
+            ? '#e0e0e0'
+            : 'transparent',
         }}
       >
         <FormatItalic />
@@ -76,9 +79,10 @@ const Toolbar = ({ editor }) => {
         disabled={
           !editor.can().chain().focus().toggleHeading({ level: 2 }).run()
         }
-        style = {{
-          backgroundColor: editor.isActive("heading", {level:3})
-          ? "#e0e0e0" : "transparent",
+        style={{
+          backgroundColor: editor.isActive('heading', { level: 3 })
+            ? '#e0e0e0'
+            : 'transparent',
         }}
       >
         <Title />
@@ -89,9 +93,10 @@ const Toolbar = ({ editor }) => {
       <Button
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         disabled={!editor.can().chain().focus().toggleBulletList().run()}
-        style = {{
-          backgroundColor : editor.isActive("bulletList") ? "#e0e0e0" : "transparent",
-
+        style={{
+          backgroundColor: editor.isActive('bulletList')
+            ? '#e0e0e0'
+            : 'transparent',
         }}
       >
         <FormatListBulleted />
@@ -99,9 +104,10 @@ const Toolbar = ({ editor }) => {
       <Button
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         disabled={!editor.can().chain().focus().toggleOrderedList().run()}
-
-        style = {{
-          backgroundColor : editor.isActive("orderedList") ? "#e0e0e0" : "transparent",
+        style={{
+          backgroundColor: editor.isActive('orderedList')
+            ? '#e0e0e0'
+            : 'transparent',
         }}
       >
         <FormatListNumbered />
@@ -118,6 +124,10 @@ const Toolbar = ({ editor }) => {
       />
     </div>
   );
+};
+
+Toolbar.propTypes = {
+  editor: PropTypes.object,
 };
 
 export default Toolbar;

@@ -2,23 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './CustomLabelTagStyles.css';
 
-const VALID_BACKGROUND_COLORS = ['orange', 'gray', 'purple', 'green', 'seen', 'waiting', 'new'];
+const VALID_BACKGROUND_COLORS = [
+  'orange',
+  'gray',
+  'purple',
+  'green',
+  'seen',
+  'waiting',
+  'new',
+];
 
-const CustomLabelTag = ({ 
-  text, 
-  backgroundColor = 'white', 
-  textColor = '', 
-  className = '' 
+const CustomLabelTag = ({
+  text,
+  backgroundColor = 'white',
+  textColor = '',
+  className = '',
 }) => {
   const labelClass = `label label-${backgroundColor} ${className}`;
-  
+
   const style = {
     color: textColor,
   };
 
   return (
     <span className={labelClass} style={style}>
-      {['seen', 'waiting', 'new'].includes(backgroundColor) && <span className="dot"></span>}
+      {['seen', 'waiting', 'new'].includes(backgroundColor) && (
+        <span className="dot"></span>
+      )}
       {text}
     </span>
   );

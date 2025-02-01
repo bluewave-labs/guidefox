@@ -1,28 +1,31 @@
-import React, { useState } from "react";
-import Avatar from "@components/Avatar/Avatar";
-import styles from "./ProfileTab.module.css";
-import CustomTextField from "@components/TextFieldComponents/CustomTextField/CustomTextField";
-import Button from "@components/Button/Button";
-import { useAuth } from "../../../services/authProvider";
-import DeleteConfirmationModal from "../Modals/DeleteConfirmationModal/DeleteConfirmationModal";
-import { deleteAccount, updateUser } from "../../../services/settingServices";
-import { handleProfileUpdateSuccess, handleNothingToUpdateProfile, handleGenericError } from "../../../utils/settingsHelper";
+import React, { useState } from 'react';
+import Avatar from '@components/Avatar/Avatar';
+import styles from './ProfileTab.module.css';
+import CustomTextField from '@components/TextFieldComponents/CustomTextField/CustomTextField';
+import Button from '@components/Button/Button';
+import { useAuth } from '../../../services/authProvider';
+import DeleteConfirmationModal from '../Modals/DeleteConfirmationModal/DeleteConfirmationModal';
+import { deleteAccount, updateUser } from '../../../services/settingServices';
+import {
+  handleProfileUpdateSuccess,
+  handleNothingToUpdateProfile,
+  handleGenericError,
+} from '../../../utils/settingsHelper';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-import UploadModal from "../Modals/UploadImageModal/UploadModal";
-
+import UploadModal from '../Modals/UploadImageModal/UploadModal';
 
 const ProfileTab = () => {
   const navigate = useNavigate();
   const { userInfo, updateProfile } = useAuth();
- 
+
   const [formData, setFormData] = useState({
-    name: userInfo.name || "",
-    surname: userInfo.surname || "",
-    picture: userInfo.picture || ""
+    name: userInfo.name || '',
+    surname: userInfo.surname || '',
+    picture: userInfo.picture || '',
   });
- 
+
   const [loading, setLoading] = useState(false);
 
   const [openDeleteAccountModal, setOpenDeleteAccountModal] = useState(false);
@@ -33,23 +36,23 @@ const ProfileTab = () => {
   const handleUploadImageModalOpen = (e) => {
     e.preventDefault();
     setOpenUploadImageModal(true);
-  }
+  };
 
   const handleUploadImageModalClose = () => {
     setOpenUploadImageModal(false);
-  }
+  };
 
   const handleDeleteAccountModalClose = () => {
     setOpenDeleteAccountModal(false);
-  }
+  };
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
-    }))
-  }
+      [name]: value,
+    }));
+  };
 
   const handleImageDelete = async (e) => {
     e.preventDefault();
@@ -66,7 +69,7 @@ const ProfileTab = () => {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   const handleImageUpload = async () => {
     if (uploadedFile) {
@@ -75,22 +78,24 @@ const ProfileTab = () => {
         const base64Data = reader.result;
         try {
           const response = await updateUser({ picture: base64Data });
-          
+
           handleProfileUpdateSuccess(response, updateProfile);
           handleUploadImageModalClose();
         } catch (e) {
           console.error('Error Updating image:', e);
         }
-      }
+      };
       reader.readAsDataURL(uploadedFile);
     }
-  }
-
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
     // remove empty or unchanged data
-    let filteredFormData = Array.from(Object.entries(formData)).filter(([key, value]) => userInfo[key] !== value && value !== null && value !== '');
+    let filteredFormData = Array.from(Object.entries(formData)).filter(
+      ([key, value]) =>
+        userInfo[key] !== value && value !== null && value !== ''
+    );
     if (filteredFormData.length === 0) {
       handleNothingToUpdateProfile('Nothing to update...');
       return;
@@ -112,12 +117,11 @@ const ProfileTab = () => {
     try {
       await deleteAccount();
       localStorage.removeItem('authToken');
-      navigate("/login")
+      navigate('/login');
+    } catch (error) {
+      handleGenericError('Error Deleting Account');
     }
-    catch (error) {
-      handleGenericError("Error Deleting Account")
-    }
-  }
+  };
 
   return (
     <>
@@ -173,28 +177,41 @@ const ProfileTab = () => {
           />
         </div>
         <div className={styles.photoElements}>
-            <label htmlFor="photo" className={styles.label}>
-              Your Photo
-            </label>
-            <div className={styles.photoAlign}>
-              <p className={styles.supportText}>
-                This photo will be displayed on your profile page.
-              </p>
-              <div className={styles.photoOptions}>
-
-                <Avatar src={userInfo?.picture || "/vendetta.png"} alt="User" size="large" />
-                <div>
-                  {loading ?
-                    <CircularProgress size={12} color="inherit" />
-                    :
-                    <>
-                      <button onClick={handleImageDelete} className={styles.delete}>Delete</button>
-                      <button onClick={handleUploadImageModalOpen} className={styles.update}>Update</button>
-                    </>
-                  }
-                </div>
+          <label htmlFor="photo" className={styles.label}>
+            Your Photo
+          </label>
+          <div className={styles.photoAlign}>
+            <p className={styles.supportText}>
+              This photo will be displayed on your profile page.
+            </p>
+            <div className={styles.photoOptions}>
+              <Avatar
+                src={userInfo?.picture || '/vendetta.png'}
+                alt="User"
+                size="large"
+              />
+              <div>
+                {loading ? (
+                  <CircularProgress size={12} color="inherit" />
+                ) : (
+                  <>
+                    <button
+                      onClick={handleImageDelete}
+                      className={styles.delete}
+                    >
+                      Delete
+                    </button>
+                    <button
+                      onClick={handleUploadImageModalOpen}
+                      className={styles.update}
+                    >
+                      Update
+                    </button>
+                  </>
+                )}
               </div>
             </div>
+          </div>
         </div>
         <div className={styles.saveButton}>
           <Button
@@ -208,11 +225,21 @@ const ProfileTab = () => {
       <div>
         <h4 className={styles.label}>Delete Account</h4>
         <p className={styles.supportText}>
-          Note that deleting your account will remove all data from our system. This is permanent and non-recoverable.
+          Note that deleting your account will remove all data from our system.
+          This is permanent and non-recoverable.
         </p>
-        <Button onClick={() => setOpenDeleteAccountModal(!openDeleteAccountModal)} text="Delete Account" buttonType="error" style={{ padding: '6px  20px', marginTop: '35px' }} />
+        <Button
+          onClick={() => setOpenDeleteAccountModal(!openDeleteAccountModal)}
+          text="Delete Account"
+          buttonType="error"
+          style={{ padding: '6px  20px', marginTop: '35px' }}
+        />
       </div>
-      <DeleteConfirmationModal open={openDeleteAccountModal} handleClose={handleDeleteAccountModalClose} handleDelete={handleDelete} />
+      <DeleteConfirmationModal
+        open={openDeleteAccountModal}
+        handleClose={handleDeleteAccountModalClose}
+        handleDelete={handleDelete}
+      />
       <UploadModal
         handleUpload={handleImageUpload}
         uploadedFile={uploadedFile}
@@ -225,4 +252,3 @@ const ProfileTab = () => {
 };
 
 export default ProfileTab;
-

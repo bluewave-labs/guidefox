@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
+import React from 'react';
+import PropTypes from 'prop-types';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 
 const CheckIcon = ({ size = 'medium', outline = true, color = 'purple' }) => {
   const getColorVariable = (color) => {
@@ -28,12 +28,12 @@ const CheckIcon = ({ size = 'medium', outline = true, color = 'purple' }) => {
       )}
     </div>
   );
-}
+};
 
 CheckIcon.propTypes = {
-  size: PropTypes.oneOf(["small", "medium", "large"]),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
   outline: PropTypes.bool,
-  color: PropTypes.oneOf(['purple', 'green', 'black'])
+  color: PropTypes.oneOf(['purple', 'green', 'black']),
 };
 
 export default CheckIcon;

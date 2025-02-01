@@ -18,9 +18,11 @@
 }
 
 /* Dates between start and end */
-.MuiPickersDay-rangeIntervalDay:not(.Mui-selected):not(:first-child):not(:last-child) {
+.MuiPickersDay-rangeIntervalDay:not(.Mui-selected):not(:first-child):not(
+    :last-child
+  ) {
   background-color: #f9fafb !important;
-  color: #000 !important; 
+  color: #000 !important;
 }
 /* Individual button */
 .button-container button {
@@ -54,7 +56,7 @@
   align-items: flex-start;
   gap: var(--spacing-xs, 4px);
   padding: var(--spacing-lg, 12px) var(--spacing-xl, 16px);
-  order: 0; 
+  order: 0;
 }
 
 .date-button {
@@ -67,7 +69,11 @@
   align-self: stretch !important;
   padding: 10px 14px !important;
   border-radius: var(--radius-xs, 4px) !important;
-  border: 1px solid var(--Component-colors-Components-Buttons-Primary-button-primary-border, var(--light-border-color)) !important;
+  border: 1px solid
+    var(
+      --Component-colors-Components-Buttons-Primary-button-primary-border,
+      var(--light-border-color)
+    ) !important;
 }
 
 /* Apply button */
@@ -78,8 +84,15 @@
   height: 34px;
   gap: var(--spacing-xs, 4px);
   flex: 1 0 0;
-  border: 1px solid var(--Component-colors-Components-Buttons-Primary-button-primary-border, #7F56D9) !important;
-  background: var(--Component-colors-Components-Buttons-Primary-button-primary-bg, #7F56D9);
+  border: 1px solid
+    var(
+      --Component-colors-Components-Buttons-Primary-button-primary-border,
+      #7f56d9
+    ) !important;
+  background: var(
+    --Component-colors-Components-Buttons-Primary-button-primary-bg,
+    #7f56d9
+  );
 
   /* Shadows/shadow-xs */
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
@@ -93,13 +106,20 @@
   height: 34px;
   gap: var(--spacing-xs, 4px);
   flex: 1 0 0;
-  border: 1px solid var(--Component-colors-Components-Buttons-Secondary-button-secondary-border, var(--light-border-color)) !important;
-  background: var(--Component-colors-Components-Buttons-Secondary-button-secondary-bg, #FFF);
+  border: 1px solid
+    var(
+      --Component-colors-Components-Buttons-Secondary-button-secondary-border,
+      var(--light-border-color)
+    ) !important;
+  background: var(
+    --Component-colors-Components-Buttons-Secondary-button-secondary-bg,
+    #fff
+  );
 
   /* Shadows/shadow-xs */
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 }
 
-.datepicker-btn{
+.datepicker-btn {
   display: flex;
 }

@@ -8,7 +8,7 @@
 }
 
 .toolbar-container button {
-  color:  var(--second-text-color);
+  color: var(--second-text-color);
 }
 
 .toolbar-container button[disabled] {
@@ -16,5 +16,5 @@
 }
 
 .toolbar-container .MuiButtonBase-root {
-  min-width: 0!important;
+  min-width: 0 !important;
 }

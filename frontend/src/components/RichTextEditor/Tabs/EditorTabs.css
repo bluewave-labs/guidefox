@@ -2,27 +2,27 @@
   border: 1px solid var(--light-border-color);
   border-radius: 5px;
   width: fit-content;
-  min-height: 34px!important;
+  min-height: 34px !important;
   margin-top: 15px;
 }
 
 .editor-tabs button {
-  min-height: 34px!important;
+  min-height: 34px !important;
 }
 
 .editor-tabs.css-11keaam-MuiTabs-root {
-  position: static!important;
+  position: static !important;
 }
 
-.tab[aria-selected="true"] {
+.tab[aria-selected='true'] {
   background-color: var(--main-purple);
   color: white !important;
 }
 
-.tab{
+.tab {
   text-transform: none !important;
-  font-size: var(--font-regular)!important;
-  font-weight: 400!important;
-  line-height: 20px!important;
+  font-size: var(--font-regular) !important;
+  font-weight: 400 !important;
+  line-height: 20px !important;
   padding: 0 !important;
 }

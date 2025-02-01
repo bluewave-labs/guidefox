@@ -1,29 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import styles from "./Login.module.css";
-import CustomTextField from "../../components/TextFieldComponents/CustomTextField/CustomTextField";
-import CircularProgress from "@mui/material/CircularProgress";
-import { login } from "../../services/loginServices";
-import CustomLink from "../../components/CustomLink/CustomLink";
-import { handleAuthSuccess } from "../../utils/loginHelper";
-import { useAuth } from "../../services/authProvider";
-import { useNavigate } from "react-router-dom";
-import Logo from "../../components/Logo/Logo";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import styles from './Login.module.css';
+import CustomTextField from '../../components/TextFieldComponents/CustomTextField/CustomTextField';
+import CircularProgress from '@mui/material/CircularProgress';
+import { login } from '../../services/loginServices';
+import CustomLink from '../../components/CustomLink/CustomLink';
+import { handleAuthSuccess } from '../../utils/loginHelper';
+import { useAuth } from '../../services/authProvider';
+import { useNavigate } from 'react-router-dom';
+import Logo from '../../components/Logo/Logo';
 
 const validationSchema = Yup.object({
   email: Yup.string()
-    .required("Email is required")
+    .required('Email is required')
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      "Invalid email address"
+      'Invalid email address'
     )
     .trim(),
-  password: Yup.string().required("Password is required").trim(),
+  password: Yup.string().required('Password is required').trim(),
 });
 
 function LoginPage({ isAdmin = false }) {
-  const [rememberMe, setRememberMe] = useState(false)
+  const [rememberMe, setRememberMe] = useState(false);
   const [serverErrors, setServerErrors] = useState([]);
   const { loginAuth } = useAuth();
 
@@ -34,11 +35,10 @@ function LoginPage({ isAdmin = false }) {
     }
   }, [isAdmin]);
   return (
-
     <Formik
       initialValues={{
-        email: "",
-        password: "",
+        email: '',
+        password: '',
       }}
       validationSchema={validationSchema}
       validateOnChange={false}
@@ -55,7 +55,7 @@ function LoginPage({ isAdmin = false }) {
             setServerErrors([error.response.data.error]);
           } else {
             setServerErrors([
-              "An error occurred. Please check your network connection and try again.",
+              'An error occurred. Please check your network connection and try again.',
             ]);
           }
         } finally {
@@ -71,11 +71,11 @@ function LoginPage({ isAdmin = false }) {
         handleBlur,
         values,
       }) => (
-        <Form className={styles["login-container"]}>
+        <Form className={styles['login-container']}>
           <Logo />
           <h2>Log in to your account</h2>
 
-          <div className={styles["form-group"]}>
+          <div className={styles['form-group']}>
             <CustomTextField
               id="email"
               name="email"
@@ -93,7 +93,7 @@ function LoginPage({ isAdmin = false }) {
             />
           </div>
 
-          <div className={styles["form-group"]}>
+          <div className={styles['form-group']}>
             <CustomTextField
               id="password"
               name="password"
@@ -111,7 +111,7 @@ function LoginPage({ isAdmin = false }) {
             />
 
             {serverErrors.length > 0 && (
-              <div className={styles["error-message"]}>
+              <div className={styles['error-message']}>
                 {serverErrors.map((error, index) => (
                   <div key={index}>{error}</div>
                 ))}
@@ -119,8 +119,8 @@ function LoginPage({ isAdmin = false }) {
             )}
           </div>
 
-          <div className={styles["form-group"]}>
-            <div className={styles["form-group-2"]}>
+          <div className={styles['form-group']}>
+            <div className={styles['form-group-2']}>
               <label>
                 <input
                   type="checkbox"
@@ -134,14 +134,14 @@ function LoginPage({ isAdmin = false }) {
           </div>
 
           <button
-            className={styles["sign-in-button"]}
+            className={styles['sign-in-button']}
             type="submit"
             disabled={isSubmitting}
           >
             {isSubmitting ? (
               <CircularProgress size={12} color="inherit" />
             ) : (
-              "Sign In"
+              'Sign In'
             )}
           </button>
         </Form>
@@ -149,5 +149,9 @@ function LoginPage({ isAdmin = false }) {
     </Formik>
   );
 }
+
+LoginPage.propTypes = {
+  isAdmin: PropTypes.bool,
+};
 
 export default LoginPage;

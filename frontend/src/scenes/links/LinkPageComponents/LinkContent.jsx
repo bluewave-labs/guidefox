@@ -1,10 +1,10 @@
-import { Link } from "@mui/material";
-import { useContext, useState } from "react";
-import CardContainer from "@components/Links/Card";
-import Card from "@components/Links/Card/Card";
-import Popup from "@components/Links/Popup/Popup";
-import { HelperLinkContext } from "../../../services/linksProvider";
-import styles from "../LinkPage.module.scss";
+import { Link } from '@mui/material';
+import { useContext, useState } from 'react';
+import CardContainer from '@components/Links/Card';
+import Card from '@components/Links/Card/Card';
+import Popup from '@components/Links/Popup/Popup';
+import { HelperLinkContext } from '../../../services/linksProvider';
+import styles from '../LinkPage.module.scss';
 
 const LinkContent = () => {
   const [draggingItem, setDraggingItem] = useState(null);
@@ -54,12 +54,12 @@ const LinkContent = () => {
           ))}
           <Link
             onClick={toggleSettings}
-            underline='hover'
-            component='button'
-            fontSize='0.785rem'
+            underline="hover"
+            component="button"
+            fontSize="0.785rem"
             lineHeight={1.43}
-            display='inline-block'
-            style={{ margin: "0 0 0 1.4rem" }}
+            display="inline-block"
+            style={{ margin: '0 0 0 1.4rem' }}
           >
             + Add new link
           </Link>

@@ -1,13 +1,11 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { render, screen, act } from '@testing-library/react';
 import Toast from '@components/Toast/Toast';
 import toastEmitter, { TOAST_EMITTER_KEY } from '../../../utils/toastEmitter';
 
 describe('Toast', () => {
-  const mockRemoveToast = vi.fn();
-
   it('renders toasts correctly when event is emitted', () => {
-    render(<Toast />); 
+    render(<Toast />);
 
     act(() => {
       toastEmitter.emit(TOAST_EMITTER_KEY, 'Test Toast');
@@ -25,7 +23,7 @@ describe('Toast', () => {
       }
     });
 
-    expect(screen.getAllByText(/Toast/).length).toBe(8); 
+    expect(screen.getAllByText(/Toast/).length).toBe(8);
   });
 
   it('cleans up event listener on unmount', () => {

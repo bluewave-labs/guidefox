@@ -1,5 +1,4 @@
 :root {
-
   /* fonts */
   --font-header: 16px;
   --font-regular: 13px;
@@ -10,17 +9,17 @@
   --preview-header-color: #484848;
   --main-purple: #7f56d9;
   --light-purple: #f3e5f5;
-  --light-gray: #EAECF0;
-  --light-border-color: #D0D5DD;
-  --border-error-solid: #D92D20;
+  --light-gray: #eaecf0;
+  --light-border-color: #d0d5dd;
+  --border-error-solid: #d92d20;
   --checkIcon-green: #079455;
   --background-color: #fcfcfd;
-  --dark-purple: #6941C6;
-  --light-purple-background: #F9F5FF;
-  --grey-border: #EBEBEB;
+  --dark-purple: #6941c6;
+  --light-purple-background: #f9f5ff;
+  --grey-border: #ebebeb;
   --shadow-one: #10182808;
   --shadow-two: #10182814;
-  --header-background: #F8F9F8;
+  --header-background: #f8f9f8;
   --menu-icon-color: #9486cb;
 
   /* Additional colors */
@@ -56,18 +55,18 @@
   --label-new-dot: #ff9800;
 
   /* Radii */
-  --radius-button: 8.9px; 
-  --radius-card: 6.95px;  
-  --radius-skeleton: 2.48px; 
+  --radius-button: 8.9px;
+  --radius-card: 6.95px;
+  --radius-skeleton: 2.48px;
 }
 
 /* Dark mode overrides */
 body[data-theme='dark'] {
-  --main-text-color: #FFFFFF;
-  --second-text-color: #B0B0B0;
-  --third-text-color: #A0A0A0;
+  --main-text-color: #ffffff;
+  --second-text-color: #b0b0b0;
+  --third-text-color: #a0a0a0;
   --background-color: #121212;
-  --header-background: #1F1F1F;
+  --header-background: #1f1f1f;
   --main-purple: #bb86fc;
   --light-purple: #3a3a3a;
   --light-gray: #2c2c2c;

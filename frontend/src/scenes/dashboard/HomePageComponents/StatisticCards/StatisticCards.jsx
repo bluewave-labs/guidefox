@@ -1,18 +1,18 @@
 import ArrowDownwardRoundedIcon from '@mui/icons-material/ArrowDownwardRounded';
 import ArrowUpwardRoundedIcon from '@mui/icons-material/ArrowUpwardRounded';
-import PropTypes from "prop-types";
-import React from "react";
-import styles from "./StatisticCards.module.scss";
+import PropTypes from 'prop-types';
+import React from 'react';
+import styles from './StatisticCards.module.scss';
 
 const StatisticCard = ({ metricName, metricValue = 0, changeRate = 0 }) => {
   const getChangeRate = () => {
-    if (changeRate === 0) return "N/A";
-    return Math.abs(changeRate) + "%";
+    if (changeRate === 0) return 'N/A';
+    return Math.abs(changeRate) + '%';
   };
 
   const getRateColor = () => {
-    if (changeRate === 0) return "inherit";
-    return changeRate >= 0 ? "var(--green-400)" : "var(--red-500)";
+    if (changeRate === 0) return 'inherit';
+    return changeRate >= 0 ? 'var(--green-400)' : 'var(--red-500)';
   };
 
   return (
@@ -22,7 +22,11 @@ const StatisticCard = ({ metricName, metricValue = 0, changeRate = 0 }) => {
       <div className={styles.changeRate}>
         <span style={{ color: getRateColor() }} className={styles.change}>
           {changeRate !== 0 &&
-            (changeRate >= 0 ? <ArrowUpwardRoundedIcon  /> : <ArrowDownwardRoundedIcon />)}
+            (changeRate >= 0 ? (
+              <ArrowUpwardRoundedIcon />
+            ) : (
+              <ArrowDownwardRoundedIcon />
+            ))}
           {getChangeRate()}
         </span>
         &nbsp;vs last month

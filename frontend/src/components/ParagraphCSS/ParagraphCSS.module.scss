@@ -1,35 +1,35 @@
 .bannerOne,
-    .bannerTwo,
-    .bannerThree {
-        background-color: #F3F3F3;
-        border-radius: 5px;
-        margin-bottom: 1rem;
-    }
+.bannerTwo,
+.bannerThree {
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
 
-    .bannerOne {
-        background-color: #D9D9D9;
-        width: 85px;
-        height: 13px;
-        margin-top: 1rem;
-    }
+.bannerOne {
+  background-color: #d9d9d9;
+  width: 85px;
+  height: 13px;
+  margin-top: 1rem;
+}
 
-    .bannerTwo {
-        width: 220px;
-        height: 44px;
-    }
+.bannerTwo {
+  width: 220px;
+  height: 44px;
+}
 
-    .bannerThree {
-        width: 220px;
-        height: 32px;
-    }
-    .preview {
-        background-color: white;
-        border-radius: 10px;
-        border: 1.23px solid var(--grey-border);
-        padding: 0.5rem 0.7rem;
-        display: flex;
-        justify-self: center;
-        flex-direction: column;
-        width: auto;
-        margin-bottom: 24px;
-    }
+.bannerThree {
+  width: 220px;
+  height: 32px;
+}
+.preview {
+  background-color: white;
+  border-radius: 10px;
+  border: 1.23px solid var(--grey-border);
+  padding: 0.5rem 0.7rem;
+  display: flex;
+  justify-self: center;
+  flex-direction: column;
+  width: auto;
+  margin-bottom: 24px;
+}

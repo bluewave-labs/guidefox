@@ -1,10 +1,15 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom"
-import DefaultPageTemplate from "../../templates/DefaultPageTemplate/DefaultPageTemplate";
-import CreateHintPage from "./CreateHintPage";
-import { ACTIVITY_TYPES_INFO } from "../../data/guideMainPageData";
-import { addHint, getHintById, getHints, deleteHint } from '../../services/hintServices';
-import { useDialog } from "../../templates/GuideTemplate/GuideTemplateContext";
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import DefaultPageTemplate from '../../templates/DefaultPageTemplate/DefaultPageTemplate';
+import CreateHintPage from './CreateHintPage';
+import { ACTIVITY_TYPES_INFO } from '../../data/guideMainPageData';
+import {
+  addHint,
+  getHintById,
+  getHints,
+  deleteHint,
+} from '../../services/hintServices';
+import { useDialog } from '../../templates/GuideTemplate/GuideTemplateContext';
 
 const HintDefaultPage = () => {
   const [itemsUpdated, setItemsUpdated] = useState(false);
@@ -12,7 +17,7 @@ const HintDefaultPage = () => {
   const [itemId, setItemId] = useState(null);
   const { state } = useLocation();
   const { isOpen } = useDialog();
-  
+
   const getHintDetails = (hint) => ({
     title: `Hint ${hint.id}`,
     text: hint.header,

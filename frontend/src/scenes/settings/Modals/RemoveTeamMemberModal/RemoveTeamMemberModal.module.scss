@@ -1,18 +1,18 @@
 .box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    box-shadow: 0px 1px 2px 0px #1018280D;
-    border-radius: 5px;
-    padding: 1.5rem 3rem;
-    box-sizing: content-box;
-    font-size: 13px;
-    width: 350px;
-    color: var(--third-text-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0px 1px 2px 0px #1018280d;
+  border-radius: 5px;
+  padding: 1.5rem 3rem;
+  box-sizing: content-box;
+  font-size: 13px;
+  width: 350px;
+  color: var(--third-text-color);
 
-    p:first-child {
-        font-weight: 600;
-    }
+  p:first-child {
+    font-weight: 600;
+  }
 }

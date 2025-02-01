@@ -1,40 +1,40 @@
-@import "../../../styles/variables.css";
+@import '../../../styles/variables.css';
 
-.bannerStyle{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.bannerStyle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.heading{
-    color: var(--main-text-color);
-    font-weight: 600;
-    margin-bottom: 15px;
-    font-size: var(--font-header);
+.heading {
+  color: var(--main-text-color);
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: var(--font-header);
 }
 
-.list{
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 5px;
+.list {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 5px;
 }
 
-.listText{
-    color: var(--main-text-color);
-    font-weight: 400;
-    font-size: var(--font-regular);
-    margin-bottom: 10px;
-    list-style-type: none;
+.listText {
+  color: var(--main-text-color);
+  font-weight: 400;
+  font-size: var(--font-regular);
+  margin-bottom: 10px;
+  list-style-type: none;
 }
 
-.bannerContents{
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
+.bannerContents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.button{
-    margin-top: 10px;
+.button {
+  margin-top: 10px;
 }

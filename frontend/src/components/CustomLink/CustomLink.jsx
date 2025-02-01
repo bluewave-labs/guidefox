@@ -8,11 +8,11 @@ const CustomLink = ({
   url = '',
   className = '',
   underline = 'none',
-  onClick, 
+  onClick,
 }) => {
   const handleClick = (event) => {
     if (onClick) {
-      event.preventDefault(); 
+      event.preventDefault();
       onClick(event);
     }
   };
@@ -22,7 +22,7 @@ const CustomLink = ({
       href={url}
       className={`custom-link ${className}`}
       underline={underline}
-      onClick={handleClick} 
+      onClick={handleClick}
     >
       {text}
     </Link>
@@ -34,7 +34,7 @@ CustomLink.propTypes = {
   url: PropTypes.string,
   className: PropTypes.string,
   underline: PropTypes.oneOf(['none', 'hover', 'always']),
-  onClick: PropTypes.func, 
+  onClick: PropTypes.func,
 };
 
 export default CustomLink;

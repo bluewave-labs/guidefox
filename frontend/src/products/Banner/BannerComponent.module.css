@@ -1,14 +1,14 @@
-.container{
-    width: fit-content;
-    display: inline-flex;
-    gap: 1rem;
-    border-radius: 4px;
-    padding: 16px 30px ;
-    box-shadow: 0px 2px 7px 0px #0000001F;
-    cursor: pointer;
-    align-items: center;
+.container {
+  width: fit-content;
+  display: inline-flex;
+  gap: 1rem;
+  border-radius: 4px;
+  padding: 16px 30px;
+  box-shadow: 0px 2px 7px 0px #0000001f;
+  cursor: pointer;
+  align-items: center;
 }
 
-.text{
-    font-size: 16px;
+.text {
+  font-size: 16px;
 }

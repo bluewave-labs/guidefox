@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
-import { createContext, useMemo, useState } from "react";
-import { getLinks } from "./linkService";
+import PropTypes from 'prop-types';
+import { createContext, useMemo, useState } from 'react';
+import { getLinks } from './linkService';
 
 export const HelperLinkContext = createContext({
   helper: {},
@@ -34,7 +34,7 @@ const HelperLinkProvider = ({ children }) => {
   const [helperToEdit, setHelperToEdit] = useState(null);
 
   const toggleSettings = (e, link = null) => {
-    if (e.target.closest("#delete") || e.target.closest("#drag")) return;
+    if (e.target.closest('#delete') || e.target.closest('#drag')) return;
 
     if (!showSettings && link) {
       setLinkToEdit(link);

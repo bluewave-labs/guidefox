@@ -1,4 +1,4 @@
-import { apiClient } from "./apiClient";
+import { apiClient } from './apiClient';
 
 export const addHint = async (hintData) => {
   try {
@@ -8,7 +8,7 @@ export const addHint = async (hintData) => {
     console.error('Add hint error: ', error);
     throw error;
   }
-}
+};
 
 export const editHint = async (hintId, hintData) => {
   try {
@@ -18,7 +18,7 @@ export const editHint = async (hintId, hintData) => {
     console.error(`Edit hint error for ID (${hintId}): `, error);
     throw error;
   }
-}
+};
 
 export const deleteHint = async (hintId) => {
   try {
@@ -28,7 +28,7 @@ export const deleteHint = async (hintId) => {
     console.error(`Delete hint error for ID (${hintId}): `, error);
     throw error;
   }
-}
+};
 
 export const getHints = async () => {
   try {
@@ -48,4 +48,4 @@ export const getHintById = async (hintId) => {
     console.error(`Get hint by ID (${hintId}) error: `, error);
     throw error;
   }
-}
+};

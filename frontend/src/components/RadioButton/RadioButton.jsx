@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Radio } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import styles from './RadioButtonStyles.module.css'; 
+import styles from './RadioButtonStyles.module.css';
 
 const CustomRadioIcon = styled('span')({
   borderRadius: '50%',
   width: 16,
   height: 16,
-  boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
+  boxShadow:
+    'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
 });
 
 const CustomRadioCheckedIcon = styled('span')({
@@ -23,18 +24,17 @@ const CustomRadioCheckedIcon = styled('span')({
   },
 });
 
-function RadioButton({ 
-  id, 
-  name, 
-  value, 
-  label, 
-  onChange, 
-  onClick, 
-  size = 'small', 
-  checked = false, 
-  enabled = true 
+function RadioButton({
+  id,
+  name,
+  value,
+  label,
+  onChange,
+  onClick,
+  size = 'small',
+  checked = false,
+  enabled = true,
 }) {
-
   const handleChange = (event) => {
     if (checked) {
       onChange({ target: { name, value: '' } });
@@ -58,7 +58,11 @@ function RadioButton({
         onClick={onClick}
         sx={{ padding: '0' }}
       />
-      {label && <label className={styles.label} htmlFor={id}>{label}</label>}
+      {label && (
+        <label className={styles.label} htmlFor={id}>
+          {label}
+        </label>
+      )}
     </div>
   );
 }
@@ -72,6 +76,8 @@ RadioButton.propTypes = {
   onChange: PropTypes.func,
   color: PropTypes.string,
   checked: PropTypes.bool,
+  onClick: PropTypes.func,
+  size: PropTypes.string,
 };
 
 export default RadioButton;

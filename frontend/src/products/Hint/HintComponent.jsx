@@ -1,7 +1,7 @@
-import React from "react";
-import ReactMarkdown from "react-markdown";
-import "./HintComponent.css";
-import Button from "../../components/Button/Button";
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
+import './HintComponent.css';
+import Button from '../../components/Button/Button';
 import PropTypes from 'prop-types';
 
 const HintComponent = ({
@@ -19,7 +19,7 @@ const HintComponent = ({
       <div className="preview-container">
         {header && (
           <div
-            className={"header"}
+            className={'header'}
             style={{
               backgroundColor: headerBackgroundColor,
               color: headerColor,
@@ -38,8 +38,8 @@ const HintComponent = ({
                 style={{
                   backgroundColor: buttonBackgroundColor,
                   color: buttonTextColor,
-                  marginBottom: "1rem",
-                  borderRadius: '8px'
+                  marginBottom: '1rem',
+                  borderRadius: '8px',
                 }}
                 text={previewBtnText}
               ></Button>
@@ -59,6 +59,6 @@ HintComponent.propTypes = {
   headerColor: PropTypes.string,
   textColor: PropTypes.string,
   buttonBackgroundColor: PropTypes.string,
-  buttonTextColor: PropTypes.string
+  buttonTextColor: PropTypes.string,
 };
 export default HintComponent;

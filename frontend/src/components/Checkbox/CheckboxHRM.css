@@ -1,28 +1,30 @@
 /* Checkboxes and radio buttons */
-.checkbox, .radio {
-    accent-color: var(--main-purple);
+.checkbox,
+.radio {
+  accent-color: var(--main-purple);
 }
 
 .checkbox {
-    border-radius: 4px;
-    padding: 1px;
+  border-radius: 4px;
+  padding: 1px;
 }
 
-.checkbox:active, .radio:active {
-    accent-color: var(--main-purple);
-    outline: 5px solid #9E77ED3D;
+.checkbox:active,
+.radio:active {
+  accent-color: var(--main-purple);
+  outline: 5px solid #9e77ed3d;
 }
 
 /* Small checkboxes and radio buttons */
 .small {
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
 }
 
 /* Large checkboxes and radio buttons */
 .large {
-    width: 20px;
-    height: 20px;
-    border-radius: 6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
 }

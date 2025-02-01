@@ -7,24 +7,29 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import styles from './TeamTable.module.css';
-import { RiDeleteBinLine } from "react-icons/ri";
+import { RiDeleteBinLine } from 'react-icons/ri';
 import { useAuth } from '../../../../services/authProvider';
 import DropdownMenu from '@components/DropdownMenu/DropdownMenu';
 import { roles } from '../../../../utils/constants';
+import PropTypes from 'prop-types';
 
-export default function TeamTable({ team, setRemoveModalOpen, setChangeRoleModalOpen, setSelectedMember }) {
-
+const TeamTable = ({
+  team,
+  setRemoveModalOpen,
+  setChangeRoleModalOpen,
+  setSelectedMember,
+}) => {
   const { userInfo } = useAuth();
 
   const handleRemoveMember = async (member) => {
     setSelectedMember(() => member);
     setRemoveModalOpen(() => true);
-  }
+  };
 
   const handleChangeRole = async (e, member) => {
     setSelectedMember(() => ({ ...member, newRole: e.target.innerText }));
     setChangeRoleModalOpen(() => true);
-  }
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -48,21 +53,30 @@ export default function TeamTable({ team, setRemoveModalOpen, setChangeRoleModal
               <TableCell className={styles.data}>
                 <div className={styles.role}>
                   {member.role}
-                  {userInfo.role == "admin" &&
+                  {userInfo.role == 'admin' && (
                     <DropdownMenu
-                      menuItems={roles.filter(role => role !== member.role).map(role => ({
-                        text: role,
-                        onClick: (e) => handleChangeRole(e, member)
-                      }))}
-                      direction={'right'} 
+                      menuItems={roles
+                        .filter((role) => role !== member.role)
+                        .map((role) => ({
+                          text: role,
+                          onClick: (e) => handleChangeRole(e, member),
+                        }))}
+                      direction={'right'}
                     />
-                  }
+                  )}
                 </div>
               </TableCell>
               <TableCell className={styles.data}>
-                {userInfo.role == "admin" && member.id !== userInfo.id &&
-                  <RiDeleteBinLine style={{ fontSize: '20px', cursor: 'pointer', color: 'red' }} onClick={() => handleRemoveMember(member)} />
-                }
+                {userInfo.role == 'admin' && member.id !== userInfo.id && (
+                  <RiDeleteBinLine
+                    style={{
+                      fontSize: '20px',
+                      cursor: 'pointer',
+                      color: 'red',
+                    }}
+                    onClick={() => handleRemoveMember(member)}
+                  />
+                )}
               </TableCell>
             </TableRow>
           ))}
@@ -70,4 +84,13 @@ export default function TeamTable({ team, setRemoveModalOpen, setChangeRoleModal
       </Table>
     </TableContainer>
   );
-}
+};
+
+TeamTable.propTypes = {
+  team: PropTypes.array,
+  setRemoveModalOpen: PropTypes.func,
+  setChangeRoleModalOpen: PropTypes.func,
+  setSelectedMember: PropTypes.func,
+};
+
+export default TeamTable;

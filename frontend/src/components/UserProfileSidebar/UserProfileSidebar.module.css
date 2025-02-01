@@ -1,33 +1,33 @@
 .user-info {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
-    padding-left: 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  padding-left: 16px;
 }
 
 .user-details-container {
-    display: flex;
+  display: flex;
 }
 
 .user-details {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .user-name {
-    font-size: var(--font-regular);
-    font-weight: 600;
-    line-height: 20px;
-    color: var(--main-text-color);
+  font-size: var(--font-regular);
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--main-text-color);
 }
 
 .user-role {
-    margin: 0;
-    font-size: var(--font-regular);
-    font-weight: 400;
-    line-height: 20px;
-    color: var(--main-text-color);
+  margin: 0;
+  font-size: var(--font-regular);
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--main-text-color);
 }

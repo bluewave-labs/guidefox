@@ -1,35 +1,35 @@
 @use '../../../styles/globals.scss' as *;
 
-  .container{
-    width: 100%;
-    display:flex;
-    flex-direction:row;
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 
-    h3{
-      font-weight: 600;
-      font-size: 14px;
-      margin: 0;
-      color: var(--main-text-color);
-      margin: 10px 0px;
-    }
-  
-    h4{
-      font-weight: 450;
-      font-size: 14px;
-      margin: 0;
-      color: var(--second-text-color);
-      text-align: center;
-    }
-  }
-  
-  .step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-grow: 1;
+  h3 {
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0;
+    color: var(--main-text-color);
+    margin: 10px 0px;
   }
 
-.check-circle-icon, 
+  h4 {
+    font-weight: 450;
+    font-size: 14px;
+    margin: 0;
+    color: var(--second-text-color);
+    text-align: center;
+  }
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.check-circle-icon,
 .on-progress,
 .future-step {
   font-size: 40px !important;
@@ -41,23 +41,23 @@
 }
 
 .on-progress {
-    color: var(--main-purple);
-    border: 2px solid rgba(var(--main-purple), 0.5);
+  color: var(--main-purple);
+  border: 2px solid rgba(var(--main-purple), 0.5);
 }
 
 .future-step {
-    color: var(--light-gray);
+  color: var(--light-gray);
 }
 
 .line {
-    position: absolute;
-    top: 50%;
-    left: calc(50% + 17px); 
-    height: 2px;
-    background-color: var(--light-gray);
-    width: calc(100% - 33px);
-    transform: translateY(-50%);
-    z-index: -99;
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 17px);
+  height: 2px;
+  background-color: var(--light-gray);
+  width: calc(100% - 33px);
+  transform: translateY(-50%);
+  z-index: -99;
 }
 
 .icon-container {

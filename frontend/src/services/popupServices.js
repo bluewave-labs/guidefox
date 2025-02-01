@@ -32,7 +32,10 @@ export const getPopupById = async (popupId) => {
 
 export const editPopup = async (popupId, popupData) => {
   try {
-    const response = await apiClient.put(`/popup/edit_popup/${popupId}`, popupData);
+    const response = await apiClient.put(
+      `/popup/edit_popup/${popupId}`,
+      popupData
+    );
     return response.data;
   } catch (error) {
     console.error(`Edit Popup error for ID (${popupId}):`, error);

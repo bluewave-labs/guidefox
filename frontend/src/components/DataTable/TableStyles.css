@@ -1,111 +1,118 @@
-
 /* Style for the container holding the entire table */
 .tableContainer {
-    margin-top: 20px;
-    width: 980px;
-    height: 998px;
+  margin-top: 20px;
+  width: 980px;
+  height: 998px;
 }
 
 /* Style for the table header */
 .tableHeader {
-    background-color: #f0f0f0;
+  background-color: #f0f0f0;
 }
 
 /* Style for the "Our Company" heading */
 .companyHeading {
-    font-size: 24px;
-    font-weight: bold;
-    padding: 10px;
-    display:inline;
-    justify-content: space-between;
-    align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px;
+  display: inline;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Style for the circle around total entries */
 .totalEntriesCircle {
-    border-radius: var(--radius-full, 9999px);
-    border: 1px solid var(--Component-colors-Utility-Brand-utility-brand-200, #E9D7FE);
-    background: var(--Component-colors-Utility-Brand-utility-brand-50, #F9F5FF);
-    background-color: #F9F5FF;
-    color: #6941C6;
-    padding: 5px 10px;
-    font-size: 14px;
-    margin-left: 10px;
+  border-radius: var(--radius-full, 9999px);
+  border: 1px solid
+    var(--Component-colors-Utility-Brand-utility-brand-200, #e9d7fe);
+  background: var(--Component-colors-Utility-Brand-utility-brand-50, #f9f5ff);
+  background-color: #f9f5ff;
+  color: #6941c6;
+  padding: 5px 10px;
+  font-size: 14px;
+  margin-left: 10px;
 }
 
 /* Style for the customize button */
 .customize-btn {
-    color: var(--main-text-color) !important;
-    border:1px solid var(--main-text-color) !important;
-    margin-top: 10px !important;
-    display:inline !important;
-    float:right;
-    display: inline-flex !important;
+  color: var(--main-text-color) !important;
+  border: 1px solid var(--main-text-color) !important;
+  margin-top: 10px !important;
+  display: inline !important;
+  float: right;
+  display: inline-flex !important;
 }
 
 /* Style for the pagination component */
 .paginationContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    padding: var(--spacing-lg, 12px) var(--spacing-3xl, 24px) var(--spacing-xl, 16px) var(--spacing-3xl, 24px);
-    gap: var(--spacing-lg, 12px);
-    align-self: stretch;
-    border: 1px solid var(--Colors-Border-border-secondary, #EAECF0);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding: var(--spacing-lg, 12px) var(--spacing-3xl, 24px)
+    var(--spacing-xl, 16px) var(--spacing-3xl, 24px);
+  gap: var(--spacing-lg, 12px);
+  align-self: stretch;
+  border: 1px solid var(--Colors-Border-border-secondary, #eaecf0);
 }
 
 /* Style for the pagination numbers */
 .paginationNumbers {
-    margin: 0 10px;
+  margin: 0 10px;
 }
 
-.paginationNumbers button{
-    background-color: transparent;
-    border:none;
+.paginationNumbers button {
+  background-color: transparent;
+  border: none;
 }
 
 /* Style for the Previous and Next page buttons */
 .paginationButtons {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .paginationButtons .MuiButtonBase-root {
-    margin: 0 5px;
+  margin: 0 5px;
 }
 
+.direct_buttons {
+  display: flex;
+  padding: 7px var(--spacing-lg, 12px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-xs, 4px);
+  border-radius: var(--radius-xs, 4px);
+  border: 1px solid
+    var(
+      --Component-colors-Components-Buttons-Secondary-button-secondary-border,
+      var(--light-border-color)
+    );
+  background: var(
+    --Component-colors-Components-Buttons-Secondary-button-secondary-bg,
+    #fff
+  );
 
-.direct_buttons{
-    display: flex;
-    padding: 7px var(--spacing-lg, 12px);
-    justify-content: center;
-    align-items: center;
-    gap: var(--spacing-xs, 4px);
-    border-radius: var(--radius-xs, 4px);
-    border: 1px solid var(--Component-colors-Components-Buttons-Secondary-button-secondary-border, var(--light-border-color));
-    background: var(--Component-colors-Components-Buttons-Secondary-button-secondary-bg, #FFF);
-
-    /* Shadows/shadow-xs */
-    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  /* Shadows/shadow-xs */
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 }
 
 /* Change background color of main header row */
 .tableContainer .tableHeadRow {
-    background-color: #F9FAFB;
-  }
+  background-color: #f9fafb;
+}
 .popoverContent {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-.tableCell{
-    display: flex;
-    height: 48px;
-    padding: var(--spacing-xl, 16px) var(--spacing-3xl, 24px);
-    align-items: center;
-    gap: var(--spacing-lg, 12px);
-    align-self: stretch;
-    border-bottom: 1px solid var(--Colors-Border-border-secondary, #EAECF0);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.tableCell {
+  display: flex;
+  height: 48px;
+  padding: var(--spacing-xl, 16px) var(--spacing-3xl, 24px);
+  align-items: center;
+  gap: var(--spacing-lg, 12px);
+  align-self: stretch;
+  border-bottom: 1px solid var(--Colors-Border-border-secondary, #eaecf0);
 }

@@ -11,9 +11,9 @@
 }
 
 .ProseMirror {
-    height: 7.5rem;
-    padding: 0 14px;
-    overflow-y: auto;
+  height: 7.5rem;
+  padding: 0 14px;
+  overflow-y: auto;
 }
 
 .ProseMirror p {

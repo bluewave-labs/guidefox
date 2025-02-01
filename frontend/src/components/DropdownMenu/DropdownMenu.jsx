@@ -8,59 +8,59 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import PropTypes from 'prop-types';
 
 const DropdownMenu = ({ menuItems, direction = 'up' }) => {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    const handleDropdownClick = () => {
-        setIsDropdownOpen((prev) => !prev);
-    };
+  const handleDropdownClick = () => {
+    setIsDropdownOpen((prev) => !prev);
+  };
 
-    const renderOpenArrowIcon = () => {
-        switch (direction) {
-            case 'up':
-                return <KeyboardArrowUpIcon />;
-            case 'down':
-                return <KeyboardArrowDownOutlinedIcon />;
-            case 'left':
-                return <KeyboardArrowLeftIcon />;
-            case 'right':
-                return <KeyboardArrowRightIcon />;
-            default:
-                return <KeyboardArrowDownOutlinedIcon />;
-        }
-    };
+  const renderOpenArrowIcon = () => {
+    switch (direction) {
+      case 'up':
+        return <KeyboardArrowUpIcon />;
+      case 'down':
+        return <KeyboardArrowDownOutlinedIcon />;
+      case 'left':
+        return <KeyboardArrowLeftIcon />;
+      case 'right':
+        return <KeyboardArrowRightIcon />;
+      default:
+        return <KeyboardArrowDownOutlinedIcon />;
+    }
+  };
 
-    const renderClosedArrowIcon = () => {
-        switch (direction) {
-            case 'up':
-                return <KeyboardArrowDownOutlinedIcon />;
-            case 'down':
-                return <KeyboardArrowUpIcon />;
-            case 'left':
-                return <KeyboardArrowRightIcon />;
-            case 'right':
-                return <KeyboardArrowLeftIcon />;
-            default:
-                return <KeyboardArrowUpIcon />;
-        }
-    };
+  const renderClosedArrowIcon = () => {
+    switch (direction) {
+      case 'up':
+        return <KeyboardArrowDownOutlinedIcon />;
+      case 'down':
+        return <KeyboardArrowUpIcon />;
+      case 'left':
+        return <KeyboardArrowRightIcon />;
+      case 'right':
+        return <KeyboardArrowLeftIcon />;
+      default:
+        return <KeyboardArrowUpIcon />;
+    }
+  };
 
-    return (
-        <button className={styles["dropdownButton"]} onClick={handleDropdownClick}>
-            {isDropdownOpen ? (
-                <>
-                    {renderOpenArrowIcon()}
-                    <DropdownMenuList menuItems={menuItems} direction={direction}/>
-                </>
-            ) :
-                <>{renderClosedArrowIcon()}</>
-            }
-        </button>
-    );
+  return (
+    <button className={styles['dropdownButton']} onClick={handleDropdownClick}>
+      {isDropdownOpen ? (
+        <>
+          {renderOpenArrowIcon()}
+          <DropdownMenuList menuItems={menuItems} direction={direction} />
+        </>
+      ) : (
+        <>{renderClosedArrowIcon()}</>
+      )}
+    </button>
+  );
 };
 
 DropdownMenu.propTypes = {
-    menuItems: PropTypes.array.isRequired,
-    direction: PropTypes.oneOf(['up', 'down', 'left', 'right']),
+  menuItems: PropTypes.array.isRequired,
+  direction: PropTypes.oneOf(['up', 'down', 'left', 'right']),
 };
 
 export default DropdownMenu;

@@ -1,77 +1,76 @@
 @use '../../../../styles/globals.scss' as *;
 
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  flex: 2;
+  min-width: 450px;
+
+  .bannertext {
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: center;
+  }
+
+  .bannertext:focus {
+    outline: none;
+  }
+
+  .preview {
+    border-radius: 10px;
+    border: 1.23px solid var(--grey-border);
+    width: 100%;
+    padding: 1rem 1.5rem;
+  }
+
+  h2 {
+    @include text-style(regular);
+    margin-bottom: 0.7rem;
+    margin-top: 0;
+  }
+
+  .banner {
+    @include text-style(regular);
+    background-color: var(--light-purple-background);
     display: flex;
-    flex-direction: column;
     align-items: center;
-    margin-top: 1.5rem;
-    margin-left: 3rem;
-    margin-right: 3rem;
-    flex: 2;
-    min-width: 450px;
+    justify-content: space-between;
+    padding: 0.7rem;
+    border-radius: 5px;
+  }
 
-    .bannertext {
-        border: none;
-        background: transparent;
-        width: 100%;
-        text-align: center;
-    }
+  .bannerOne,
+  .bannerTwo,
+  .bannerThree,
+  .bannerFour {
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+  }
 
-    .bannertext:focus {
-        outline: none
-    }
+  .bannerOne {
+    width: 40%;
+    height: 2rem;
+    margin-top: 1rem;
+  }
 
-    .preview {
-        border-radius: 10px;
-        border: 1.23px solid var(--grey-border);
-        width: 100%;
-        padding: 1rem 1.5rem;
-    }
+  .bannerTwo {
+    width: 80%;
+    height: 5.4rem;
+  }
 
-    h2 {
-        @include text-style(regular);
-        margin-bottom: 0.7rem;
-        margin-top: 0;
-    }
+  .bannerThree {
+    width: 95%;
+    height: 4rem;
+  }
 
-    .banner {
-        @include text-style(regular);
-        background-color: var(--light-purple-background);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.7rem;
-        border-radius: 5px;
-    }
-
-    .bannerOne,
-    .bannerTwo,
-    .bannerThree,
-    .bannerFour {
-        background-color: #F3F3F3;
-        border-radius: 5px;
-        margin-bottom: 1rem;
-
-    }
-
-    .bannerOne {
-        width: 40%;
-        height: 2rem;
-        margin-top: 1rem;
-    }
-
-    .bannerTwo {
-        width: 80%;
-        height: 5.4rem;
-    }
-
-    .bannerThree {
-        width: 95%;
-        height: 4rem;
-    }
-
-    .bannerFour {
-        width: 95%;
-        height: 3rem;
-    }
+  .bannerFour {
+    width: 95%;
+    height: 3rem;
+  }
 }

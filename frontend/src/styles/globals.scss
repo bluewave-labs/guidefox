@@ -33,15 +33,15 @@ $base-font-size: var(--font-header);
 }
 
 *::-webkit-scrollbar {
-  width: 8px; 
-  height: 8px; 
+  width: 8px;
+  height: 8px;
 }
 
 *::-webkit-scrollbar-track {
-  background-color: var(--background-color); 
+  background-color: var(--background-color);
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--gray-300); 
-  border: 2px solid var(--background-color); 
+  background-color: var(--gray-300);
+  border: 2px solid var(--background-color);
 }

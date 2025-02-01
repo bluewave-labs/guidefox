@@ -1,28 +1,28 @@
-import { AxiosError } from "axios";
-import PropTypes from "prop-types";
-import React, { useContext, useEffect, useState } from "react";
-import Settings from "../../components/Links/Settings/Settings";
-import Preview from "../../products/LinkPreview";
+import { AxiosError } from 'axios';
+import PropTypes from 'prop-types';
+import React, { useContext, useEffect, useState } from 'react';
+import Settings from '../../components/Links/Settings/Settings';
+import Preview from '../../products/LinkPreview';
 import {
   createHelper,
   getHelperById,
   updateHelper,
-} from "../../services/helperLinkService";
-import { deleteLink } from "../../services/linkService";
-import { HelperLinkContext } from "../../services/linksProvider";
-import GuideTemplate from "../../templates/GuideTemplate/GuideTemplate";
-import { useDialog } from "../../templates/GuideTemplate/GuideTemplateContext";
-import { emitToastError } from "../../utils/guideHelper";
-import toastEmitter, { TOAST_EMITTER_KEY } from "../../utils/toastEmitter";
-import styles from "./LinkPage.module.scss";
-import LinkAppearance from "./LinkPageComponents/LinkAppearance";
-import LinkContent from "./LinkPageComponents/LinkContent";
+} from '../../services/helperLinkService';
+import { deleteLink } from '../../services/linkService';
+import { HelperLinkContext } from '../../services/linksProvider';
+import GuideTemplate from '../../templates/GuideTemplate/GuideTemplate';
+import { useDialog } from '../../templates/GuideTemplate/GuideTemplateContext';
+import { emitToastError } from '../../utils/guideHelper';
+import toastEmitter, { TOAST_EMITTER_KEY } from '../../utils/toastEmitter';
+import styles from './LinkPage.module.scss';
+import LinkAppearance from './LinkPageComponents/LinkAppearance';
+import LinkContent from './LinkPageComponents/LinkContent';
 
 const DEFAULT_VALUES = {
-  title: "",
-  headerBackgroundColor: "#F8F9F8",
-  linkFontColor: "#344054",
-  iconColor: "#7F56D9",
+  title: '',
+  headerBackgroundColor: '#F8F9F8',
+  linkFontColor: '#344054',
+  iconColor: '#7F56D9',
 };
 
 const NewLinksPopup = ({
@@ -95,11 +95,11 @@ const NewLinksPopup = ({
   const handleLinks = async (item) => {
     const { id, ...link } = item;
     if (!link?.title.trim() || !link?.url.trim()) {
-      emitToastError(buildToastError("Title and URL are required"));
+      emitToastError(buildToastError('Title and URL are required'));
       return null;
     }
     try {
-      if (typeof id === "number") return item;
+      if (typeof id === 'number') return item;
       return { ...link };
     } catch (err) {
       emitToastError(err);
@@ -143,8 +143,8 @@ const NewLinksPopup = ({
     }
     if (newHelper) {
       const toastMessage = isEdit
-        ? "You edited this Helper Link"
-        : "New Helper Link saved";
+        ? 'You edited this Helper Link'
+        : 'New Helper Link saved';
       toastEmitter.emit(TOAST_EMITTER_KEY, toastMessage);
       resetHelper();
     }
@@ -157,12 +157,14 @@ const NewLinksPopup = ({
       <LinkContent />
     </>
   );
-  const leftAppearance = () => <LinkAppearance handleSaveHelper={handleSaveHelper} />;
+  const leftAppearance = () => (
+    <LinkAppearance handleSaveHelper={handleSaveHelper} />
+  );
 
   return (
     <div className={styles.new__container}>
       <GuideTemplate
-        title={isEdit ? "Edit Helper Link" : "New Helper Link"}
+        title={isEdit ? 'Edit Helper Link' : 'New Helper Link'}
         activeButton={activeBtn}
         handleButtonClick={setActiveBtn}
         rightContent={rightContent}
@@ -179,6 +181,7 @@ NewLinksPopup.propTypes = {
   autoOpen: PropTypes.bool,
   isEdit: PropTypes.bool.isRequired,
   itemId: PropTypes.number,
+  setIsEdit: PropTypes.func,
   setItemsUpdated: PropTypes.func.isRequired,
 };
 

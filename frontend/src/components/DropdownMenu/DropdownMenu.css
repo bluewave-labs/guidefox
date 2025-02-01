@@ -1,42 +1,41 @@
 .dropdown-menu {
-    position: absolute;
-    bottom: calc(8vh + 10px); 
-    min-width: fit-content;
-    z-index: 1;
+  position: absolute;
+  bottom: calc(8vh + 10px);
+  min-width: fit-content;
+  z-index: 1;
 }
 
 .dropdown-menu .MuiListItem-root {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .dropdown-menu .MuiListItem-root:hover {
-    background-color: #F9FAFB;
+  background-color: #f9fafb;
 }
 
-.dropdown-item .MuiTypography-root{
-    width: 100%; 
-    font-size: var(--font-regular);
-    font-weight: 400;
-    line-height: 24px;
-    color: var(--main-text-color);
-    display: inline;
-    justify-content: center;
-  }
+.dropdown-item .MuiTypography-root {
+  width: 100%;
+  font-size: var(--font-regular);
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--main-text-color);
+  display: inline;
+  justify-content: center;
+}
 
-  .dropdown-item {
-    padding: 4px 12px !important; 
-  }
+.dropdown-item {
+  padding: 4px 12px !important;
+}
 
-  .dropdown-list{
-    padding-top: 4px !important;
-    padding-bottom: 4px !important;
-  }
+.dropdown-list {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
 
-  .dropdown-menu .MuiSvgIcon-root{
-    color:var(--second-text-color);
-  }
+.dropdown-menu .MuiSvgIcon-root {
+  color: var(--second-text-color);
+}
 
-  .dropdown-menu .MuiListItemIcon-root {
-    min-width: 2rem; 
-  }
-
+.dropdown-menu .MuiListItemIcon-root {
+  min-width: 2rem;
+}

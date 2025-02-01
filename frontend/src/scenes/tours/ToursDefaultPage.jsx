@@ -1,45 +1,42 @@
 import React, { useState } from 'react';
-import CreateActivityButton from "@components/Button/CreateActivityButton/CreateActivityButton";
-import { ACTIVITY_TYPES } from "../../data/createActivityButtonData";
-import ParagraphCSS from "@components/ParagraphCSS/ParagraphCSS";
+import CreateActivityButton from '@components/Button/CreateActivityButton/CreateActivityButton';
+import { ACTIVITY_TYPES } from '../../data/createActivityButtonData';
+import ParagraphCSS from '@components/ParagraphCSS/ParagraphCSS';
 import TourPage from './ProductTour';
 
 const ToursDefaultPage = () => {
-    const [showTourPage, setShowTourPage] = useState(false);
+  const [showTourPage, setShowTourPage] = useState(false);
 
-    const handleButtonClick = () => {
-        setShowTourPage(true);
-    };
+  const handleButtonClick = () => {
+    setShowTourPage(true);
+  };
 
-    const style = {
-        "display": "flex",
-        "flexDirection": "column",
-        "width": "100%",
-        "justifyContent": "center",
-        "alignItems": "center",
-    };
+  const style = {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
 
-    return (
-        <>
-            {showTourPage ? (
-                <TourPage items={[]} />
-            ) : (
-                <div style={style}>
-                    <ParagraphCSS />
-                    <CreateActivityButton type={ACTIVITY_TYPES.TOURS} onClick={handleButtonClick} />
-                </div>
-            )}
-        </>
-    );
+  return (
+    <>
+      {showTourPage ? (
+        <TourPage items={[]} />
+      ) : (
+        <div style={style}>
+          <ParagraphCSS />
+          <CreateActivityButton
+            type={ACTIVITY_TYPES.TOURS}
+            onClick={handleButtonClick}
+          />
+        </div>
+      )}
+    </>
+  );
 };
 
 export default ToursDefaultPage;
-
-
-
-
-
-
 
 // import React from 'react';
 // import DefaultPageTemplate from '../../templates/DefaultPageTemplate/DefaultPageTemplate';
@@ -72,4 +69,3 @@ export default ToursDefaultPage;
 // };
 
 // export default TourDefaultPage;
-

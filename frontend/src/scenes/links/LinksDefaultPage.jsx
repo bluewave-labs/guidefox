@@ -1,12 +1,17 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom"
-import { ACTIVITY_TYPES_INFO } from "../../data/guideMainPageData";
-import { createHelper, getHelperById, deleteHelper, getHelpers } from "../../services/helperLinkService";
-import HelperLinkProvider from "../../services/linksProvider";
-import DefaultPageTemplate from "../../templates/DefaultPageTemplate/DefaultPageTemplate";
-import { useDialog } from "../../templates/GuideTemplate/GuideTemplateContext";
-import styles from "./LinkPage.module.scss";
-import NewLinksPopup from "./NewLinksPopup";
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { ACTIVITY_TYPES_INFO } from '../../data/guideMainPageData';
+import {
+  createHelper,
+  getHelperById,
+  deleteHelper,
+  getHelpers,
+} from '../../services/helperLinkService';
+import HelperLinkProvider from '../../services/linksProvider';
+import DefaultPageTemplate from '../../templates/DefaultPageTemplate/DefaultPageTemplate';
+import { useDialog } from '../../templates/GuideTemplate/GuideTemplateContext';
+import styles from './LinkPage.module.scss';
+import NewLinksPopup from './NewLinksPopup';
 
 const LinksDefaultPage = () => {
   const [itemsUpdated, setItemsUpdated] = useState(false);

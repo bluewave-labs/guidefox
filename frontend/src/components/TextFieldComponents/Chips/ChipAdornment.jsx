@@ -1,16 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Box, Chip } from "@mui/material";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Box, Chip } from '@mui/material';
 
 const ChipAdornment = ({ chips }) => (
-  <Box sx={{ display: "flex", gap: 1, mt: -15, mr: 1 }}>
+  <Box sx={{ display: 'flex', gap: 1, mt: -15, mr: 1 }}>
     {chips.map((chip, index) => (
       <Chip
         key={index}
         label={chip.label}
         onDelete={chip.onDelete}
         variant="outlined"
-        sx={{ borderRadius: "5px" }}
+        sx={{ borderRadius: '5px' }}
       />
     ))}
   </Box>

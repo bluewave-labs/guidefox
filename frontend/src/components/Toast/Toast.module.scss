@@ -1,6 +1,5 @@
 @use '../../styles/globals.scss' as *;
 
-
 .toastContainer {
   position: fixed;
   bottom: 60px;
@@ -29,7 +28,7 @@
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  gap: 10px
+  gap: 10px;
 }
 
 .text {

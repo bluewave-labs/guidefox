@@ -22,7 +22,7 @@ describe('ToastItem', () => {
     });
 
     act(() => {
-      vi.advanceTimersByTime(500); 
+      vi.advanceTimersByTime(500);
     });
 
     expect(mockRemoveToast).toHaveBeenCalledWith(mockToast.id);
@@ -34,7 +34,9 @@ describe('ToastItem', () => {
     vi.useFakeTimers();
 
     const clearTimeoutSpy = vi.spyOn(global, 'clearTimeout');
-    const { unmount } = render(<ToastItem toast={mockToast} removeToast={mockRemoveToast} />);
+    const { unmount } = render(
+      <ToastItem toast={mockToast} removeToast={mockRemoveToast} />
+    );
 
     unmount();
     expect(clearTimeoutSpy).toHaveBeenCalled();
