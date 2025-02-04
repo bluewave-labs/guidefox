@@ -73,8 +73,8 @@ describe("Test helper link service", () => {
     HelperLinkMock.create = sinon
       .stub(HelperLink, "create")
       .resolves(mocks.HelperLinkBuilder.helperLink(1).build());
-    LinkMock.create = sinon
-      .stub(Link, "create")
+    LinkMock.bulkCreate = sinon
+      .stub(Link, "bulkCreate")
       .resolves(mocks.LinkBuilder.link(1).build());
     const result = await helperLinkService.createHelper(
       mocks.HelperLinkBuilder.helperLink(1).build(),
@@ -86,14 +86,14 @@ describe("Test helper link service", () => {
       mocks.HelperLinkBuilder.helperLink(1).build()
     );
     expect(paramsHelper[1]).to.have.property("returning", true);
-    const paramsLink = LinkMock.create.getCall(0).args;
-    expect(paramsLink[0]).to.deep.equal(mocks.LinkBuilder.link(1).build());
+    const paramsLink = LinkMock.bulkCreate.getCall(0).args;
+    expect(paramsLink[0]).to.deep.equal(mocks.LinksList);
     expect(commit.called).to.be.true;
     expect(rollback.called).to.be.false;
   });
   it("createHelper - should throw an error if something goes wrong", async () => {
     HelperLinkMock.create = sinon.stub(HelperLink, "create").rejects();
-    LinkMock.create = sinon.stub(Link, "create").resolves();
+    LinkMock.bulkCreate = sinon.stub(Link, "bulkCreate").resolves();
     try {
       await helperLinkService.createHelper(
         mocks.HelperLinkBuilder.helperLink(1).build(),
@@ -136,7 +136,7 @@ describe("Test helper link service", () => {
       .stub(HelperLink, "update")
       .resolves([1, mocks.HelperLinkBuilder.helperLink(1).build()]);
     LinkMock.update = sinon.stub(Link, "update").resolves();
-    LinkMock.create = sinon.stub(Link, "create").resolves();
+    LinkMock.bulkCreate = sinon.stub(Link, "bulkCreate").resolves();
     const result = await helperLinkService.updateHelper(
       1,
       mocks.HelperLinkBuilder.helperLink(1).build(),
@@ -167,7 +167,7 @@ describe("Test helper link service", () => {
       .stub(HelperLink, "update")
       .resolves([1, mocks.HelperLinkBuilder.helperLink(1).build()]);
     LinkMock.update = sinon.stub(Link, "update").resolves();
-    LinkMock.create = sinon.stub(Link, "create").resolves();
+    LinkMock.bulkCreate = sinon.stub(Link, "bulkCreate").resolves();
     const result = await helperLinkService.updateHelper(
       1,
       mocks.HelperLinkBuilder.helperLink(1).build(),
@@ -175,7 +175,7 @@ describe("Test helper link service", () => {
     );
     expect(result).to.deep.equal(mocks.HelperLinkBuilder.helperLink(1).build());
     expect(LinkMock.update.called).to.be.true;
-    expect(LinkMock.create.called).to.be.false;
+    expect(LinkMock.bulkCreate.called).to.be.false;
     expect(commit.called).to.be.true;
     expect(rollback.called).to.be.false;
   });
@@ -184,7 +184,7 @@ describe("Test helper link service", () => {
       .stub(HelperLink, "update")
       .resolves([1, mocks.HelperLinkBuilder.helperLink(1).build()]);
     LinkMock.update = sinon.stub(Link, "update").resolves();
-    LinkMock.create = sinon.stub(Link, "create").resolves();
+    LinkMock.bulkCreate = sinon.stub(Link, "bulkCreate").resolves();
     const result = await helperLinkService.updateHelper(
       1,
       mocks.HelperLinkBuilder.helperLink(1).build(),
@@ -195,7 +195,7 @@ describe("Test helper link service", () => {
     );
     expect(result).to.deep.equal(mocks.HelperLinkBuilder.helperLink(1).build());
     expect(LinkMock.update.called).to.be.false;
-    expect(LinkMock.create.called).to.be.true;
+    expect(LinkMock.bulkCreate.called).to.be.true;
     expect(commit.called).to.be.true;
     expect(rollback.called).to.be.false;
   });

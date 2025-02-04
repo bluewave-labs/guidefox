@@ -68,6 +68,11 @@ $box-shadow-color: rgba(16, 24, 40, 0.05);
     font-size: 0.813rem;
     font-weight: 400;
     line-height: 1.54;
+
+    &.row {
+      flex-direction: row;
+      gap: 1rem;
+    }
   }
 
   &__input {
@@ -84,6 +89,10 @@ $box-shadow-color: rgba(16, 24, 40, 0.05);
 
     &:first-of-type {
       margin-top: 5px;
+    }
+
+    &.error {
+      border-color: var(--error-color);
     }
   }
 }

@@ -2,8 +2,18 @@ import PropTypes from "prop-types";
 import { createContext, useMemo, useState } from "react";
 import { getLinks } from "./linkService";
 
+export const DEFAULT_VALUES = {
+  title: '',
+  headerBackgroundColor: '#F8F9F8',
+  linkFontColor: '#344054',
+  iconColor: '#7F56D9',
+  url: 'https://',
+  active: true,
+  absolutePath: false,
+};
+
 export const HelperLinkContext = createContext({
-  helper: {},
+  helper: DEFAULT_VALUES,
   setHelper: (helper) => {},
   links: [],
   setLinks: (links) => {},
@@ -24,7 +34,7 @@ export const HelperLinkContext = createContext({
 });
 
 const HelperLinkProvider = ({ children }) => {
-  const [helper, setHelper] = useState({});
+  const [helper, setHelper] = useState(DEFAULT_VALUES);
   const [links, setLinks] = useState([]);
   const [showSettings, setShowSettings] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);

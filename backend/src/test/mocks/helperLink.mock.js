@@ -3,7 +3,7 @@ class LinkBuilder {
     this.link = {
       id: id ?? 1,
       title: `Link ${id ?? 1}`,
-      url: "/url",
+      url: '/url',
       order: 1,
       target: true,
       helperId,
@@ -14,7 +14,7 @@ class LinkBuilder {
   }
 
   missingTitle() {
-    this.link.title = "";
+    this.link.title = '';
     return this;
   }
 
@@ -24,17 +24,17 @@ class LinkBuilder {
   }
 
   missingUrl() {
-    this.link.url = "";
+    this.link.url = '';
     return this;
   }
 
   invalidUrl() {
-    this.link.url = "url";
+    this.link.url = 'url';
     return this;
   }
 
   invalidOrderType() {
-    this.link.order = "order";
+    this.link.order = 'order';
     return this;
   }
 
@@ -68,13 +68,14 @@ class HelperLinkBuilder {
     this.helperLink = {
       id: id ?? 1,
       title: `Helper Link ${id ?? 1}`,
-      headerBackgroundColor: "#F8F9F8",
-      linkFontColor: "#344054",
-      iconColor: "#7F56D9",
+      headerBackgroundColor: '#F8F9F8',
+      linkFontColor: '#344054',
+      iconColor: '#7F56D9',
       createdBy: 1,
-      links: Array.from({ length: 5 }, (_, i) =>
-        LinkBuilder.link(i + 1, id).build()
-      ),
+      links: Array.from({ length: 5 }, (_, i) => LinkBuilder.link(i + 1, id).build()),
+      url: '/url',
+      absolutePath: true,
+      active: true,
     };
   }
 
@@ -83,22 +84,22 @@ class HelperLinkBuilder {
   }
 
   missingTitle() {
-    this.helperLink.title = "";
+    this.helperLink.title = '';
     return this;
   }
 
   invalidHeaderBackgroundColor() {
-    this.helperLink.headerBackgroundColor = "color";
+    this.helperLink.headerBackgroundColor = 'color';
     return this;
   }
 
   invalidLinkFontColor() {
-    this.helperLink.linkFontColor = "color";
+    this.helperLink.linkFontColor = 'color';
     return this;
   }
 
   invalidIconColor() {
-    this.helperLink.iconColor = "color";
+    this.helperLink.iconColor = 'color';
     return this;
   }
 
@@ -112,17 +113,15 @@ class HelperLinkBuilder {
   }
 }
 
-const LinksList = Array.from({ length: 5 }, (_, i) =>
-  LinkBuilder.link(i + 1).build()
-);
+const LinksList = Array.from({ length: 5 }, (_, i) => LinkBuilder.link(i + 1).build());
 
-const HelperLinkList = Array.from({ length: 10 }, (_, i) =>
-  HelperLinkBuilder.helperLink(i + 1).build()
-).map((link, i) => {
-  if (i < 5) link.createdBy = 1;
-  else link.createdBy = 2;
-  return link;
-});
+const HelperLinkList = Array.from({ length: 10 }, (_, i) => HelperLinkBuilder.helperLink(i + 1).build()).map(
+  (link, i) => {
+    if (i < 5) link.createdBy = 1;
+    else link.createdBy = 2;
+    return link;
+  }
+);
 
 module.exports = {
   HelperLinkBuilder,

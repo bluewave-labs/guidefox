@@ -173,16 +173,19 @@ describe('Test Helper Link popup', () => {
         await screen.findByTestId('appearance-form')
       ).querySelectorAll('input');
 
-      expect(inputs).toHaveLength(4);
+      expect(inputs).toHaveLength(7);
       expect(inputs[0]).toHaveProperty('name', 'title');
-      expect(inputs[1]).toHaveProperty('name', 'headerBackgroundColor');
-      expect(inputs[2]).toHaveProperty('name', 'linkFontColor');
-      expect(inputs[3]).toHaveProperty('name', 'iconColor');
+      expect(inputs[1]).toHaveProperty('name', 'url');
+      expect(inputs[2]).toHaveProperty('name', 'absolutePath');
+      expect(inputs[3]).toHaveProperty('name', 'headerBackgroundColor');
+      expect(inputs[4]).toHaveProperty('name', 'linkFontColor');
+      expect(inputs[5]).toHaveProperty('name', 'iconColor');
+      expect(inputs[6]).toHaveProperty('name', 'active');
     });
     it('should change the title on the preview when a title is typed', async () => {
       await renderPopup();
       await openAppearance();
-      const titleInput = await screen.findByRole('textbox');
+      const titleInput = await screen.findByLabelText('Header text');
       await userEvent.type(titleInput, 'Title');
       const preview = await screen.findByText('Title');
       expect(preview).to.exist;

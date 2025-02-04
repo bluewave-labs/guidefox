@@ -343,6 +343,9 @@ describe('E2e tests link', () => {
           linkFontColor: '#344054',
           iconColor: '#7F56D9',
           createdBy: 1,
+          absolutePath: true,
+          active: true,
+          url: '/url',
         },
       });
     });

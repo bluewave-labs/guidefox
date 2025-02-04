@@ -62,6 +62,7 @@ const Settings = () => {
         {}
       );
     }
+
     if (!e) {
       e = { target: settingsRef.current };
     }
@@ -95,7 +96,7 @@ const Settings = () => {
       validateOnBlur={false}
       onSubmit={async (values, { setSubmitting }) => {
         try {
-          handleClose(null, values);
+          await handleClose(null, state);
         } catch (error) {
           return;
         } finally {
@@ -140,7 +141,10 @@ const Settings = () => {
               type="hidden"
               name="id"
               value={state.id}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                setState((prev) => ({ ...prev, id: e.target.value }));
+              }}
             />
             <label
               htmlFor="title"
@@ -154,7 +158,10 @@ const Settings = () => {
                 id="title"
                 type="text"
                 name="title"
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e);
+                  setState((prev) => ({ ...prev, title: e.target.value }));
+                }}
                 onBlur={(e) => {
                   handleBlur(e);
                   validateField('title');
@@ -178,7 +185,10 @@ const Settings = () => {
                 id="url"
                 type="text"
                 name="url"
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e);
+                  setState((prev) => ({ ...prev, url: e.target.value }));
+                }}
                 onBlur={(e) => {
                   handleBlur(e);
                   validateField('url');
@@ -202,7 +212,13 @@ const Settings = () => {
               <Switch
                 id="switch"
                 name="target"
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e);
+                  setState((prev) => ({
+                    ...prev,
+                    target: e.target.value === 'true',
+                  }));
+                }}
                 value={values.target}
               />
               <span>Open in a new tab</span>

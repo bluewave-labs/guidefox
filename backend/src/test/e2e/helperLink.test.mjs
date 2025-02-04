@@ -214,11 +214,7 @@ describe('E2e tests helperLink', () => {
         if (helper.createdBy === 2) {
           expect(res.body).to.not.include(helper);
         } else {
-          const {
-            createdBy: c,
-            id: i,
-            ...curr
-          } = res.body.find((it) => it.title === helper.title);
+          const { createdBy: c, id: i, ...curr } = res.body.find((it) => it.title === helper.title);
           const { createdBy, links, id, ...expected } = helper;
           expect(curr).to.be.deep.equal(expected);
           // expect(creator).to.have.property("id", createdBy);
@@ -272,11 +268,7 @@ describe('E2e tests helperLink', () => {
         .set('Authorization', `Bearer ${token}`);
       expect(res).to.have.status(200);
       mocks.HelperLinkList.forEach((helper) => {
-        const {
-          createdBy: c,
-          id: i,
-          ...curr
-        } = res.body.find((it) => it.title === helper.title);
+        const { createdBy: c, id: i, ...curr } = res.body.find((it) => it.title === helper.title);
         const { createdBy, links, id, ...expected } = helper;
         expect(curr).to.be.deep.equal(expected);
         // expect(creator).to.have.property("id", createdBy);
@@ -375,7 +367,14 @@ describe('E2e tests helperLink', () => {
         .set('Authorization', `Bearer ${token}`);
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: ['ID must be an integer', 'Header is required', 'links must be an array'],
+        errors: [
+          'ID must be an integer',
+          'Header is required',
+          'Invalid value for url',
+          'Invalid value for url',
+          'Invalid value for absolutePath',
+          'links must be an array',
+        ],
       });
     });
     it('should return 400 if title is missing', async () => {

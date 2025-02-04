@@ -21,6 +21,9 @@ const LinksDefaultPage = () => {
     headerBackgroundColor: helper.headerBackgroundColor,
     linkFontColor: helper.linkFontColor,
     iconColor: helper.iconColor,
+    url: helper.url,
+    active: helper.active,
+    absolutePath: helper.absolutePath,
   });
 
   return (

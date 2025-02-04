@@ -1,5 +1,5 @@
-const { Op } = require("sequelize");
-const db = require("../models");
+const { Op } = require('sequelize');
+const db = require('../models');
 const HelperLink = db.HelperLink;
 const Link = db.Link;
 
@@ -13,9 +13,9 @@ class HelperLinkService {
       include: [
         {
           model: Link,
-          as: "links",
+          as: 'links',
         },
-      ]
+      ],
     });
   }
 
@@ -24,12 +24,12 @@ class HelperLinkService {
       include: [
         {
           model: Link,
-          as: "links",
+          as: 'links',
         },
       ],
       where: {
-        id: { [Op.notIn]: ids }
-      }
+        id: { [Op.notIn]: ids },
+      },
     });
   }
 
@@ -48,20 +48,16 @@ class HelperLinkService {
         transaction: t,
         returning: true,
       });
-      await Promise.all(
-        links.map(async (link) => {
-          return await Link.create(
-            { ...link, helperId: newHelper.id },
-            { transaction: t }
-          );
-        })
-      );
+      const updatedLinks = links.map((link) => {
+        return { ...link, helperId: newHelper.id };
+      });
+      await Link.bulkCreate(updatedLinks, { transaction: t });
       t.commit();
       return newHelper;
     } catch (e) {
       console.log(e);
       await t.rollback();
-      throw new Error("Error creating helper");
+      throw new Error('Error creating helper');
     }
   }
 
@@ -82,19 +78,13 @@ class HelperLinkService {
         t.commit();
         return null;
       }
+      const linksToUpdate = links.filter((item) => item.id);
+      const linksToCreate = links.filter((item) => !item.id).map((item) => ({ ...item, helperId: id }));
+      if (linksToCreate.length > 0) await Link.bulkCreate(linksToCreate, { transaction: t });
       await Promise.all(
-        links.map(async (item) => {
+        linksToUpdate.map(async (item) => {
           const { id: linkId, ...link } = item;
-          if (linkId)
-            return await Link.update(
-              { ...link, helperId: id },
-              { transaction: t, where: { id: linkId } }
-            );
-          else
-            return await Link.create(
-              { ...link, helperId: id },
-              { transaction: t }
-            );
+          return await Link.update({ ...link, helperId: id }, { transaction: t, where: { id: linkId } });
         })
       );
       t.commit();
@@ -102,7 +92,7 @@ class HelperLinkService {
     } catch (e) {
       console.log(e);
       await t.rollback();
-      throw new Error("Error updating helper");
+      throw new Error('Error updating helper');
     }
   }
 
@@ -113,12 +103,12 @@ class HelperLinkService {
         include: [
           {
             model: db.Link,
-            as: "links",
+            as: 'links',
           },
         ],
       });
     } catch (error) {
-      throw new Error("Error retrieving helper by ID");
+      throw new Error('Error retrieving helper by ID');
     }
   }
 }
