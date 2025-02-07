@@ -1,63 +1,91 @@
-const db = require("../models");
+const db = require('../models');
+
 const Tour = db.Tour;
+const TourPopup = db.TourPopup;
 
 class TourService {
   async getAllTours() {
     return await Tour.findAll();
   }
 
-  async getTours(userId) {
+  async getTourById(id) {
+    return await Tour.findByPk(id);
+  }
+
+  async getTourByUserId(userId) {
     return await Tour.findAll({
       where: {
-        createdBy: userId
+        createdBy: userId,
       },
     });
   }
 
   async createTour(data) {
-    return await Tour.create(data);
-  }
+    const { steps, ...info } = data;
+    const transaction = await db.sequelize.transaction();
+    try {
+      const newTour = await Tour.create(info, {
+        transaction,
+        returning: true,
+      });
 
-  async deleteTour(id) {
-    const rowsAffected = await Tour.destroy({ where: { id } });
+      const formattedSteps = steps.map((step) => ({
+        ...step,
+        tourId: newTour.id,
+      }));
 
-    if (rowsAffected === 0) {
-      return false;
+      await TourPopup.bulkCreate(formattedSteps, { transaction });
+
+      await transaction.commit();
+      return newTour;
+    } catch (error) {
+      await transaction.rollback();
+      throw error;
     }
-
-    return true;
   }
 
   async updateTour(id, data) {
-    const [affectedRows, updatedTours] = await Tour.update(data, {
-      where: { id },
-      returning: true,
-    });
-
-    if (affectedRows === 0) {
-      return null;
-    }
-
-    return updatedTours[0];
-  }
-
-  async getTourById(tourId) {
+    const { steps, ...info } = data;
+    const transaction = await db.sequelize.transaction();
     try {
-      return await Tour.findOne({
-        where: { id: tourId },
+      const [affectedRows, [updatedTour]] = await Tour.update(info, {
+        where: { id },
+        transaction,
+        returning: true,
       });
+      if (affectedRows === 0) {
+        await transaction.commit();
+        return null
+      }
+      await TourPopup.destroy({ where: { tourId: id }, transaction });
+      const formattedSteps = steps.map((step) => ({
+        ...step,
+        tourId: id,
+      }));
+      await TourPopup.bulkCreate(formattedSteps, { transaction });
+      await transaction.commit();
+      return updatedTour;
     } catch (error) {
-      throw new Error("Error retrieving tour by ID");
+      await transaction.rollback();
+      throw error;
     }
   }
 
-  async getTourByUrl(url) {
+  async deleteTour(id) {
+    const transaction = await db.sequelize.transaction();
     try {
-      return await Tour.findAll({ where: { url } });
+      await TourPopup.destroy({ where: { tourId: id }, transaction });
+      const rowsAffected = await Tour.destroy({
+        where: { id },
+        transaction,
+      });
+      await transaction.commit();
+      return rowsAffected !== 0;
     } catch (error) {
-      throw new Error("Error retrieving Tour by URL");
+      await transaction.rollback();
+      throw error;
     }
-  };
+  }
 }
 
 module.exports = new TourService();
