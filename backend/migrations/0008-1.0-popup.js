@@ -1,6 +1,6 @@
 'use strict';
 
-const TABLE_NAME = 'popup'; // Define the table name
+const TABLE_NAME = 'popups'; // Define the table name
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
