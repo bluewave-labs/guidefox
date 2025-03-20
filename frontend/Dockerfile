@@ -1,19 +1,12 @@
-FROM node:22-alpine3.21
-
-RUN apk update && apk add bash && rm -rf /var/cache/apk/*
-
-RUN apk update && apk add bash && rm -rf /var/cache/apk/*
-
+FROM node:22-alpine3.21 as builder
 WORKDIR /app
-
-COPY package.json ./
-
-RUN npm install
-
+COPY package*.json ./
+RUN npm ci
 COPY . .
+RUN npm run build
 
-ENV NODE_OPTIONS="--max-old-space-size=4096"
-
-EXPOSE 4173
-
-# CMD ["sh", "-c", "npm run build && npm run preview"]
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+#COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD [ "nginx", "-g", "daemon off;" ]    

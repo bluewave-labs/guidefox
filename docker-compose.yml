@@ -6,7 +6,7 @@ services:
       - ./backend:/app
       - /app/node_modules
     ports:
-      - "3000:3000"
+      - '3000:3000'
     depends_on:
       - db
     env_file:
@@ -21,7 +21,7 @@ services:
           ignore:
             - node_modules/
             - .git/
-            - "*.log"
+            - '*.log'
             - coverage/
             - dist/
     command: >
@@ -47,7 +47,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
   frontend:
@@ -56,7 +56,7 @@ services:
       - ./frontend:/app
       - /app/node_modules
     ports:
-      - "4173:4173"
+      - '80:80'
     develop:
       watch:
         - action: sync
@@ -71,13 +71,13 @@ services:
         if [ \"$NODE_ENV\" = \"development\" ]; then
           npm run dev;
         elif [ \"$NODE_ENV\" != \"development\" ]; then
-          npm run build && npm run preview;
+          nginx -g daemon off    
         fi"
   mailhog:
     image: mailhog/mailhog
     ports:
-      - "1025:1025"
-      - "8025:8025"
+      - '1025:1025'
+      - '8025:8025'
 
 volumes:
   pgdata:
