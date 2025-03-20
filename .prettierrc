@@ -7,5 +7,5 @@
   "arrowParens": "always",
   "htmlWhitespaceSensitivity": "strict",
   "singleAttributePerLine": false,
-  "printWidth": 120
+  "printWidth": 80
 }

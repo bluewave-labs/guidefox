@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ColorTextField from '@components/ColorTextField/ColorTextField';
 import { Formik, Form } from 'formik';
@@ -27,14 +26,7 @@ const BannerLeftAppearance = ({
         }
       }}
     >
-      {({
-        errors,
-        touched,
-        handleBlur,
-        handleChange,
-        values,
-        setFieldValue,
-      }) => (
+      {({ errors, handleBlur, values, setFieldValue }) => (
         <Form className={styles.bannerAppearanceContainer}>
           <div className={styles.bannerAppearanceItem}>
             <h2 className={styles.bannerStateName}>Background Color</h2>
@@ -79,6 +71,12 @@ const BannerLeftAppearance = ({
       )}
     </Formik>
   );
+};
+BannerLeftAppearance.propTypes = {
+  backgroundColor: PropTypes.string,
+  setBackgroundColor: PropTypes.func,
+  fontColor: PropTypes.string,
+  setFontColor: PropTypes.func,
 };
 
 export default BannerLeftAppearance;
