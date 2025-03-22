@@ -2,6 +2,7 @@ import { React } from 'react';
 import styles from './BannerPreview.module.scss';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import PropTypes from 'prop-types';
+import BannerSkeleton from './BannerSkeleton';
 
 const BannerPreview = ({
   bannerText = '',
@@ -36,10 +37,7 @@ const BannerPreview = ({
       <h2>Preview</h2>
       <div className={styles.preview}>
         {isTopPosition && banner}
-        <div className={styles.bannerOne}></div>
-        <div className={styles.bannerTwo}></div>
-        <div className={styles.bannerThree}></div>
-        <div className={styles.bannerFour}></div>
+        <BannerSkeleton />
         {!isTopPosition && banner}
       </div>
     </div>
