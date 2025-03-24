@@ -52,9 +52,9 @@ services:
       - pgdata:/var/lib/postgresql/data
   frontend:
     build: ./frontend
-    # volumes:
-    #   - ./frontend:/app
-    #   - /app/node_modules
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     ports:
       - "4173:4173"
     develop:
