@@ -137,15 +137,16 @@ const CreatePopupPage = ({
       }));
       closeDialog();
     } catch (error) {
-      if (error.response.data?.errors) {
-        return error.response.data.errors.forEach((err) => {
+      if (error.response?.data?.errors) {
+        error.response.data.errors.forEach((err) => {
           toastEmitter.emit(TOAST_EMITTER_KEY, `Error: ${err}`);
         });
+      } else {
+        const errorMessage =
+          error.response?.data?.message ||
+          'An unexpected error occurred. Please try again.';
+        toastEmitter.emit(TOAST_EMITTER_KEY, errorMessage);
       }
-      const errorMessage = error.response?.data?.message
-        ? `Error: ${error.response.data.message}`
-        : 'An unexpected error occurred. Please try again.';
-      toastEmitter.emit(TOAST_EMITTER_KEY, errorMessage);
     }
   };
 
