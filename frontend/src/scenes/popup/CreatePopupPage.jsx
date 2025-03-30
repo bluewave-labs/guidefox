@@ -132,7 +132,15 @@ const CreatePopupPage = ({
       setItemsUpdated((prevState) => !prevState);
       closeDialog();
     } catch (error) {
-      emitToastError(error);
+      if (error.response.data?.errors) {
+        return error.response.data.errors.forEach((err) => {
+          toastEmitter.emit(TOAST_EMITTER_KEY, `Error: ${err}`);
+        });
+      }
+      const errorMessage = error.response?.data?.message
+        ? `Error: ${error.response.data.message}`
+        : 'An unexpected error occurred. Please try again.';
+      toastEmitter.emit(TOAST_EMITTER_KEY, errorMessage);
     }
   };
 
