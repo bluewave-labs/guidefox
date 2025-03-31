@@ -132,14 +132,19 @@ const CreatePopupPage = ({
       setItemsUpdated((prevState) => !prevState);
       closeDialog();
     } catch (error) {
-      if (error.response.data?.errors) {
+      if (error.response && error.response.data?.errors) {
         return error.response.data.errors.forEach((err) => {
           toastEmitter.emit(TOAST_EMITTER_KEY, `Error: ${err}`);
         });
       }
+
+      //  To ensure we handle cases where `error.response` is undefined
       const errorMessage = error.response?.data?.message
         ? `Error: ${error.response.data.message}`
-        : 'An unexpected error occurred. Please try again.';
+        : `An unexpected error occurred: ${
+            error.message || 'No details available'
+          }`;
+
       toastEmitter.emit(TOAST_EMITTER_KEY, errorMessage);
     }
   };
