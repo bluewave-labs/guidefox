@@ -132,15 +132,17 @@ const CreatePopupPage = ({
       setItemsUpdated((prevState) => !prevState);
       closeDialog();
     } catch (error) {
-      if (error.response && error.response.data?.errors) {
+      console.error('API Error:', error); // Debugging log
+
+      if (error.response?.data?.errors) {
         return error.response.data.errors.forEach((err) => {
-          toastEmitter.emit(TOAST_EMITTER_KEY, `Error: ${err}`);
+          toastEmitter.emit(TOAST_EMITTER_KEY, `Error: ${String(err)}`);
         });
       }
 
-      //  To ensure we handle cases where `error.response` is undefined
+      // Ensure message is a string before emitting
       const errorMessage = error.response?.data?.message
-        ? `Error: ${error.response.data.message}`
+        ? `Error: ${String(error.response.data.message)}`
         : `An unexpected error occurred: ${
             error.message || 'No details available'
           }`;
