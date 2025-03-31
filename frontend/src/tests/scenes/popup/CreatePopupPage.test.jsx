@@ -82,7 +82,7 @@ describe('CreatePopupPage component', () => {
       .mockRejectedValueOnce({
         response: {
           data: {
-            errors: [{ msg: 'headerColor must be a valid hex color code' }],
+            message: 'headerColor must be a valid hex color code', // Ensure message is a string
           },
         },
       });
@@ -104,8 +104,8 @@ describe('CreatePopupPage component', () => {
     // Check if the toastEmitter.emit function was called
     await waitFor(() => {
       expect(emitSpy).toHaveBeenCalledWith(
-        expect.anything(), // The first argument is the key, which can be anything
-        expect.stringContaining('An error occurred')
+        expect.anything(),
+        expect.stringContaining('headerColor must be a valid hex color code') // Match actual error message
       );
     });
 
