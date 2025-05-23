@@ -1,0 +1,38 @@
+.bannerAppearanceContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  color: var(--main-text-color);
+}
+
+.bannerStateName {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  font-size: var(--font-regular);
+}
+
+.bannerAppearanceColor {
+  display: flex;
+  align-items: center;
+  width: 241px;
+}
+
+.bannerAppearanceColor > div {
+  width: 100%;
+}
+
+.bannerAppearanceError {
+  position: absolute;
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  line-height: 1.45;
+  margin-top: 2px;
+  color: var(--error-color);
+}
+
+.bannerAppearanceItem {
+  position: relative;
+}

@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 
 const GuideTemplateContext = createContext({
   isOpen: false,
@@ -9,7 +10,7 @@ const GuideTemplateContext = createContext({
 export const useDialog = () => {
   const context = useContext(GuideTemplateContext);
   if (context === undefined) {
-    throw new Error("useDialog must be used within a GuideTemplateProvider");
+    throw new Error('useDialog must be used within a GuideTemplateProvider');
   }
   return context;
 };
@@ -25,4 +26,8 @@ export const GuideTemplateProvider = ({ children }) => {
       {children}
     </GuideTemplateContext.Provider>
   );
+};
+
+GuideTemplateProvider.propTypes = {
+  children: PropTypes.node,
 };

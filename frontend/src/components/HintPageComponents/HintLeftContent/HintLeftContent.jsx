@@ -45,14 +45,7 @@ const HintLeftContent = ({ data, setState }) => {
       validateOnMount={false}
       validateOnBlur={false}
     >
-      {({
-        isSubmitting,
-        errors,
-        handleChange,
-        handleBlur,
-        values,
-        validateField,
-      }) => (
+      {({ errors, handleChange, handleBlur, validateField }) => (
         <Form className="left-content-container">
           <h2
             className="hint-label"

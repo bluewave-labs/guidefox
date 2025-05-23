@@ -1,4 +1,10 @@
-import { render, waitFor, screen, fireEvent, act } from '@testing-library/react';
+import {
+  render,
+  waitFor,
+  screen,
+  fireEvent,
+  act,
+} from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { BrowserRouter as Router } from 'react-router-dom';
 import LoginPage from '../../../scenes/login/LoginPage';
@@ -11,7 +17,7 @@ describe('LoginPage', () => {
   it('renders the login page', () => {
     render(
       <Router>
-        <AuthProvider> 
+        <AuthProvider>
           <LoginPage />
         </AuthProvider>
       </Router>
@@ -27,48 +33,48 @@ describe('LoginPage', () => {
 
     render(
       <Router>
-        <AuthProvider> 
+        <AuthProvider>
           <LoginPage />
         </AuthProvider>
       </Router>
     );
 
     await act(async () => {
-      fireEvent.change(screen.getByPlaceholderText('Enter email'), 
-        { target: { value: 'test@example.com' } }
-      );
-      fireEvent.change(screen.getByPlaceholderText('Enter password'), 
-        { target: { value: 'password' } }
-      );
+      fireEvent.change(screen.getByPlaceholderText('Enter email'), {
+        target: { value: 'test@example.com' },
+      });
+      fireEvent.change(screen.getByPlaceholderText('Enter password'), {
+        target: { value: 'password' },
+      });
       fireEvent.click(screen.getByText('Sign In'));
     });
 
     expect(loginServices.login).toHaveBeenCalledWith({
       email: 'test@example.com',
-      password: 'password'
+      password: 'password',
     });
   });
 
   it('handles login failure', async () => {
-    loginServices.login.mockRejectedValueOnce({ 
-      response: { data: { error: 'Invalid credentials' } } 
+    loginServices.login.mockRejectedValueOnce({
+      response: { data: { error: 'Invalid credentials' } },
     });
 
     render(
       <Router>
-        <AuthProvider> 
+        <AuthProvider>
           <LoginPage />
         </AuthProvider>
       </Router>
     );
 
     await act(async () => {
-      fireEvent.change(screen.getByPlaceholderText('Enter email'), 
-        { target: { value: 'test@example.com' } }
-      );
-      fireEvent.change(screen.getByPlaceholderText('Enter password'), 
-        { target: { value: 'wrongpassword' } }
-      );
+      fireEvent.change(screen.getByPlaceholderText('Enter email'), {
+        target: { value: 'test@example.com' },
+      });
+      fireEvent.change(screen.getByPlaceholderText('Enter password'), {
+        target: { value: 'wrongpassword' },
+      });
       fireEvent.click(screen.getByText('Sign In'));
     });
 
@@ -88,7 +94,7 @@ describe('LoginPage', () => {
 
     const checkbox = screen.getByLabelText('Remember for 30 days');
     expect(checkbox.checked).toBe(false);
-    
+
     fireEvent.click(checkbox);
     expect(checkbox.checked).toBe(true);
   });

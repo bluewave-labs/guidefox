@@ -1,57 +1,52 @@
-
 .top-banner {
-    background-color: #ffffff; 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    height: 8vh;
-    top: 0; 
-    left: 0; 
-    box-shadow: 0px 3px 3px -3px var(--shadow-one);
-    box-shadow: 0px 4px 24px -4px var(--shadow-two);
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  height: 8vh;
+  top: 0;
+  left: 0;
+  box-shadow: 0px 3px 3px -3px var(--shadow-one);
+  box-shadow: 0px 4px 24px -4px var(--shadow-two);
+}
 
-  }
-  
-  .user-info {
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
-  }
-  
-  
-  .user-details {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .user-name{
-    font-size: var(--font-regular);
-    font-weight: 600;
-    line-height: 20px;
-    color: var(--main-text-color);
-  }
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
 
-  .user-role {
-    margin: 0; 
-    font-size: var(--font-regular);
-    font-weight: 400;
-    line-height: 20px;
-    color: var(--main-text-color);
-  }
-  
-  .logo {
-    color: #FF834E;
-    font-size: 20px; 
-    font-weight: 600;
-  }
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: var(--font-regular);
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--main-text-color);
+}
+
+.user-role {
+  margin: 0;
+  font-size: var(--font-regular);
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--main-text-color);
+}
+
+.logo {
+  color: #ff834e;
+  font-size: 20px;
+  font-weight: 600;
+}
 
 .dropdown-button {
-    background-color: transparent; 
-    border: none; 
-    cursor: pointer; 
-    padding: 0.4em 0.4em;
-    margin: 1px
-  }
-  
-  
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.4em 0.4em;
+  margin: 1px;
+}

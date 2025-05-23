@@ -1,0 +1,32 @@
+@use '../../../../styles/globals.scss' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 1.6rem;
+  margin-right: 3rem;
+  color: var(--main-text-color);
+  flex: 1;
+  h2 {
+    @include text-style(regular);
+  }
+  .color {
+    display: flex;
+    align-items: center;
+    color: var(--main-text-color);
+    width: 241px;
+    > div {
+      width: 100%;
+    }
+  }
+}
+
+.error {
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  line-height: 1.45;
+  margin-top: 2px;
+  color: var(--error-color);
+}

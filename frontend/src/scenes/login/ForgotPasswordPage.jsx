@@ -1,31 +1,31 @@
-import React, { useState } from "react";
-import styles from "./Login.module.css";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { forgotPassword } from "../../services/loginServices"; 
-import { useNavigate } from "react-router-dom";
-import CustomTextField from "../../components/TextFieldComponents/CustomTextField/CustomTextField";
-import CircularProgress from "@mui/material/CircularProgress";
-import Logo from "../../components/Logo/Logo";
-import * as Yup from "yup";
-import { Form, Formik } from "formik";
+import React, { useState } from 'react';
+import styles from './Login.module.css';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { forgotPassword } from '../../services/loginServices';
+import { useNavigate } from 'react-router-dom';
+import CustomTextField from '../../components/TextFieldComponents/CustomTextField/CustomTextField';
+import CircularProgress from '@mui/material/CircularProgress';
+import Logo from '../../components/Logo/Logo';
+import * as Yup from 'yup';
+import { Form, Formik } from 'formik';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      "Enter a valid email address"
+      'Enter a valid email address'
     )
-    .required("Email is required")
+    .required('Email is required')
     .trim(),
 });
 
 const ForgotPasswordPage = () => {
   const navigate = useNavigate();
-  const [serverErrors, setServerErrors] = useState("");
+  const [serverErrors, setServerErrors] = useState('');
   return (
     <Formik
       initialValues={{
-        email: "",
+        email: '',
       }}
       validationSchema={validationSchema}
       validateOnChange={false}
@@ -34,7 +34,7 @@ const ForgotPasswordPage = () => {
         setServerErrors([]);
         try {
           await forgotPassword(values);
-          navigate("/check-email", { state: { values } });
+          navigate('/check-email', { state: { values } });
         } catch (error) {
           setServerErrors(error.response?.data?.error);
         } finally {
@@ -50,11 +50,11 @@ const ForgotPasswordPage = () => {
         handleBlur,
         values,
       }) => (
-        <Form className={styles["login-container"]}>
+        <Form className={styles['login-container']}>
           <Logo />
-          <h2 style={{ marginBottom: "0px" }}>Forgot password?</h2>
-          <h3>No worries, we'll send you reset instructions.</h3>
-          <div className={styles["form-group"]}>
+          <h2 style={{ marginBottom: '0px' }}>Forgot password?</h2>
+          <h3>No worries, we&apos;ll send you reset instructions.</h3>
+          <div className={styles['form-group']}>
             <CustomTextField
               id="email"
               name="email"
@@ -74,26 +74,26 @@ const ForgotPasswordPage = () => {
             />
 
             {serverErrors.length > 0 && (
-              <div className={styles["error-message"]}>{serverErrors}</div>
+              <div className={styles['error-message']}>{serverErrors}</div>
             )}
           </div>
           <button
-            style={{ marginTop: "0px" }}
-            className={styles["reset-password-button"]}
+            style={{ marginTop: '0px' }}
+            className={styles['reset-password-button']}
           >
             {isSubmitting ? (
               <CircularProgress size={12} color="inherit" />
             ) : (
-              "Reset password"
+              'Reset password'
             )}
           </button>
           <button
-            className={styles["back-to-login-button"]}
+            className={styles['back-to-login-button']}
             type="submit"
             disabled={isSubmitting}
-            onClick={() => navigate("/")}
+            onClick={() => navigate('/')}
           >
-            <ArrowBackIcon style={{ fontSize: "18px", marginRight: "5px" }} />
+            <ArrowBackIcon style={{ fontSize: '18px', marginRight: '5px' }} />
             Back to log in
           </button>
         </Form>

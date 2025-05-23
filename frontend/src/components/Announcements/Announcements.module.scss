@@ -1,50 +1,49 @@
 @use '../../styles/globals.scss' as *;
 
-  .container{
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--second-text-color) ;
-    padding: 1em 2em;
-    border-radius: 1em;
-    box-shadow: 0px 1px 2px 0px #1018280D;
+.container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--second-text-color);
+  padding: 1em 2em;
+  border-radius: 1em;
+  box-shadow: 0px 1px 2px 0px #1018280d;
 
-    h2{
-      @include text-style(header-text, semibold);
-    }
-  
-    h3{
-      @include text-style(regular);
-    }
+  h2 {
+    @include text-style(header-text, semibold);
   }
 
-  .buttons{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
+  h3 {
+    @include text-style(regular);
   }
+}
 
-  .changelog,
-  .dismiss{
-    border-radius: 8px;
-    border: 1px solid var(--second-text-color) ;
-    padding: 8px 14px;
-    box-shadow: 0px 1px 2px 0px #1018280D;
-  }
+.buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 
-  .changelog{
-    background-color: var(--main-purple);
-    color: white;
-  }
+.changelog,
+.dismiss {
+  border-radius: 8px;
+  border: 1px solid var(--second-text-color);
+  padding: 8px 14px;
+  box-shadow: 0px 1px 2px 0px #1018280d;
+}
 
-  .dismiss{
-    background-color: white;
-    margin-right: 10px;
-  }
+.changelog {
+  background-color: var(--main-purple);
+  color: white;
+}
 
-  .emailInput{
-    width: 320px;
-    height: 2rem;
-    border: 1px solid var(--light-gray);
-  }
+.dismiss {
+  background-color: white;
+  margin-right: 10px;
+}
 
+.emailInput {
+  width: 320px;
+  height: 2rem;
+  border: 1px solid var(--light-gray);
+}

@@ -46,7 +46,7 @@
   left: 50%;
   width: 10px;
   height: 10px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
@@ -58,7 +58,7 @@
 }
 
 .list-item-info p {
-  margin: 2px 0 0 33px;
+  margin: 2px 0 0 0;
   color: var(--main-text-color);
 }
 

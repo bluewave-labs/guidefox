@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import "./Switch.css";
+import PropTypes from 'prop-types';
+import './Switch.css';
 
 /**
  * Switch components for both HRM and Onboarding applications.
@@ -13,9 +13,9 @@ import "./Switch.css";
  */
 export default function Switch({ id, name, value, enabled = true, onChange }) {
   return (
-    <label className='switch'>
+    <label className="switch">
       <input
-        type='checkbox'
+        type="checkbox"
         id={id}
         name={name}
         value={value}
@@ -23,7 +23,7 @@ export default function Switch({ id, name, value, enabled = true, onChange }) {
         checked={value}
         onChange={onChange}
       />
-      <span className='slider round'></span>
+      <span className="slider round"></span>
     </label>
   );
 }

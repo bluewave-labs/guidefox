@@ -1,28 +1,28 @@
-import React from "react";
-import PropTypes from "prop-types";
-import CustomTextField from "../../TextFieldComponents/CustomTextField/CustomTextField";
-import PopUpMessages from "../../PopUpMessages/PopUpMessages";
+import React from 'react';
+import PropTypes from 'prop-types';
+import CustomTextField from '../../TextFieldComponents/CustomTextField/CustomTextField';
+import PopUpMessages from '../../PopUpMessages/PopUpMessages';
 
 const LinkDialog = ({
   open,
-  url = "",
+  url = '',
   isLinkActive = false,
   setUrl = () => {},
   handleClose = () => {},
   handleInsertLink = () => {},
   handleOpenLink = () => {},
 }) => {
-  const title = isLinkActive ? "Edit link" : "Add link";
+  const title = isLinkActive ? 'Edit link' : 'Add link';
   return (
     <PopUpMessages
       open={open}
       header={title}
       leftButtonClickHandler={handleClose}
       rightButtonClickHandler={handleInsertLink}
-      leftButtonText={"Cancel"}
+      leftButtonText={'Cancel'}
       additionanLinkButton={isLinkActive}
       handleOpenLink={handleOpenLink}
-      rightButtonText={`${url ? "Insert/Update" : "Remove link"}`}
+      rightButtonText={`${url ? 'Insert/Update' : 'Remove link'}`}
     >
       <CustomTextField
         type="url"

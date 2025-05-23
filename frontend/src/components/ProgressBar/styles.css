@@ -1,23 +1,22 @@
-.app{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 30px;
+.app {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
 }
 
-.progress{
-    height: 20px;
-    width: 500px;
-    background-color: rgb(233, 233, 233);
-    border: 1px solid rgba(0, 0, 0, 0);
-    border-radius: 20px;
-    overflow: hidden;
+.progress {
+  height: 20px;
+  width: 500px;
+  background-color: rgb(233, 233, 233);
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 20px;
+  overflow: hidden;
 }
 
-.progress div{
-    height: 100%;
-    background-color: #7f55d9;
-    color: white;
-    border-radius: 20px;
-    
+.progress div {
+  height: 100%;
+  background-color: #7f55d9;
+  color: white;
+  border-radius: 20px;
 }

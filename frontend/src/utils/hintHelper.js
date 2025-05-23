@@ -20,13 +20,7 @@ const newHintSchema = Yup.object().shape({
     ['no action', 'open url', 'open url in a new tab'],
     'Invalid value for action'
   ),
-  targetElement: Yup.string().test(
-    'targetElement',
-    'Invalid value for targetElement',
-    (value) => {
-      return value.startsWith('#') || value.startsWith('.');
-    }
-  ),
+  targetElement: Yup.string().required('Target element cannot be empty'),
   tooltipPlacement: Yup.string().oneOf(
     ['top', 'bottom', 'right', 'left'],
     'Invalid value for tooltipPlacement'

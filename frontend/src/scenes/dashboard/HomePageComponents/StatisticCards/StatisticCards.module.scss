@@ -1,49 +1,46 @@
 @import url('../../../../styles/variables.css');
 
 .statisticCard {
-    border: 1px solid var(--light-gray);
-    border-radius: 10px;
-    padding: 24px;
-    gap:10px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    box-shadow: 0px 1px 2px 0px #1018280D;
+  border: 1px solid var(--light-gray);
+  border-radius: 10px;
+  padding: 24px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-shadow: 0px 1px 2px 0px #1018280d;
 
-
-    .metricName {
-        font-size: var(--font-header);
-        color: var(--gray-350);
-        font-weight: 400;
-        line-height: 24px;
-        margin-bottom: 13px;
-    }
-  
-    .metricValue {
-        color: var(--gray-500);
-        font-size: 36px;
-        font-weight: 600;
-        line-height: 44px;
-        letter-spacing: -0.02em;
-    }
-  
-    .changeRate {
-        font-size: var(--font-regular);
-        font-weight: 400;
-        line-height: 20px;
-        color: var(--third-text-color);    
-        align-items: center;
-        flex-direction: row;
-        display: flex;
-    }
-    .change{
-        align-items: center;
-        display: flex;
-        font-family: Inter;
-        font-size: 14px;
-        font-weight: 600;
-        line-height: 20px;
-    }
-
+  .metricName {
+    font-size: var(--font-header);
+    color: var(--gray-350);
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 13px;
   }
-  
+
+  .metricValue {
+    color: var(--gray-500);
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 44px;
+    letter-spacing: -0.02em;
+  }
+
+  .changeRate {
+    font-size: var(--font-regular);
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--third-text-color);
+    align-items: center;
+    flex-direction: row;
+    display: flex;
+  }
+  .change {
+    align-items: center;
+    display: flex;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+  }
+}

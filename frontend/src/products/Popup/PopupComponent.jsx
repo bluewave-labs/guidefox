@@ -1,32 +1,37 @@
-import React, { useState } from "react";
-import ReactMarkdown from "react-markdown";
-import styles from "./PopupComponent.module.css"; // Use your module CSS file
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import Button from "@components/Button/Button";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import ReactMarkdown from 'react-markdown';
+import styles from './PopupComponent.module.css'; // Use your module CSS file
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import Button from '@components/Button/Button';
 
-const PopupComponent = ({
-  header,
-  content,
-  previewBtnText,
-  headerBackgroundColor,
-  headerColor,
-  textColor,
-  buttonBackgroundColor,
-  buttonTextColor,
-  buttonAction,
-  popupSize,
-  actionButtonUrl,
-  isReal,
-}) => {
+const PopupComponent = (props) => {
+  const {
+    header,
+    content,
+    previewBtnText,
+    headerBackgroundColor,
+    headerColor,
+    textColor,
+    buttonBackgroundColor,
+    buttonTextColor,
+    buttonAction,
+    popupSize,
+    actionButtonUrl,
+    isReal,
+  } = props;
+
+  // console.log(props)
   const [isVisible, setIsVisible] = useState(true);
-  const validSizes = ["small", "medium", "large"];
+
+  const validSizes = ['small', 'medium', 'large'];
   const sizeClass = validSizes.includes(popupSize.toLowerCase())
     ? styles[popupSize.toLowerCase()]
-    : "";
+    : '';
   const sizeClassContent = validSizes.includes(popupSize.toLowerCase())
     ? styles[popupSize.toLowerCase() + 'Content']
-    : "";
-  const centeredClass = isReal ? styles.centered : "";
+    : '';
+  const centeredClass = isReal ? styles.centered : '';
 
   const handleClose = () => {
     if (isReal) {
@@ -35,12 +40,12 @@ const PopupComponent = ({
   };
 
   const handleButtonClick = () => {
-    if (buttonAction === "close the popup") {
+    if (buttonAction === 'close the popup') {
       handleClose();
-    } else if (buttonAction === "open url") {
-      window.open(actionButtonUrl, "_self");
-    } else if (buttonAction === "open url in new page") {
-      window.open(actionButtonUrl, "_blank");
+    } else if (buttonAction === 'open url') {
+      window.open(actionButtonUrl, '_self');
+    } else if (buttonAction === 'open url in new page') {
+      window.open(actionButtonUrl, '_blank');
     }
   };
 
@@ -59,9 +64,9 @@ const PopupComponent = ({
               color: headerColor,
             }}
           >
-            <h3 style={{ marginLeft: "5px" }}>{header}</h3>
+            <h3 style={{ marginLeft: '5px' }}>{header}</h3>
             <CloseOutlinedIcon
-              style={{ color: "#98A2B3", fontSize: "20px", cursor: "pointer" }}
+              style={{ color: '#98A2B3', fontSize: '20px', cursor: 'pointer' }}
               onClick={handleClose}
             />
           </div>
@@ -76,7 +81,7 @@ const PopupComponent = ({
                 style={{
                   backgroundColor: buttonBackgroundColor,
                   color: buttonTextColor,
-                  borderRadius: '8px'
+                  borderRadius: '8px',
                 }}
                 text={previewBtnText}
                 onClick={handleButtonClick} // Add onClick handler
@@ -87,6 +92,21 @@ const PopupComponent = ({
       </div>
     </>
   );
+};
+
+PopupComponent.propTypes = {
+  header: PropTypes.string,
+  content: PropTypes.string.isRequired,
+  previewBtnText: PropTypes.string,
+  headerBackgroundColor: PropTypes.string,
+  headerColor: PropTypes.string,
+  textColor: PropTypes.string,
+  buttonBackgroundColor: PropTypes.string,
+  buttonTextColor: PropTypes.string,
+  buttonAction: PropTypes.string,
+  popupSize: PropTypes.string,
+  actionButtonUrl: PropTypes.string,
+  isReal: PropTypes.bool,
 };
 
 export default PopupComponent;

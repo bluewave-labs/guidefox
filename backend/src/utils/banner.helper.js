@@ -16,30 +16,30 @@ const addOrUpdateBannerValidation = [
     .isIn(settings.banner.action)
     .withMessage('Invalid close button action'),
   body('url')
-    .optional()
-    .custom((value, { req }) => {
-      const needsUrl = ['open url', 'open url in a new tab'].includes(req.body.closeButtonAction);
-      return !needsUrl || (needsUrl && value);
-    })
-    .withMessage('URL is required when close button action is set to open URL')
+    .notEmpty()
+    .withMessage('URL is required')
     .bail()
     .custom((value) => {
-      if (!value) return true;
       try {
-        const url = new URL(value);
-        return ['http:', 'https:'].includes(url.protocol);
+        new URL(value); // Validates absolute URL
+        return true;
       } catch {
-        return false;
+        if (value.startsWith('/')) return true; // Allows relative URLs
+        throw new Error('URL must be an absolute (http/https) or relative URL (starting with /)');
       }
-    })
-    .withMessage('URL must use HTTP or HTTPS protocol'),
+    }),
   body('actionUrl')
     .optional()
     .custom((value) => {
       if (!value) return true;
-      return value.startsWith('/');
-    })
-    .withMessage('Relative URL must start with /'),
+      try {
+        new URL(value); // Validates absolute URL
+        return true;
+      } catch {
+        if (value.startsWith('/')) return true; // Allows relative URLs
+        throw new Error('Action URL must be an absolute (http/https) or relative URL (starting with /)');
+      }
+    }),
   body('repetitionType').custom((value) => {
     if (!value) {
       throw new Error('Repetition type is required');

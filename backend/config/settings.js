@@ -30,16 +30,7 @@ module.exports = {
     },
   },
   tour: {
-    triggeringFrequency: [
-      'just once',
-      'once in every session',
-      'once every day',
-      'once every week',
-      'once every month',
-      'always',
-    ],
-    pageTargeting: ['equals to', 'is different from'],
-    themes: ['default theme'],
+    size: ['small', 'medium', 'large'],
   },
   hint: {
     action: ['no action', 'open url', 'open url in a new tab'],

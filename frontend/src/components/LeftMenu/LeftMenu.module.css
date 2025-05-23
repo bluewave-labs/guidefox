@@ -1,36 +1,41 @@
-.left-menu {
+.leftMenu {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   padding-left: 0.5rem;
   padding-right: 1rem;
   /* box-shadow: 0px 4px 6px rgba(81, 81, 81, 0.1); */
-  border-right: 1px solid #EBEBEB;
+  border-right: 1px solid #ebebeb;
   min-width: max-content;
+  height: 100vh;
+  box-sizing: border-box;
 }
 
-.left-menu .MuiSvgIcon-root {
+.leftMenu :global(.MuiSvgIcon-root) {
   color: var(--second-text-color);
 }
 
-.title .MuiTypography-root {
+.title :global(.MuiTypography-root) {
   font-size: var(--font-informative);
   font-weight: 400;
   line-height: 38px;
-  color: #98A2B3;
+  color: #98a2b3;
   margin-left: 8px;
   margin-top: 8px;
 }
 
-.left-menu .MuiListItemIcon-root {
+.leftMenu :global(.MuiListItemIcon-root) {
   min-width: 2rem;
 }
 
-.left-menu .MuiListItemText-root {
+.leftMenu :global(.MuiListItemText-root) {
   margin: 0;
 }
 
-.menu-item .MuiTypography-root {
+.menuItem :global(.MuiTypography-root) {
   width: 100%;
   font-size: var(--font-regular);
   font-weight: 400;
@@ -41,65 +46,63 @@
   padding-right: 1.5rem;
 }
 
-.left-menu .MuiListItemButton-root {
+.leftMenu :global(.MuiListItemButton-root) {
   border-radius: 6px;
 }
 
 @media screen and (max-height: 680px) {
-  .left-menu {
+  .leftMenu {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
   }
 
-  .title .MuiTypography-root {
+  .title :global(.MuiTypography-root) {
     margin-top: 4px;
     margin-bottom: 4px;
   }
 
-  .menu-item .MuiTypography-root {
+  .menuItem :global(.MuiTypography-root) {
     padding-right: 1rem;
   }
 
-  .left-menu .MuiListItemButton-root {
+  .leftMenu :global(.MuiListItemButton-root) {
     padding-top: 4px;
     padding-bottom: 4px;
   }
 
-  .left-menu .MuiSvgIcon-root {
-    font-size: 1.4rem;  
+  .leftMenu :global(.MuiSvgIcon-root) {
+    font-size: 1.4rem;
   }
-
 }
 
 @media screen and (max-height: 615px) {
-  .menu-item .MuiTypography-root {
+  .menuItem :global(.MuiTypography-root) {
     font-size: 12px;
     line-height: 20px;
   }
 
-  .title .MuiTypography-root {
+  .title :global(.MuiTypography-root) {
     font-size: 10px;
     line-height: 32px;
   }
 
-  .left-menu .MuiListItemButton-root {
+  .leftMenu :global(.MuiListItemButton-root) {
     padding-top: 2px;
     padding-bottom: 2px;
   }
 
-  
-  .left-menu .MuiSvgIcon-root {
-    font-size: 1.4rem;  
+  .leftMenu :global(.MuiSvgIcon-root) {
+    font-size: 1.4rem;
   }
 }
 
 @media screen and (max-width: 1024px) {
-  .left-menu {
+  .leftMenu {
     padding-left: 0.25rem;
     padding-right: 0.5rem;
   }
 
-  .menu-item .MuiTypography-root {
+  .menuItem :global(.MuiTypography-root) {
     padding-right: 0.5rem;
   }
-}
+} 

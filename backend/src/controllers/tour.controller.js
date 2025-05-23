@@ -1,144 +1,43 @@
-const tourService = require("../service/tour.service");
-const { internalServerError } = require("../utils/errors.helper");
-const {
-  validateTriggeringFrequency,
-  validatePageTargeting,
-  validateTheme,
-} = require("../utils/tour.helper");
+const TourService = require('../service/tour.service');
+const { internalServerError } = require('../utils/errors.helper');
 
 class TourController {
-  async addTour(req, res) {
-    const userId = req.user.id;
-    const { title, pageTargeting, theme, triggeringFrequency } = req.body;
-
-    if (!title || !pageTargeting || !theme || !triggeringFrequency) {
-      return res.status(400).json({
-        errors: [
-          {
-            msg: "title, pageTargeting, theme, and triggeringFrequency are required",
-          },
-        ],
-      });
-    }
-
-    if (
-      !validatePageTargeting(pageTargeting) ||
-      !validateTheme(theme) ||
-      !validateTriggeringFrequency(triggeringFrequency)
-    ) {
-      return res.status(400).json({
-        errors: [
-          {
-            msg: "Invalid value for pageTargeting, theme, or triggeringFrequency",
-          },
-        ],
-      });
-    }
-
-    try {
-      const newTourData = { ...req.body, createdBy: userId };
-      const newTour = await tourService.createTour(newTourData);
-      res.status(201).json(newTour);
-    } catch (err) {
-      console.log(err);
-      const { statusCode, payload } = internalServerError(
-        "CREATE_TOUR_ERROR",
-        err.message
-      );
-      res.status(statusCode).json(payload);
-    }
-  }
-
-  async deleteTour(req, res) {
-    const { id } = req.params;
-
-    try {
-      const deletedTour = await tourService.deleteTour(id);
-
-      if (!deletedTour) {
-        return res.status(404).json({ msg: "Tour not found" });
-      }
-
-      res.status(200).json({ msg: "Tour deleted successfully" });
-    } catch (err) {
-      console.log(err);
-      const { statusCode, payload } = internalServerError(
-        "DELETE_TOUR_ERROR",
-        err.message
-      );
-      res.status(statusCode).json(payload);
-    }
-  }
-
-  async editTour(req, res) {
-    const { id } = req.params;
-    const updatedTourData = req.body;
-
-    try {
-      const updatedTour = await tourService.updateTour(id, updatedTourData);
-
-      if (!updatedTour) {
-        return res.status(404).json({ msg: "Tour not found" });
-      }
-
-      res.status(200).json(updatedTour);
-    } catch (err) {
-      console.log(err);
-      const { statusCode, payload } = internalServerError(
-        "EDIT_TOUR_ERROR",
-        err.message
-      );
-      res.status(statusCode).json(payload);
-    }
-  }
-
   async getAllTours(req, res) {
     try {
-      const tours = await tourService.getAllTours();
+      const tours = await TourService.getAllTours();
       res.status(200).json(tours);
     } catch (err) {
-      console.log(err);
-      const { statusCode, payload } = internalServerError(
-        "GET_TOURS_ERROR",
-        err.message
-      );
-      res.status(statusCode).json(payload);
-    }
-  }
-
-  async getTours(req, res) {
-    const userId = req.user.id;
-
-    try {
-      const tours = await tourService.getTours(userId);
-      res.status(200).json(tours);
-    } catch (err) {
-      console.log(err);
-      const { statusCode, payload } = internalServerError(
-        "GET_USER_TOURS_ERROR",
-        err.message
-      );
+      const { statusCode, payload } = internalServerError('GET_TOUR_ERROR', err.message);
       res.status(statusCode).json(payload);
     }
   }
 
   async getTourById(req, res) {
-    const { id } = req.params;
-
     try {
-      const tour = await tourService.getTourById(id);
+      const { id } = req.params;
+
+      const tour = await TourService.getTourById(id);
 
       if (!tour) {
-        return res.status(404).json({ msg: "Tour not found" });
+        return res.status(404).json({
+          errors: [{ msg: 'Tour with the specified id does not exist' }],
+        });
       }
 
       res.status(200).json(tour);
     } catch (err) {
-      console.log(err);
-      const { statusCode, payload } = internalServerError(
-        "GET_TOUR_BY_ID_ERROR",
-        err.message
-      );
+      const { statusCode, payload } = internalServerError('GET_TOUR_BY_ID_ERROR', err.message);
+      res.status(statusCode).json(payload);
+    }
+  }
+
+  async getToursByUserId(req, res) {
+    try {
+      const userId = req.user.id;
+      const tours = await TourService.getTourByUserId(userId);
+      res.status(200).json(tours);
+    } catch (err) {
+      const { statusCode, payload } = internalServerError('GET_TOUR_BY_USER_ID_ERROR', err.message);
       res.status(statusCode).json(payload);
     }
   }
@@ -146,20 +45,61 @@ class TourController {
   async getTourByUrl(req, res) {
     try {
       const { url } = req.body;
+      const tours = await TourService.getTourByUrl(url);
+      res.status(200).json(tours);
+    } catch (err) {
+      const { statusCode, payload } = internalServerError('GET_TOUR_BY_URL_ERROR', err.message);
+      res.status(statusCode).json(payload);
+    }
+  }
 
-      if (!url || typeof url !== 'string') {
-        return res.status(400).json({ errors: [{ msg: "URL is missing or invalid" }] });
+  async createTour(req, res) {
+    try {
+      const userId = req.user.id;
+      const tour = await TourService.createTour({ ...req.body, createdBy: userId });
+      res.status(201).json(tour);
+    } catch (err) {
+      const { statusCode, payload } = internalServerError('CREATE_TOUR_ERROR', err.message);
+      res.status(statusCode).json(payload);
+    }
+  }
+
+  async updateTour(req, res) {
+    try {
+      const { id } = req.params;
+      const { userId, ...data } = req.body;
+      const tour = await TourService.updateTour(id, data);
+
+      if (!tour) {
+        return res.status(404).json({
+          errors: [{ msg: 'Tour with the specified id does not exist' }],
+        });
       }
 
-      const tour = await tourService.getTourByUrl(url);
-      res.status(200).json({ tour });
-    } catch (error) {
-      internalServerError(
-        "GET_TOUR_BY_URL_ERROR",
-        error.message,
-      );
+      res.status(200).json(tour);
+    } catch (err) {
+      const { statusCode, payload } = internalServerError('UPDATE_TOUR_ERROR', err.message);
+      res.status(statusCode).json(payload);
     }
-  };
+  }
+
+  async deleteTour(req, res) {
+    try {
+      const { id } = req.params;
+      const tour = await TourService.deleteTour(id);
+
+      if (!tour) {
+        return res.status(404).json({
+          errors: [{ msg: 'Tour with the specified id does not exist' }],
+        });
+      }
+
+      res.status(200).json({ message: 'Tour deleted successfully' });
+    } catch (err) {
+      const { statusCode, payload } = internalServerError('DELETE_TOUR_ERROR', err.message);
+      res.status(statusCode).json(payload);
+    }
+  }
 }
 
 module.exports = new TourController();

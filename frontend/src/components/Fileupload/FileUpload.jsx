@@ -16,7 +16,7 @@ const FileUpload = () => {
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
     setIsFileActive(true);
-    setUploadPercentage(0); 
+    setUploadPercentage(0);
   };
 
   const handleDrop = (e) => {
@@ -27,7 +27,7 @@ const FileUpload = () => {
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       setSelectedFile(e.dataTransfer.files[0]);
       setIsFileActive(true);
-      setUploadPercentage(0); 
+      setUploadPercentage(0);
       e.dataTransfer.clearData();
     }
   };
@@ -48,22 +48,30 @@ const FileUpload = () => {
     setSelectedFile(null);
     setUploadPercentage(0);
     setIsFileActive(false);
-  }
+  };
 
   const handleCheck = () => {
     setIsFileActive(!isFileActive);
-  }
+  };
 
   return (
-    <div className={classNames(styles.container, { [styles.redBorder]: isUploadFailed })}>
-      {selectedFile && <div className={styles.fileDetails}>
-        <span className={styles.fileType}>{getFileExtension(selectedFile)}</span>
-        <FileOpenOutlinedIcon 
-          className={styles.fileIcon} 
-          style={isUploadFailed ? {color: 'var(--border-error-solid)'} : {}}
-        />
-      </div>}
-      <div 
+    <div
+      className={classNames(styles.container, {
+        [styles.redBorder]: isUploadFailed,
+      })}
+    >
+      {selectedFile && (
+        <div className={styles.fileDetails}>
+          <span className={styles.fileType}>
+            {getFileExtension(selectedFile)}
+          </span>
+          <FileOpenOutlinedIcon
+            className={styles.fileIcon}
+            style={isUploadFailed ? { color: 'var(--border-error-solid)' } : {}}
+          />
+        </div>
+      )}
+      <div
         className={`${styles.fileUpload} ${isDragging ? styles.dragging : ''}`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
@@ -80,23 +88,55 @@ const FileUpload = () => {
             <label htmlFor="file">Upload File </label>
           </div>
         )}
-        <span className={styles.progressText}>{selectedFile && selectedFile.name}</span>
-        <div className={styles.informativeText}>{selectedFile && !isUploadFailed && formatFileSize(selectedFile.size)}</div>
-        {isUploadFailed && <span className={styles.informativeText}> Upload failed, please try again </span>}
+        <span className={styles.progressText}>
+          {selectedFile && selectedFile.name}
+        </span>
+        <div className={styles.informativeText}>
+          {selectedFile && !isUploadFailed && formatFileSize(selectedFile.size)}
+        </div>
+        {isUploadFailed && (
+          <span className={styles.informativeText}>
+            {' '}
+            Upload failed, please try again{' '}
+          </span>
+        )}
         {selectedFile && !isUploadFailed && (
           <div className={styles.progressBarContainer}>
-            <progress id="progressBar" value={uploadPercentage} max="100" className={styles.progressBar}></progress>
+            <progress
+              id="progressBar"
+              value={uploadPercentage}
+              max="100"
+              className={styles.progressBar}
+            ></progress>
           </div>
         )}
       </div>
       {selectedFile && (
         <div className={styles.thirdBlock}>
           {uploadPercentage === 100 ? (
-            <button onClick={handleCheck}><CheckBoxIcon style={isFileActive ? {color:'var(--main-purple)'} : {color:'var(--third-text-color)'}} /></button>
+            <button onClick={handleCheck}>
+              <CheckBoxIcon
+                style={
+                  isFileActive
+                    ? { color: 'var(--main-purple)' }
+                    : { color: 'var(--third-text-color)' }
+                }
+              />
+            </button>
           ) : (
-            <button onClick={handleDelete}><DeleteOutlinedIcon style={isUploadFailed ? {color:'var(--border-error-solid)'} : {color:'var(--third-text-color)'}} /></button>
+            <button onClick={handleDelete}>
+              <DeleteOutlinedIcon
+                style={
+                  isUploadFailed
+                    ? { color: 'var(--border-error-solid)' }
+                    : { color: 'var(--third-text-color)' }
+                }
+              />
+            </button>
           )}
-          {!isUploadFailed && <span className={styles.progressText}>{uploadPercentage}%</span>}
+          {!isUploadFailed && (
+            <span className={styles.progressText}>{uploadPercentage}%</span>
+          )}
         </div>
       )}
     </div>

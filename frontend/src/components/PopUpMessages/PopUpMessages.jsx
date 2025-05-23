@@ -1,12 +1,12 @@
-import PropTypes from "prop-types";
-import { popupStyles } from "./PopUpStyles";
-import Button from "../Button/Button";
+import PropTypes from 'prop-types';
+import { popupStyles } from './PopUpStyles';
+import Button from '../Button/Button';
 import {
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-} from "@mui/material";
+} from '@mui/material';
 
 const PopUpMessages = ({
   open,
@@ -43,7 +43,7 @@ const PopUpMessages = ({
         )}
         <Button
           text={leftButtonText}
-          buttonType={leftButtonType || "secondary"}
+          buttonType={leftButtonType || 'secondary'}
           variant="text"
           onClick={leftButtonClickHandler}
           sx={popupStyles.contentText}
@@ -52,7 +52,7 @@ const PopUpMessages = ({
           text={rightButtonText}
           onClick={rightButtonClickHandler}
           variant="contained"
-          buttonType={rightButtonType || "secondary"}
+          buttonType={rightButtonType || 'secondary'}
           sx={popupStyles.contentText}
         />
       </DialogActions>

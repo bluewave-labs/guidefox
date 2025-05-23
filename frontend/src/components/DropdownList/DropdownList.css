@@ -1,15 +1,14 @@
 .select {
-    width: 241px;
-    height: 34px;
-    font-size: var(--font-regular) !important;
-    border-radius: 8px !important;
+  width: 241px;
+  height: 34px;
+  font-size: var(--font-regular) !important;
+  border-radius: 8px !important;
 }
 
-.select:hover .MuiOutlinedInput-notchedOutline{
-    border-color: var(--main-purple) !important;
+.select:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--main-purple) !important;
 }
 
 .menuItem {
-    font-size: var(--font-regular) !important;
+  font-size: var(--font-regular) !important;
 }
-

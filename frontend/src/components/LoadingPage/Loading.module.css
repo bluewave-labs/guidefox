@@ -1,10 +1,10 @@
 @import url(../../styles/variables.css);
 
-.container{
+.container {
   display: flex;
   flex-direction: column;
-  width:100vw;
-  height:100vh;
+  width: 100vw;
+  height: 100vh;
   flex-grow: 1;
 }
 
@@ -20,7 +20,7 @@
 }
 
 .loading::after {
-  content: "";
+  content: '';
   width: 50px;
   height: 50px;
   border: 10px solid #dddddd;

@@ -1,0 +1,51 @@
+.stepContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0px 8px 12px;
+  background-color: var(--header-background);
+  border: 1.23px solid var(--light-border-color);
+  border-radius: 8px;
+
+  &__isActive {
+    border: 1.23px solid var(--main-purple);
+  }
+
+  &__button {
+    border: none;
+    border-radius: 1rem;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    cursor: pointer;
+    background-color: var(--header-background);
+
+    &:hover {
+      background-color: var(--gray-200);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  &__customInput {
+    padding: 3px 0.5rem;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--main-text-color);
+    cursor: text;
+    outline: none;
+    width: 100px;
+    border: 1px solid transparent;
+    background-color: var(--header-background);
+
+    &:focus {
+      border: 1px solid var(--light-border-color);
+      background-color: white;
+    }
+  }
+}

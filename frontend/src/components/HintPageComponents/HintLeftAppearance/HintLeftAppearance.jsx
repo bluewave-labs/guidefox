@@ -34,17 +34,10 @@ const HintLeftAppearance = ({ data = {}, setState, onSave }) => {
           }
         }}
       >
-        {({
-          isSubmitting,
-          errors,
-          handleChange,
-          handleBlur,
-          values,
-          validateField,
-        }) => (
+        {({ errors, handleChange, handleBlur, values, validateField }) => (
           <Form className="hint-appearance-container">
             {Object.entries(data).map(([key, value]) => (
-              <div key={key} className='hint-appearance-item'>
+              <div key={key} className="hint-appearance-item">
                 <h2 className="hint-state-name">{mapState[key]}</h2>
                 <div className="hint-appearance-color">
                   <ColorTextField

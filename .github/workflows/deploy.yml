@@ -49,7 +49,7 @@ jobs:
             git stash
             git pull
             git stash apply
-            docker compose down
-            docker compose build
-            docker compose up -d
+            npm run docker-down:dev
+            npm run docker-build:prod
+            npm run docker-up:prod-d
           EOF

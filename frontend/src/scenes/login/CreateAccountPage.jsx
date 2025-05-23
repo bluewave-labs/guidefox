@@ -1,65 +1,66 @@
-import React, { useState } from "react";
-import styles from "./Login.module.css";
-import CustomTextField from "../../components/TextFieldComponents/CustomTextField/CustomTextField";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import CircularProgress from "@mui/material/CircularProgress";
-import { signUp } from "../../services/loginServices";
-import CustomLink from "../../components/CustomLink/CustomLink";
-import { handleAuthSuccess } from "../../utils/loginHelper";
-import { useAuth } from "../../services/authProvider";
-import { useNavigate } from "react-router-dom";
-import Logo from "../../components/Logo/Logo";
-import * as Yup from "yup";
-import { Form, Formik } from "formik";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import styles from './Login.module.css';
+import CustomTextField from '../../components/TextFieldComponents/CustomTextField/CustomTextField';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CircularProgress from '@mui/material/CircularProgress';
+import { signUp } from '../../services/loginServices';
+import CustomLink from '../../components/CustomLink/CustomLink';
+import { handleAuthSuccess } from '../../utils/loginHelper';
+import { useAuth } from '../../services/authProvider';
+import { useNavigate } from 'react-router-dom';
+import Logo from '../../components/Logo/Logo';
+import * as Yup from 'yup';
+import { Form, Formik } from 'formik';
 
-function CreateAccountPage({ isAdmin = false, setIsAdmin}) {
+function CreateAccountPage({ isAdmin = false, setIsAdmin }) {
   const { loginAuth } = useAuth();
   const navigate = useNavigate();
   const [serverErrors, setServerErrors] = useState([]);
-  
+
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .required("Name is required")
+      .required('Name is required')
       .matches(
         /^[A-Za-z'\s-]+$/,
-        "Name can only contain letters, hyphens and apostrophes"
+        'Name can only contain letters, hyphens and apostrophes'
       )
       .trim(),
     surname: Yup.string()
-      .required("Surname is required")
+      .required('Surname is required')
       .matches(
         /^[A-Za-z'\s-]+$/,
-        "Surname can only contain letters, hyphens and apostrophes"
+        'Surname can only contain letters, hyphens and apostrophes'
       )
       .trim(),
     email: Yup.string()
       .matches(
         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-        "Enter a valid email address"
+        'Enter a valid email address'
       )
-      .required("Email is required")
+      .required('Email is required')
       .trim(),
     password: Yup.string()
-      .required("Password is required")
-      .min(8, "Password must be at least 8 characters")
+      .required('Password is required')
+      .min(8, 'Password must be at least 8 characters')
       .matches(
         /[!@#$%^&*(),.?":{}|<>_\-=]/,
-        "Password must contain at least one special character"
+        'Password must contain at least one special character'
       ),
-      ...(isAdmin && {
-        confirmPassword: Yup.string()
-          .required("Confirm Password is required")
-          .oneOf([Yup.ref('password'), null], "Passwords must match"),
-      }),
+    ...(isAdmin && {
+      confirmPassword: Yup.string()
+        .required('Confirm Password is required')
+        .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+    }),
   });
 
   return (
     <Formik
       initialValues={{
-        name: "",
-        surname: "",
-        email: "",
-        password: "",
+        name: '',
+        surname: '',
+        email: '',
+        password: '',
       }}
       validationSchema={validationSchema}
       validateonMount={false}
@@ -77,7 +78,7 @@ function CreateAccountPage({ isAdmin = false, setIsAdmin}) {
             setServerErrors([error.response.data.error]);
           } else {
             setServerErrors([
-              "An error occurred. Please check your network connection and try again.",
+              'An error occurred. Please check your network connection and try again.',
             ]);
           }
         } finally {
@@ -93,10 +94,14 @@ function CreateAccountPage({ isAdmin = false, setIsAdmin}) {
         handleBlur,
         values,
       }) => (
-        <Form className={styles["login-container"]}>
+        <Form className={styles['login-container']}>
           <Logo />
-          {isAdmin ? <h2> Create admin account</h2> : <h2>Create an account</h2>}
-          <div className={styles["form-group"]}>
+          {isAdmin ? (
+            <h2> Create admin account</h2>
+          ) : (
+            <h2>Create an account</h2>
+          )}
+          <div className={styles['form-group']}>
             <CustomTextField
               id="name"
               name="name"
@@ -116,7 +121,7 @@ function CreateAccountPage({ isAdmin = false, setIsAdmin}) {
             />
           </div>
 
-          <div className={styles["form-group"]}>
+          <div className={styles['form-group']}>
             <CustomTextField
               id="surname"
               name="surname"
@@ -136,7 +141,7 @@ function CreateAccountPage({ isAdmin = false, setIsAdmin}) {
             />
           </div>
 
-          <div className={styles["form-group"]}>
+          <div className={styles['form-group']}>
             <CustomTextField
               id="email"
               type="email"
@@ -156,7 +161,7 @@ function CreateAccountPage({ isAdmin = false, setIsAdmin}) {
             />
           </div>
 
-          <div className={styles["form-group"]}>
+          <div className={styles['form-group']}>
             <CustomTextField
               id="password"
               type="password"
@@ -176,9 +181,8 @@ function CreateAccountPage({ isAdmin = false, setIsAdmin}) {
             />
           </div>
 
-          {
-            isAdmin &&
-            <div className={styles["form-group"]}>
+          {isAdmin && (
+            <div className={styles['form-group']}>
               <CustomTextField
                 id="confirmPassword"
                 type="password"
@@ -195,36 +199,38 @@ function CreateAccountPage({ isAdmin = false, setIsAdmin}) {
                 value={values.confirmPassword}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                error={Boolean(touched.confirmPassword && errors.confirmPassword)}
+                error={Boolean(
+                  touched.confirmPassword && errors.confirmPassword
+                )}
                 helperText={touched.confirmPassword && errors.confirmPassword}
               />
             </div>
-          }
-          <div className={styles["password-constraints"]}>
+          )}
+          <div className={styles['password-constraints']}>
             <CheckCircleIcon
               style={{
-                color: values.password.length >= 8 ? "green" : "#D0D5DD",
-                fontSize: "20px",
-                marginRight: "5px",
+                color: values.password.length >= 8 ? 'green' : '#D0D5DD',
+                fontSize: '20px',
+                marginRight: '5px',
               }}
             />
             Must be at least 8 characters
           </div>
-          <div className={styles["password-constraints"]}>
+          <div className={styles['password-constraints']}>
             <CheckCircleIcon
               style={{
                 color: /[!@#$%^&*(),.?":{}|<>_\-=]/.test(values.password)
-                  ? "green"
-                  : "#D0D5DD",
-                fontSize: "20px",
-                marginRight: "5px",
+                  ? 'green'
+                  : '#D0D5DD',
+                fontSize: '20px',
+                marginRight: '5px',
               }}
             />
             Must contain one special character
           </div>
 
           {serverErrors.length > 0 && (
-            <div className={styles["error-message"]}>
+            <div className={styles['error-message']}>
               {serverErrors.map((error, index) => (
                 <div key={index}>{error}</div>
               ))}
@@ -232,17 +238,17 @@ function CreateAccountPage({ isAdmin = false, setIsAdmin}) {
           )}
 
           <button
-            className={styles["create-account-button"]}
+            className={styles['create-account-button']}
             type="submit"
             disabled={isSubmitting}
           >
             {isSubmitting ? (
               <CircularProgress size={12} color="inherit" />
             ) : (
-              "Get started"
+              'Get started'
             )}
           </button>
-          <div className={styles["sign-up-link"]}>
+          <div className={styles['sign-up-link']}>
             Already have an account? <CustomLink text="Log in" url="/login" />
           </div>
         </Form>
@@ -250,5 +256,10 @@ function CreateAccountPage({ isAdmin = false, setIsAdmin}) {
     </Formik>
   );
 }
+
+CreateAccountPage.propTypes = {
+  setIsAdmin: PropTypes.func,
+  isAdmin: PropTypes.bool,
+};
 
 export default CreateAccountPage;

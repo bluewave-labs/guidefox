@@ -1,4 +1,10 @@
-import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
+import {
+  render,
+  screen,
+  fireEvent,
+  act,
+  waitFor,
+} from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { AuthProvider } from '../../../services/authProvider';
@@ -14,7 +20,7 @@ describe('CreateAccountPage', () => {
   it('renders the create account page', () => {
     render(
       <Router>
-        <AuthProvider> 
+        <AuthProvider>
           <CreateAccountPage />
         </AuthProvider>
       </Router>
@@ -96,18 +102,26 @@ describe('CreateAccountPage', () => {
     );
 
     await act(async () => {
-      fireEvent.change(screen.getByPlaceholderText('Enter your name'), { target: { value: 'testname' } });
-      fireEvent.change(screen.getByPlaceholderText('Enter your surname'), { target: { value: 'testsurname' } });
-      fireEvent.change(screen.getByPlaceholderText('Enter your email'), { target: { value: 'test@example.com' } });
-      fireEvent.change(screen.getByPlaceholderText('Create your password'), { target: { value: 'Password1!' } });
+      fireEvent.change(screen.getByPlaceholderText('Enter your name'), {
+        target: { value: 'testname' },
+      });
+      fireEvent.change(screen.getByPlaceholderText('Enter your surname'), {
+        target: { value: 'testsurname' },
+      });
+      fireEvent.change(screen.getByPlaceholderText('Enter your email'), {
+        target: { value: 'test@example.com' },
+      });
+      fireEvent.change(screen.getByPlaceholderText('Create your password'), {
+        target: { value: 'Password1!' },
+      });
       fireEvent.click(screen.getByText('Get started'));
     });
 
-    expect(signUp).toHaveBeenCalledWith({ 
-      name: 'testname', 
-      surname: 'testsurname', 
-      email: 'test@example.com', 
-      password: 'Password1!' 
+    expect(signUp).toHaveBeenCalledWith({
+      name: 'testname',
+      surname: 'testsurname',
+      email: 'test@example.com',
+      password: 'Password1!',
     });
     expect(screen.queryByText('An error occurred.')).toBeFalsy();
   });
@@ -129,10 +143,18 @@ describe('CreateAccountPage', () => {
     );
 
     await act(async () => {
-      fireEvent.change(screen.getByPlaceholderText('Enter your name'), { target: { value: 'testname' } });
-      fireEvent.change(screen.getByPlaceholderText('Enter your surname'), { target: { value: 'testsurname' } });
-      fireEvent.change(screen.getByPlaceholderText('Enter your email'), { target: { value: 'test@example.com' } });
-      fireEvent.change(screen.getByPlaceholderText('Create your password'), { target: { value: 'Password1!' } });
+      fireEvent.change(screen.getByPlaceholderText('Enter your name'), {
+        target: { value: 'testname' },
+      });
+      fireEvent.change(screen.getByPlaceholderText('Enter your surname'), {
+        target: { value: 'testsurname' },
+      });
+      fireEvent.change(screen.getByPlaceholderText('Enter your email'), {
+        target: { value: 'test@example.com' },
+      });
+      fireEvent.change(screen.getByPlaceholderText('Create your password'), {
+        target: { value: 'Password1!' },
+      });
       fireEvent.click(screen.getByText('Get started'));
     });
 
@@ -140,11 +162,11 @@ describe('CreateAccountPage', () => {
       expect(screen.getByText('Email already exists')).toBeTruthy();
     });
 
-    expect(signUp).toHaveBeenCalledWith({ 
-      name: 'testname', 
-      surname: 'testsurname', 
-      email: 'test@example.com', 
-      password: 'Password1!' 
+    expect(signUp).toHaveBeenCalledWith({
+      name: 'testname',
+      surname: 'testsurname',
+      email: 'test@example.com',
+      password: 'Password1!',
     });
     expect(screen.queryByText('An error occurred.')).toBeFalsy();
   });
@@ -161,15 +183,27 @@ describe('CreateAccountPage', () => {
     );
 
     await act(async () => {
-      fireEvent.change(screen.getByPlaceholderText('Enter your name'), { target: { value: 'testname' } });
-      fireEvent.change(screen.getByPlaceholderText('Enter your surname'), { target: { value: 'testsurname' } });
-      fireEvent.change(screen.getByPlaceholderText('Enter your email'), { target: { value: 'test@example.com' } });
-      fireEvent.change(screen.getByPlaceholderText('Create your password'), { target: { value: 'Password1!' } });
+      fireEvent.change(screen.getByPlaceholderText('Enter your name'), {
+        target: { value: 'testname' },
+      });
+      fireEvent.change(screen.getByPlaceholderText('Enter your surname'), {
+        target: { value: 'testsurname' },
+      });
+      fireEvent.change(screen.getByPlaceholderText('Enter your email'), {
+        target: { value: 'test@example.com' },
+      });
+      fireEvent.change(screen.getByPlaceholderText('Create your password'), {
+        target: { value: 'Password1!' },
+      });
       fireEvent.click(screen.getByText('Get started'));
     });
 
     await waitFor(() => {
-      expect(screen.getByText('An error occurred. Please check your network connection and try again.')).toBeTruthy();
+      expect(
+        screen.getByText(
+          'An error occurred. Please check your network connection and try again.'
+        )
+      ).toBeTruthy();
     });
   });
 });

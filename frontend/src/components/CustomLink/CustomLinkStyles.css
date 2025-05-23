@@ -1,27 +1,26 @@
 .custom-link {
-    text-decoration: none;
-  }
-  
-  .custom-link.tertiary {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .custom-link.tertiary::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 100%;
-    border-bottom: 1px dashed var(--main-purple);
-    transition: border-bottom 0.3s ease-in-out;
-  }
-  
-  .custom-link.tertiary:hover {
-    background-color: #F1F2FF;
-  }
-  
-  .custom-link.tertiary:hover::after {
-    border-bottom: 1px solid var(--main-purple);
-  }
-  
+  text-decoration: none;
+}
+
+.custom-link.tertiary {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-link.tertiary::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  border-bottom: 1px dashed var(--main-purple);
+  transition: border-bottom 0.3s ease-in-out;
+}
+
+.custom-link.tertiary:hover {
+  background-color: #f1f2ff;
+}
+
+.custom-link.tertiary:hover::after {
+  border-bottom: 1px solid var(--main-purple);
+}

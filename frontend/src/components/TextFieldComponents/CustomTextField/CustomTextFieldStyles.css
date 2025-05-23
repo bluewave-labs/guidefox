@@ -6,6 +6,10 @@
   color: var(--light-border-color);
 }
 
+.textField .MuiInputBase-input {
+  color: var(--main-text-color);
+}
+
 .textField .MuiDivider-root {
   margin: 0 10px;
 }

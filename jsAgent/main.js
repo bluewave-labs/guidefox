@@ -2,7 +2,9 @@
 const BW_SERVER_ENDPOINT_BASE = window.bwApiBaseUrl;
 const BW_GET_GUIDE_LOG_URL= `${BW_SERVER_ENDPOINT_BASE}guide/get_incomplete_guides_by_url`;
 const BW_ADD_GUIDE_LOG_URL= `${BW_SERVER_ENDPOINT_BASE}guide_log/add_guide_log`;
+const BW_TOUR_DETAIL_JS_URL = `${BW_SERVER_ENDPOINT_BASE}tour/get_tour/`;
 const BW_JS_BASE_URL = window.bwAgentBaseUrl;
+
 const BW_POPUP_JS_URL = `${BW_JS_BASE_URL}popup.js`;
 const BW_LINKS_JS_URL = `${BW_JS_BASE_URL}links.js`;
 const BW_BANNER_JS_URL = `${BW_JS_BASE_URL}banner.js`;
@@ -107,7 +109,7 @@ bw.data = {
             headers: myHeaders,
             body: JSON.stringify({
                 userId,
-                url: location.origin,
+                url: location.href,
             }),
             redirect: "follow",
         };
@@ -135,6 +137,29 @@ bw.data = {
         const response = await fetch(BW_ADD_GUIDE_LOG_URL, requestOptions)
         const responseJson = await response.json();
         return responseJson;
+    },
+    getTourById: async function (tourId) {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            redirect: "follow",
+        };
+
+        try {
+            const response = await fetch(`${BW_TOUR_DETAIL_JS_URL}${tourId}`, requestOptions);
+            if (!response.ok) {
+                console.log("Error fetching tour data:", response.status);
+                return null;
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.log("Error fetching tour data:", error);
+            return null;
+        }
     },
 };
 
@@ -185,6 +210,7 @@ bw.init = (cb) => {
         try {
             const onBoardConfig = await bw.data.getData(window.BW_USER);
             console.log("data loaded:", onBoardConfig);
+          
             window.bwonboarddata = onBoardConfig;
             if (onBoardConfig.popup.length > 0) {
                 bw.util.loadScriptAsync(BW_POPUP_JS_URL);

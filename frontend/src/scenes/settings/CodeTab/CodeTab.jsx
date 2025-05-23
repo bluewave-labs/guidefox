@@ -1,65 +1,69 @@
-import React, { useState, useEffect } from "react";
-import styles from "./CodeTab.module.css";
-import CustomTextField from "@components/TextFieldComponents/CustomTextField/CustomTextField";
-import Button from "@components/Button/Button";
+import React, { useState, useEffect } from 'react';
+import styles from './CodeTab.module.css';
+import CustomTextField from '@components/TextFieldComponents/CustomTextField/CustomTextField';
+import Button from '@components/Button/Button';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
-import { emitToastError } from "../../../utils/guideHelper";
+import { emitToastError } from '../../../utils/guideHelper';
 import { getServerUrl, addServerUrl } from '../../../services/teamServices';
-import toastEmitter, { TOAST_EMITTER_KEY } from "../../../utils/toastEmitter";
-import { URL_REGEX } from "../../../utils/constants";
+import toastEmitter, { TOAST_EMITTER_KEY } from '../../../utils/toastEmitter';
+import { URL_REGEX } from '../../../utils/constants';
 
 const CodeTab = () => {
-    const [serverUrl, setServerUrl] = useState('');
-    const [agentUrl, setAgentUrl] = useState('');
+  const [serverUrl, setServerUrl] = useState('');
+  const [agentUrl, setAgentUrl] = useState('');
 
-    const validateServerUrl = url => {
-        const errors = [];
+  const validateServerUrl = (url) => {
+    const errors = [];
 
-        if (url === "") {
-            return { valid: true, errors: null };
-        }
+    if (url === '') {
+      return { valid: true, errors: null };
+    }
 
-        if (!URL_REGEX.PROTOCOL.test(url)) {
-            errors.push("Invalid or missing protocol (must be 'http://' or 'https://').")
-        }
+    if (!URL_REGEX.PROTOCOL.test(url)) {
+      errors.push(
+        "Invalid or missing protocol (must be 'http://' or 'https://')."
+      );
+    }
 
-        const domainMatch = url.match(URL_REGEX.DOMAIN);
-        if (!domainMatch) {
-            errors.push("Invalid domain name (must include a valid top-level domain like '.com').");
-        } else {
-            const domain = domainMatch[1];
-            if (!/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(domain)) {
-                errors.push(`Malformed domain: '${domain}'.`);
-            }
-        }
+    const domainMatch = url.match(URL_REGEX.DOMAIN);
+    if (!domainMatch) {
+      errors.push(
+        "Invalid domain name (must include a valid top-level domain like '.com')."
+      );
+    } else {
+      const domain = domainMatch[1];
+      if (!/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(domain)) {
+        errors.push(`Malformed domain: '${domain}'.`);
+      }
+    }
 
-        if (errors.length === 0) {
-            return { valid: true, errors: null }
-        }
+    if (errors.length === 0) {
+      return { valid: true, errors: null };
+    }
 
-        return { valid: false, errors }
+    return { valid: false, errors };
+  };
+
+  useEffect(() => {
+    const fetchServerUrl = async () => {
+      try {
+        const { serverUrl, agentUrl } = await getServerUrl();
+        setServerUrl(serverUrl);
+        setAgentUrl(agentUrl);
+      } catch (err) {
+        console.error('Error fetching server url: ', err);
+      }
     };
+    fetchServerUrl();
+  }, []);
 
-    useEffect(() => {
-        const fetchServerUrl = async () => {
-            try {
-                const { serverUrl, agentUrl } = await getServerUrl();
-                setServerUrl(serverUrl);
-                setAgentUrl(agentUrl)
-            } catch (err) {
-                console.error('Error fetching server url: ', err);
-            }
-        }
-        fetchServerUrl();
-    }, [])
+  const handleUrlChange = (e) => {
+    setServerUrl(e.target.value);
+  };
 
-    const handleUrlChange = (e) => {
-        setServerUrl(e.target.value);
-    };
-
-    const handleAgentUrlChange = (e) => {
-        setAgentUrl(e.target.value);
-    };
+  const handleAgentUrlChange = (e) => {
+    setAgentUrl(e.target.value);
+  };
 
     // const onSave = async () => {
     //     const { valid, errors } = validateServerUrl(serverUrl);
@@ -79,7 +83,7 @@ const CodeTab = () => {
     //     }
     // };
 
-    const codeToCopy = `
+  const codeToCopy = `
         <!-- Client-side HTML/JS Snippet to be integrated into their website -->
         <script>
             (function() {
@@ -96,20 +100,23 @@ const CodeTab = () => {
         </script>
         `;
 
-    const handleCopy = () => {
-        navigator.clipboard.writeText(codeToCopy)
-            .then(() => {
-                toastEmitter.emit(TOAST_EMITTER_KEY, 'Code copied to clipboard');
-            })
-            .catch((err) => {
-                toastEmitter.emit(TOAST_EMITTER_KEY, err);
-            });
-    };
+  const handleCopy = () => {
+    navigator.clipboard
+      .writeText(codeToCopy)
+      .then(() => {
+        toastEmitter.emit(TOAST_EMITTER_KEY, 'Code copied to clipboard');
+      })
+      .catch((err) => {
+        toastEmitter.emit(TOAST_EMITTER_KEY, err);
+      });
+  };
 
-    return (
-        <section className={styles.container}>
-            <h2>API key management</h2>
-            <p className={styles.content}>Manage the key that Onboarding app uses to authenticate the agent code.</p>
+  return (
+    <section className={styles.container}>
+      <h2>API key management</h2>
+      <p className={styles.content}>
+        Manage the key that Onboarding app uses to authenticate the agent code.
+      </p>
 
             {/* server url */}
             <div className={styles.block}>
@@ -149,9 +156,11 @@ const CodeTab = () => {
                 />
             </div>
 
-            <pre><code style={{ whiteSpace: "break-spaces"}}>{codeToCopy}</code></pre>
-        </section>
-    )
-}
+      <pre>
+        <code style={{ whiteSpace: 'break-spaces' }}>{codeToCopy}</code>
+      </pre>
+    </section>
+  );
+};
 
 export default CodeTab;

@@ -1,8 +1,8 @@
 .dropdownButton {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0.4em 0.4em;
-    margin: 1px;
-    position: relative;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.4em 0.4em;
+  margin: 1px;
+  position: relative;
 }

@@ -1,9 +1,9 @@
-.settings{
-    display: flex;
-    justify-content: center;
-    width: 70%;
-    margin: 30px 30px;
+.settings {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  margin: 30px 30px;
 }
-.tabLabel{
-    font-size: var(--font-regular) !important;
+.tabLabel {
+  font-size: var(--font-regular) !important;
 }

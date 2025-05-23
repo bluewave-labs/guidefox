@@ -1,32 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import LoadingArea from "../../components/LoadingPage/LoadingArea";
-import { getStatistics } from "../../services/statisticsService";
-import styles from "./Dashboard.module.scss";
-import CreateActivityButtonList from "./HomePageComponents/CreateActivityButtonList/CreateActivityButtonList";
-import DateDisplay from "./HomePageComponents/DateDisplay/DateDisplay";
-import StatisticCardList from "./HomePageComponents/StatisticCardsList/StatisticCardsList";
-import UserTitle from "./HomePageComponents/UserTitle/UserTitle";
-import BannerSkeleton from "./HomePageComponents/Skeletons/BannerSkeleton";
-import BaseSkeleton from "./HomePageComponents/Skeletons/BaseSkeleton";
-import HintSkeleton from "./HomePageComponents/Skeletons/HintSkeleton";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import LoadingArea from '../../components/LoadingPage/LoadingArea';
+import { getStatistics } from '../../services/statisticsService';
+import styles from './Dashboard.module.scss';
+import CreateActivityButtonList from './HomePageComponents/CreateActivityButtonList/CreateActivityButtonList';
+import DateDisplay from './HomePageComponents/DateDisplay/DateDisplay';
+import StatisticCardList from './HomePageComponents/StatisticCardsList/StatisticCardsList';
+import UserTitle from './HomePageComponents/UserTitle/UserTitle';
+import BannerSkeleton from './HomePageComponents/Skeletons/BannerSkeleton';
+import BaseSkeleton from './HomePageComponents/Skeletons/BaseSkeleton';
+import HintSkeleton from './HomePageComponents/Skeletons/HintSkeleton';
+import TourSkeleton from './HomePageComponents/Skeletons/TourSkeleton';
 
 const mapMetricName = (guideType) => {
   switch (guideType) {
-    case "popup":
-      return "Popup views";
-    case "hint":
-      return "Hint views";
-    case "banner":
-      return "Banner views";
-    case "link":
-      return "Helper link views";
-    case "tour":
-      return "Tour views";
-    case "checklist":
-      return "Checklist views";
+    case 'popup':
+      return 'Popup views';
+    case 'hint':
+      return 'Hint views';
+    case 'banner':
+      return 'Banner views';
+    case 'link':
+      return 'Helper link views';
+    case 'tour':
+      return 'Tour views';
+    case 'checklist':
+      return 'Checklist views';
     default:
-      return "Unknown";
+      return 'Unknown';
   }
 };
 
@@ -35,7 +37,7 @@ const Dashboard = ({ name }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [metrics, setMetrics] = useState([]);
 
-  const metricNames = ['popup', 'banner', 'link', 'hint']
+  const metricNames = ['popup', 'banner', 'link', 'hint', 'tour'];
 
   useEffect(() => {
     getStatistics().then((data) => {
@@ -59,23 +61,28 @@ const Dashboard = ({ name }) => {
   const buttons = [
     {
       skeletonType: <BaseSkeleton guideType="popup" />,
-      placeholder: "Create a popup",
-      onClick: () => navigate("/popup", { state: { autoOpen: true } }),
+      placeholder: 'Create a popup',
+      onClick: () => navigate('/popup', { state: { autoOpen: true } }),
     },
     {
       skeletonType: <BannerSkeleton />,
-      placeholder: "Create a new banner",
-      onClick: () => navigate("/banner", { state: { autoOpen: true } }),
+      placeholder: 'Create a new banner',
+      onClick: () => navigate('/banner', { state: { autoOpen: true } }),
     },
     {
       skeletonType: <BaseSkeleton guideType="helperLink" />,
-      placeholder: "Create a new helper link",
-      onClick: () => navigate("/link", { state: { autoOpen: true } }),
+      placeholder: 'Create a new helper link',
+      onClick: () => navigate('/link', { state: { autoOpen: true } }),
     },
     {
-      skeletonType: <HintSkeleton/>,
-      placeholder: "Create a new hint",
-      onClick: () => navigate("/hint", { state: { autoOpen: true } }),
+      skeletonType: <HintSkeleton />,
+      placeholder: 'Create a new hint',
+      onClick: () => navigate('/hint', { state: { autoOpen: true } }),
+    },
+    {
+      skeletonType: <TourSkeleton />,
+      placeholder: 'Create a new tour',
+      onClick: () => navigate('/tour', { state: { autoOpen: true } }),
     },
   ];
 
@@ -90,6 +97,10 @@ const Dashboard = ({ name }) => {
       {isLoading ? <LoadingArea /> : <StatisticCardList metrics={metrics} />}
     </div>
   );
+};
+
+Dashboard.propTypes = {
+  name: PropTypes.string,
 };
 
 export default Dashboard;

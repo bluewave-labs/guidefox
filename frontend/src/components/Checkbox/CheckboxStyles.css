@@ -4,7 +4,7 @@
   cursor: pointer;
 }
 .checkbox .MuiCheckbox-root {
-  border: none; 
+  border: none;
   outline: none;
 }
 .checkbox-label {
@@ -16,7 +16,7 @@
 }
 
 .secondary .MuiCheckbox-root {
-  color: #808080E5;
+  color: #808080e5;
 }
 
 .primary .MuiCheckbox-root.Mui-checked {
@@ -24,7 +24,7 @@
 }
 
 .secondary .MuiCheckbox-root.Mui-checked {
-  color: #808080E5;
+  color: #808080e5;
 }
 
 .primary .MuiCheckbox-root.MuiCheckbox-indeterminate {
@@ -32,5 +32,5 @@
 }
 
 .secondary .MuiCheckbox-root.MuiCheckbox-indeterminate {
-  color: #808080E5;
+  color: #808080e5;
 }

@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Button from "@mui/material/Button";
-import { activityButtonStyles } from "./ActivityButtonStyles";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Button from '@mui/material/Button';
+import { activityButtonStyles } from './ActivityButtonStyles';
 
 const CreateActivityButton = ({
-  placeholder = "",
+  placeholder = '',
   skeletonType,
   onClick = () => {},
 }) => {

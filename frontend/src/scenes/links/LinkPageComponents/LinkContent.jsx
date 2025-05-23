@@ -1,10 +1,10 @@
-import { Link } from "@mui/material";
-import { useContext, useState } from "react";
-import CardContainer from "@components/Links/Card";
-import Card from "@components/Links/Card/Card";
-import Popup from "@components/Links/Popup/Popup";
-import { HelperLinkContext } from "../../../services/linksProvider";
-import styles from "../LinkPage.module.scss";
+import { Link } from '@mui/material';
+import { useContext, useState } from 'react';
+import ListItemContainer from '../../../components/Links/DraggableHelperLink/ListItemContainer';
+import DraggableHelperLink from '../../../components/Links/DraggableHelperLink/DraggableHelperLink';
+import Popup from '@components/Links/Popup/Popup';
+import { HelperLinkContext } from '../../../services/linksProvider';
+import styles from '../LinkPage.module.scss';
 
 const LinkContent = () => {
   const [draggingItem, setDraggingItem] = useState(null);
@@ -41,9 +41,9 @@ const LinkContent = () => {
     <>
       <div className={styles.body__links}>
         <h3 className={styles.body__title}>Link items</h3>
-        <CardContainer>
+        <ListItemContainer>
           {links.map((item) => (
-            <Card
+            <DraggableHelperLink
               card={item}
               key={item.id}
               onDragStart={handleDragStart}
@@ -54,16 +54,16 @@ const LinkContent = () => {
           ))}
           <Link
             onClick={toggleSettings}
-            underline='hover'
-            component='button'
-            fontSize='0.785rem'
+            underline="hover"
+            component="button"
+            fontSize="0.785rem"
             lineHeight={1.43}
-            display='inline-block'
-            style={{ margin: "0 0 0 1.4rem" }}
+            display="inline-block"
+            style={{ margin: '0 0 0 1.4rem' }}
           >
             + Add new link
           </Link>
-        </CardContainer>
+        </ListItemContainer>
       </div>
       <Popup />
     </>

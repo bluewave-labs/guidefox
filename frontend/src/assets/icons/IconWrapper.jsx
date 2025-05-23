@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const IconWrapper = ({ children, label, ...props }) => (
   <svg
     role="img"
@@ -12,5 +14,10 @@ const IconWrapper = ({ children, label, ...props }) => (
     {children}
   </svg>
 );
+
+IconWrapper.propTypes = {
+  children: PropTypes.node,
+  label: PropTypes.string.isRequired,
+};
 
 export default IconWrapper;

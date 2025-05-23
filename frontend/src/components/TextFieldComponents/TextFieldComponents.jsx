@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { Box, Button, InputAdornment, Tooltip, Chip } from "@mui/material";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import Divider from "@mui/material/Divider";
-import CustomTextField from "./CustomTextField/CustomTextField";
-import "./TextFieldComponents.css";
+import React, { useState } from 'react';
+import { Box, Button, InputAdornment, Tooltip } from '@mui/material';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import Divider from '@mui/material/Divider';
+import CustomTextField from './CustomTextField/CustomTextField';
+import './TextFieldComponents.css';
 
 const TextFieldComponents = () => {
   const [values, setValues] = useState({
-    website: "www.untitledui.com",
-    website1: "www.untitledui.com",
-    email: "olivia@untitledui.com",
-    email1: "olivia@untitledui.com",
-    email2: "olivia@untitledui.com",
-    description: "",
-    description1: "Marketing",
-    description2: "",
+    website: 'www.untitledui.com',
+    website1: 'www.untitledui.com',
+    email: 'olivia@untitledui.com',
+    email1: 'olivia@untitledui.com',
+    email2: 'olivia@untitledui.com',
+    description: '',
+    description1: 'Marketing',
+    description2: '',
   });
 
   const handleChange = (name) => (e) => {
@@ -29,7 +29,7 @@ const TextFieldComponents = () => {
         <CustomTextField
           labelText="Website"
           value={values.website}
-          onChange={handleChange("website")}
+          onChange={handleChange('website')}
           startAdornment=<>
             <InputAdornment position="start">http://</InputAdornment>
             <Divider sx={{ height: 34, m: 0.5 }} orientation="vertical" />
@@ -43,25 +43,25 @@ const TextFieldComponents = () => {
         <CustomTextField
           labelText="Email"
           value={values.email}
-          onChange={handleChange("email")}
+          onChange={handleChange('email')}
           helperText="This is a hint text to help user."
         />
 
         <CustomTextField
           labelText="Email"
           value={values.email1}
-          onChange={handleChange("email1")}
+          onChange={handleChange('email1')}
           error
           helperText="This is an error message."
           endAdornment=<ErrorOutlineIcon
-            style={{ color: "var(--border-error-solid)" }}
+            style={{ color: 'var(--border-error-solid)' }}
           />
         />
 
         <CustomTextField
           labelText="Email"
           value={values.email2}
-          onChange={handleChange("email2")}
+          onChange={handleChange('email2')}
           helperText="This is a hint text to help user."
           endAdornment=<HelpOutlineIcon />
         />
@@ -71,7 +71,7 @@ const TextFieldComponents = () => {
           labelFontWeight={400}
           TextFieldWidth="397px"
           value={values.website1}
-          onChange={handleChange("website1")}
+          onChange={handleChange('website1')}
           helperText="This is a hint text to help user."
           endAdornment=<>
             <HelpOutlineIcon />
@@ -87,7 +87,7 @@ const TextFieldComponents = () => {
         <CustomTextField
           labelText="Description"
           value={values.description}
-          onChange={handleChange("description")}
+          onChange={handleChange('description')}
           placeholder="Enter a description..."
           helperText="This is a hint text to help user."
           multiline={true}
@@ -99,18 +99,18 @@ const TextFieldComponents = () => {
           helperText="This is a hint text to help user."
           multiline={true}
           value={values.description1}
-          onChange={handleChange("description1")}
+          onChange={handleChange('description1')}
           rows={4}
           chips={[
-            { label: "Design", onDelete: () => {} },
-            { label: "Software", onDelete: () => {} },
+            { label: 'Design', onDelete: () => {} },
+            { label: 'Software', onDelete: () => {} },
           ]}
         />
 
         <CustomTextField
           labelText="Description"
           value={values.description2}
-          onChange={handleChange("description2")}
+          onChange={handleChange('description2')}
           placeholder="Enter a description..."
           helperText="This is an error message."
           multiline={true}

@@ -1,7 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types';
 import styles from './ProgressSteps.module.scss';
-import { CheckCircle as CheckCircleIcon, TripOrigin as TripOriginIcon } from '@mui/icons-material';
+import {
+  CheckCircle as CheckCircleIcon,
+  TripOrigin as TripOriginIcon,
+} from '@mui/icons-material';
 
 const StepIcon = ({ prevStep = false, currentStep = false }) => {
   return (
@@ -18,9 +21,8 @@ const StepIcon = ({ prevStep = false, currentStep = false }) => {
 };
 
 StepIcon.propTypes = {
-    prevStep: PropTypes.bool,
-    currentStep: PropTypes.bool,
-  };
-
+  prevStep: PropTypes.bool,
+  currentStep: PropTypes.bool,
+};
 
 export default StepIcon;
