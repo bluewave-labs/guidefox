@@ -94,6 +94,7 @@ async function runSeeders(queryInterface) {
         linkFontColor: '#344054',
         iconColor: '#7F56D9',
         createdBy: 1,
+        url: 'https://guidefox-demo.bluewavelabs.ca/'
       },
     ],
     { returning: true } // Return the created row to use its ID
@@ -118,6 +119,53 @@ async function runSeeders(queryInterface) {
     ],
     {}
   );
+  const [tour] = await queryInterface.bulkInsert(
+    'tours',
+    [
+      {
+        headerColor: '#101828',
+        textColor: '#344054',
+        buttonBackgroundColor: '#7F56D9',
+        buttonTextColor: '#ffffff',
+        size: 'medium', // assuming settings.tour.size[1] is 'medium'
+        finalButtonText: 'Complete tour',
+        url: 'https://guidefox-demo.bluewavelabs.ca/',
+        active: true,
+        createdBy: 1,
+      },
+    ],
+    { returning: true }
+  );
+
+  // Insert three TourPopups linked to the above Tour
+  const tourPopups = [
+    {
+      title: 'Popup 1',
+      header: 'See your popup views',
+      description: 'Explore the popup views available in your dashboard.',
+      targetElement: 'div#root>div:nth-child(1)>div:nth-child(1)>div:nth-child(1)',
+      order: 1,
+      tourId: tour.id,
+    },
+    {
+      title: 'Popup 2',
+      header: 'See your banner views',
+      description: 'Check out your banner views and customize them.',
+      targetElement: 'div#root>div:nth-child(1)>div:nth-child(1)>div:nth-child(2)',
+      order: 2,
+      tourId: tour.id,
+    },
+    {
+      title: 'Popup 3',
+      header: 'See your helper link views',
+      description: 'Review and manage your helper link views.',
+      targetElement: 'div#root>div:nth-child(1)>div:nth-child(1)>div:nth-child(3)',
+      order: 3,
+      tourId: tour.id,
+    },
+  ];
+
+  await queryInterface.bulkInsert('tour_popup', tourPopups, {});
 }
 
 module.exports = { runSeeders };
