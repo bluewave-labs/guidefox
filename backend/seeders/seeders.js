@@ -137,7 +137,6 @@ async function runSeeders(queryInterface) {
     { returning: true }
   );
 
-  // Insert three TourPopups linked to the above Tour
   const tourPopups = [
     {
       title: 'Popup 1',
