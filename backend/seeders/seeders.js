@@ -52,7 +52,7 @@ async function runSeeders(queryInterface) {
         popupSize: "small",
         closeButtonAction: "open url",
         url: "https://guidefox-demo.bluewavelabs.ca",
-        actionUrl: "https://guidefox.io/",
+        actionButtonUrl: "https://guidefox.io/",
         actionButtonText: "Go to guidefox.io",
         headerBackgroundColor: "#e4c2f0",
         headerColor: "#450fbd",
