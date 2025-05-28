@@ -1,23 +1,20 @@
-import { React } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Formik } from 'formik';
 import styles from './PopupAppearance.module.scss';
 import ColorTextField from '@components/ColorTextField/ColorTextField';
 import DropdownList from '@components/DropdownList/DropdownList';
-import { apperanceSchema } from '../../../../utils/popupHelper';
+import { appearanceSchema } from '../../../../utils/popupHelper';
 
-const PopupAppearance = ({
-  data = [],
-  popupAppearance,
-  setPopupAppearance,
-  onSave,
-}) => {
+const PopupAppearance = React.forwardRef((props, ref) => {
+  const { data = [], popupAppearance, setPopupAppearance, onSave } = props;
   return (
     <Formik
+      innerRef={ref}
       initialValues={{
         ...popupAppearance,
       }}
-      validationSchema={apperanceSchema}
+      validationSchema={appearanceSchema}
       validateOnMount={false}
       onSubmit={async (values, { setSubmitting }) => {
         try {
@@ -84,15 +81,11 @@ const PopupAppearance = ({
       )}
     </Formik>
   );
-};
-
-PopupAppearance.propTypes = {
-  data: PropTypes.array,
-  setPopupSize: PropTypes.func,
-  popupSize: PropTypes.string,
-};
+});
 
 export default PopupAppearance;
+
+PopupAppearance.displayName = 'PopupAppearance';
 
 PopupAppearance.propTypes = {
   data: PropTypes.arrayOf(

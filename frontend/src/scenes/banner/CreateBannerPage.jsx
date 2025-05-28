@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react';
+import { React, useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import {
   addBanner,
@@ -6,12 +6,13 @@ import {
   getBannerById,
 } from '../../services/bannerServices';
 import GuideTemplate from '../../templates/GuideTemplate/GuideTemplate';
-import { emitToastError } from '../../utils/guideHelper';
+import { emitToastError, onSaveTemplate } from '../../utils/guideHelper';
 import toastEmitter, { TOAST_EMITTER_KEY } from '../../utils/toastEmitter';
 import BannerLeftAppearance from './BannerPageComponents/BannerLeftAppearance/BannerLeftApperance';
 import BannerLeftContent from './BannerPageComponents/BannerLeftContent/BannerLeftContent';
 import BannerPreview from './BannerPageComponents/BannerPreview/BannerPreview';
 import { useDialog } from '../../templates/GuideTemplate/GuideTemplateContext';
+import { newBannerSchema, appearanceSchema } from '../../utils/bannerHelper';
 
 const BannerPage = ({
   autoOpen = false,
@@ -30,6 +31,7 @@ const BannerPage = ({
   const [buttonAction, setButtonAction] = useState('No action');
   const [buttonRepetition, setButtonRepetition] = useState('Show only once');
   const { openDialog, closeDialog } = useDialog();
+  const formikRef = useRef(null);
 
   const handleButtonClick = (index) => {
     setActiveButton(index);
@@ -73,20 +75,40 @@ const BannerPage = ({
       repetitionType: buttonRepetition.toLowerCase(),
       bannerText,
     };
-    try {
-      isEdit
-        ? await editBanner(itemId, bannerData)
-        : await addBanner(bannerData);
 
-      const toastMessage = isEdit
-        ? 'You edited this banner'
-        : 'New banner saved';
-      toastEmitter.emit(TOAST_EMITTER_KEY, toastMessage);
-      setItemsUpdated((prevState) => !prevState);
-      closeDialog();
-    } catch (error) {
-      emitToastError(error);
-    }
+    const appearanceKeys = ['backgroundColor', 'fontColor'];
+    const fieldPriority = [
+      'action',
+      'url',
+      'actionUrl',
+      'backgroundColor',
+      'fontColor',
+    ];
+
+    await onSaveTemplate({
+      data: bannerData,
+      schema: newBannerSchema.concat(appearanceSchema),
+      formikRef,
+      appearanceKeys,
+      setActiveButton,
+      fieldPriority,
+      onSuccess: async () => {
+        try {
+          if (isEdit) {
+            await editBanner(itemId, bannerData);
+            toastEmitter.emit(TOAST_EMITTER_KEY, 'You edited this banner');
+          } else {
+            await addBanner(bannerData);
+            toastEmitter.emit(TOAST_EMITTER_KEY, 'New banner saved');
+          }
+          setItemsUpdated((prev) => !prev);
+          closeDialog();
+        } catch (error) {
+          console.error('Error saving banner:', error);
+          emitToastError(error);
+        }
+      },
+    });
   };
 
   return (
@@ -107,6 +129,7 @@ const BannerPage = ({
       )}
       leftContent={() => (
         <BannerLeftContent
+          ref={formikRef}
           setIsTopPosition={setIsTopPosition}
           isTopPosition={isTopPosition}
           url={url}
@@ -121,6 +144,7 @@ const BannerPage = ({
       )}
       leftAppearance={() => (
         <BannerLeftAppearance
+          ref={formikRef}
           backgroundColor={backgroundColor}
           setBackgroundColor={setBackgroundColor}
           fontColor={fontColor}

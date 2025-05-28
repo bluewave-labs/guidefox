@@ -56,7 +56,7 @@ export const createHelper = async (helper, links) => {
     return response.data;
   } catch (error) {
     console.log(error.message);
-    console.error('Create helper link error:', error.message);
+    console.error('Create helper link error:', error);
     throw error;
   }
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Turndown from 'turndown';
 import HintLeftAppearance from '@components/HintPageComponents/HintLeftAppearance/HintLeftAppearance';
@@ -8,8 +8,9 @@ import HintComponent from '../../products/Hint/HintComponent';
 import { addHint, editHint, getHintById } from '../../services/hintServices';
 import GuideTemplate from '../../templates/GuideTemplate/GuideTemplate';
 import { useDialog } from '../../templates/GuideTemplate/GuideTemplateContext';
-import { emitToastError } from '../../utils/guideHelper';
+import { emitToastError, onSaveTemplate } from '../../utils/guideHelper';
 import toastEmitter, { TOAST_EMITTER_KEY } from '../../utils/toastEmitter';
+import { newHintSchema, appearanceSchema } from '../../utils/hintHelper';
 
 const HintPage = ({
   autoOpen = false,
@@ -18,9 +19,9 @@ const HintPage = ({
   setItemsUpdated,
   setIsEdit,
 }) => {
-  const { openDialog, closeDialog } = useDialog();
-
   const [activeButton, setActiveButton] = useState(0);
+  const formikRef = useRef(null);
+  const { openDialog, closeDialog } = useDialog();
 
   const params = new URLSearchParams(window.location.search);
 
@@ -151,29 +152,52 @@ const HintPage = ({
       isHintIconVisible,
     };
 
-    try {
-      isEdit ? await editHint(itemId, hintData) : await addHint(hintData);
+    // used in onSaveTemplate() input validation/error to switch to appearance tab
+    const appearanceKeys = [
+      'headerBackgroundColor',
+      'headerColor',
+      'textColor',
+      'buttonBackgroundColor',
+      'buttonTextColor',
+    ];
 
-      const toastMessage = isEdit ? 'You edited this hint' : 'New hint saved';
-      toastEmitter.emit(TOAST_EMITTER_KEY, toastMessage);
-      setItemsUpdated((prev) => !prev);
-      setHeader('');
-      setContent('');
-      closeDialog();
-
-      if (params.get('autoOpen'))
-        window.history.replaceState({}, '', window.location.pathname);
-    } catch (error) {
-      if (error.response.data?.errors) {
-        return error.response.data.errors.forEach((err) => {
-          toastEmitter.emit(TOAST_EMITTER_KEY, `Error: ${err}`);
-        });
-      }
-      const errorMessage = error.response?.data?.message
-        ? `Error: ${error.response.data.message}`
-        : 'An unexpected error occurred. Please try again.';
-      toastEmitter.emit(TOAST_EMITTER_KEY, errorMessage);
-    }
+    // defines the order of validation/error prioritization
+    const fieldPriority = [
+      'url',
+      'actionButtonUrl',
+      'actionButtonText',
+      'targetElement',
+      'headerBackgroundColor',
+      'headerColor',
+      'textColor',
+      'buttonBackgroundColor',
+      'buttonTextColor',
+    ];
+    await onSaveTemplate({
+      data: hintData,
+      schema: newHintSchema.concat(appearanceSchema),
+      formikRef,
+      appearanceKeys,
+      setActiveButton,
+      fieldPriority,
+      onSuccess: async () => {
+        try {
+          if (isEdit) {
+            await editHint(itemId, hintData);
+            toastEmitter.emit(TOAST_EMITTER_KEY, 'You edited this hint');
+          } else {
+            await addHint(hintData);
+            toastEmitter.emit(TOAST_EMITTER_KEY, 'New hint saved');
+          }
+          setItemsUpdated((prev) => !prev);
+          closeDialog();
+        } catch (error) {
+          console.error('Error saving hint:', error);
+          emitToastError(error);
+        }
+        setIsEdit(false);
+      },
+    });
   };
 
   return (
@@ -215,6 +239,7 @@ const HintPage = ({
           data={leftContent}
           setState={setLeftContent}
           onSave={onSave}
+          ref={formikRef}
         />
       )}
       leftAppearance={() => (
@@ -222,6 +247,7 @@ const HintPage = ({
           data={appearance}
           setState={setAppearance}
           onSave={onSave}
+          ref={formikRef}
         />
       )}
     />

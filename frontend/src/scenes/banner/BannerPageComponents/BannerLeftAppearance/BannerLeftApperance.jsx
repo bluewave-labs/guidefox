@@ -1,18 +1,16 @@
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import ColorTextField from '@components/ColorTextField/ColorTextField';
 import { Formik, Form } from 'formik';
 import { appearanceSchema } from '../../../../utils/bannerHelper';
 import styles from './BannerLeftAppearance.module.css';
 
-const BannerLeftAppearance = ({
-  backgroundColor,
-  setBackgroundColor,
-  fontColor,
-  setFontColor,
-}) => {
+const BannerLeftAppearance = React.forwardRef((props, ref) => {
+  const { backgroundColor, setBackgroundColor, fontColor, setFontColor } =
+    props;
   return (
     <Formik
+      innerRef={ref}
       initialValues={{ backgroundColor, fontColor }}
       validationSchema={appearanceSchema}
       validateOnBlur={false}
@@ -27,14 +25,7 @@ const BannerLeftAppearance = ({
         }
       }}
     >
-      {({
-        errors,
-        touched,
-        handleBlur,
-        handleChange,
-        values,
-        setFieldValue,
-      }) => (
+      {({ errors, handleBlur, values, setFieldValue }) => (
         <Form className={styles.bannerAppearanceContainer}>
           <div className={styles.bannerAppearanceItem}>
             <h2 className={styles.bannerStateName}>Background Color</h2>
@@ -79,6 +70,15 @@ const BannerLeftAppearance = ({
       )}
     </Formik>
   );
+});
+
+BannerLeftAppearance.propTypes = {
+  backgroundColor: PropTypes.string.isRequired,
+  setBackgroundColor: PropTypes.func.isRequired,
+  fontColor: PropTypes.string.isRequired,
+  setFontColor: PropTypes.func.isRequired,
 };
+
+BannerLeftAppearance.displayName = 'BannerLeftAppearance';
 
 export default BannerLeftAppearance;

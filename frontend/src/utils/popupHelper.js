@@ -13,13 +13,13 @@ const validateUrl = (url) => {
 };
 
 export const popupContentSchema = Yup.object().shape({
-  buttonRepetition: Yup.string()
+  repetitionType: Yup.string()
     .oneOf(
       ['show only once', 'show every visit'],
       'Invalid value for repetition'
     )
     .required('Button repetition is required'),
-  buttonAction: Yup.string()
+  closeButtonAction: Yup.string()
     .oneOf(
       ['no action', 'open url', 'open url in a new tab'],
       'Invalid value for action'
@@ -35,7 +35,7 @@ export const popupContentSchema = Yup.object().shape({
   actionButtonText: Yup.string(),
 });
 
-export const apperanceSchema = Yup.object().shape({
+export const appearanceSchema = Yup.object().shape({
   headerBackgroundColor: Yup.string()
     .required('Header background color is required')
     .matches(COLOR_REGEX, 'Invalid value for header background color'),

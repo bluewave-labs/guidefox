@@ -1,4 +1,4 @@
-import { React } from 'react';
+import React from 'react';
 import { Form, Formik } from 'formik';
 import PropTypes from 'prop-types';
 import styles from './PopupContent.module.scss';
@@ -6,17 +6,19 @@ import DropdownList from '@components/DropdownList/DropdownList';
 import CustomTextField from '@components/TextFieldComponents/CustomTextField/CustomTextField';
 import { popupContentSchema } from '../../../../utils/popupHelper';
 
-const PopupContent = ({
-  buttonRepetition,
-  buttonAction,
-  url,
-  actionButtonUrl,
-  actionButtonText,
-  setPopupContent,
-  onSave,
-}) => {
+const PopupContent = React.forwardRef((props, ref) => {
+  const {
+    buttonRepetition,
+    buttonAction,
+    url,
+    actionButtonUrl,
+    actionButtonText,
+    setPopupContent,
+    onSave,
+  } = props;
   return (
     <Formik
+      innerRef={ref}
       initialValues={{
         buttonRepetition,
         buttonAction,
@@ -81,6 +83,7 @@ const PopupContent = ({
 
             <h2 style={{ marginBottom: 0 }}>URL</h2>
             <CustomTextField
+              data-testid="popup-url"
               TextFieldWidth="241px"
               name="url"
               value={values.url}
@@ -102,6 +105,7 @@ const PopupContent = ({
               Action button URL (can be relative)
             </h2>
             <CustomTextField
+              data-testid="popup-action-url"
               TextFieldWidth="241px"
               name="actionButtonUrl"
               value={values.actionButtonUrl}
@@ -147,7 +151,7 @@ const PopupContent = ({
       }}
     </Formik>
   );
-};
+});
 
 PopupContent.propTypes = {
   actionButtonText: PropTypes.string,
@@ -158,5 +162,7 @@ PopupContent.propTypes = {
   setPopupContent: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
 };
+
+PopupContent.displayName = 'PopupContent';
 
 export default PopupContent;

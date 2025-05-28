@@ -10,7 +10,7 @@
 
 Guidefox helps app owners build knowledge and user-experience oriented apps. It includes the following features: 
 
-- Welcome tours (in progress)
+- Welcome tours 
 - Popups
 - Banners
 - Helper links
@@ -43,9 +43,11 @@ Make sure docker and git is installed
 
 3. Run docker
 
-`docker compose build`
+`docker compose -f docker-compose.prod.yml build` or `npm run docker-build:prod`
 
-`docker compose up`
+then
+
+`docker compose -f docker-compose.prod.yml up` or `npm run docker-up:prod`
 
 ## Server Installation
 
@@ -76,7 +78,7 @@ server {
     server_name YOUR_DOMAIN_NAME;
 
     location / {
-        proxy_pass http://localhost:4173; # Frontend React app
+        proxy_pass http://localhost:81; # Frontend React app
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

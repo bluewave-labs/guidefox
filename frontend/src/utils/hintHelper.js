@@ -32,19 +32,19 @@ const newHintSchema = Yup.object().shape({
 
 const appearanceSchema = Yup.object().shape({
   headerBackgroundColor: Yup.string()
-    .optional()
+    .required('Header background color is required')
     .matches(/^#[0-9A-Fa-f]{6}$/, 'Invalid value for headerBackgroundColor'),
   headerColor: Yup.string()
-    .optional()
+    .required('Header color is required')
     .matches(/^#[0-9A-Fa-f]{6}$/, 'Invalid value for headerColor'),
   textColor: Yup.string()
-    .optional()
+    .required('Text color is required')
     .matches(/^#[0-9A-Fa-f]{6}$/, 'Invalid value for textColor'),
   buttonBackgroundColor: Yup.string()
-    .optional()
+    .required('Button background color is required')
     .matches(/^#[0-9A-Fa-f]{6}$/, 'Invalid value for buttonBackgroundColor'),
   buttonTextColor: Yup.string()
-    .optional()
+    .required('Button text color is required')
     .matches(/^#[0-9A-Fa-f]{6}$/, 'Invalid value for buttonTextColor'),
 });
 

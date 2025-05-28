@@ -1,13 +1,14 @@
+import React from 'react';
 import { Form, Formik } from 'formik';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { newHintSchema } from '../../../utils/hintHelper';
 import DropdownList from '../../DropdownList/DropdownList';
 import Switch from '../../Switch/Switch';
 import CustomTextField from '../../TextFieldComponents/CustomTextField/CustomTextField';
 import './HintLeftContent.css';
 
-const HintLeftContent = ({ data, setState }) => {
+const HintLeftContent = React.forwardRef((props, ref) => {
+  const { data, setState } = props;
   const handleRepetitionChange = (newRepetitionType) => {
     setState((prev) => ({ ...prev, buttonRepetition: newRepetitionType }));
   };
@@ -39,6 +40,7 @@ const HintLeftContent = ({ data, setState }) => {
 
   return (
     <Formik
+      innerRef={ref}
       initialValues={data}
       validationSchema={newHintSchema}
       enableReinitialize={true}
@@ -198,7 +200,7 @@ const HintLeftContent = ({ data, setState }) => {
       )}
     </Formik>
   );
-};
+});
 
 HintLeftContent.propTypes = {
   data: PropTypes.shape({
@@ -214,5 +216,7 @@ HintLeftContent.propTypes = {
   setState: PropTypes.func,
   onSave: PropTypes.func,
 };
+
+HintLeftContent.displayName = 'HintLeftContent';
 
 export default HintLeftContent;

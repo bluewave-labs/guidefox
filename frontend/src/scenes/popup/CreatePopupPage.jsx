@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Turndown from 'turndown';
 import RichTextEditor from '../../components/RichTextEditor/RichTextEditor';
 import PopupComponent from '../../products/Popup/PopupComponent';
@@ -10,10 +10,11 @@ import {
 } from '../../services/popupServices';
 import GuideTemplate from '../../templates/GuideTemplate/GuideTemplate';
 import { useDialog } from '../../templates/GuideTemplate/GuideTemplateContext';
-import { emitToastError } from '../../utils/guideHelper';
+import { emitToastError, onSaveTemplate } from '../../utils/guideHelper';
 import toastEmitter, { TOAST_EMITTER_KEY } from '../../utils/toastEmitter';
 import PopupAppearance from './PopupPageComponents/PopupAppearance/PopupAppearance';
 import PopupContent from './PopupPageComponents/PopupContent/PopupContent';
+import { popupContentSchema, appearanceSchema } from '../../utils/popupHelper';
 
 const CreatePopupPage = ({
   autoOpen = false,
@@ -38,12 +39,14 @@ const CreatePopupPage = ({
   });
 
   const [popupContent, setPopupContent] = useState({
-    buttonRepetition: 'Show only once',
-    buttonAction: 'No action',
+    repetitionType: 'Show only once',
+    closeButtonAction: 'No action',
     url: 'https://',
     actionButtonUrl: 'https://',
     actionButtonText: 'Take me to subscription page',
   });
+
+  const formikRef = useRef(null);
 
   const markdownContent = new Turndown().turndown(content);
 
@@ -68,10 +71,10 @@ const CreatePopupPage = ({
       });
 
       setPopupContent({
-        buttonRepetition: popupData.repetitionType || 'Show only once',
-        buttonAction: popupData.closeButtonAction || 'No action',
+        repetitionType: popupData.repetitionType || 'Show only once',
+        closeButtonAction: popupData.closeButtonAction || 'No action',
         url: popupData.url || 'https://',
-        actionButtonUrl: popupData.actionUrl || 'https://',
+        actionButtonUrl: popupData.actionButtonUrl || 'https://',
         actionButtonText:
           popupData.actionButtonText || 'Take me to subscription page',
       });
@@ -109,31 +112,64 @@ const CreatePopupPage = ({
 
   const onSave = async () => {
     const popupData = {
-      repetitionType: popupContent.buttonRepetition.toLowerCase(),
-      closeButtonAction: popupContent.buttonAction.toLowerCase(),
+      repetitionType: popupContent.repetitionType?.toLowerCase(),
+      closeButtonAction: popupContent.closeButtonAction?.toLowerCase(),
       url: popupContent.url,
-      actionUrl: popupContent.actionButtonUrl,
+      actionButtonUrl: popupContent.actionButtonUrl,
       actionButtonText: popupContent.actionButtonText,
       headerBackgroundColor: popupAppearance.headerBackgroundColor,
       headerColor: popupAppearance.headerColor,
       textColor: popupAppearance.textColor,
       buttonBackgroundColor: popupAppearance.buttonBackgroundColor,
       buttonTextColor: popupAppearance.buttonTextColor,
-      popupSize: popupAppearance.popupSize.toLowerCase(),
+      popupSize: popupAppearance.popupSize?.toLowerCase(),
       header,
       content,
     };
 
-    try {
-      isEdit ? await editPopup(itemId, popupData) : await addPopup(popupData);
-      const toastMessage = isEdit ? 'You edited this popup' : 'New popup Saved';
+    const appearanceKeys = [
+      'headerBackgroundColor',
+      'headerColor',
+      'textColor',
+      'buttonBackgroundColor',
+      'buttonTextColor',
+      'popupSize',
+    ];
+    const fieldPriority = [
+      'url',
+      'actionButtonUrl',
+      'actionButtonText',
+      'headerBackgroundColor',
+      'headerColor',
+      'textColor',
+      'buttonBackgroundColor',
+      'buttonTextColor',
+    ];
 
-      toastEmitter.emit(TOAST_EMITTER_KEY, toastMessage);
-      setItemsUpdated((prevState) => !prevState);
-      closeDialog();
-    } catch (error) {
-      emitToastError(error);
-    }
+    await onSaveTemplate({
+      data: popupData,
+      schema: popupContentSchema.concat(appearanceSchema),
+      formikRef,
+      appearanceKeys,
+      setActiveButton,
+      fieldPriority,
+      onSuccess: async () => {
+        try {
+          if (isEdit) {
+            await editPopup(itemId, popupData);
+            toastEmitter.emit(TOAST_EMITTER_KEY, 'You edited this popup');
+          } else {
+            await addPopup(popupData);
+            toastEmitter.emit(TOAST_EMITTER_KEY, 'New popup saved');
+          }
+          setItemsUpdated((prev) => !prev);
+          closeDialog();
+        } catch (error) {
+          console.error('Error saving popup:', error);
+          emitToastError(error);
+        }
+      },
+    });
   };
 
   const handleButtonClick = (index) => {
@@ -168,6 +204,7 @@ const CreatePopupPage = ({
 
   const leftContent = () => (
     <PopupContent
+      ref={formikRef}
       setPopupContent={setPopupContent}
       {...popupContent}
       onSave={onSave}
@@ -176,6 +213,7 @@ const CreatePopupPage = ({
 
   const leftAppearance = () => (
     <PopupAppearance
+      ref={formikRef}
       data={fields}
       popupAppearance={popupAppearance}
       setPopupAppearance={setPopupAppearance}

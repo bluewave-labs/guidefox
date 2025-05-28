@@ -7,18 +7,19 @@ import styles from './BannerLeftContent.module.scss';
 import { newBannerSchema } from '../../../../utils/bannerHelper.js';
 import { Form, Formik } from 'formik';
 
-const BannerLeftContent = ({
-  setIsTopPosition,
-  url,
-  setUrl,
-  setButtonAction,
-  isTopPosition,
-  buttonAction,
-  buttonRepetition,
-  setButtonRepetition,
-  actionUrl,
-  setActionUrl,
-}) => {
+const BannerLeftContent = React.forwardRef((props, ref) => {
+  const {
+    setIsTopPosition,
+    url,
+    setUrl,
+    setButtonAction,
+    isTopPosition,
+    buttonAction,
+    buttonRepetition,
+    setButtonRepetition,
+    actionUrl,
+    setActionUrl,
+  } = props;
   const handleSetUrl = (event) => {
     setUrl(event.target.value);
   };
@@ -41,6 +42,7 @@ const BannerLeftContent = ({
 
   return (
     <Formik
+      innerRef={ref}
       initialValues={{ url, actionUrl }}
       validationSchema={newBannerSchema}
       enableReinitialize={true}
@@ -116,7 +118,9 @@ const BannerLeftContent = ({
       )}
     </Formik>
   );
-};
+});
+
+BannerLeftContent.displayName = 'BannerLeftContent';
 
 export default BannerLeftContent;
 BannerLeftContent.propTypes = {

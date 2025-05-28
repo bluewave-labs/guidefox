@@ -36,13 +36,13 @@ const appearanceSchema = Yup.object().shape({
     .test('url', 'Invalid value for URL', validateUrl)
     .max(2000, 'URL must be at most 2000 characters'),
   headerBackgroundColor: Yup.string()
-    .optional()
+    .required('Header background color is required')
     .matches(/^#[0-9A-Fa-f]{6}$/, 'Invalid value for headerBackgroundColor'),
   linkFontColor: Yup.string()
-    .optional()
+    .required('Link font color is required')
     .matches(/^#[0-9A-Fa-f]{6}$/, 'Invalid value for linkFontColor'),
   iconColor: Yup.string()
-    .optional()
+    .required('Icon color is required')
     .matches(/^#[0-9A-Fa-f]{6}$/, 'Invalid value for iconColor'),
   active: Yup.boolean('Active option must be a boolean'),
   absolutePath: Yup.boolean('Absolute path option must be a boolean'),

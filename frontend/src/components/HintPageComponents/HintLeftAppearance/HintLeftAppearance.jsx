@@ -1,5 +1,6 @@
-import { Form, Formik } from 'formik';
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
+import { Form, Formik } from 'formik';
 import { appearanceSchema } from '../../../utils/hintHelper';
 import ColorTextField from '../../ColorTextField/ColorTextField';
 import './HintLeftAppearance.css';
@@ -12,7 +13,8 @@ const mapState = {
   buttonTextColor: 'Button Text Color',
 };
 
-const HintLeftAppearance = ({ data = {}, setState, onSave }) => {
+const HintLeftAppearance = React.forwardRef((props, ref) => {
+  const { data = {}, setState, onSave } = props;
   const content = useMemo(() => {
     if (Object.values(data).every((state) => state === null)) {
       return <div className="hint-appearance-container">No data available</div>;
@@ -20,6 +22,7 @@ const HintLeftAppearance = ({ data = {}, setState, onSave }) => {
 
     return (
       <Formik
+        innerRef={ref}
         initialValues={data}
         validationSchema={appearanceSchema}
         validateOnMount={false}
@@ -36,11 +39,12 @@ const HintLeftAppearance = ({ data = {}, setState, onSave }) => {
       >
         {({ errors, handleChange, handleBlur, values, validateField }) => (
           <Form className="hint-appearance-container">
-            {Object.entries(data).map(([key, value]) => (
+            {Object.entries(data).map(([key]) => (
               <div key={key} className="hint-appearance-item">
                 <h2 className="hint-state-name">{mapState[key]}</h2>
                 <div className="hint-appearance-color">
                   <ColorTextField
+                    name={key}
                     value={values[key]}
                     onChange={(val) => {
                       handleChange({ target: { name: key, value: val } });
@@ -65,6 +69,14 @@ const HintLeftAppearance = ({ data = {}, setState, onSave }) => {
   }, [data]);
 
   return content;
+});
+
+HintLeftAppearance.propTypes = {
+  data: PropTypes.object,
+  setState: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
 };
+
+HintLeftAppearance.displayName = 'HintLeftAppearance';
 
 export default HintLeftAppearance;

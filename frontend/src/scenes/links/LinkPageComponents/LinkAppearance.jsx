@@ -1,13 +1,12 @@
 import { Form, Formik } from 'formik';
-import PropTypes from 'prop-types';
-import { useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import ColorInput from '../../../components/Links/ColorInput';
 import Switch from '../../../components/Switch/Switch';
 import { HelperLinkContext } from '../../../services/linksProvider';
 import { appearanceSchema } from '../../../utils/linkHelper';
 import styles from '../LinkPage.module.scss';
 
-const LinkAppearance = () => {
+const LinkAppearance = React.forwardRef((props, ref) => {
   const context = useContext(HelperLinkContext);
   if (!context) {
     throw new Error('LinkAppearance must be used within a HelperLinkProvider');
@@ -33,6 +32,7 @@ const LinkAppearance = () => {
 
   return (
     <Formik
+      innerRef={ref}
       initialValues={helper}
       validationSchema={appearanceSchema}
       validateOnMount={false}
@@ -147,10 +147,8 @@ const LinkAppearance = () => {
       )}
     </Formik>
   );
-};
+});
+
+LinkAppearance.displayName = 'LinkAppearance';
 
 export default LinkAppearance;
-
-LinkAppearance.propTypes = {
-  handleSaveHelper: PropTypes.func.isRequired,
-};

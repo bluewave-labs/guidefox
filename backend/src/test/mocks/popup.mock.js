@@ -15,7 +15,7 @@ class PopupBuilder {
       header: "header",
       content: "content",
       createdBy: 1,
-      actionUrl: "https://www.google.com",
+      actionButtonUrl: "https://www.google.com",
     };
   }
 

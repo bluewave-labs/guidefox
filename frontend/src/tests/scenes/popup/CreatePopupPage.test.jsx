@@ -5,6 +5,7 @@ import * as popupServices from '../../../services/popupServices';
 import * as loginServices from '../../../services/loginServices';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { act } from 'react';
+import PropTypes from 'prop-types';
 import toastEmitter from '../../../utils/toastEmitter';
 import { GuideTemplateProvider } from '../../../templates/GuideTemplate/GuideTemplateContext';
 
@@ -24,6 +25,10 @@ const Wrapper = ({ children }) => (
     <Router>{children}</Router>
   </GuideTemplateProvider>
 );
+
+Wrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 describe('CreatePopupPage component', () => {
   it('handles onSave and successful popup creation', async () => {
@@ -48,15 +53,25 @@ describe('CreatePopupPage component', () => {
       .mockResolvedValueOnce({
         data: { success: true },
       });
+    const mockSetItemsUpdated = vi.fn();
 
     await act(async () => {
-      render(<CreatePopupPage autoOpen />, { wrapper: Wrapper });
+      render(
+        <CreatePopupPage autoOpen setItemsUpdated={mockSetItemsUpdated} />,
+        { wrapper: Wrapper }
+      );
     });
 
-    const saveButton = await waitFor(() =>
-      screen.getByRole('button', { name: /Save/i })
-    );
-    fireEvent.click(saveButton);
+    fireEvent.change(document.querySelector('input[name="url"]'), {
+      target: { value: 'https://example.com' },
+    });
+
+    fireEvent.change(document.querySelector('input[name="actionButtonUrl"]'), {
+      target: { value: 'https://example.com' },
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: /Save/i }));
+    });
     expect(mockAddPopup).toHaveBeenCalledTimes(1);
   });
 
@@ -87,19 +102,27 @@ describe('CreatePopupPage component', () => {
         },
       });
 
+    const mockSetItemsUpdated = vi.fn();
     const emitSpy = vi.spyOn(toastEmitter, 'emit');
 
     await act(async () => {
-      render(<CreatePopupPage autoOpen />, { wrapper: Wrapper });
+      render(
+        <CreatePopupPage autoOpen setItemsUpdated={mockSetItemsUpdated} />,
+        { wrapper: Wrapper }
+      );
+    });
+    fireEvent.change(document.querySelector('input[name="url"]'), {
+      target: { value: 'https://example.com' },
     });
 
-    // Wait for the "Save" button to appear in the DOM
-    const saveButton = await waitFor(() =>
-      screen.getByRole('button', { name: /Save/i })
-    );
+    fireEvent.change(document.querySelector('input[name="actionButtonUrl"]'), {
+      target: { value: 'https://example.com' },
+    });
 
     // Trigger the Save button click
-    fireEvent.click(saveButton);
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: /Save/i }));
+    });
 
     // Check if the toastEmitter.emit function was called
     await waitFor(() => {

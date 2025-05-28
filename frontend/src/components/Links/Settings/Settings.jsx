@@ -1,6 +1,6 @@
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { CircularProgress } from '@mui/material';
-import { Form, Formik } from 'formik';
+import { Formik } from 'formik';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { HelperLinkContext } from '../../../services/linksProvider';
 import { newLinkSchema, validateUrl } from '../../../utils/linkHelper';
@@ -85,12 +85,19 @@ const Settings = () => {
       if (!validateUrl(info.url)) {
         throw new Error('Invalid URL format');
       }
+      if (info.title.length < 3) {
+        throw new Error('Title must be at least 3 characters long');
+      }
+      if (info.title.length > 50) {
+        throw new Error('Title must be at most 50 characters long');
+      }
       setLinks((prev) =>
         prev.map((it) =>
           it.id === oldLink.id
             ? {
                 ...oldLink,
                 ...info,
+                id: Number(info.id),
               }
             : it
         )
@@ -126,11 +133,16 @@ const Settings = () => {
         handleBlur,
         values,
         validateField,
+        handleSubmit,
       }) => (
-        <Form
+        <form
           className={style.settings}
           ref={settingsRef}
           data-testid="settings-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(e);
+          }}
         >
           <div className={style.settings__header}>
             <span className={style['settings__header--title']}>
@@ -246,7 +258,7 @@ const Settings = () => {
               'Submit'
             )}
           </button>
-        </Form>
+        </form>
       )}
     </Formik>
   );

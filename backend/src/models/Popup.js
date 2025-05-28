@@ -97,7 +97,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: '',
       },
-      actionUrl: {
+      actionButtonUrl: {
         type: DataTypes.STRING,
         allowNull: true,
         validate: {

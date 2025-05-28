@@ -1,6 +1,5 @@
-import { AxiosError } from 'axios';
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import Settings from '../../components/Links/Settings/Settings';
 import Preview from '../../products/LinkPreview';
 import {
@@ -15,11 +14,12 @@ import {
 } from '../../services/linksProvider';
 import GuideTemplate from '../../templates/GuideTemplate/GuideTemplate';
 import { useDialog } from '../../templates/GuideTemplate/GuideTemplateContext';
-import { emitToastError } from '../../utils/guideHelper';
+import { emitToastError, onSaveTemplate } from '../../utils/guideHelper';
 import toastEmitter, { TOAST_EMITTER_KEY } from '../../utils/toastEmitter';
 import styles from './LinkPage.module.scss';
 import LinkAppearance from './LinkPageComponents/LinkAppearance';
 import LinkContent from './LinkPageComponents/LinkContent';
+import { newLinkSchema, appearanceSchema } from '../../utils/linkHelper';
 
 const NewLinksPopup = ({
   autoOpen = false,
@@ -41,6 +41,7 @@ const NewLinksPopup = ({
   } = useContext(HelperLinkContext);
 
   const { openDialog, closeDialog, isOpen } = useDialog();
+  const formikRef = useRef(null);
 
   const resetHelper = (close = true) => {
     close && closeDialog();
@@ -104,46 +105,65 @@ const NewLinksPopup = ({
   };
 
   const handleSaveHelper = async () => {
-    let newHelper;
     const formattedLinks = await Promise.all(links.map(handleLinks));
-    try {
-      if (formattedLinks.some((it) => !it)) {
-        return null;
-      }
-      newHelper = await (isEdit
-        ? updateHelper(helper, formattedLinks)
-        : createHelper(helper, formattedLinks));
-      setHelper(newHelper);
-      setItemsUpdated((prevState) => !prevState);
-    } catch (err) {
-      let msg;
-      if (err instanceof AxiosError) {
-        msg = err.response.data.errors[0];
-      } else {
-        msg = err;
-      }
-      emitToastError(buildToastError(msg));
-      return null;
-    }
-    if (isEdit && deletedLinks.length) {
-      await Promise.all(
-        deletedLinks.map(async (it) => {
-          try {
-            return await deleteLink(it.id);
-          } catch (err) {
-            emitToastError(err);
-            return null;
+    if (formattedLinks.some((it) => !it)) return;
+    const appearanceKeys = [
+      'title',
+      'url',
+      'headerBackgroundColor',
+      'linkFontColor',
+      'iconColor',
+    ];
+
+    const fieldPriority = [
+      'title',
+      'url',
+      'backgroundColor',
+      'fontColor',
+      'borderColor',
+    ];
+
+    await onSaveTemplate({
+      data: helper,
+      schema: newLinkSchema.concat(appearanceSchema),
+      formikRef,
+      appearanceKeys,
+      setActiveButton: setActiveBtn,
+      fieldPriority,
+      onSuccess: async () => {
+        try {
+          const newHelper = isEdit
+            ? await updateHelper(helper, formattedLinks)
+            : await createHelper(helper, formattedLinks);
+
+          setHelper(newHelper);
+          setItemsUpdated((prev) => !prev);
+
+          if (isEdit && deletedLinks.length) {
+            await Promise.all(
+              deletedLinks.map(async (it) => {
+                try {
+                  return await deleteLink(it.id);
+                } catch (err) {
+                  emitToastError(err);
+                  return null;
+                }
+              })
+            );
           }
-        })
-      );
-    }
-    if (newHelper) {
-      const toastMessage = isEdit
-        ? 'You edited this Helper Link'
-        : 'New Helper Link saved';
-      toastEmitter.emit(TOAST_EMITTER_KEY, toastMessage);
-      resetHelper();
-    }
+
+          const toastMessage = isEdit
+            ? 'You edited this Helper Link'
+            : 'New Helper Link saved';
+
+          toastEmitter.emit(TOAST_EMITTER_KEY, toastMessage);
+          resetHelper();
+        } catch (err) {
+          console.error('Error saving helper link:', err);
+          emitToastError(err);
+        }
+      },
+    });
   };
 
   const rightContent = () => <Preview />;
@@ -154,7 +174,7 @@ const NewLinksPopup = ({
     </>
   );
   const leftAppearance = () => (
-    <LinkAppearance handleSaveHelper={handleSaveHelper} />
+    <LinkAppearance ref={formikRef} handleSaveHelper={handleSaveHelper} />
   );
 
   return (
