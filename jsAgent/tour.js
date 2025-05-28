@@ -310,8 +310,7 @@ bw.tour = {
                 backButton.style.color =`#333`;
             }
             updateData();
-            updatePosition();
-            
+            updatePosition();            
         }
 
         function updateData() {
