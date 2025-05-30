@@ -102,7 +102,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         validate: {
           isUrl(value) {
-            validateUrl(value, 'actionUrl');
+            validateUrl(value, 'actionButtonUrl');
           },
         },
       },

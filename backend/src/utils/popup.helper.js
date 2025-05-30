@@ -42,7 +42,7 @@ const addOrUpdatePopupValidation = [
       }
     })
     .withMessage('Invalid URL. URL must start with / or use HTTP or HTTPS protocol'),
-  body('actionUrl')
+  body('actionButtonUrl')
     .custom((value) => {
       if(!value) return true;
       try {
