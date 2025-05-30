@@ -129,7 +129,7 @@ async function runSeeders(queryInterface) {
         buttonTextColor: '#ffffff',
         size: 'medium', // assuming settings.tour.size[1] is 'medium'
         finalButtonText: 'Complete tour',
-        url: 'https://guidefox-demo.bluewavelabs.ca/',
+        url: 'https://guidefox-demo.bluewavelabs.ca',
         active: true,
         createdBy: 1,
       },
