@@ -1,13 +1,13 @@
 .radioButton {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    white-space: nowrap;
-    margin-bottom: 13px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-bottom: 13px;
 }
 
 .label {
-    color: var(--main-text-color);
-    margin-left: 8px;
-    white-space: nowrap;
+  color: var(--main-text-color);
+  margin-left: 8px;
+  white-space: nowrap;
 }

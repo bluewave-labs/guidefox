@@ -14,7 +14,7 @@ const setOrganisation = async (req, res) => {
       return res.status(400).json({ error: 'Cannot create more than one team.' });
     }
 
-    const newOrg = await teamService.createTeam(name);
+    const newOrg = await teamService.createTeamWithAgentUrl(name);
     return res.status(201).json({
       status: 201,
       message: 'Organization created successfully',

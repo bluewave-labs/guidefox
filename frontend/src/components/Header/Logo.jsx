@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import './LogoStyles.css';
 
 const Logo = ({ logo }) => {
-
-if (!logo || !logo.src) {
+  if (!logo || !logo.src) {
     return null;
   }
 

@@ -1,31 +1,31 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme } from '@mui/material/styles';
 
 // Light theme definition
 export const lightTheme = createTheme({
   palette: {
-    mode: "light",
+    mode: 'light',
     primary: {
-      main: "#7f56d9",
+      main: '#7f56d9',
     },
     background: {
-      default: "#FFFFFF",
+      default: '#FFFFFF',
     },
   },
   components: {
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: "white",
-          color: "#344054",
+          backgroundColor: 'white',
+          color: '#344054',
         },
       },
     },
     MuiTab: {
       styleOverrides: {
         root: {
-          textTransform: "none",
-          fontSize: "14px",
-          padding: "3px 9px",
+          textTransform: 'none',
+          fontSize: '14px',
+          padding: '3px 9px',
         },
       },
     },
@@ -39,10 +39,10 @@ export const lightTheme = createTheme({
     MuiMenuItem: {
       styleOverrides: {
         root: {
-          margin: "0px 5px !important",
-          "&.Mui-selected": {
-            backgroundColor: "#F9FAFB !important",
-            borderRadius: "8px !important",
+          margin: '0px 5px !important',
+          '&.Mui-selected': {
+            backgroundColor: '#F9FAFB !important',
+            borderRadius: '8px !important',
           },
         },
       },
@@ -50,7 +50,7 @@ export const lightTheme = createTheme({
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          width: "250px",
+          width: '250px',
           flexShrink: 0,
           zIndex: 1200,
         },
@@ -59,15 +59,15 @@ export const lightTheme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         input: {
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
         },
         root: {
-          borderRadius: "8px",
-          "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: "var(--main-purple)",
+          borderRadius: '8px',
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'var(--main-purple)',
           },
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "var(--main-purple)",
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'var(--main-purple)',
           },
         },
       },
@@ -79,36 +79,36 @@ export const lightTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Inter",
+    fontFamily: 'Inter',
   },
 });
 
 // Dark theme definition
 export const darkTheme = createTheme({
   palette: {
-    mode: "dark",
+    mode: 'dark',
     primary: {
-      main: "#7f56d9",
+      main: '#7f56d9',
     },
     background: {
-      default: "#121212",
+      default: '#121212',
     },
   },
   components: {
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: "#333",
-          color: "#FFFFFF",
+          backgroundColor: '#333',
+          color: '#FFFFFF',
         },
       },
     },
     MuiTab: {
       styleOverrides: {
         root: {
-          textTransform: "none",
-          fontSize: "14px",
-          padding: "3px 9px",
+          textTransform: 'none',
+          fontSize: '14px',
+          padding: '3px 9px',
         },
       },
     },
@@ -122,10 +122,10 @@ export const darkTheme = createTheme({
     MuiMenuItem: {
       styleOverrides: {
         root: {
-          margin: "0px 5px !important",
-          "&.Mui-selected": {
-            backgroundColor: "#F9FAFB !important",
-            borderRadius: "8px !important",
+          margin: '0px 5px !important',
+          '&.Mui-selected': {
+            backgroundColor: '#F9FAFB !important',
+            borderRadius: '8px !important',
           },
         },
       },
@@ -133,7 +133,7 @@ export const darkTheme = createTheme({
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          width: "250px",
+          width: '250px',
           flexShrink: 0,
           zIndex: 1200,
         },
@@ -142,21 +142,21 @@ export const darkTheme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         input: {
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
         },
         root: {
-          borderRadius: "8px",
-          "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: "var(--main-purple)",
+          borderRadius: '8px',
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'var(--main-purple)',
           },
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "var(--main-purple)",
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'var(--main-purple)',
           },
         },
       },
     },
   },
   typography: {
-    fontFamily: "Inter",
+    fontFamily: 'Inter',
   },
 });

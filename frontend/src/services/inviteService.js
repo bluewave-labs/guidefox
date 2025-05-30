@@ -1,7 +1,7 @@
 import { roles } from '../utils/constants';
 import { apiClient } from './apiClient';
 
-const baseEndpoint = "team/";
+const baseEndpoint = 'team/';
 
 export const sendInvites = async (memberEmails) => {
   if (!memberEmails?.length) {
@@ -9,7 +9,7 @@ export const sendInvites = async (memberEmails) => {
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const invalidEmails = memberEmails.filter(email => !emailRegex.test(email));
+  const invalidEmails = memberEmails.filter((email) => !emailRegex.test(email));
   if (invalidEmails.length) {
     throw new Error(`Invalid email addresses: ${invalidEmails.join(', ')}`);
   }

@@ -91,14 +91,10 @@ describe("E2e tests popup", () => {
         .execute(app)
         .post("/api/popup/add_popup")
         .set("Authorization", `Bearer ${token}`)
-        .send(popup().invalidPopupSize().build());
+        .send(popup().missingPopupSize().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "Invalid value for popupSize or closeButtonAction or repetitionType",
-          },
-        ],
+        errors: ['Popup size is required'],
       });
     });
     it("should return 400 if closeButtonAction is not provided", async () => {
@@ -106,14 +102,10 @@ describe("E2e tests popup", () => {
         .execute(app)
         .post("/api/popup/add_popup")
         .set("Authorization", `Bearer ${token}`)
-        .send(popup().invalidCloseButtonAction().build());
+        .send(popup().missingCloseButtonAction().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "Invalid value for popupSize or closeButtonAction or repetitionType",
-          },
-        ],
+        errors: ['Close Button Action is required'],
       });
     });
     it("should return 400 if popupSize is invalid", async () => {
@@ -124,11 +116,7 @@ describe("E2e tests popup", () => {
         .send(popup().invalidPopupSize().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "Invalid value for popupSize or closeButtonAction or repetitionType",
-          },
-        ],
+        errors: ['Invalid value for Popup size'],
       });
     });
     it("should return 400 if closeButtonAction is invalid", async () => {
@@ -139,11 +127,7 @@ describe("E2e tests popup", () => {
         .send(popup().invalidCloseButtonAction().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "Invalid value for popupSize or closeButtonAction or repetitionType",
-          },
-        ],
+        errors: ['Invalid close button action'],
       });
     });
     it("should return 400 if headerBackgroundColor is invalid", async () => {
@@ -154,11 +138,7 @@ describe("E2e tests popup", () => {
         .send(popup().invalidHeaderBackgroundColor().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "headerBackgroundColor must be a valid hex color code",
-          },
-        ],
+        errors: ['headerBackgroundColor must be a valid hex color code'],
       });
     });
     it("should return 400 if headerColor is invalid", async () => {
@@ -169,11 +149,7 @@ describe("E2e tests popup", () => {
         .send(popup().invalidHeaderColor().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "headerColor must be a valid hex color code",
-          },
-        ],
+        errors: ['headerColor must be a valid hex color code'],
       });
     });
     it("should return 400 if textColor is invalid", async () => {
@@ -184,11 +160,7 @@ describe("E2e tests popup", () => {
         .send(popup().invalidTextColor().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "textColor must be a valid hex color code",
-          },
-        ],
+        errors: ['textColor must be a valid hex color code'],
       });
     });
     it("should return 400 if buttonBackgroundColor is invalid", async () => {
@@ -199,11 +171,7 @@ describe("E2e tests popup", () => {
         .send(popup().invalidButtonBackgroundColor().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "buttonBackgroundColor must be a valid hex color code",
-          },
-        ],
+        errors: ['buttonBackgroundColor must be a valid hex color code'],
       });
     });
     it("should return 400 if buttonTextColor is invalid", async () => {
@@ -214,11 +182,7 @@ describe("E2e tests popup", () => {
         .send(popup().invalidButtonTextColor().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "buttonTextColor must be a valid hex color code",
-          },
-        ],
+        errors: ['buttonTextColor must be a valid hex color code'],
       });
     });
     it("should return 201 if popup is created", async () => {
@@ -290,11 +254,7 @@ describe("E2e tests popup", () => {
         .send();
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "Invalid id",
-          },
-        ],
+        errors: ['Invalid popup id'],
       });
     });
     it("should return 400 if popup is not found", async () => {
@@ -386,14 +346,10 @@ describe("E2e tests popup", () => {
         .execute(app)
         .put("/api/popup/edit_popup/1")
         .set("Authorization", `Bearer ${token}`)
-        .send(popup().invalidPopupSize().build());
+        .send(popup().missingPopupSize().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "Invalid value for popupSize",
-          },
-        ],
+        errors: ['Popup size is required'],
       });
     });
     it("should return 400 if closeButtonAction is not provided", async () => {
@@ -401,14 +357,10 @@ describe("E2e tests popup", () => {
         .execute(app)
         .put("/api/popup/edit_popup/1")
         .set("Authorization", `Bearer ${token}`)
-        .send(popup().invalidCloseButtonAction().build());
+        .send(popup().missingCloseButtonAction().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "Invalid value for closeButtonAction",
-          },
-        ],
+        errors: ['Close Button Action is required'],
       });
     });
     it("should return 400 if popupSize is invalid", async () => {
@@ -419,11 +371,7 @@ describe("E2e tests popup", () => {
         .send(popup().invalidPopupSize().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "Invalid value for popupSize",
-          },
-        ],
+        errors: ['Invalid value for Popup size'],
       });
     });
     it("should return 400 if closeButtonAction is invalid", async () => {
@@ -434,11 +382,7 @@ describe("E2e tests popup", () => {
         .send(popup().invalidCloseButtonAction().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "Invalid value for closeButtonAction",
-          },
-        ],
+        errors: ['Invalid close button action'],
       });
     });
     it("should return 400 if headerBackgroundColor is invalid", async () => {
@@ -449,11 +393,7 @@ describe("E2e tests popup", () => {
         .send(popup().invalidHeaderBackgroundColor().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "headerBackgroundColor must be a valid hex color code",
-          },
-        ],
+        errors: ['headerBackgroundColor must be a valid hex color code'],
       });
     });
     it("should return 400 if headerColor is invalid", async () => {
@@ -464,11 +404,7 @@ describe("E2e tests popup", () => {
         .send(popup().invalidHeaderColor().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "headerColor must be a valid hex color code",
-          },
-        ],
+        errors: ['headerColor must be a valid hex color code'],
       });
     });
     it("should return 400 if textColor is invalid", async () => {
@@ -479,11 +415,7 @@ describe("E2e tests popup", () => {
         .send(popup().invalidTextColor().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "textColor must be a valid hex color code",
-          },
-        ],
+        errors: ['textColor must be a valid hex color code'],
       });
     });
     it("should return 400 if buttonBackgroundColor is invalid", async () => {
@@ -494,11 +426,7 @@ describe("E2e tests popup", () => {
         .send(popup().invalidButtonBackgroundColor().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "buttonBackgroundColor must be a valid hex color code",
-          },
-        ],
+        errors: ['buttonBackgroundColor must be a valid hex color code'],
       });
     });
     it("should return 400 if buttonTextColor is invalid", async () => {
@@ -509,11 +437,7 @@ describe("E2e tests popup", () => {
         .send(popup().invalidButtonTextColor().build());
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "buttonTextColor must be a valid hex color code",
-          },
-        ],
+        errors: ['buttonTextColor must be a valid hex color code'],
       });
     });
     it("should return 200 if popup is updated", async () => {
@@ -683,11 +607,7 @@ describe("E2e tests popup", () => {
         .send();
       expect(res).to.have.status(400);
       expect(res.body).to.be.deep.equal({
-        errors: [
-          {
-            msg: "Invalid popup ID",
-          },
-        ],
+        errors: ["Invalid popup id"],
       });
     });
     it("should return 404 if popup is not found", async () => {

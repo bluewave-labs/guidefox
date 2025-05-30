@@ -31,7 +31,13 @@ describe('CustomLink', () => {
   });
 
   it('applies underline prop correctly', () => {
-    render(<CustomLink text="Link Text" url="https://example.com" underline="hover" />);
+    render(
+      <CustomLink
+        text="Link Text"
+        url="https://example.com"
+        underline="hover"
+      />
+    );
     const linkElement = screen.getByText(/Link Text/i);
     expect(linkElement.classList.contains('MuiLink-underlineHover')).toBe(true);
   });

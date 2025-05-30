@@ -1,13 +1,11 @@
-import Dashboard from "../dashboard/Dashboard";
+import Dashboard from '../dashboard/Dashboard';
 import React from 'react';
-import { useAuth } from "../../services/authProvider";
+import { useAuth } from '../../services/authProvider';
 
 const Home = () => {
-  const {userInfo} = useAuth();
+  const { userInfo } = useAuth();
 
-  return (
-    <Dashboard name={userInfo.name} />
-  );
+  return <Dashboard name={userInfo.name} />;
 };
 
 export default Home;

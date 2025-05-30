@@ -1,23 +1,82 @@
+class TourPopupBuilder {
+  constructor(id, tourId) {
+    this.tourPopup = {
+      id: id,
+      title: `title ${id}`,
+      header: `header ${id}`,
+      description: `description ${id}`,
+      targetElement: `.element${id}`,
+      order: id,
+      tourId,
+    };
+  }
+
+  static tourPopup(id = 1, tourId = 1) {
+    return new TourPopupBuilder(id, tourId);
+  }
+
+  withoutId() {
+    this.tourPopup.id = undefined;
+    return this;
+  }
+
+  invalidTitle() {
+    this.tourPopup.title = 123;
+    return this;
+  }
+
+  missingTitle() {
+    this.tourPopup.title = undefined;
+    return this;
+  }
+
+  invalidDescription() {
+    this.tourPopup.description = 123;
+    return this;
+  }
+
+  missingDescription() {
+    this.tourPopup.description = undefined;
+    return this;
+  }
+
+  invalidTargetElement() {
+    this.tourPopup.targetElement = 123;
+    return this;
+  }
+
+  missingTargetElement() {
+    this.tourPopup.targetElement = undefined;
+    return this;
+  }
+
+  invalidOrder() {
+    this.tourPopup.order = 'asd';
+    return this;
+  }
+
+  missingOrder() {
+    this.tourPopup.order = undefined;
+    return this;
+  }
+
+  build() {
+    return this.tourPopup;
+  }
+}
+
 class TourBuilder {
-  triggeringFrequency = [
-    "just once",
-    "once in every session",
-    "once every day",
-    "once every week",
-    "once every month",
-    "always",
-  ];
-  pageTargeting = ["equals to", "is different from"];
   constructor(id) {
     this.tour = {
       id: id,
-      title: `title ${id}`,
-      description: "description",
-      statusActive: true,
-      pageTargeting: this.pageTargeting[0],
-      theme: "default theme",
-      triggeringFrequency: this.triggeringFrequency[0],
-      createdBy: 1,
+      headerColor: '#999',
+      textColor: '#444',
+      buttonBackgroundColor: '#ff00ff',
+      buttonTextColor: '#fff',
+      url: '/url',
+      size: 'small',
+      finalButtonText: 'text',
+      active: true,
     };
   }
 
@@ -30,53 +89,73 @@ class TourBuilder {
     return this;
   }
 
-  invalidTitle() {
-    this.tour.title = null;
+  invalidHeaderColor() {
+    this.tour.headerColor = 123;
     return this;
   }
 
-  missingTitle() {
-    this.tour.title = undefined;
+  invalidTextColor() {
+    this.tour.textColor = 123;
     return this;
   }
 
-  invalidDescription() {
-    this.tour.description = null;
+  invalidButtonBackgroundColor() {
+    this.tour.buttonBackgroundColor = 123;
     return this;
   }
 
-  missingDescription() {
-    this.tour.description = undefined;
+  invalidButtonTextColor() {
+    this.tour.buttonTextColor = 123;
     return this;
   }
 
-  invalidPageTargeting() {
-    this.tour.pageTargeting = "invalid";
+  invalidUrl() {
+    this.tour.url = 123;
     return this;
   }
 
-  missingPageTargeting() {
-    this.tour.pageTargeting = undefined;
+  missingUrl() {
+    this.tour.url = undefined;
     return this;
   }
 
-  invalidTheme() {
-    this.tour.theme = "invalid";
+  invalidSize() {
+    this.tour.size = 'asd';
     return this;
   }
 
-  missingTheme() {
-    this.tour.theme = undefined;
+  missingSize() {
+    this.tour.size = undefined;
     return this;
   }
 
-  invalidTriggeringFrequency() {
-    this.tour.triggeringFrequency = "invalid";
+  invalidFinalButtonText() {
+    this.tour.finalButtonText = 123;
     return this;
   }
 
-  missingTriggeringFrequency() {
-    this.tour.triggeringFrequency = undefined;
+  missingFinalButtonText() {
+    this.tour.finalButtonText = undefined;
+    return this;
+  }
+
+  invalidActive() {
+    this.tour.active = 'asd';
+    return this;
+  }
+
+  missingActive() {
+    this.tour.active = undefined;
+    return this;
+  }
+
+  invalidSteps() {
+    this.tour.steps = 123;
+    return this;
+  }
+
+  missingSteps() {
+    this.tour.steps = undefined;
     return this;
   }
 
@@ -89,10 +168,12 @@ const toursList = new Array(10)
   .fill(null)
   .map((_, i) => TourBuilder.tour(i + 1).build())
   .map((tour, i) => {
+    const steps = new Array(3).fill(null).map((_, j) => TourPopupBuilder.tourPopup(j + 1, tour.id).build());
+    tour.steps = steps;
     if (i % 2 === 0) {
       return { ...tour, createdBy: 2 };
     }
     return tour;
   });
 
-module.exports = { TourBuilder, toursList };
+module.exports = { TourBuilder, toursList, TourPopupBuilder };

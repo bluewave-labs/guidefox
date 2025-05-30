@@ -10,8 +10,8 @@
 .popupContent {
   color: var(--second-text-color);
   font-size: var(--font-regular);
-  word-wrap: break-word; 
-  overflow-wrap: break-word; 
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .centered {

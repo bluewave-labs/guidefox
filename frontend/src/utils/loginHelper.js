@@ -1,7 +1,8 @@
+
 import { getTeamCount } from '../services/teamServices';
 import toastEmitter, { TOAST_EMITTER_KEY } from './toastEmitter';
 
-export const handleAuthSuccess = (response, loginAuth, navigate) => {
+export const handleAuthSuccess = (response, loginAuth, navigate, redirectTo = null) => {
     const { id, name, surname, email, role, picture } = response.user;
     const payload = { id, name, surname, email, role, picture };
     // Emit toast notification
@@ -15,7 +16,10 @@ export const handleAuthSuccess = (response, loginAuth, navigate) => {
             const { teamExists } = response;
             if (!teamExists) {
                 navigate('/progress-steps');
-            } else {
+            } else if(redirectTo){
+                navigate(redirectTo)
+            }
+            else {
                 navigate('/');
             }
         })

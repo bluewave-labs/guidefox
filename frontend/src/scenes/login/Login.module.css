@@ -48,9 +48,9 @@
   font-weight: 500;
 }
 
-.form-group input[type="email"],
-.form-group input[type="text"],
-.form-group input[type="password"] {
+.form-group input[type='email'],
+.form-group input[type='text'],
+.form-group input[type='password'] {
   width: 100%;
   border: 1px solid var(--light-border-color);
   border-radius: 8px;
@@ -63,7 +63,7 @@
   }
 }
 
-.form-group input[type="checkbox"],
+.form-group input[type='checkbox'],
 .form-group a {
   font-size: var(--font-regular);
   color: var(--main-purple);
@@ -141,7 +141,7 @@
 }
 
 .error-message {
-  color: #D92D20;
+  color: #d92d20;
   font-size: var(--font-regular);
   font-weight: 400;
   margin-bottom: 1rem;

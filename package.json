@@ -1,0 +1,17 @@
+{
+  "name": "bluewave-onboarding",
+  "version": "1.0.0",
+  "description": "![](https://img.shields.io/github/license/bluewave-labs/guidefox) ![](https://img.shields.io/github/repo-size/bluewave-labs/guidefox) ![](https://img.shields.io/github/commit-activity/w/bluewave-labs/guidefox) ![](https://img.shields.io/github/last-commit/bluewave-labs/guidefox) ![](https://img.shields.io/github/languages/top/bluewave-labs/guidefox) ![](https://img.shields.io/github/issues-pr/bluewave-labs/guidefox) ![](https://img.shields.io/github/issues/bluewave-labs/guidefox)",
+  "scripts": {
+    "docker-up:dev": "docker compose -f docker-compose.dev.yml up",
+    "docker-up:prod": "docker compose -f docker-compose.prod.yml up",
+    "docker-up:prod-d": "docker compose -f docker-compose.prod.yml up -d",
+    "docker-build:dev": "docker compose -f docker-compose.dev.yml build",
+    "docker-build:prod": "docker compose -f docker-compose.prod.yml build",
+    "docker-down:dev": "docker compose -f docker-compose.dev.yml down",
+    "docker-down:prod": "docker compose -f docker-compose.prod.yml down"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,6 +1,6 @@
 export const popupStyles = {
   paper: {
-    padding: "16px",
+    padding: '16px',
   },
   title: {
     padding: 0,
@@ -9,7 +9,7 @@ export const popupStyles = {
     paddingLeft: 0,
   },
   contentText: {
-    fontSize: "13px",
+    fontSize: '13px',
   },
   actions: {
     paddingBottom: 0,

@@ -4,6 +4,6 @@
   "singleQuote": true,
   "tabWidth": 2,
   "bracketSpacing": true,
-  "arrowParens":"always",
+  "arrowParens": "always",
   "htmlWhitespaceSensitivity": "strict"
 }

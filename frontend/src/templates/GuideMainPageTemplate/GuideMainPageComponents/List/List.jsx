@@ -5,7 +5,7 @@ import ListItem from './ListItem/ListItem';
 const List = ({ items }) => {
   return (
     <>
-      {items.map(item => (
+      {items.map((item) => (
         <ListItem
           key={item.idItem}
           title={item.title}

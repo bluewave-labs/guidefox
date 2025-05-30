@@ -20,7 +20,9 @@ describe('CustomTextField', () => {
     const handleChange = vi.fn();
     render(<CustomTextField labelText="Test Label" onChange={handleChange} />);
 
-    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'New Value' } });
+    fireEvent.change(screen.getByRole('textbox'), {
+      target: { value: 'New Value' },
+    });
     expect(handleChange).toHaveBeenCalledWith(expect.any(Object));
   });
 
@@ -31,7 +33,9 @@ describe('CustomTextField', () => {
   });
 
   it('renders with multiline and rows props', () => {
-    render(<CustomTextField labelText="Test Label" multiline={true} rows={4} />);
+    render(
+      <CustomTextField labelText="Test Label" multiline={true} rows={4} />
+    );
 
     expect(screen.getByRole('textbox').getAttribute('rows')).toBe('4');
   });
@@ -59,7 +63,9 @@ describe('CustomTextField', () => {
 
   // Additional tests
   it('renders with a placeholder', () => {
-    render(<CustomTextField labelText="Test Label" placeholder="Enter text here" />);
+    render(
+      <CustomTextField labelText="Test Label" placeholder="Enter text here" />
+    );
 
     expect(screen.getByPlaceholderText('Enter text here')).not.toBeNull();
   });
@@ -67,7 +73,9 @@ describe('CustomTextField', () => {
   it('renders with custom input height', () => {
     render(<CustomTextField labelText="Test Label" inputHeight="50px" />);
 
-    expect(screen.getByRole('textbox').closest('.MuiOutlinedInput-root').style.height).toBe('50px');
+    expect(
+      screen.getByRole('textbox').closest('.MuiOutlinedInput-root').style.height
+    ).toBe('50px');
   });
 
   it('renders with custom label font weight', () => {

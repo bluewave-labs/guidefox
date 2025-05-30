@@ -1,58 +1,58 @@
 .organisation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--grey-border);
-    padding-bottom: 15px;
-    height: 2rem;
-    margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--grey-border);
+  padding-bottom: 15px;
+  height: 2rem;
+  margin-top: 8px;
 }
 
 .orgNameContainer {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 
 .nameHeading {
-    margin: 0;
+  margin: 0;
 }
 
 .organisationName {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: var(--font-regular);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: var(--font-regular);
 }
 
 .team {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .tabs {
-    border: 1px solid var(--grey-border) !important;
+  border: 1px solid var(--grey-border) !important;
 }
 
 h6 {
-    font-size: var(--font-regular);
-    font-weight: 600;
+  font-size: var(--font-regular);
+  font-weight: 600;
 }
 
 .pencil {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .boldTab {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .normalTab {
-    font-weight: normal;
+  font-weight: normal;
 }
 
 .tabIndicator {
-    background-color: var(--header-background);
-    padding-top: 0px;
+  background-color: var(--header-background);
+  padding-top: 0px;
 }

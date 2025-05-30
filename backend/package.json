@@ -10,7 +10,7 @@
     "test": "NODE_ENV=test nyc mocha --extension js,mjs 'src/test/**/*.test.*'",
     "test:e2e": "npm run pretest && NODE_ENV=test mocha 'src/test/e2e/**/*.test.mjs'",
     "test:unit": "NODE_ENV=test mocha 'src/test/unit/**/*.test.js' --watch",
-    "dev": "nodemon index.js",
+    "dev": "nodemon --legacy-watch index.js",
     "prod": "node index.js",
     "build": "echo 'No build script defined'"
   },

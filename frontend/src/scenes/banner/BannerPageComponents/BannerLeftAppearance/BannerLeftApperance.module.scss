@@ -1,19 +1,18 @@
 @use '../../../../styles/globals.scss' as *;
 
-.container{
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  h2 {
+    @include text-style(regular);
+    margin-top: 1.5rem;
+    margin-bottom: 10px;
+  }
+  .color {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    flex: 1;
-    h2{
-        @include text-style(regular);
-        margin-top: 1.5rem;
-        margin-bottom: 10px;
-    }
-    .color{
-        display: flex;
-        align-items: center;
-        width: 241px;
-    }
-
+    align-items: center;
+    width: 241px;
+  }
 }

@@ -9,14 +9,14 @@ const ToastItem = ({ toast, removeToast }) => {
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      setIsVisible(false); 
+      setIsVisible(false);
       setTimeout(() => {
         removeToast(toast.id);
-      }, 500); 
+      }, 500);
     }, toast.duration || 3000);
 
     return () => {
-      clearTimeout(timeoutId); 
+      clearTimeout(timeoutId);
     };
   }, [toast, removeToast]);
 
@@ -24,24 +24,29 @@ const ToastItem = ({ toast, removeToast }) => {
     setIsVisible(false);
     setTimeout(() => {
       removeToast(toast.id);
-    }, 500); 
+    }, 500);
   };
 
   return (
     <div
-      className={classNames(styles.toast, { 
-        [styles.slideIn]: isVisible, 
-        [styles.slideOut]: !isVisible 
+      className={classNames(styles.toast, {
+        [styles.slideIn]: isVisible,
+        [styles.slideOut]: !isVisible,
       })}
     >
       <p className={styles.text}>{toast.message}</p>
-      <CloseIcon onClick={handleClose} className={styles.icon} data-testid="CloseIcon" />
+      <CloseIcon
+        onClick={handleClose}
+        className={styles.icon}
+        data-testid="CloseIcon"
+      />
     </div>
   );
 };
 
 ToastItem.propTypes = {
   toast: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
     duration: PropTypes.number,
   }).isRequired,

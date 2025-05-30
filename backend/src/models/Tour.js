@@ -1,4 +1,6 @@
 const settings = require('../../config/settings');
+const { validateHexColor } = require('../utils/guide.helper');
+const { validateUrl } = require('../utils/tour.helper');
 
 module.exports = (sequelize, DataTypes) => {
   const Tour = sequelize.define(
@@ -9,29 +11,72 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      title: {
+      headerColor: {
+        type: DataTypes.STRING(15),
+        allowNull: false,
+        defaultValue: '#101828',
+        validate: {
+          isHexColor(value) {
+            validateHexColor(value, 'headerColor');
+          },
+        },
+      },
+      textColor: {
+        type: DataTypes.STRING(15),
+        allowNull: false,
+        defaultValue: '#344054',
+        validate: {
+          isHexColor(value) {
+            validateHexColor(value, 'textColor');
+          },
+        },
+      },
+      buttonBackgroundColor: {
+        type: DataTypes.STRING(15),
+        allowNull: false,
+        defaultValue: '#7F56D9',
+        validate: {
+          isHexColor(value) {
+            validateHexColor(value, 'buttonBackgroundColor');
+          },
+        },
+      },
+      buttonTextColor: {
+        type: DataTypes.STRING(15),
+        allowNull: false,
+        defaultValue: '#ffffff',
+        validate: {
+          isHexColor(value) {
+            validateHexColor(value, 'buttonTextColor');
+          },
+        },
+      },
+      size: {
+        type: DataTypes.ENUM(settings.tour.size),
+        allowNull: false,
+        defaultValue: settings.tour.size[1],
+      },
+      finalButtonText: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: 'Complete tour',
       },
-      description: {
+      url: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
+        defaultValue: '/',
+        validate: {
+          customValidation(value) {
+            if (!validateUrl(value)) {
+              throw new Error('Invalid value for URL');
+            }
+          },
+        },
       },
-      statusActive: {
+      active: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
-      pageTargeting: {
-        type: DataTypes.ENUM(settings.tour.pageTargeting),
         allowNull: false,
-      },
-      theme: {
-        type: DataTypes.ENUM(settings.tour.themes),
-        allowNull: false,
-      },
-      triggeringFrequency: {
-        type: DataTypes.ENUM(settings.tour.triggeringFrequency),
-        allowNull: false,
+        defaultValue: true,
       },
       createdBy: {
         type: DataTypes.INTEGER,
@@ -50,6 +95,11 @@ module.exports = (sequelize, DataTypes) => {
 
   Tour.associate = (models) => {
     Tour.belongsTo(models.User, { foreignKey: 'createdBy', as: 'creator' });
+    Tour.hasMany(models.TourPopup, {
+      foreignKey: 'tourPopupId',
+      as: 'steps',
+      onDelete: 'CASCADE',
+    });
   };
 
   return Tour;

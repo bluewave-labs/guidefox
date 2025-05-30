@@ -1,19 +1,19 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 3rem;
+  gap: 1.5rem;
+
+  .top {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 3rem;
-    gap: 1.5rem;
+    justify-content: space-between;
+  }
 
-    .top {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .text {
-        font-size: var(--font-header);
-        font-weight: 400;
-        line-height: 38px;
-        color: #344054;
-    }
+  .text {
+    font-size: var(--font-header);
+    font-weight: 400;
+    line-height: 38px;
+    color: #344054;
+  }
 }

@@ -4,18 +4,25 @@ import { Box, Typography } from '@mui/material';
 import Button from '../../Button/Button';
 import './TitleStyles.css';
 
-const Title = ({ title, buttonText, onButtonClick, titleStyle, buttonStyle, children }) => {
+const Title = ({
+  title,
+  buttonText,
+  onButtonClick,
+  titleStyle,
+  buttonStyle,
+  children,
+}) => {
   return (
-    <div className='titleContainer'>
+    <div className="titleContainer">
       <Box className="titleHeader">
-        <Typography className='titleBanner' component="div" style={{ ...titleStyle }}>
+        <Typography
+          className="titleBanner"
+          component="div"
+          style={{ ...titleStyle }}
+        >
           {title}
         </Typography>
-        <Button
-          text={buttonText}
-          onClick={onButtonClick}
-          style={buttonStyle}
-        />
+        <Button text={buttonText} onClick={onButtonClick} style={buttonStyle} />
       </Box>
       {children}
     </div>

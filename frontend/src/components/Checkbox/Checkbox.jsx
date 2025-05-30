@@ -26,7 +26,9 @@ const CustomCheckbox = ({
   indeterminate = false,
   childrenCheckboxes = [],
 }) => {
-  const [childChecked, setChildChecked] = useState(childrenCheckboxes.map(() => false));
+  const [childChecked, setChildChecked] = useState(
+    childrenCheckboxes.map(() => false)
+  );
   const [isChecked, setIsChecked] = useState(checked);
 
   const handleParentChange = useCallback(
@@ -52,7 +54,9 @@ const CustomCheckbox = ({
     setIsChecked(event.target.checked);
   };
 
-  const isIndeterminate = childChecked.some((child) => child !== childChecked[0]);
+  const isIndeterminate = childChecked.some(
+    (child) => child !== childChecked[0]
+  );
 
   const sx = getCheckboxStyles(variant);
 
@@ -61,8 +65,14 @@ const CustomCheckbox = ({
       <FormControlLabel
         control={
           <Checkbox
-            checked={childrenCheckboxes.length > 0 ? childChecked.every(Boolean) : isChecked}
-            onChange={childrenCheckboxes.length > 0 ? handleParentChange : handleChange}
+            checked={
+              childrenCheckboxes.length > 0
+                ? childChecked.every(Boolean)
+                : isChecked
+            }
+            onChange={
+              childrenCheckboxes.length > 0 ? handleParentChange : handleChange
+            }
             indeterminate={indeterminate || isIndeterminate}
             size={size}
             sx={sx}

@@ -1,14 +1,16 @@
+import { useEffect, useState, useCallback, useRef } from 'react';
+import PropTypes from 'prop-types';
+import Turndown from 'turndown';
 import HintLeftAppearance from '@components/HintPageComponents/HintLeftAppearance/HintLeftAppearance';
 import HintLeftContent from '@components/HintPageComponents/HintLeftContent/HintLeftContent';
 import RichTextEditor from '@components/RichTextEditor/RichTextEditor';
-import React, { useEffect, useState } from 'react';
-import Turndown from 'turndown';
 import HintComponent from '../../products/Hint/HintComponent';
 import { addHint, editHint, getHintById } from '../../services/hintServices';
 import GuideTemplate from '../../templates/GuideTemplate/GuideTemplate';
 import { useDialog } from '../../templates/GuideTemplate/GuideTemplateContext';
-import { emitToastError } from '../../utils/guideHelper';
+import { emitToastError, onSaveTemplate } from '../../utils/guideHelper';
 import toastEmitter, { TOAST_EMITTER_KEY } from '../../utils/toastEmitter';
+import { newHintSchema, appearanceSchema } from '../../utils/hintHelper';
 
 const HintPage = ({
   autoOpen = false,
@@ -17,9 +19,14 @@ const HintPage = ({
   setItemsUpdated,
   setIsEdit,
 }) => {
+  const [activeButton, setActiveButton] = useState(0);
+  const formikRef = useRef(null);
   const { openDialog, closeDialog } = useDialog();
 
-  const [activeButton, setActiveButton] = useState(0);
+  const params = new URLSearchParams(window.location.search);
+
+  const hintTargetParam = params.get('hintTarget');
+  const hintTarget = hintTargetParam ? JSON.parse(hintTargetParam) : null;
 
   const handleButtonClick = (index) => {
     setActiveButton(index);
@@ -44,18 +51,6 @@ const HintPage = ({
   const [content, setContent] = useState('');
   const markdownContent = new Turndown().turndown(content);
 
-  // const [buttonRepetition, setButtonRepetition] = useState('show only once');
-
-  // const [url, setUrl] = useState('https://');
-  // const [actionButtonUrl, setActionButtonUrl] = useState('https://');
-  // const [actionButtonText, setActionButtonText] = useState(
-  //   'Take me to subscription page'
-  // );
-  // const [action, setAction] = useState('No action');
-  // const [targetElement, setTargetElement] = useState('.element');
-  // const [tooltipPlacement, setTooltipPlacement] = useState('Top');
-  // const [isHintIconVisible, setIsHintIconVisible] = useState(true);
-
   const [leftContent, setLeftContent] = useState({
     buttonRepetition: 'show only once',
     url: 'https://',
@@ -78,13 +73,9 @@ const HintPage = ({
     isHintIconVisible,
   } = leftContent;
 
-  useEffect(() => {
-    if (autoOpen) openDialog();
-  }, [autoOpen, openDialog]);
-
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-  }
+  };
 
   useEffect(() => {
     if (isEdit) {
@@ -107,7 +98,8 @@ const HintPage = ({
               hintData.actionButtonText || 'Take me to subscription page',
             action: capitalizeFirstLetter(hintData.action) || 'No action',
             targetElement: hintData.targetElement || '.element',
-            tooltipPlacement: capitalizeFirstLetter(hintData.tooltipPlacement) || 'Top',
+            tooltipPlacement:
+              capitalizeFirstLetter(hintData.tooltipPlacement) || 'Top',
             isHintIconVisible: hintData.isHintIconVisible ?? true,
           });
           setHeader(hintData.header || '');
@@ -119,6 +111,27 @@ const HintPage = ({
       fetchHintData();
     }
   }, [isEdit, itemId]);
+
+  const preFillHintTarget = useCallback(() => {
+    try {
+      setLeftContent((prev) => ({ ...prev, targetElement: hintTarget }));
+
+      openDialog();
+    } catch (error) {
+      console.error('Error parsing hint data:', error);
+      toastEmitter.emit(TOAST_EMITTER_KEY, 'Invalid hint data format');
+    }
+  }, [hintTarget, openDialog]);
+
+  useEffect(() => {
+    if (!autoOpen) return;
+
+    if (hintTarget) {
+      preFillHintTarget();
+    } else {
+      openDialog();
+    }
+  }, [autoOpen, hintTarget, preFillHintTarget, openDialog]);
 
   const onSave = async () => {
     const hintData = {
@@ -139,27 +152,52 @@ const HintPage = ({
       isHintIconVisible,
     };
 
-    try {
-      const response = isEdit
-        ? await editHint(itemId, hintData)
-        : await addHint(hintData);
-      const toastMessage = isEdit ? 'You edited this hint' : 'New hint saved';
-      toastEmitter.emit(TOAST_EMITTER_KEY, toastMessage);
-      setItemsUpdated((prev) => !prev);
-      setHeader('');
-      setContent('');
-      closeDialog();
-    } catch (error) {
-      if (error.response.data?.errors) {
-        return error.response.data.errors.forEach((err) => {
-          toastEmitter.emit(TOAST_EMITTER_KEY, `Error: ${err}`);
-        });
-      }
-      const errorMessage = error.response?.data?.message
-        ? `Error: ${error.response.data.message}`
-        : 'An unexpected error occurred. Please try again.';
-      toastEmitter.emit(TOAST_EMITTER_KEY, errorMessage);
-    }
+    // used in onSaveTemplate() input validation/error to switch to appearance tab
+    const appearanceKeys = [
+      'headerBackgroundColor',
+      'headerColor',
+      'textColor',
+      'buttonBackgroundColor',
+      'buttonTextColor',
+    ];
+
+    // defines the order of validation/error prioritization
+    const fieldPriority = [
+      'url',
+      'actionButtonUrl',
+      'actionButtonText',
+      'targetElement',
+      'headerBackgroundColor',
+      'headerColor',
+      'textColor',
+      'buttonBackgroundColor',
+      'buttonTextColor',
+    ];
+    await onSaveTemplate({
+      data: hintData,
+      schema: newHintSchema.concat(appearanceSchema),
+      formikRef,
+      appearanceKeys,
+      setActiveButton,
+      fieldPriority,
+      onSuccess: async () => {
+        try {
+          if (isEdit) {
+            await editHint(itemId, hintData);
+            toastEmitter.emit(TOAST_EMITTER_KEY, 'You edited this hint');
+          } else {
+            await addHint(hintData);
+            toastEmitter.emit(TOAST_EMITTER_KEY, 'New hint saved');
+          }
+          setItemsUpdated((prev) => !prev);
+          closeDialog();
+        } catch (error) {
+          console.error('Error saving hint:', error);
+          emitToastError(error);
+        }
+        setIsEdit(false);
+      },
+    });
   };
 
   return (
@@ -201,6 +239,7 @@ const HintPage = ({
           data={leftContent}
           setState={setLeftContent}
           onSave={onSave}
+          ref={formikRef}
         />
       )}
       leftAppearance={() => (
@@ -208,10 +247,19 @@ const HintPage = ({
           data={appearance}
           setState={setAppearance}
           onSave={onSave}
+          ref={formikRef}
         />
       )}
     />
   );
+};
+
+HintPage.propTypes = {
+  autoOpen: PropTypes.bool,
+  isEdit: PropTypes.bool,
+  setIsEdit: PropTypes.func,
+  itemId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  setItemsUpdated: PropTypes.func,
 };
 
 export default HintPage;

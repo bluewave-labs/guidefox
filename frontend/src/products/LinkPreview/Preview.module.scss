@@ -15,7 +15,9 @@
   }
 
   &__card {
-    box-shadow: 0px 8px 8px -4px #10182808, 0px 20px 24px -4px #10182814;
+    box-shadow:
+      0px 8px 8px -4px #10182808,
+      0px 20px 24px -4px #10182814;
     width: 330px;
     display: flex;
     flex-direction: column;

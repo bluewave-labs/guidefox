@@ -1,4 +1,4 @@
-import { apiClient } from "./apiClient";
+import { apiClient } from './apiClient';
 const RELATIVE_URL_REGEX = /^([./?#]|[a-zA-Z0-9_-]+\/?)+$/;
 
 const isValidUrl = (url) => {
@@ -13,22 +13,22 @@ const isValidUrl = (url) => {
 export const createLink = async (link) => {
   try {
     if (!link.title?.trim() || !link.url?.trim()) {
-      throw new Error("Title and URL are required");
+      throw new Error('Title and URL are required');
     }
     if (!isValidUrl(link.url)) {
-      throw new Error("Invalid URL format");
+      throw new Error('Invalid URL format');
     }
     const response = await apiClient.post(`/link/add_link`, {
       title: link.title,
       url: link.url,
       order: link.order,
-      target: link.target ? "_blank" : "_self",
+      target: link.target ? '_blank' : '_self',
       helperId: link.helperId,
     });
     if (response.status >= 400) throw new Error(response.data);
     return response.data;
   } catch (error) {
-    console.error("Create Link error:", error.response);
+    console.error('Create Link error:', error.response);
     throw error;
   }
 };
@@ -36,7 +36,7 @@ export const createLink = async (link) => {
 export const getLinks = async (helperId) => {
   try {
     if (!helperId) {
-      throw new Error("Helper ID is required");
+      throw new Error('Helper ID is required');
     }
     const response = await apiClient.get(
       `/link/get_links?helperId=${helperId}`
@@ -44,7 +44,7 @@ export const getLinks = async (helperId) => {
     if (response.status >= 400) throw new Error(response.data);
     return response.data;
   } catch (error) {
-    console.error("Get Link error:", error.response);
+    console.error('Get Link error:', error.response);
     throw error;
   }
 };
@@ -52,12 +52,12 @@ export const getLinks = async (helperId) => {
 export const getLinkById = async (id) => {
   try {
     if (!id) {
-      throw new Error("Link ID is required");
+      throw new Error('Link ID is required');
     }
     const response = await apiClient.get(`/link/get_link/${id}`);
     return response.data;
   } catch (error) {
-    if (error.message.includes("Link ID is required")) {
+    if (error.message.includes('Link ID is required')) {
       throw error;
     }
     return false;
@@ -67,26 +67,26 @@ export const getLinkById = async (id) => {
 export const updateLink = async (link) => {
   try {
     if (!link.title?.trim() || !link.url?.trim()) {
-      throw new Error("Title and URL are required");
+      throw new Error('Title and URL are required');
     }
     if (!isValidUrl(link.url)) {
-      throw new Error("Invalid URL format");
+      throw new Error('Invalid URL format');
     }
-    if (typeof link.order !== "number") {
-      throw new Error("Order must be a number");
+    if (typeof link.order !== 'number') {
+      throw new Error('Order must be a number');
     }
-    link.title = link.title.replace(/[<>]/g, "");
+    link.title = link.title.replace(/[<>]/g, '');
     const response = await apiClient.put(`/link/edit_link/${link.id}`, {
       title: link.title,
       url: link.url,
       order: link.order,
-      target: link.target ? "_blank" : "_self",
+      target: link.target ? '_blank' : '_self',
       helperId: link.helperId,
     });
     if (response.status >= 400) throw new Error(response.data);
     return response.data;
   } catch (error) {
-    console.error("Update Link error:", error.response);
+    console.error('Update Link error:', error.response);
     throw error;
   }
 };
@@ -97,7 +97,7 @@ export const deleteLink = async (id) => {
     if (response.status >= 400) throw new Error(response.data);
     return response.data;
   } catch (error) {
-    console.error("Delete Link error:", error.response);
+    console.error('Delete Link error:', error.response);
     throw error;
   }
 };

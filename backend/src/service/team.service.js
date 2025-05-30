@@ -1,4 +1,3 @@
-const { where } = require("sequelize");
 const settings = require("../../config/settings");
 const db = require("../models");
 const Team = db.Team;
@@ -20,6 +19,20 @@ class TeamService {
             throw new Error("Failed to create team");
         }
     }
+
+    async createTeamWithAgentUrl(name) {
+        const transaction = await sequelize.transaction();
+        const agentUrl = 'https://cdn.jsdelivr.net/gh/bluewave-labs/bluewave-onboarding@agent-1.0.2/jsAgent/'
+        try {
+            const team = await Team.create({ name, agentUrl }, { transaction });
+            await transaction.commit();
+            return team;
+        } catch (err) {
+            await transaction.rollback();
+            throw new Error("Failed to create team");
+        }
+    }
+
 
     async getTeam() {
         try {

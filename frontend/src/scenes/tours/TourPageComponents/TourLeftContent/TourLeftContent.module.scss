@@ -1,0 +1,30 @@
+@use '../../../../styles/globals.scss' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  h2 {
+    @include text-style(regular);
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+  }
+  h3 {
+    @include text-style(regular);
+  }
+
+  .stepsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 0px;
+    min-height: 200px;
+    max-height: 250px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    min-width: 280px;
+    padding-right: 10px;
+    margin-right: -20px;
+  }
+}

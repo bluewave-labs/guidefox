@@ -36,7 +36,11 @@ const Toast = () => {
   return (
     <div className={styles.toastContainer}>
       {toasts.map((toast) => (
-        <ToastItem key={toast.id} toast={toast} removeToast={handleRemoveToast} />
+        <ToastItem
+          key={toast.id}
+          toast={toast}
+          removeToast={handleRemoveToast}
+        />
       ))}
     </div>
   );

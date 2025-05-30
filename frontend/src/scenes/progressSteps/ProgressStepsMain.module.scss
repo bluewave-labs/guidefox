@@ -1,113 +1,110 @@
 @use '../../styles/globals.scss' as *;
 
 .container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 1rem 2rem 2rem 2rem;
+  .skeleton {
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
-    padding: 1rem 2rem 2rem 2rem;
-    .skeleton{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
+    align-items: center;
+    width: 100%;
 
-        
-        h2{
-            @include text-style(header-text, semibold);
-            margin: 1.5rem;
-        }
+    h2 {
+      @include text-style(header-text, semibold);
+      margin: 1.5rem;
     }
-    h3{
-        @include text-style(regular);
-        line-height: 50px;
+  }
+  h3 {
+    @include text-style(regular);
+    line-height: 50px;
+  }
+  h4 {
+    @include text-style(regular, semibold);
+    margin-right: 2rem;
+  }
+  input[type='text'] {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border: 1px solid var(--light-border-color);
+    box-shadow: 0px 1px 2px 0px #1018280d;
+    border-radius: 8px;
+    width: 450px;
+    margin-bottom: 10px;
+  }
+  input[type='text']::placeholder {
+    @include text-style(regular);
+    color: #b0b0b0;
+    padding-left: 0.5rem;
+  }
+  input[type='email'] {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border: 1px solid var(--light-border-color);
+    box-shadow: 0px 1px 2px 0px #1018280d;
+    border-radius: 8px;
+    width: 450px;
+    margin-bottom: 10px;
+  }
+  input[type='email']::placeholder {
+    @include text-style(regular);
+    color: #b0b0b0;
+    padding-left: 0.5rem;
+  }
 
-    }
-    h4{
-        @include text-style(regular, semibold);
-        margin-right: 2rem;
-    }
-    input[type="text"]
-    {
-        border: 1px solid #ccc;
-        padding: 5px;
-        border: 1px solid var(--light-border-color);
-        box-shadow: 0px 1px 2px 0px #1018280D;
-        border-radius: 8px;
-        width: 450px;
-        margin-bottom: 10px;
-    }
-    input[type="text"]::placeholder {
-        @include text-style(regular);
-        color:  #b0b0b0;
-        padding-left: 0.5rem;
-    }
-    input[type="email"] {
-        border: 1px solid #ccc;
-        padding: 5px;
-        border: 1px solid var(--light-border-color);
-        box-shadow: 0px 1px 2px 0px #1018280D;
-        border-radius: 8px;
-        width: 450px;
-        margin-bottom: 10px;
-    }
-    input[type="email"]::placeholder {
-        @include text-style(regular);
-        color:  #b0b0b0;
-        padding-left: 0.5rem;
-    }
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    width: 100%;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    position: absolute;
+    right: 12vw;
+    bottom: 40vh;
+  }
+  .content {
+    margin-left: 12vw;
+    margin-right: 12vw;
+  }
 
-    .buttons{
-        display: flex;            
-        justify-content: flex-end;
-        gap: 20px;     
-        width: 100%;
-        margin-right: 2rem;
-        margin-top: 2rem;
-        position: absolute;
-        right: 12vw;
-        bottom: 40vh;
-    }
-    .content{
-        margin-left: 12vw;
-        margin-right: 12vw;
-    }
+  .stepOne {
+    display: flex;
+    flex-direction: row;
+    margin-top: 4rem;
+    justify-content: start;
+  }
+  .invite {
+    display: flex;
+  }
+  .teamMembers {
+    display: flex;
+    flex-direction: column;
+  }
 
-    .stepOne{
-        display: flex;
-        flex-direction: row;
-        margin-top: 4rem;
-        justify-content: start;
-    }
-    .invite{
-        display: flex;
-    }
-    .teamMembers{
-        display: flex;
-        flex-direction: column;
-    }
+  .errorMessage {
+    color: #d92d20;
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    margin-top: 0.25rem;
+  }
 
-    .errorMessage {
-        color: #D92D20;
-        font-size: 13px;
-        font-weight: 400;
-        margin-bottom: 1rem;
-        margin-top: 0.25rem;
-    }
+  .checkbox {
+    accent-color: var(--main-purple);
+    border-radius: 4px;
+    padding: 1px;
+  }
 
-    .checkbox {
-        accent-color: var(--main-purple);
-        border-radius: 4px;
-        padding: 1px;
-    }
+  .checkbox:active {
+    accent-color: var(--main-purple);
+    outline: 5px solid #9e77ed3d;
+  }
 
-    .checkbox:active {
-        accent-color: var(--main-purple);
-        outline: 5px solid #9E77ED3D;
-    }
-
-    .small {
+  .small {
     width: 16px;
     height: 16px;
     border-radius: 4px;
-    }
+  }
 }

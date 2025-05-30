@@ -34,6 +34,7 @@
     "react-router": "^6.27.0",
     "react-router-dom": "^6.27.0",
     "turndown": "^7.2.0",
+    "uuid": "^11.1.0",
     "yup": "^1.4.0"
   },
   "devDependencies": {
@@ -42,30 +43,41 @@
     "@testing-library/user-event": "^14.5.2",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.8.0",
+    "husky": "^9.1.7",
     "jsdom": "^24.0.0",
+    "lint-staged": "^15.4.3",
     "prop-types": "^15.8.1",
     "sass-embedded": "^1.79.4",
     "vite": "^5.4.14",
-    "vitest": "^1.6.0",
+    "vitest": "^3.0.7",
     "webpack": "^5.93.0"
   },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint src/ --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "start": "vite",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "format": "prettier --write .",
+    "prepare": "cd .. && husky frontend/.husky"
   },
   "eslintConfig": {
     "extends": [
       "plugin:storybook/recommended"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
     ]
   }
 }

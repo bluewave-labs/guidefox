@@ -1,80 +1,79 @@
 .form {
-    padding-bottom: 20px;
-    min-width: 780px;
-    max-width: 864px;
-    border-bottom: 1px solid #EEEEEE;
+  padding-bottom: 20px;
+  min-width: 780px;
+  max-width: 864px;
+  border-bottom: 1px solid #eeeeee;
 }
 
 .formElements {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
 }
 
 .photoElements {
-    display: flex;
-    flex-direction: column;
-    margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
 }
 
-.photoAlign{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.photoAlign {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .supportText {
-    margin: 0;
-    color: var(--second-text-color);
-    font-size: var(--font-regular);
-    font-weight: 400;
-    line-height: 20px;
-    margin-top: 6px;
+  margin: 0;
+  color: var(--second-text-color);
+  font-size: var(--font-regular);
+  font-weight: 400;
+  line-height: 20px;
+  margin-top: 6px;
 }
 
 .photoOptions {
-    min-width: 350px;
-    display: flex;
-    gap: 5px;
-    align-items: center;
+  min-width: 350px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }
 
-.saveButton{
-    text-align: right;
+.saveButton {
+  text-align: right;
 }
 
 .labelElements {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .label {
-    font-size: var(--font-regular);
-    min-width: 400px;
-    font-weight: 700;
-    line-height: 20px;
-    text-align: left;
-    flex-grow: 1;
-    margin: 0;
+  font-size: var(--font-regular);
+  min-width: 400px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: left;
+  flex-grow: 1;
+  margin: 0;
 }
 
 .textField {
-    flex-grow: 1; 
-    text-align: right;
+  flex-grow: 1;
+  text-align: right;
 }
-  
+
 .update,
-.delete{
-    border: none;
-    background: none;
-    cursor: pointer;
+.delete {
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 .update {
-    color: var(--main-purple);
-
+  color: var(--main-purple);
 }
 
 .delete {
-    color: var(--second-text-color);
+  color: var(--second-text-color);
 }

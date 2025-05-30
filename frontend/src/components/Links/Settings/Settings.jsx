@@ -1,6 +1,6 @@
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { CircularProgress } from '@mui/material';
-import { Form, Formik } from 'formik';
+import { Formik } from 'formik';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { HelperLinkContext } from '../../../services/linksProvider';
 import { newLinkSchema, validateUrl } from '../../../utils/linkHelper';
@@ -62,6 +62,7 @@ const Settings = () => {
         {}
       );
     }
+
     if (!e) {
       e = { target: settingsRef.current };
     }
@@ -70,13 +71,35 @@ const Settings = () => {
       setLinkToEdit(null);
       return;
     }
-    if (!validateUrl(info.url)) {
+    if (!linkToEdit && !validateUrl(info.url)) {
+      throw new Error('Invalid URL format');
+    } else if (linkToEdit && info.url.trim() !== '' && !validateUrl(info.url)) {
       throw new Error('Invalid URL format');
     }
     if (linkToEdit) {
+      if (!info.url.trim() || !info.title.trim()) {
+        setLinkToEdit(null);
+        toggleSettings(e);
+        return;
+      }
+      if (!validateUrl(info.url)) {
+        throw new Error('Invalid URL format');
+      }
+      if (info.title.length < 3) {
+        throw new Error('Title must be at least 3 characters long');
+      }
+      if (info.title.length > 50) {
+        throw new Error('Title must be at most 50 characters long');
+      }
       setLinks((prev) =>
         prev.map((it) =>
-          it.id === oldLink.id ? { ...info, id: oldLink.id } : it
+          it.id === oldLink.id
+            ? {
+                ...oldLink,
+                ...info,
+                id: Number(info.id),
+              }
+            : it
         )
       );
       setLinkToEdit(null);
@@ -95,7 +118,7 @@ const Settings = () => {
       validateOnBlur={false}
       onSubmit={async (values, { setSubmitting }) => {
         try {
-          handleClose(null, values);
+          await handleClose(null, state);
         } catch (error) {
           return;
         } finally {
@@ -110,15 +133,20 @@ const Settings = () => {
         handleBlur,
         values,
         validateField,
+        handleSubmit,
       }) => (
-        <Form
+        <form
           className={style.settings}
           ref={settingsRef}
           data-testid="settings-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(e);
+          }}
         >
           <div className={style.settings__header}>
             <span className={style['settings__header--title']}>
-              Add new link
+              {linkToEdit ? 'Edit link' : 'Add new link'}
             </span>
             <div className={style['settings__header--right']}>
               <span className={style['settings__header--info']}>
@@ -140,7 +168,10 @@ const Settings = () => {
               type="hidden"
               name="id"
               value={state.id}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                setState((prev) => ({ ...prev, id: e.target.value }));
+              }}
             />
             <label
               htmlFor="title"
@@ -154,7 +185,10 @@ const Settings = () => {
                 id="title"
                 type="text"
                 name="title"
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e);
+                  setState((prev) => ({ ...prev, title: e.target.value }));
+                }}
                 onBlur={(e) => {
                   handleBlur(e);
                   validateField('title');
@@ -178,7 +212,10 @@ const Settings = () => {
                 id="url"
                 type="text"
                 name="url"
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e);
+                  setState((prev) => ({ ...prev, url: e.target.value }));
+                }}
                 onBlur={(e) => {
                   handleBlur(e);
                   validateField('url');
@@ -202,7 +239,13 @@ const Settings = () => {
               <Switch
                 id="switch"
                 name="target"
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e);
+                  setState((prev) => ({
+                    ...prev,
+                    target: e.target.value === 'true',
+                  }));
+                }}
                 value={values.target}
               />
               <span>Open in a new tab</span>
@@ -215,7 +258,7 @@ const Settings = () => {
               'Submit'
             )}
           </button>
-        </Form>
+        </form>
       )}
     </Formik>
   );

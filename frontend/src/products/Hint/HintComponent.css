@@ -9,7 +9,6 @@
   word-wrap: break-word;
   box-sizing: border-box;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-  
 }
 
 .preview-container h3 {
@@ -39,9 +38,9 @@
   line-height: 24px;
 }
 
-.preview-content  {
-  word-wrap: break-word; 
-  overflow-wrap: break-word; 
+.preview-content {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .preview-button-container {

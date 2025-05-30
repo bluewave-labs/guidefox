@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -8,7 +9,7 @@ import { login } from "../../services/loginServices";
 import CustomLink from "../../components/CustomLink/CustomLink";
 import { handleAuthSuccess } from "../../utils/loginHelper";
 import { useAuth } from "../../services/authProvider";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Logo from "../../components/Logo/Logo";
 
 const validationSchema = Yup.object({
@@ -23,18 +24,22 @@ const validationSchema = Yup.object({
 });
 
 function LoginPage({ isAdmin = false }) {
-  const [rememberMe, setRememberMe] = useState(false)
+  const [rememberMe, setRememberMe] = useState(false);
   const [serverErrors, setServerErrors] = useState([]);
   const { loginAuth } = useAuth();
-
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const params = new URLSearchParams(location.search);
+  const redirectTo = params.get("redirect") || '/';
+
   useEffect(() => {
     if (isAdmin) {
-      navigate('/signup');
+      navigate("/signup");
     }
   }, [isAdmin]);
-  return (
 
+  return (
     <Formik
       initialValues={{
         email: "",
@@ -47,7 +52,7 @@ function LoginPage({ isAdmin = false }) {
         setServerErrors([]);
         try {
           const response = await login(values);
-          handleAuthSuccess(response, loginAuth, navigate);
+          handleAuthSuccess(response, loginAuth, navigate, redirectTo);
         } catch (error) {
           if (error.response?.data?.errors) {
             setServerErrors(error.response.data.errors);

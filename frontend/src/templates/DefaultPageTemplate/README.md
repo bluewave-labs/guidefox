@@ -20,18 +20,24 @@ import { ACTIVITY_TYPES_INFO } from '../../data/GuideMainPageData';
 import { useNavigate } from 'react-router-dom';
 
 const BannerDefaultPage = () => {
-    const navigate = useNavigate();
-    const getBannerDetails = (banner) => ({ title: `Banner ${banner.id}`, text: banner.bannerText });
-    const navigateToCreate = (state) => {navigate('/banner/create', state);};
+  const navigate = useNavigate();
+  const getBannerDetails = (banner) => ({
+    title: `Banner ${banner.id}`,
+    text: banner.bannerText,
+  });
+  const navigateToCreate = (state) => {
+    navigate('/banner/create', state);
+  };
 
-    return (
-        <DefaultPageTemplate
-            getItems={getBanners}
-            deleteItem={deleteBanner}
-            navigateToCreate={navigateToCreate}
-            itemType={ACTIVITY_TYPES_INFO.BANNERS}
-            itemTypeInfo={ACTIVITY_TYPES_INFO.BANNERS}
-            getItemDetails={getBannerDetails}
-        />
-    );
+  return (
+    <DefaultPageTemplate
+      getItems={getBanners}
+      deleteItem={deleteBanner}
+      navigateToCreate={navigateToCreate}
+      itemType={ACTIVITY_TYPES_INFO.BANNERS}
+      itemTypeInfo={ACTIVITY_TYPES_INFO.BANNERS}
+      getItemDetails={getBannerDetails}
+    />
+  );
 };
+```

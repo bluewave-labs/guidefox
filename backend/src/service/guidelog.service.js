@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require('../models');
 const GuideLog = db.GuideLog;
 const { GuideType } = require('../utils/guidelog.helper');
 
@@ -6,13 +6,16 @@ class GuideLogService {
   async addGuideLog({ guideType, userId, guideId, completed }) {
     const transaction = await db.sequelize.transaction();
     try {
-      const log = await GuideLog.create({
-        guideType,
-        userId,
-        guideId,
-        showingTime: new Date(),
-        completed
-      }, { transaction });
+      const log = await GuideLog.create(
+        {
+          guideType,
+          userId,
+          guideId,
+          showingTime: new Date(),
+          completed,
+        },
+        { transaction }
+      );
       await transaction.commit();
       return log;
     } catch (err) {
@@ -30,7 +33,7 @@ class GuideLogService {
         where: {
           userId: userId,
           completed: true,
-          guideType: GuideType.BANNER
+          guideType: GuideType.BANNER,
         },
       });
     } catch (err) {
@@ -44,7 +47,7 @@ class GuideLogService {
         where: {
           userId: userId,
           completed: true,
-          guideType: GuideType.POPUP
+          guideType: GuideType.POPUP,
         },
       });
     } catch (err) {
@@ -57,7 +60,7 @@ class GuideLogService {
         where: {
           userId: userId,
           completed: true,
-          guideType: GuideType.HINT
+          guideType: GuideType.HINT,
         },
       });
     } catch (err) {
@@ -71,7 +74,7 @@ class GuideLogService {
         where: {
           userId: userId,
           completed: true,
-          guideType: GuideType.LINK
+          guideType: GuideType.LINK,
         },
       });
     } catch (err) {
@@ -79,6 +82,19 @@ class GuideLogService {
     }
   }
 
+  async getCompleteToursLogs(userId) {
+    try {
+      return await GuideLog.findAll({
+        where: {
+          userId: userId,
+          completed: true,
+          guideType: GuideType.TOUR,
+        },
+      });
+    } catch (err) {
+      throw new Error(`Failed to retrieve tour log for user ${userId}: ${err.message}`);
+    }
+  }
 
   async getCompleteGuideLogs(userId) {
     try {

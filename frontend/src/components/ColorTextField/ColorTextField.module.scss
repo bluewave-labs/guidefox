@@ -1,18 +1,17 @@
 @use '../../styles/globals.scss' as *;
 
 .colorTextField {
+  input {
+    font-size: var(--font-regular);
+    height: 34px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 
-    input {
-        font-size: var(--font-regular);
-        height: 34px;
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-
-    button {
-        height: 17px;
-        width: 17px;
-        box-shadow: none;
-        border: 1.23px solid var(--grey-border);
-    }
+  button {
+    height: 17px;
+    width: 17px;
+    box-shadow: none;
+    border: 1.23px solid var(--grey-border);
+  }
 }

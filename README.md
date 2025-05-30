@@ -10,11 +10,13 @@
 
 Guidefox helps app owners build knowledge and user-experience oriented apps. It includes the following features: 
 
-- Welcome tours (in progress)
+- Welcome tours 
 - Popups
 - Banners
 - Helper links
 - Hints
+
+To see a demo, [click here](https://guidefox-demo.bluewavelabs.ca/). If you have any questions, you can use the [Guidefox forum](https://github.com/bluewave-labs/guidefox/discussions).
 
 The source code is available under GNU AGPLv3. If you would like to support us, please consider giving it a ⭐ and click on "watch" so you can latest news from us.
 
@@ -41,14 +43,16 @@ Make sure docker and git is installed
 
 3. Run docker
 
-`docker compose build`
+`docker compose -f docker-compose.prod.yml build` or `npm run docker-build:prod`
 
-`docker compose up`
+then
+
+`docker compose -f docker-compose.prod.yml up` or `npm run docker-up:prod`
 
 ## Server Installation
 
 1. Make sure Docker is installed to your machine where the server will run.
-2. Make sure git is installed to your machine Git.
+2. Make sure git is installed to your machine.
 3. Make sure nginx is installed.
 
 4. Clone GitHub Repository
@@ -74,7 +78,7 @@ server {
     server_name YOUR_DOMAIN_NAME;
 
     location / {
-        proxy_pass http://localhost:4173; # Frontend React app
+        proxy_pass http://localhost:81; # Frontend React app
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -99,11 +103,11 @@ server {
 }
 ```
 
-6. Create a symbolic link to enable the configuration:
+6. [Optional] Create a symbolic link to enable the configuration:
 
 `sudo ln -s /etc/nginx/sites-available/guidefox /etc/nginx/sites-enabled/`
 
-7. Install Certbot and its Nginx plugin:
+7. [Optional] Install Certbot and its Nginx plugin:
 
 `sudo apt install certbot python3-certbot-nginx`
 
@@ -138,10 +142,10 @@ NODE_ENV - node environment (production, test or development)
 
 It is set from the .env file in the root directory
 
-2. Api Url
+2. Backend Url
 
 ```
-API_BASE_URL - Backend API url
+BASE_URL - Backend url
 ```
 
 It is set from ./frontend/src/utils/constant.js
@@ -237,9 +241,9 @@ For running tests in windows installing `win-node-env` module is recommended
 
 After setting up the project, copy and paste the script that can be found in the Code tab of the Settings. Modify Api Base URL to point out to the url of tour backend server. The code snippet can also be found here:
 
-`
+```
 window.bwApiBaseUrl = 'https://guidefox-demo.bluewavelabs.ca/api/';
-                window.bwAgentBaseUrl = 'https://cdn.jsdelivr.net/gh/bluewave-labs/bluewave-onboarding@agent-1.0.0/jsAgent/';
+                window.bwAgentBaseUrl = 'https://cdn.jsdelivr.net/gh/bluewave-labs/bluewave-onboarding@agent-1.0.2/jsAgent/';
 
                 var s=document.createElement("script");
                 s.type="text/javascript";
@@ -247,7 +251,7 @@ window.bwApiBaseUrl = 'https://guidefox-demo.bluewavelabs.ca/api/';
                 s.onerror=()=>{console.log("onboard not loaded");};
                 s.src = window.bwAgentBaseUrl + '/main.js';
                 (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(s);
-`
+```
 
 We are working on a browser extention to move this code there to improve the user experience.
 
@@ -270,7 +274,7 @@ We pride ourselves on building strong connections with contributors at every lev
 Also check other developer and contributor-friendly projects of BlueWave:
 
 - [Checkmate](https://github.com/bluewave-labs/checkmate), a server and infrastructure monitoring tool
-- [DataRoom](https://github.com/bluewave-labs/bluewave-dataroom), an secure file sharing application, aka dataroom.
-- [BlueWave HRM](https://github.com/bluewave-labs/bluewave-hrm), a complete Human Resource Management platform.
+- [DataHall](https://github.com/bluewave-labs/datahall), an secure file sharing application, aka dataroom.
+- [Headcount](https://github.com/bluewave-labs/headcount), a complete Human Resource Management platform.
 - [VerifyWise](https://github.com/bluewave-labs/verifywise), the first open source AI governance platform.
 

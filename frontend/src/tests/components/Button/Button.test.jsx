@@ -5,7 +5,7 @@ import Button from '@components/Button/Button';
 describe('Button component', () => {
   it('renders with default props', () => {
     render(<Button />);
-    
+
     const buttonElement = screen.getByRole('button');
     expect(buttonElement).not.toBeNull();
     expect(buttonElement.classList.contains('button')).toBe(true);
@@ -16,7 +16,7 @@ describe('Button component', () => {
 
   it('renders with custom text and class', () => {
     render(<Button text="Click Me" buttonType="secondary-purple" />);
-    
+
     const buttonElement = screen.getByText('Click Me');
     expect(buttonElement).not.toBeNull();
     expect(buttonElement.classList.contains('button')).toBe(true);
@@ -26,10 +26,10 @@ describe('Button component', () => {
   it('handles click events', () => {
     const handleClick = vi.fn();
     render(<Button text="Click Me" onClick={handleClick} />);
-    
+
     const buttonElement = screen.getByText('Click Me');
     fireEvent.click(buttonElement);
-    
+
     expect(handleClick).toHaveBeenCalledTimes(1);
     expect(handleClick).toHaveBeenCalledWith(expect.any(Object));
   });
@@ -43,7 +43,7 @@ describe('Button component', () => {
         disabled={true}
       />
     );
-    
+
     const buttonElement = screen.getByText('Styled Button');
     expect(buttonElement.classList.contains('MuiButton-outlined')).toBe(true);
     expect(buttonElement.getAttribute('style')).toBe('background-color: blue;');
@@ -52,7 +52,7 @@ describe('Button component', () => {
 
   it('applies sx prop correctly', () => {
     render(<Button text="SX Button" sx={{ margin: '10px' }} />);
-    
+
     const buttonElement = screen.getByText('SX Button');
     expect(buttonElement).not.toBeNull();
   });

@@ -97,4 +97,6 @@ jobs:
         run: npm test
 
       - name: Run Docker container
-        run: docker compose up --build -d
+        run: |
+          npm run docker-build:prod
+          npm run docker-up:prod-d

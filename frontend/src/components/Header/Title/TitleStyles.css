@@ -1,15 +1,15 @@
-.titleContainer{
-    padding: 60px;
+.titleContainer {
+  padding: 60px;
 }
-.titleBanner{
-    font-size: 1.5rem;
-    font-weight: bold;
-    line-height: 1.5;
-    margin: 1.33em 0; 
+.titleBanner {
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1.5;
+  margin: 1.33em 0;
 }
 .titleHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}

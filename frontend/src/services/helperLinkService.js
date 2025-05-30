@@ -1,4 +1,4 @@
-import { apiClient } from "./apiClient";
+import { apiClient } from './apiClient';
 
 export const getHelpers = async () => {
   try {
@@ -6,7 +6,7 @@ export const getHelpers = async () => {
     if (response.status >= 400) throw new Error(response.data);
     return response.data;
   } catch (error) {
-    console.error("Get helper link error:", error.response);
+    console.error('Get helper link error:', error.response);
     throw error;
   }
 };
@@ -16,25 +16,25 @@ export const getHelperById = async (id) => {
     if (response.status >= 400) throw new Error(response.data);
     return response.data;
   } catch (error) {
-    console.error("Get helper link error:", error.response);
+    console.error('Get helper link error:', error.response);
     throw error;
   }
 };
 const validateHelper = (helper, links) => {
   if (!helper?.title) {
-    throw new Error("Header is required");
+    throw new Error('Header is required');
   }
   if (!helper?.headerBackgroundColor) {
-    throw new Error("Header background color is required");
+    throw new Error('Header background color is required');
   }
   if (!helper?.linkFontColor) {
-    throw new Error("Link font color is required");
+    throw new Error('Link font color is required');
   }
   if (!helper?.iconColor) {
-    throw new Error("Icon color is required");
+    throw new Error('Icon color is required');
   }
   if (links.some((it) => !it?.title || !it?.url)) {
-    throw new Error("Title and URL are required");
+    throw new Error('Title and URL are required');
   }
 };
 
@@ -48,11 +48,15 @@ export const createHelper = async (helper, links) => {
       iconColor: helper.iconColor,
       userId: helper.userId,
       links,
+      url: helper.url,
+      active: helper.active,
+      absolutePath: helper.absolutePath,
     });
     if (response.status >= 400) throw new Error(response.data);
     return response.data;
   } catch (error) {
-    console.error("Create helper link error:", error.message);
+    console.log(error.message);
+    console.error('Create helper link error:', error);
     throw error;
   }
 };
@@ -69,12 +73,15 @@ export const updateHelper = async (helper, links) => {
         iconColor: helper.iconColor,
         userId: helper.userId,
         links,
+        url: helper.url,
+        active: helper.active,
+        absolutePath: helper.absolutePath,
       }
     );
     if (response.status >= 400) throw new Error(response.data);
     return response.data;
   } catch (error) {
-    console.error("Update helper link error:", error.response);
+    console.error('Update helper link error:', error.response);
     throw error;
   }
 };
@@ -85,7 +92,7 @@ export const deleteHelper = async (id) => {
     if (response.status >= 400) throw new Error(response.data);
     return response.data;
   } catch (error) {
-    console.error("Delete helper link error:", error.response);
+    console.error('Delete helper link error:', error.response);
     throw error;
   }
 };

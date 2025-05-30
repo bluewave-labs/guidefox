@@ -37,7 +37,7 @@ bw.popup = {
      },
     
     addOverlay: function () {
-        document.body.insertAdjacentHTML('afterbegin', `<div id='bw-overlay' style=' position: fixed; top: 0; left: 0;width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.${popupDefaultOptions.overlayOpacity}); z-index: 999;'></div>`);
+        document.body.insertAdjacentHTML('afterbegin', `<div id='bw-overlay' style=' position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background-color: rgba(0, 0, 0, 0.${popupDefaultOptions.overlayOpacity}) !important; z-index: 999 !important;'></div>`);
     },
     addModal: async function (cb) {
         const options = window.bwonboarddata.popup[0];
@@ -50,10 +50,10 @@ bw.popup = {
         const size = PopUpSize[option.popupSize];
 
         let temp_html = `
-            <div id='bw-modal' style='position: fixed; top: 180px; left: 50%; transform: translate(-50%, -50%); width: ${size.width}px; height: ${size.height}px; display: block; z-index: 1000; border: 1px solid var(--light-border-color); box-sizing: border-box; padding-top: 100px; background-color: rgb(255 255 255 / 0%);;'>
-                <div class='modal-content' style='border-radius: 4px; position: relative; margin: auto;padding: 0;border: 1px solid #D0D5DD; background-color: white;box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;'>
+            <div id='bw-modal' style='position: fixed !important; top: 180px !important; left: 50% !important; transform: translate(-50%, -50%) !important; width: ${size.width}px !important; height: ${size.height}px!important; display: block !important; z-index: 1000 !important; box-sizing: border-box !important; padding-top: 100px !important; background-color: rgb(255 255 255 / 0%) !important;'>
+                <div class='modal-content' style='border-radius: 4px !important; position: relative !important; margin: auto !important; padding: 0 !important; border: 1px solid #F0F0F0 !important; background-color: white !important; box-shadow: 2px 2px 10px 0px #0000000D !important;'>
                     ${bw.popup.addHeader(option.header, option.headerBackgroundColor, option.headerColor, option.padding)}
-                    <div class="modal-body" style='padding: ${option.padding}px ${option.padding}px; display: flex; justify-content: space-between; flex-direction: column; box-sizing: border-box; font-family: "Inter", sans-serif; font-size: 13px; min-height: 227px; '>
+                    <div class="modal-body" style='padding: ${option.padding}px ${option.padding}px !important; display: flex !important; justify-content: space-between !important; flex-direction: column !important; box-sizing: border-box !important; font-family: "Inter", sans-serif !important; font-size: 13px !important; min-height: 227px !important; '>
                         ${option.content}
                         ${option.closeButtonAction !== 'no action' ?  bw.popup.addButton(option.actionButtonText, option.buttonBackgroundColor, option.buttonTextColor, option.padding, `bw-popup-btn`): ''}
                     </div>
@@ -64,10 +64,10 @@ bw.popup = {
         bw.popup.bindEvents( option.closeButtonAction, option.url);
     },
     addHeader: function(headerTitle, bgColor, textColor, padding){
-        let headerHtml = `<div class="modal-header" style='height:57px; margin: auto; font-weight: bold; padding: 0 ${padding}px; background-color: ${bgColor}; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #D0D5DD;'>
-            <h2 style= 'font-family: "Inter", sans-serif; font-size: 20px; font-weight: 500; margin-left: 5px; color:${textColor}'>${headerTitle}</h2>
-            <svg id='bw-modal-close' class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="CloseOutlinedIcon" 
-                style="fill: rgb(152, 162, 179); font-size: 20px; display: block;position: absolute;float: right;right: 23px;cursor: pointer; width: 1em;height: 1em;display: inline-block; margin: auto;">
+        let headerHtml = `<div class="modal-header" style='height:57px !important; margin: auto !important; font-weight: bold !important; padding: 0 ${padding}px !important; background-color: ${bgColor} !important; display: flex !important; justify-content: space-between !important; align-items: center !important; border-bottom: 1px solid #D0D5DD !important;'>
+            <h2 style= 'font-family: "Inter", sans-serif !important; font-size: 20px !important; font-weight: 500 !important; color:${textColor} !important; margin-bottom: unset; margin-top: unset !important;'>${headerTitle}</h2>
+            <svg id='bw-modal-close' focusable="false" viewBox="0 0 24 24" data-testid="CloseOutlinedIcon" 
+                style="fill: rgb(152, 162, 179) !important; font-size: 20px !important; display: block !important; position: absolute !important; float: right !important; right: 23px !important; cursor: pointer !important; width: 20px !important; height: 20px !important; display: inline-block !important; margin: auto !important;">
                 <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
             </svg>
         </div>`;
@@ -75,9 +75,9 @@ bw.popup = {
     },
     addButton: function(text, bgColor, textColor, padding, btnId){
         let buttonHtml = `
-            <div class="modal-button-container" style=' display: flex; justify-content: flex-end; margin-top: 16px;'>
-                <button id="${btnId}" style="color: ${textColor}; padding: ${padding}px ${padding}px;background-color: ${bgColor}; border-radius:8px; cursor: pointer;
-                transition: background-color 0.3s, border-color 0.3s; min-width: 64px; padding: 6px 16px; border: 0; font-family: Inter; font-weight: 500; font-size: 13px; line-height: 1.75;">${text}</button>
+            <div class="modal-button-container" style='display: flex !important; justify-content: flex-end !important; margin-top: 16px !important;'>
+                <button id="${btnId}" style="color: ${textColor} !important; padding: ${padding}px ${padding}px !important; background-color: ${bgColor} !important; border-radius:8px !important; cursor: pointer !important;
+                transition: background-color 0.3s, border-color 0.3s !important; min-width: 64px !important; padding: 6px 16px !important; border: 0px !important; font-family: Inter !important; font-weight: 500 !important; font-size: 13px !important; line-height: 1.75 !important;">${text}</button>
             </div>`;
         return buttonHtml;
     },

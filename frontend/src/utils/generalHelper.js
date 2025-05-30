@@ -5,7 +5,7 @@ export const getFileExtension = (selectedFile) => {
     return extension;
   }
   return null;
-}
+};
 
 export const formatFileSize = (sizeInBytes) => {
   const units = ['B', 'KB', 'MB', 'GB', 'TB'];
@@ -18,20 +18,22 @@ export const formatFileSize = (sizeInBytes) => {
   }
 
   return `${fileSize.toFixed(2)} ${units[unitIndex]}`;
-}
+};
 
 export const getFullName = (userData) => {
   if (userData) {
-    return userData?.surname ? `${userData.name} ${userData.surname}` : userData.name;
+    return userData?.surname
+      ? `${userData.name} ${userData.surname}`
+      : userData.name;
+  } else {
+    return null;
   }
-  else {
-    return null
-  }
-}
+};
 
 export const generateApiKey = () => {
   const length = 32; // Define the length of the API key
-  const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; // Characters to use
+  const charset =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; // Characters to use
   let apiKey = '';
 
   const array = new Uint8Array(length);
@@ -47,4 +49,8 @@ export const generateApiKey = () => {
 export function renderIfAuthorized(userRole, requiredRole, element) {
   if (!userRole || !requiredRole) return null;
   return userRole === requiredRole ? element : null;
+}
+
+export function camelToUppercase(str) {
+  return str.replace(/([A-Z])/g, ' $1').trim().toUpperCase();
 }

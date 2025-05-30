@@ -30,9 +30,10 @@ db.Banner = require("./Banner.js")(sequelize, Sequelize.DataTypes);
 db.Team = require("./Team.js")(sequelize, Sequelize.DataTypes);
 db.Invite = require("./Invite.js")(sequelize, Sequelize.DataTypes);
 db.Hint = require("./Hint.js")(sequelize, Sequelize.DataTypes);
-db.Tour = require("./Tour.js")(sequelize, Sequelize.DataTypes);
 db.Link = require("./Link.js")(sequelize, Sequelize.DataTypes);
 db.HelperLink = require("./HelperLink.js")(sequelize, Sequelize.DataTypes);
+db.Tour = require("./Tour.js")(sequelize, Sequelize.DataTypes);
+db.TourPopup = require("./TourPopup.js")(sequelize, Sequelize.DataTypes);
 
 // Define associations here
 db.User.hasMany(db.Popup, { foreignKey: "createdBy", as: "popups" });
@@ -46,6 +47,9 @@ db.Link.belongsTo(db.HelperLink, { foreignKey: "helperId", as: "helper" });
 
 db.User.hasMany(db.Banner, { foreignKey: "createdBy", as: "banners" });
 db.Banner.belongsTo(db.User, { foreignKey: "createdBy", as: "creator" });
+
+db.Tour.hasMany(db.TourPopup, { foreignKey: "tourId", as: "steps" });
+db.TourPopup.belongsTo(db.Tour, { foreignKey: "tourId", as: "tour" });
 
 db.Invite.belongsTo(db.User, { foreignKey: "invitedBy" });
 db.User.hasMany(db.Invite, { foreignKey: "invitedBy" });

@@ -21,6 +21,13 @@ export const baseSkeletonStyles = {
     width: '80%',
     height: '70%',
   },
+  tour: {
+    position: 'absolute',
+    top: '10%',
+    left: '10%',
+    width: '60%',
+    height: '55%',
+  },
 };
 
 export const commonSkeletonStyles = {

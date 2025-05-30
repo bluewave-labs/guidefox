@@ -1,63 +1,148 @@
-const db = require("../models");
+const db = require('../models');
+const { Op } = require('sequelize');
+
 const Tour = db.Tour;
+const TourPopup = db.TourPopup;
 
 class TourService {
   async getAllTours() {
     return await Tour.findAll();
   }
 
-  async getTours(userId) {
+  async getTourById(id) {
+    const response = await Tour.findByPk(id, {
+      include: [
+        {
+          model: TourPopup,
+          as: "steps", 
+        },
+      ],
+    });
+
+    return response
+  }
+
+  async getTourByUserId(userId) {
     return await Tour.findAll({
       where: {
-        createdBy: userId
+        createdBy: userId,
       },
+        include: [
+          {
+            model: db.TourPopup,
+            as: 'steps',
+          },
+        ],
     });
-  }
-
-  async createTour(data) {
-    return await Tour.create(data);
-  }
-
-  async deleteTour(id) {
-    const rowsAffected = await Tour.destroy({ where: { id } });
-
-    if (rowsAffected === 0) {
-      return false;
-    }
-
-    return true;
-  }
-
-  async updateTour(id, data) {
-    const [affectedRows, updatedTours] = await Tour.update(data, {
-      where: { id },
-      returning: true,
-    });
-
-    if (affectedRows === 0) {
-      return null;
-    }
-
-    return updatedTours[0];
-  }
-
-  async getTourById(tourId) {
-    try {
-      return await Tour.findOne({
-        where: { id: tourId },
-      });
-    } catch (error) {
-      throw new Error("Error retrieving tour by ID");
-    }
   }
 
   async getTourByUrl(url) {
     try {
-      return await Tour.findAll({ where: { url } });
-    } catch (error) {
-      throw new Error("Error retrieving Tour by URL");
+      return await Tour.findAll({
+        where: {
+          [Op.and]: [{ url }, { active: true }],
+        },
+        include: [
+          {
+            model: db.TourPopup,
+            as: 'steps',
+          },
+        ],
+      });
+    } catch (err) {
+      console.log(err);
+      throw new Error('Error finding tour by url');
     }
-  };
+  }
+
+  async getIncompleteTourByUrl(url, ids) {
+    try {
+      return await Tour.findAll({
+        where: {
+          url,
+          id: {
+            [Op.notIn]: ids,
+          },
+        },
+        include: [
+          {
+            model: db.TourPopup,
+            as: 'steps',
+          },
+        ],
+      });
+    } catch (err) {
+      console.log(err);
+      throw new Error('Error finding incomplete tours by url');
+    }
+  }
+
+  async createTour(data) {
+    const { steps, ...info } = data;
+    const transaction = await db.sequelize.transaction();
+    try {
+      const newTour = await Tour.create(info, {
+        transaction,
+        returning: true,
+      });
+
+      const formattedSteps = steps.map((step) => ({
+        ...step,
+        tourId: newTour.id,
+      }));
+
+      await TourPopup.bulkCreate(formattedSteps, { transaction });
+
+      await transaction.commit();
+      return newTour;
+    } catch (error) {
+      await transaction.rollback();
+      throw error;
+    }
+  }
+
+  async updateTour(id, data) {
+    const { steps, ...info } = data;
+    const transaction = await db.sequelize.transaction();
+    try {
+      const [affectedRows, [updatedTour]] = await Tour.update(info, {
+        where: { id },
+        transaction,
+        returning: true,
+      });
+      if (affectedRows === 0) {
+        await transaction.commit();
+        return null;
+      }
+      await TourPopup.destroy({ where: { tourId: id }, transaction });
+      const formattedSteps = steps.map((step) => ({
+        ...step,
+        tourId: id,
+      }));
+      await TourPopup.bulkCreate(formattedSteps, { transaction });
+      await transaction.commit();
+      return updatedTour;
+    } catch (error) {
+      await transaction.rollback();
+      throw error;
+    }
+  }
+
+  async deleteTour(id) {
+    const transaction = await db.sequelize.transaction();
+    try {
+      await TourPopup.destroy({ where: { tourId: id }, transaction });
+      const rowsAffected = await Tour.destroy({
+        where: { id },
+        transaction,
+      });
+      await transaction.commit();
+      return rowsAffected !== 0;
+    } catch (error) {
+      await transaction.rollback();
+      throw error;
+    }
+  }
 }
 
 module.exports = new TourService();
