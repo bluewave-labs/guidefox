@@ -114,7 +114,7 @@ async function runSeeders(queryInterface) {
         name: 'Bluewave',
         createdAt: new Date(),
         serverUrl: 'https://guidefox-demo.bluewavelabs.ca/api/',
-        agentUrl: 'https://cdn.jsdelivr.net/gh/bluewave-labs/bluewave-onboarding@agent-1.1.4/jsAgent/'
+        agentUrl: 'https://cdn.jsdelivr.net/gh/bluewave-labs/bluewave-onboarding@agent-1.1.5/jsAgent/'
       }
     ],
     {}
