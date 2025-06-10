@@ -33,6 +33,7 @@
     "react-markdown": "^9.0.1",
     "react-router": "^6.27.0",
     "react-router-dom": "^6.27.0",
+    "sass": "^1.89.1",
     "turndown": "^7.2.0",
     "uuid": "^11.1.0",
     "yup": "^1.4.0"
@@ -52,7 +53,7 @@
     "lint-staged": "^15.4.3",
     "prop-types": "^15.8.1",
     "sass-embedded": "^1.79.4",
-    "vite": "^5.4.14",
+    "vite": "^6.3.5",
     "vitest": "^3.0.7",
     "webpack": "^5.93.0"
   },
