@@ -1,5 +1,5 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import { defineConfig } from "vite";
 import { BASE_URL } from "./src/utils/constants";
 
 export default defineConfig({
